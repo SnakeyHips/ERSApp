@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using ERSApp.Model;
 using MahApps.Metro.Controls;
@@ -112,7 +112,7 @@ namespace ERSApp.Views
                 if (CollectionManager.AddSession(temp) > 0)
                 {
                     CollectionManager.SelectedDate = DateTime.Parse(dateSession.Text);
-                    this.Close();
+                    this.DialogResult = true;
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace ERSApp.Views
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
