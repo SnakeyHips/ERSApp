@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -83,13 +83,13 @@ namespace ERSApp.Views
                 Selected.ContractHours = double.Parse(cboHours.Text);
                 Selected.WorkPattern = GetWorkPattern();
                 CollectionManager.UpdateStaff(Selected);
-                this.Close();
+                this.DialogResult = true;
             }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
