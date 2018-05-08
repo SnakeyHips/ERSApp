@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ERSApp.Model;
@@ -30,7 +30,7 @@ namespace ERSApp.Views
         {
             AddStaffWindow addStaffWindow = new AddStaffWindow();
             addStaffWindow.Owner = mainWindow;
-            addStaffWindow.Show();
+            addStaffWindow.ShowDialog();
         }
 
         private void btnUpdateStaff_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace ERSApp.Views
             {
                 UpdateStaffWindow updateStaffWindow = new UpdateStaffWindow(StaffViewModel.SelectedStaff);
                 updateStaffWindow.Owner = mainWindow;
-                updateStaffWindow.Show();
+                updateStaffWindow.ShowDialog();
             }
         }
 
