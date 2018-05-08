@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
@@ -105,10 +105,7 @@ namespace ERSApp.Views
                 Fill = new SolidColorBrush(Color.FromRgb(r, g, b)),
                 Values = new ChartValues<GanttPoint>
                     {
-                        new GanttPoint(
-                            TimeSpan.Parse(start).TotalHours,
-                            TimeSpan.Parse(end).TotalHours
-                            )
+                        new GanttPoint(TimeSpan.Parse(start).TotalHours, TimeSpan.Parse(end).TotalHours)
                     }
             };
         }
