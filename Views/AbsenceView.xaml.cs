@@ -1,112 +1,60 @@
 using System;
-using System.Linq;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
+using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using ERSApp.Model;
-using ERSApp.ViewModel;
-using System.Text.RegularExpressions;
 
 namespace ERSApp.Views
 {
-    public partial class AddAbsenceWindow : MetroWindow
+    public partial class AbsenceView : UserControl
     {
-        public AddAbsenceWindow()
+        MetroWindow mainWindow = (Application.Current.MainWindow as MetroWindow);
+
+        public AbsenceView()
         {
             InitializeComponent();
-            cboType.Items.Add("Day Off");
-            cboType.Items.Add("Annual Leave");
-            cboType.Items.Add("Sick Leave");
-            cboType.Items.Add("Special Leave");
-            cboType.Items.Add("Training");
+            this.DataContext = new AbsenceViewModel();
         }
 
-        private async void btnFind_Click(object sender, RoutedEventArgs e)
+        private void btnAddAbsence_Click(object sender, RoutedEventArgs e)
         {
-            if(txtId.Text != "")
+            AddAbsenceWindow addAbsenceWindow = new AddAbsenceWindow();
+            addAbsenceWindow.Owner = mainWindow;
+            addAbsenceWindow.ShowDialog();
+        }
+
+        private void btnUpdateAbsence_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstAbsences.SelectedIndex > -1)
             {
-                try
-                {
-                    txtName.Text = StaffViewModel.Staffs.First(x => x.Id == int.Parse(txtId.Text)).Name;
-                }
-                catch
-                {
-                    await this.ShowMessageAsync("", "No staff found with ID provided.");
-                }
+                UpdateAbsenceWindow updateAbsenceWindow = new UpdateAbsenceWindow(AbsenceViewModel.SelectedAbsence);
+                updateAbsenceWindow.Owner = mainWindow;
+                updateAbsenceWindow.ShowDialog();
             }
         }
 
-        private async void btnAddAbsence_Click(object sender, RoutedEventArgs e)
+        private async void btnDelAbsence_Click(object sender, RoutedEventArgs e)
         {
-            if(txtId.Text == "")
+            if (lstAbsences.SelectedIndex > -1)
             {
-                await this.ShowMessageAsync("", "Please enter a Staff ID.");
-            }
-            else if (txtName.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please find a valid Staff via ID.");
-            }
-            else if (cboType.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please enter an Absence Type");
-            }
-            else  if (dateStart.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please enter a Start Date.");
-            }
-            else if (DateTime.Parse(dateStart.Text).CompareTo(DateTime.Now) < 0)
-            {
-                await this.ShowMessageAsync("", "Please enter a valid Start Date.");
-            }
-            else if (dateEnd.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please enter an End Date.");
-            }
-            else if (DateTime.Parse(dateEnd.Text).CompareTo(DateTime.Parse(dateStart.Text)) < 0)
-            {
-                await this.ShowMessageAsync("", "Please enter a valid End Date.");
-            }
-            else if (txtHours.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please enter an Absence Length.");
-            }
-            else
-            {
-                Absence temp = new Absence()
+                MessageDialogResult choice = await mainWindow.ShowMessageAsync("",
+                            "Are you sure you want to delete this Absence?",
+                            MessageDialogStyle.AffirmativeAndNegative);
+                if (choice == MessageDialogResult.Affirmative)
                 {
-                    StaffId = int.Parse(txtId.Text),
-                    StaffName = txtName.Text,
-                    Type = cboType.Text,
-                    StartDate = dateStart.Text,
-                    EndDate = dateEnd.Text,
-                    Length = double.Parse(txtHours.Text)
-                };
-                if(CollectionManager.AddAbsence(temp) > 0)
-                {
-                    AbsenceViewModel.Absences.Add(temp);
-                    //Update staff's absence hours
-                    CollectionManager.UpdateRoster(temp.StaffId, 0.0, temp.Length, CollectionManager.GetWeek(DateTime.Parse(dateStart.Text)));
-                    this.DialogResult = true;
-                }
-                else
-                {
-                    await this.ShowMessageAsync("", "Duplicate Absence found.");
+                    CollectionManager.UpdateRoster(AbsenceViewModel.SelectedAbsence.StaffId, 0.0,
+                    -AbsenceViewModel.SelectedAbsence.Length,
+                    CollectionManager.GetWeek(DateTime.Parse(AbsenceViewModel.SelectedAbsence.StartDate)));
+                    CollectionManager.DeleteAbsence(AbsenceViewModel.SelectedAbsence);
+                    AbsenceViewModel.Absences.Remove(AbsenceViewModel.SelectedAbsence);
                 }
             }
         }
 
-        //Method to force only numbers in textbox input
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            //Use this in the xaml file to only allow numbers in input
-            Regex regex = new Regex("[^0-9.]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
+            mainWindow.Close();
         }
     }
 }
