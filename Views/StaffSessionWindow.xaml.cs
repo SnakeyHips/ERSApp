@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -212,10 +212,7 @@ namespace ERSApp.Views
                 Fill = new SolidColorBrush(Color.FromRgb(r, g, b)),
                 Values = new ChartValues<GanttPoint>
                     {
-                        new GanttPoint(
-                            TimeSpan.Parse(start).TotalHours,
-                            TimeSpan.Parse(end).TotalHours
-                            )
+                        new GanttPoint(TimeSpan.Parse(start).TotalHours, TimeSpan.Parse(end).TotalHours)
                     }
             };
         }
@@ -668,7 +665,7 @@ namespace ERSApp.Views
             Selected.State = RolesFilled ? "Complete" : "Incomplete";
             CollectionManager.UpdateSessionStaff(Selected);
             //Go back to main window
-            this.Close();
+            this.DialogResult = true;
         }
 
         //Method to reset cbos if need to reselect staff
@@ -726,7 +723,7 @@ namespace ERSApp.Views
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
