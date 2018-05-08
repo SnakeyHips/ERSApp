@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -38,7 +38,7 @@ namespace ERSApp.Views
         {
             AddSessionWindow addSessionWindow = new AddSessionWindow();
             addSessionWindow.Owner = mainWindow;
-            addSessionWindow.Show();
+            addSessionWindow.ShowDialog();
         }
 
         private async void btnUpdateSession_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace ERSApp.Views
                 {
                     UpdateSessionWindow updateSessionWindow = new UpdateSessionWindow(SessionViewModel.SelectedSession);
                     updateSessionWindow.Owner = mainWindow;
-                    updateSessionWindow.Show();
+                    updateSessionWindow.ShowDialog();
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace ERSApp.Views
             {
                 StaffSessionWindow staffSessionWindow = new StaffSessionWindow(SessionViewModel.SelectedSession);
                 staffSessionWindow.Owner = mainWindow;
-                staffSessionWindow.Show();
+                staffSessionWindow.ShowDialog();
             }
         }
 
