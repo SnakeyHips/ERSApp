@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -101,7 +101,7 @@ namespace ERSApp.Views
                     Selected.MDC = cboMDC.Text;
                     Selected.Chairs = int.Parse(cboChairs.Text);
                     CollectionManager.UpdateSession(Selected);
-                    this.Close();
+                    this.DialogResult = true;
                 }
             }
             else
@@ -112,7 +112,7 @@ namespace ERSApp.Views
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
