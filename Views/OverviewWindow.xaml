@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="ERSApp.Views.OverviewWindow"
+<Controls:MetroWindow x:Class="ERSApp.Views.OverviewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,8 +10,9 @@
         Title="StaffSessionWindow" Height="500" Width="1070">
     <Grid Margin="15,0,15,15">
         <TabItem Name ="tabOverview" Header="Date" IsSelected="True"></TabItem>
+        <ComboBox Name="cboLocation" HorizontalAlignment="Center" Height="23" Margin="0,7.5,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboLocation_SelectionChanged"/>
         <ListView Name="lstOverview" HorizontalAlignment="Left" Margin="0,43,0,40" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sessions}">
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=OverviewSessions}" SelectedValuePath="Location">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Location" Width="80" DisplayMemberBinding="{Binding Location}"/>
