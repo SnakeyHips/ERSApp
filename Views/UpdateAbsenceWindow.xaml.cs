@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
@@ -42,7 +42,7 @@ namespace ERSApp.Views
                 CollectionManager.UpdateAbsence(Selected);
                 double absence = Selected.Length - old;
                 CollectionManager.UpdateRoster(Selected.StaffId, 0.0, absence, CollectionManager.GetWeek(DateTime.Parse(txtStart.Text)));
-                this.Close();
+                this.DialogResult = true;
             }
         }
 
@@ -56,7 +56,7 @@ namespace ERSApp.Views
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
