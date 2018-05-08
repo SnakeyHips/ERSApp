@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -62,7 +62,7 @@ namespace ERSApp.Views
                 if (CollectionManager.AddStaff(temp) > 0)
                 {
                     StaffViewModel.Staffs.Add(temp);
-                    this.Close();
+                    this.DialogResult = true;
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace ERSApp.Views
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
