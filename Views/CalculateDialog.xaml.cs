@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Text.RegularExpressions;
@@ -33,6 +33,22 @@ namespace ERSApp.Views
                 {
                     await this.ShowMessageAsync("", "No staff found with ID provided.");
                 }
+            }
+        }
+
+        private void btnWeek_Click(object sender, RoutedEventArgs e)
+        {
+            if (dateEnd.SelectedDate != null)
+            {
+                dateStart.SelectedDate = dateEnd.SelectedDate.Value.AddDays(-28);
+            }
+        }
+
+        private void btnMonth_Click(object sender, RoutedEventArgs e)
+        {
+            if (dateEnd.SelectedDate != null)
+            {
+                dateStart.SelectedDate = dateEnd.SelectedDate.Value.AddMonths(-3);
             }
         }
 
