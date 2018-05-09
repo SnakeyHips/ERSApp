@@ -13,7 +13,7 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         WindowStartupLocation="CenterOwner"
-        Title="Session Staff" Height="490" Width="325">
+        Title="Session Staff" Height="450" Width="325">
     <Grid Margin="15, 15, 15, 15">
         <Label Content="Staff ID:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtId" Margin="0,0,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
@@ -26,14 +26,12 @@
         <Button Content="3 Months" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,0,0" Height="25" Width="75" Click="btnMonth_Click"/>
         <Label Content="End Date:" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <DatePicker Name="dateEnd" HorizontalAlignment="Right" Height="23" Margin="0,200,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
-        <Label Name="lblWeekCount" Content="Week Count:" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtWeekCount" Margin="0,240,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblContractCount" Content="Contract:" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtContractCount" Margin="0,280,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblAppointedCount" Content="Appointed:" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtAppointedCount" Margin="0,320,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblAbsenceCount" Content="Absence:" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtAbsenceCount" Margin="0,360,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Name="lblContractCount" Content="Contract:" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtContractCount" Margin="0,240,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Name="lblAppointedCount" Content="Appointed:" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtAppointedCount" Margin="0,280,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Name="lblAbsenceCount" Content="Absence:" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtAbsenceCount" Margin="0,320,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
         <Button Content="Calculate" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCalculate_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCancel_Click"/>
     </Grid>
