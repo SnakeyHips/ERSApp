@@ -13,14 +13,12 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         WindowStartupLocation="CenterOwner"
-        Height="200" Width="325">
+        Height="175" Width="325">
     <Grid Margin="15, 15, 15, 15">
         <Label Content="Start Date:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <DatePicker Name="dateStart" HorizontalAlignment="Right" Height="23" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
-        <Button Content="4 Weeks" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,40,125,0" Height="25" Width="75" Click="btnWeek_Click"/>
-        <Button Content="3 Months" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,40,0,0" Height="25" Width="75" Click="btnMonth_Click"/>
-        <Label Content="End Date:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <DatePicker Name="dateEnd" HorizontalAlignment="Right" Height="23" Margin="0,80,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Label Content="End Date:" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <DatePicker Name="dateEnd" HorizontalAlignment="Right" Height="23" Margin="0,40,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCreate_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCancel_Click"/>
     </Grid>
