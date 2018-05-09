@@ -32,22 +32,6 @@ namespace ERSApp.Views
             }
         }
 
-        private void btnWeek_Click(object sender, RoutedEventArgs e)
-        {
-            if(dateEnd.SelectedDate != null)
-            {
-                dateStart.SelectedDate = dateEnd.SelectedDate.Value.AddDays(-28);
-            }
-        }
-
-        private void btnMonth_Click(object sender, RoutedEventArgs e)
-        {
-            if (dateEnd.SelectedDate != null)
-            {
-                dateStart.SelectedDate = dateEnd.SelectedDate.Value.AddMonths(-3);
-            }
-        }
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
