@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -29,6 +29,22 @@ namespace ERSApp.Views
             else
             {
                 DialogResult = true;
+            }
+        }
+
+        private void btnWeek_Click(object sender, RoutedEventArgs e)
+        {
+            if(dateEnd.SelectedDate != null)
+            {
+                dateStart.SelectedDate = dateEnd.SelectedDate.Value.AddDays(-28);
+            }
+        }
+
+        private void btnMonth_Click(object sender, RoutedEventArgs e)
+        {
+            if (dateEnd.SelectedDate != null)
+            {
+                dateStart.SelectedDate = dateEnd.SelectedDate.Value.AddMonths(-3);
             }
         }
 
