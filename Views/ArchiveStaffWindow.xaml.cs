@@ -51,7 +51,7 @@ namespace ERSApp.Views
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
