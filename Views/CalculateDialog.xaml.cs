@@ -98,7 +98,6 @@ namespace ERSApp.Views
                     appointedCount += s.AppointedHours;
                     absenceCount += s.AbsenceHours;
                 }
-                txtWeekCount.Text = SelectedRange.Count.ToString();
                 txtContractCount.Text = contractCount.ToString();
                 txtAppointedCount.Text = appointedCount.ToString();
                 txtAbsenceCount.Text = absenceCount.ToString();
