@@ -47,7 +47,7 @@ namespace ERSApp.Views
         {
             ArchiveStaffWindow ArchiveStaffWindow = new ArchiveStaffWindow();
             ArchiveStaffWindow.Owner = mainWindow;
-            ArchiveStaffWindow.Show();
+            ArchiveStaffWindow.ShowDialog();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
