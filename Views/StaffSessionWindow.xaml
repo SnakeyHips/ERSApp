@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         Title="Staff View" Height="500" Width="775">
     <Grid Name="grdStaff" Margin="15,0,15,15">
-        <TabItem Name ="tabSessionStaff" Header="Day - Date - Location" IsSelected="True"></TabItem>
+        <Label Name ="lblHeader" Content="Day - Date" FontSize="26" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,43,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtClinicTime" HorizontalAlignment="Left" Height="23" Margin="85,43,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Label Content="Type:" HorizontalAlignment="Center" Margin="0,43,130,0" VerticalAlignment="Top" FontWeight="Bold"/>
