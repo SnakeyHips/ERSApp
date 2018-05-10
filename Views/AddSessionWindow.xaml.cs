@@ -1,5 +1,7 @@
 using System;
 using System.Windows;
+using System.Windows.Input;
+using System.Text.RegularExpressions;
 using ERSApp.Model;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -11,25 +13,20 @@ namespace ERSApp.Views
         public AddSessionWindow()
         {
             InitializeComponent();
-            cboStartTime.Items.Add("08:00");
-            cboStartTime.Items.Add("09:00");
-            cboStartTime.Items.Add("10:00");
-            cboStartTime.Items.Add("11:00");
-            cboStartTime.Items.Add("12:00");
-            cboEndTime.Items.Add("14:00");
-            cboEndTime.Items.Add("15:00");
-            cboEndTime.Items.Add("16:00");
-            cboEndTime.Items.Add("17:00");
-            cboEndTime.Items.Add("18:00");
-            cboMDC.Items.Add("No");
-            cboMDC.Items.Add("Yes");
-            PopulateChairs(cboMDC.Text);
+            cboClinicTime.Items.Add("08:00");
+            cboClinicTime.Items.Add("09:00");
+            cboClinicTime.Items.Add("10:00");
+            cboClinicTime.Items.Add("11:00");
+            cboClinicTime.Items.Add("12:00");
+            cboType.Items.Add("Community");
+            cboType.Items.Add("MDC");
+            PopulateChairs(cboType.Text);
         }
 
-        public void PopulateChairs(string MDC)
+        public void PopulateChairs(string type)
         {
             cboChairs.Items.Clear();
-            if(MDC.Equals("Yes"))
+            if (type.Equals("MDC"))
             {
                 cboChairs.Items.Add("3");
                 cboChairs.Items.Add("6");
@@ -44,15 +41,15 @@ namespace ERSApp.Views
             }
         }
 
-        private void cboMDC_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cboType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(cboMDC.SelectedIndex == 0)
+            if (cboType.SelectedIndex == 0)
             {
-                PopulateChairs("No");
+                PopulateChairs("Community");
             }
             else
             {
-                PopulateChairs("Yes");
+                PopulateChairs("MDC");
             }
         }
 
@@ -67,47 +64,55 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please enter a valid Date.");
             }
-            else if (cboStartTime.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please select a Start Time.");
-            }
-            else if (cboEndTime.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please select an End Time.");
-            }
             else if (txtLocation.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select a Location.");
             }
-            else if (cboMDC.Text == "")
+            else if (cboClinicTime.Text == "")
             {
-                await this.ShowMessageAsync("", "Please select if session is MDC or not.");
+                await this.ShowMessageAsync("", "Please select a Clinic Time.");
+            }
+            else if (txtLOD.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please select a Length Of Day.");
+            }
+            else if (double.Parse(txtLOD.Text) < 0)
+            {
+                await this.ShowMessageAsync("", "Please select a valid Length Of Day.");
+            }
+            else if (cboType.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please select a Session Type.");
             }
             else if (cboChairs.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select a Chair amount.");
+            }
+            else if (txtBleeds.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please select an estimated Bleed amount.");
             }
             else
             {
                 Session temp = new Session()
                 {
                     Date = dateSession.Text,
-                    StartTime = cboStartTime.Text,
-                    EndTime = cboEndTime.Text,
-                    Length = CollectionManager.GetLength(cboStartTime.Text, cboEndTime.Text),
                     Location = txtLocation.Text,
-                    MDC = cboMDC.Text == "Yes" ? "Yes" : "No",
+                    ClinicTime = cboClinicTime.Text,
+                    LOD = double.Parse(txtLOD.Text),
+                    Type = cboType.Text,
                     Chairs = int.Parse(cboChairs.Text),
-                    SV1Id = 0, SV1Name = "", SV1Start = "", SV1End = "",
-                    DRI1Id = 0, DRI1Name = "", DRI1Start = "", DRI1End = "",
-                    DRI2Id = 0, DRI2Name = "", DRI2Start = "", DRI2End = "",
-                    RN1Id = 0, RN1Name = "", RN1Start = "", RN1End = "",
-                    RN2Id = 0, RN2Name = "", RN2Start = "", RN2End = "",
-                    RN3Id = 0, RN3Name = "", RN3Start = "", RN3End = "",
-                    CCA1Id = 0, CCA1Name = "", CCA1Start = "", CCA1End = "",
-                    CCA2Id = 0, CCA2Name = "", CCA2Start = "", CCA2End = "",
-                    CCA3Id = 0, CCA3Name = "", CCA3Start = "", CCA3End = "",
-                    State = "Incomplete"
+                    Bleeds = int.Parse(txtBleeds.Text),
+                    SV1Id = 0, SV1Name = "", SV1LOD = 0.0,
+                    DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0,
+                    DRI2Id = 0, DRI2Name = "", DRI2LOD = 0.0,
+                    RN1Id = 0, RN1Name = "", RN1LOD = 0.0,
+                    RN2Id = 0, RN2Name = "", RN2LOD = 0.0,
+                    RN3Id = 0, RN3Name = "", RN3LOD = 0.0,
+                    CCA1Id = 0, CCA1Name = "", CCA1LOD = 0.0,
+                    CCA2Id = 0, CCA2Name = "", CCA2LOD = 0.0,
+                    CCA3Id = 0, CCA3Name = "", CCA3LOD = 0.0,
+                    StaffCount = 0, State = 0
                 };
                 if (CollectionManager.AddSession(temp) > 0)
                 {
@@ -119,6 +124,14 @@ namespace ERSApp.Views
                     await this.ShowMessageAsync("", "Duplicate Session found.");
                 }
             }
+        }
+
+        //Method to force only numbers in textbox input
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            //Use this in the xaml file to only allow numbers in input
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
