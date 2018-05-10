@@ -39,6 +39,10 @@ namespace ERSApp.Views
             AddSessionWindow addSessionWindow = new AddSessionWindow();
             addSessionWindow.Owner = mainWindow;
             addSessionWindow.ShowDialog();
+            if(addSessionWindow.DialogResult == true)
+            {
+                dateSession.SelectedDate = addSessionWindow.dateSession.SelectedDate;
+            }
         }
 
         private async void btnUpdateSession_Click(object sender, RoutedEventArgs e)
@@ -150,7 +154,6 @@ namespace ERSApp.Views
                         if (result == true)
                         {
                             //disable main window and activate progress ring while report is being created
-                            this.IsHitTestVisible = false;
                             await CreateSessionReport(ReportSessions, saveDialog.FileName);
                         }
                     }
@@ -164,70 +167,76 @@ namespace ERSApp.Views
             try
             {
                 FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
-                using (Document document = new Document())
+
+                //Document is A4 size with margins of 36 each side
+                Document report = new Document(PageSize.A4.Rotate(), 10, 10, 10, 10);
+
+                PdfWriter writer = PdfWriter.GetInstance(report, fs);
+
+                //Table for displaying stock quantities with 2 being amount of columns
+                PdfPTable sessionTable = new PdfPTable(17);
+                sessionTable.SpacingBefore = 10f;
+                sessionTable.WidthPercentage = 100;
+
+                //Used for creating bold font
+                Font bold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8);
+                Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+
+                //Column titles with bold text for stock table
+                sessionTable.AddCell(new Phrase(new Chunk("Day", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("Date", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("Location", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("Time", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("LOD", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("Chairs", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("Bleeds", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("RN1", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("RN2", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("RN3", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("SV1", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("DRI1", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("DRI2", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("CCA1", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("CCA2", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("CCA3", bold)));
+                sessionTable.AddCell(new Phrase(new Chunk("Count", bold)));
+
+                foreach (Session s in sessions)
                 {
-                    using (PdfSmartCopy copy = new PdfSmartCopy(document, fs))
-                    {
-                        document.Open();
-                        foreach (Session s in sessions)
-                        {
-                            //Read in template here
-                            PdfReader reader = new PdfReader("Templates/SessionTemplate.pdf");
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                using (PdfStamper stamp = new PdfStamper(reader, ms))
-                                {
-                                    //Put together all fields from pdf template
-                                    AcroFields fields = stamp.AcroFields;
-                                    fields.SetField("Date", s.Date);
-                                    fields.SetField("StartTime", s.StartTime);
-                                    fields.SetField("MDC", s.MDC);
-                                    fields.SetField("Location", s.Location);
-                                    fields.SetField("EndTime", s.EndTime);
-                                    fields.SetField("Chairs", s.Chairs.ToString());
-                                    fields.SetField("StartTime", s.StartTime);
-                                    fields.SetField("SV1Name", s.SV1Name);
-                                    fields.SetField("SV1Start", s.SV1Start);
-                                    fields.SetField("SV1End", s.SV1End);
-                                    fields.SetField("DRI1Name", s.DRI1Name);
-                                    fields.SetField("DRI1Start", s.DRI1Start);
-                                    fields.SetField("DRI1End", s.DRI1End);
-                                    fields.SetField("DRI2Name", s.DRI2Name);
-                                    fields.SetField("DRI2Start", s.DRI2Start);
-                                    fields.SetField("DRI2End", s.DRI2End);
-                                    fields.SetField("RN1Name", s.RN1Name);
-                                    fields.SetField("RN1Start", s.RN1Start);
-                                    fields.SetField("RN1End", s.RN1End);
-                                    fields.SetField("RN2Name", s.RN2Name);
-                                    fields.SetField("RN2Start", s.RN2Start);
-                                    fields.SetField("RN2End", s.RN2End);
-                                    fields.SetField("RN3Name", s.RN3Name);
-                                    fields.SetField("RN3Start", s.RN3Start);
-                                    fields.SetField("RN3End", s.RN3End);
-                                    fields.SetField("CCA1Name", s.CCA1Name);
-                                    fields.SetField("CCA1Start", s.CCA1Start);
-                                    fields.SetField("CCA1End", s.CCA1End);
-                                    fields.SetField("CCA2Name", s.CCA2Name);
-                                    fields.SetField("CCA2Start", s.CCA2Start);
-                                    fields.SetField("CCA2End", s.CCA2End);
-                                    fields.SetField("CCA3Name", s.CCA3Name);
-                                    fields.SetField("CCA3Start", s.CCA3Start);
-                                    fields.SetField("CCA3End", s.CCA3End);
-                                    stamp.FormFlattening = true;
-                                }
-                                reader = new PdfReader(ms.ToArray());
-                                //Add page for each session
-                                copy.AddPage(copy.GetImportedPage(reader, 1));
-                            }
-                        }
-                    }
+                    sessionTable.AddCell(new Phrase(new Chunk(DateTime.Parse(s.Date).DayOfWeek.ToString(), norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.Date, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.Location, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.ClinicTime, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.LOD.ToString(), norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.Chairs.ToString(), norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.Bleeds.ToString(), norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.RN1Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.RN2Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.RN3Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.SV1Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.DRI1Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.DRI2Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.CCA1Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.CCA2Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.CCA3Name, norm)));
+                    sessionTable.AddCell(new Phrase(new Chunk(s.StaffCount.ToString(), norm)));
                 }
-                this.IsHitTestVisible = true;
-                await mainWindow.ShowMessageAsync("", "Report created successfully.");
+
+                //Title used with date and time when created
+                Paragraph titleParagraph = new Paragraph(new Phrase(new Chunk(
+                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count-1].Date, bold)));
+                titleParagraph.Alignment = Element.ALIGN_CENTER;
+
+                //Creates and adds everything to pdf output
+                report.Open();
+                report.Add(titleParagraph);
+                report.Add(sessionTable);
+                report.Close();
+
+                await mainWindow.ShowMessageAsync("", "Report created successfully!");
             }
             catch
             {
-                this.IsHitTestVisible = true;
                 //Most common issue for report not producing is that previous file is already open
                 await mainWindow.ShowMessageAsync("", "Report failed to create. Please make sure a report is not already open.");
             }
