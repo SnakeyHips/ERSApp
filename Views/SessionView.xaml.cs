@@ -179,6 +179,7 @@ namespace ERSApp.Views
                 sessionTable.WidthPercentage = 100;
 
                 //Used for creating bold font
+                Font header = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
                 Font bold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8);
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
@@ -224,7 +225,7 @@ namespace ERSApp.Views
 
                 //Title used with date and time when created
                 Paragraph titleParagraph = new Paragraph(
-                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, bold);
+                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, header);
                 titleParagraph.Alignment = Element.ALIGN_CENTER;
 
                 //Creates and adds everything to pdf output
