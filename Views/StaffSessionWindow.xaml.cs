@@ -74,6 +74,7 @@ namespace ERSApp.Views
             txtType.Text = Selected.Type;
             txtChairs.Text = Selected.Chairs.ToString();
             txtBleeds.Text = Selected.Bleeds.ToString();
+            txtStaffCount.Text = Selected.StaffCount.ToString();
 
             //Autopopulate cbos from StaffList
             //Pastel colours from colorhexa.com
@@ -217,39 +218,48 @@ namespace ERSApp.Views
             //First check if there is a selected item
             if (cboSV1.SelectedItem != null)
             {
-                //Check if different staff selected from before
-                if (Selected.SV1Id == (int)cboSV1.SelectedValue)
+                if(txtSV1LOD.Text == "")
                 {
-                    //Check if different times selected from before
-                    if (Selected.SV1LOD != double.Parse(txtSV1LOD.Text))
-                    {
-                        //If so, update times and appointed hours to use times selected
-                        double appointed = double.Parse(txtSV1LOD.Text) - Selected.SV1LOD;
-                        CollectionManager.UpdateRoster(Selected.SV1Id, appointed, 0.0, Week);
-                        Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
-                    }
-                }
-                //Check if no previous staff selected
-                else if (Selected.SV1Id != (int)cboSV1.SelectedValue)
-                {
-                    //Update old staff's appointed hours to remove length
-                    CollectionManager.UpdateRoster(Selected.SV1Id, -Selected.SV1LOD, 0.0, Week);
-
-                    //Assign new appoint staff
-                    Selected.SV1Id = (int)cboSV1.SelectedValue;
-                    Selected.SV1Name = cboSV1.Text;
-                    Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
-                    //Add onto new staff's appointed hours/New record created in sql method
-                    CollectionManager.UpdateRoster(Selected.SV1Id, Selected.SV1LOD, 0.0, Week);
+                    await this.ShowMessageAsync("", "Please enter a LOD value for SV1.");
+                    return;
                 }
                 else
                 {
-                    //Assign new appoint staff
-                    Selected.SV1Id = (int)cboSV1.SelectedValue;
-                    Selected.SV1Name = cboSV1.Text;
-                    Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
-                    //Add onto new staff's appointed hours/New record created in sql method
-                    CollectionManager.UpdateRoster(Selected.SV1Id, Selected.SV1LOD, 0.0, Week);
+                    if(Selected.SV1Id == 0)
+                    {
+                        //Assign new appoint staff
+                        Selected.SV1Id = (int)cboSV1.SelectedValue;
+                        Selected.SV1Name = cboSV1.Text;
+                        Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
+                        Selected.StaffCount++;
+                        //Add onto new staff's appointed hours/New record created in sql method
+                        CollectionManager.UpdateRoster(Selected.SV1Id, Selected.SV1LOD, 0.0, Week);
+                    }
+                    //Check if different staff selected from before
+                    else if (Selected.SV1Id == (int)cboSV1.SelectedValue)
+                    {
+                        //Check if different times selected from before
+                        if (Selected.SV1LOD != double.Parse(txtSV1LOD.Text))
+                        {
+                            //If so, update times and appointed hours to use times selected
+                            double appointed = double.Parse(txtSV1LOD.Text) - Selected.SV1LOD;
+                            CollectionManager.UpdateRoster(Selected.SV1Id, appointed, 0.0, Week);
+                            Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
+                        }
+                    }
+                    //Check if no previous staff selected
+                    else if (Selected.SV1Id != (int)cboSV1.SelectedValue)
+                    {
+                        //Update old staff's appointed hours to remove length
+                        CollectionManager.UpdateRoster(Selected.SV1Id, -Selected.SV1LOD, 0.0, Week);
+                   
+                        //Assign new appoint staff
+                        Selected.SV1Id = (int)cboSV1.SelectedValue;
+                        Selected.SV1Name = cboSV1.Text;
+                        Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
+                        //Add onto new staff's appointed hours/New record created in sql method
+                        CollectionManager.UpdateRoster(Selected.SV1Id, Selected.SV1LOD, 0.0, Week);
+                    }
                 }
             }
             //Else remove if reset staff has been pressed
@@ -261,34 +271,44 @@ namespace ERSApp.Views
                 Selected.SV1Id = 0;
                 Selected.SV1Name = "";
                 Selected.SV1LOD = 0.0;
+                Selected.StaffCount--;
             }
 
-            //Get DRI selected info
+            //Do same for other roles
             if (cboDRI1.SelectedItem != null)
             {
-                if (Selected.DRI1Id == (int)cboDRI1.SelectedValue)
+                if (txtDRI1LOD.Text == "")
                 {
-                    if (Selected.DRI1LOD != double.Parse(txtDRI1LOD.Text))
-                    {
-                        double appointed = double.Parse(txtDRI1LOD.Text) - Selected.DRI1LOD;
-                        CollectionManager.UpdateRoster(Selected.DRI1Id, appointed, 0.0, Week);
-                        Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
-                    }
-                }
-                else if (Selected.DRI1Id != (int)cboDRI1.SelectedValue)
-                {
-                    CollectionManager.UpdateRoster(Selected.DRI1Id, -Selected.DRI1LOD, 0.0, Week);
-                    Selected.DRI1Id = (int)cboDRI1.SelectedValue;
-                    Selected.DRI1Name = cboDRI1.Text;
-                    Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
-                    CollectionManager.UpdateRoster(Selected.DRI1Id, Selected.DRI1LOD, 0.0, Week);
+                    await this.ShowMessageAsync("", "Please enter a LOD value for DRI1.");
+                    return;
                 }
                 else
                 {
-                    Selected.DRI1Id = (int)cboDRI1.SelectedValue;
-                    Selected.DRI1Name = cboDRI1.Text;
-                    Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
-                    CollectionManager.UpdateRoster(Selected.DRI1Id, Selected.DRI1LOD, 0.0, Week);
+                    if (Selected.DRI1Id == 0)
+                    {
+                        Selected.DRI1Id = (int)cboDRI1.SelectedValue;
+                        Selected.DRI1Name = cboDRI1.Text;
+                        Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
+                        Selected.StaffCount++;
+                        CollectionManager.UpdateRoster(Selected.DRI1Id, Selected.DRI1LOD, 0.0, Week);
+                    }
+                    else if (Selected.DRI1Id == (int)cboDRI1.SelectedValue)
+                    {
+                        if (Selected.DRI1LOD != double.Parse(txtDRI1LOD.Text))
+                        {
+                            double appointed = double.Parse(txtDRI1LOD.Text) - Selected.DRI1LOD;
+                            CollectionManager.UpdateRoster(Selected.DRI1Id, appointed, 0.0, Week);
+                            Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
+                        }
+                    }
+                    else if (Selected.DRI1Id != (int)cboDRI1.SelectedValue)
+                    {
+                        CollectionManager.UpdateRoster(Selected.DRI1Id, -Selected.DRI1LOD, 0.0, Week);
+                        Selected.DRI1Id = (int)cboDRI1.SelectedValue;
+                        Selected.DRI1Name = cboDRI1.Text;
+                        Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
+                        CollectionManager.UpdateRoster(Selected.DRI1Id, Selected.DRI1LOD, 0.0, Week);
+                    }
                 }
             }
             else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
@@ -297,16 +317,34 @@ namespace ERSApp.Views
                 Selected.DRI1Id = 0;
                 Selected.DRI1Name = "";
                 Selected.DRI1LOD = 0.0;
+                Selected.StaffCount--;
             }
-
 
             if (cboDRI2.SelectedItem != null)
             {
-                if (cboDRI2.Text != cboDRI1.Text)
+                if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
                 {
-                    if (cboDRI2.SelectedItem != null)
+                    await this.ShowMessageAsync("", "Driver 2 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    if(txtDRI2LOD.Text == "")
                     {
-                        if (Selected.DRI2Id == (int)cboDRI2.SelectedValue)
+                        await this.ShowMessageAsync("", "Please enter a LOD value for DRI2.");
+                        return;
+                    }
+                    else
+                    {
+                        if (Selected.DRI2Id == 0)
+                        {
+                            Selected.DRI2Id = (int)cboDRI2.SelectedValue;
+                            Selected.DRI2Name = cboDRI2.Text;
+                            Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
+                            Selected.StaffCount++;
+                            CollectionManager.UpdateRoster(Selected.DRI2Id, Selected.DRI2LOD, 0.0, Week);
+                        }
+                        else if (Selected.DRI2Id == (int)cboDRI2.SelectedValue)
                         {
                             if (Selected.DRI2LOD != double.Parse(txtDRI2LOD.Text))
                             {
@@ -323,19 +361,7 @@ namespace ERSApp.Views
                             Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
                             CollectionManager.UpdateRoster(Selected.DRI2Id, Selected.DRI2LOD, 0.0, Week);
                         }
-                        else
-                        {
-                            Selected.DRI2Id = (int)cboDRI2.SelectedValue;
-                            Selected.DRI2Name = cboDRI2.Text;
-                            Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.DRI2Id, Selected.DRI2LOD, 0.0, Week);
-                        }
                     }
-                }
-                else
-                {
-                    await this.ShowMessageAsync("", "Driver 2 duplicate selected.");
-                    return;
                 }
             }
             else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
@@ -344,34 +370,43 @@ namespace ERSApp.Views
                 Selected.DRI2Id = 0;
                 Selected.DRI2Name = "";
                 Selected.DRI2LOD = 0.0;
+                Selected.StaffCount--;
             }
 
             //Get RN selected info
             if (cboRN1.SelectedItem != null)
             {
-                if (Selected.RN1Id == (int)cboRN1.SelectedValue)
+                if (txtRN1LOD.Text == "")
                 {
-                    if (Selected.RN1LOD != double.Parse(txtRN1LOD.Text))
-                    {
-                        double appointed = double.Parse(txtRN1LOD.Text) - Selected.RN1LOD;
-                        CollectionManager.UpdateRoster(Selected.RN1Id, appointed, 0.0, Week);
-                        Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
-                    }
-                }
-                else if (Selected.RN1Id != (int)cboRN1.SelectedValue)
-                {
-                    CollectionManager.UpdateRoster(Selected.RN1Id, -Selected.RN1LOD, 0.0, Week);
-                    Selected.RN1Id = (int)cboRN1.SelectedValue;
-                    Selected.RN1Name = cboRN1.Text;
-                    Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
-                    CollectionManager.UpdateRoster(Selected.RN1Id, Selected.RN1LOD, 0.0, Week);
+                    await this.ShowMessageAsync("", "Please enter a LOD value for RN1.");
+                    return;
                 }
                 else
                 {
-                    Selected.RN1Id = (int)cboRN1.SelectedValue;
-                    Selected.RN1Name = cboRN1.Text;
-                    Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
-                    CollectionManager.UpdateRoster(Selected.RN1Id, Selected.RN1LOD, 0.0, Week);
+                    if (Selected.RN1Id == 0)
+                    {
+                        Selected.RN1Id = (int)cboRN1.SelectedValue;
+                        Selected.RN1Name = cboRN1.Text;
+                        Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
+                        CollectionManager.UpdateRoster(Selected.RN1Id, Selected.RN1LOD, 0.0, Week);
+                    }
+                    else if (Selected.RN1Id == (int)cboRN1.SelectedValue)
+                    {
+                        if (Selected.RN1LOD != double.Parse(txtRN1LOD.Text))
+                        {
+                            double appointed = double.Parse(txtRN1LOD.Text) - Selected.RN1LOD;
+                            CollectionManager.UpdateRoster(Selected.RN1Id, appointed, 0.0, Week);
+                            Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
+                        }
+                    }
+                    else if (Selected.RN1Id != (int)cboRN1.SelectedValue)
+                    {
+                        CollectionManager.UpdateRoster(Selected.RN1Id, -Selected.RN1LOD, 0.0, Week);
+                        Selected.RN1Id = (int)cboRN1.SelectedValue;
+                        Selected.RN1Name = cboRN1.Text;
+                        Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
+                        CollectionManager.UpdateRoster(Selected.RN1Id, Selected.RN1LOD, 0.0, Week);
+                    }
                 }
             }
             else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
@@ -384,11 +419,28 @@ namespace ERSApp.Views
 
             if (cboRN2.SelectedItem != null)
             {
-                if (cboRN2.Text != cboRN1.Text)
+                if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
                 {
-                    if (cboRN2.SelectedItem != null)
+                    await this.ShowMessageAsync("", "RN2 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    if (txtRN2LOD.Text == "")
                     {
-                        if (Selected.RN2Id == (int)cboRN2.SelectedValue)
+                        await this.ShowMessageAsync("", "Please enter a LOD value for RN2.");
+                        return;
+                    }
+                    else
+                    {
+                        if (Selected.RN2Id == 0)
+                        {
+                            Selected.RN2Id = (int)cboRN2.SelectedValue;
+                            Selected.RN2Name = cboRN2.Text;
+                            Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
+                            CollectionManager.UpdateRoster(Selected.RN2Id, Selected.RN2LOD, 0.0, Week);
+                        }
+                        else if (Selected.RN2Id == (int)cboRN2.SelectedValue)
                         {
                             if (Selected.RN2LOD != double.Parse(txtRN2LOD.Text))
                             {
@@ -405,19 +457,7 @@ namespace ERSApp.Views
                             Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
                             CollectionManager.UpdateRoster(Selected.RN2Id, Selected.RN2LOD, 0.0, Week);
                         }
-                        else
-                        {
-                            Selected.RN2Id = (int)cboRN2.SelectedValue;
-                            Selected.RN2Name = cboRN2.Text;
-                            Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.RN2Id, Selected.RN2LOD, 0.0, Week);
-                        }
                     }
-                }
-                else
-                {
-                    await this.ShowMessageAsync("", "RN 2 duplicate selected.");
-                    return;
                 }
             }
             else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
@@ -430,11 +470,29 @@ namespace ERSApp.Views
 
             if (cboRN3.SelectedItem != null)
             {
-                if (cboRN3.Text != cboRN1.Text)
+                if ((int)cboRN3.SelectedValue == (int)cboRN1.SelectedValue ||
+                    (int)cboRN3.SelectedValue == (int)cboRN2.SelectedValue)
                 {
-                    if (cboRN3.SelectedItem != null)
+                    await this.ShowMessageAsync("", "RN3 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    if (txtRN3LOD.Text == "")
                     {
-                        if (Selected.RN3Id == (int)cboRN3.SelectedValue)
+                        await this.ShowMessageAsync("", "Please enter a LOD value for RN3.");
+                        return;
+                    }
+                    else
+                    {
+                        if (Selected.RN3Id == 0)
+                        {
+                            Selected.RN3Id = (int)cboRN3.SelectedValue;
+                            Selected.RN3Name = cboRN3.Text;
+                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
+                            CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
+                        }
+                        else if (Selected.RN3Id == (int)cboRN3.SelectedValue)
                         {
                             if (Selected.RN3LOD != double.Parse(txtRN3LOD.Text))
                             {
@@ -451,19 +509,7 @@ namespace ERSApp.Views
                             Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
                             CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
                         }
-                        else
-                        {
-                            Selected.RN3Id = (int)cboRN3.SelectedValue;
-                            Selected.RN3Name = cboRN3.Text;
-                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
-                        }
                     }
-                }
-                else
-                {
-                    await this.ShowMessageAsync("", "RN 3 duplicate selected.");
-                    return;
                 }
             }
             else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
@@ -477,29 +523,38 @@ namespace ERSApp.Views
             //Get CCA selected info
             if (cboCCA1.SelectedItem != null)
             {
-                if (Selected.CCA1Id == (int)cboCCA1.SelectedValue)
+                if (txtCCA1LOD.Text == "")
                 {
-                    if (Selected.CCA1LOD != double.Parse(txtCCA1LOD.Text))
-                    {
-                        double appointed = double.Parse(txtCCA1LOD.Text) - Selected.CCA1LOD;
-                        CollectionManager.UpdateRoster(Selected.CCA1Id, appointed, 0.0, Week);
-                        Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
-                    }
-                }
-                else if (Selected.CCA1Id != (int)cboCCA1.SelectedValue)
-                {
-                    CollectionManager.UpdateRoster(Selected.CCA1Id, -Selected.CCA1LOD, 0.0, Week);
-                    Selected.CCA1Id = (int)cboCCA1.SelectedValue;
-                    Selected.CCA1Name = cboCCA1.Text;
-                    Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
-                    CollectionManager.UpdateRoster(Selected.CCA1Id, Selected.CCA1LOD, 0.0, Week);
+                    await this.ShowMessageAsync("", "Please enter a LOD value for CCA1.");
+                    return;
                 }
                 else
                 {
-                    Selected.CCA1Id = (int)cboCCA1.SelectedValue;
-                    Selected.CCA1Name = cboCCA1.Text;
-                    Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
-                    CollectionManager.UpdateRoster(Selected.CCA1Id, Selected.CCA1LOD, 0.0, Week);
+                    if (Selected.CCA1Id == 0)
+                    {
+                        Selected.CCA1Id = (int)cboCCA1.SelectedValue;
+                        Selected.CCA1Name = cboCCA1.Text;
+                        Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
+                        Selected.StaffCount++;
+                        CollectionManager.UpdateRoster(Selected.CCA1Id, Selected.CCA1LOD, 0.0, Week);
+                    }
+                    else if (Selected.CCA1Id == (int)cboCCA1.SelectedValue)
+                    {
+                        if (Selected.CCA1LOD != double.Parse(txtCCA1LOD.Text))
+                        {
+                            double appointed = double.Parse(txtCCA1LOD.Text) - Selected.CCA1LOD;
+                            CollectionManager.UpdateRoster(Selected.CCA1Id, appointed, 0.0, Week);
+                            Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
+                        }
+                    }
+                    else if (Selected.CCA1Id != (int)cboCCA1.SelectedValue)
+                    {
+                        CollectionManager.UpdateRoster(Selected.CCA1Id, -Selected.CCA1LOD, 0.0, Week);
+                        Selected.CCA1Id = (int)cboCCA1.SelectedValue;
+                        Selected.CCA1Name = cboCCA1.Text;
+                        Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
+                        CollectionManager.UpdateRoster(Selected.CCA1Id, Selected.CCA1LOD, 0.0, Week);
+                    }
                 }
             }
             else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
@@ -508,101 +563,118 @@ namespace ERSApp.Views
                 Selected.CCA1Id = 0;
                 Selected.CCA1Name = "";
                 Selected.CCA1LOD = 0.0;
+                Selected.StaffCount--;
             }
 
-            if (cboRN3.SelectedItem != null)
+            if (cboCCA2.SelectedItem != null)
             {
-                if (cboRN3.Text != cboRN1.Text)
+                if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
                 {
-                    if (cboRN3.SelectedItem != null)
-                    {
-                        if (Selected.RN3Id == (int)cboRN3.SelectedValue)
-                        {
-                            if (Selected.RN3LOD != double.Parse(txtRN3LOD.Text))
-                            {
-                                double appointed = double.Parse(txtRN3LOD.Text) - Selected.RN3LOD;
-                                CollectionManager.UpdateRoster(Selected.RN3Id, appointed, 0.0, Week);
-                                Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
-                            }
-                        }
-                        else if (Selected.RN3Id != (int)cboRN3.SelectedValue)
-                        {
-                            CollectionManager.UpdateRoster(Selected.RN3Id, -Selected.RN3LOD, 0.0, Week);
-                            Selected.RN3Id = (int)cboRN3.SelectedValue;
-                            Selected.RN3Name = cboRN3.Text;
-                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
-                        }
-                        else
-                        {
-                            Selected.RN3Id = (int)cboRN3.SelectedValue;
-                            Selected.RN3Name = cboRN3.Text;
-                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
-                        }
-                    }
+                    await this.ShowMessageAsync("", "CCA2 duplicate selected.");
+                    return;
                 }
                 else
                 {
-                    await this.ShowMessageAsync("", "RN 3 duplicate selected.");
-                    return;
-                }
-            }
-            else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
-            {
-                CollectionManager.UpdateRoster(Selected.RN3Id, -Selected.RN3LOD, 0.0, Week);
-                Selected.RN3Id = 0;
-                Selected.RN3Name = "";
-                Selected.RN3LOD = 0.0;
-            }
-
-            if (cboRN3.SelectedItem != null)
-            {
-                if (cboRN3.Text != cboRN1.Text)
-                {
-                    if (cboRN3.SelectedItem != null)
+                    if (txtCCA2LOD.Text == "")
                     {
-                        if (Selected.RN3Id == (int)cboRN3.SelectedValue)
+                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA2.");
+                        return;
+                    }
+                    else
+                    {
+                        if (Selected.CCA2Id == 0)
                         {
-                            if (Selected.RN3LOD != double.Parse(txtRN3LOD.Text))
+                            Selected.CCA2Id = (int)cboCCA2.SelectedValue;
+                            Selected.CCA2Name = cboCCA2.Text;
+                            Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
+                            Selected.StaffCount++;
+                            CollectionManager.UpdateRoster(Selected.CCA2Id, Selected.CCA2LOD, 0.0, Week);
+                        }
+                        else if (Selected.CCA2Id == (int)cboCCA2.SelectedValue)
+                        {
+                            if (Selected.CCA2LOD != double.Parse(txtCCA2LOD.Text))
                             {
-                                double appointed = double.Parse(txtRN3LOD.Text) - Selected.RN3LOD;
-                                CollectionManager.UpdateRoster(Selected.RN3Id, appointed, 0.0, Week);
-                                Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
+                                double appointed = double.Parse(txtCCA2LOD.Text) - Selected.CCA2LOD;
+                                CollectionManager.UpdateRoster(Selected.CCA2Id, appointed, 0.0, Week);
+                                Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
                             }
                         }
-                        else if (Selected.RN3Id != (int)cboRN3.SelectedValue)
+                        else if (Selected.CCA2Id != (int)cboCCA2.SelectedValue)
                         {
-                            CollectionManager.UpdateRoster(Selected.RN3Id, -Selected.RN3LOD, 0.0, Week);
-                            Selected.RN3Id = (int)cboRN3.SelectedValue;
-                            Selected.RN3Name = cboRN3.Text;
-                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
-                        }
-                        else
-                        {
-                            Selected.RN3Id = (int)cboRN3.SelectedValue;
-                            Selected.RN3Name = cboRN3.Text;
-                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
-                            CollectionManager.UpdateRoster(Selected.RN3Id, Selected.RN3LOD, 0.0, Week);
+                            CollectionManager.UpdateRoster(Selected.CCA2Id, -Selected.CCA2LOD, 0.0, Week);
+                            Selected.CCA2Id = (int)cboCCA2.SelectedValue;
+                            Selected.CCA2Name = cboCCA2.Text;
+                            Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
+                            CollectionManager.UpdateRoster(Selected.CCA2Id, Selected.CCA2LOD, 0.0, Week);
                         }
                     }
                 }
-                else
+            }
+            else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
+            {
+                CollectionManager.UpdateRoster(Selected.CCA2Id, -Selected.CCA2LOD, 0.0, Week);
+                Selected.CCA2Id = 0;
+                Selected.CCA2Name = "";
+                Selected.CCA2LOD = 0.0;
+                Selected.StaffCount--;
+            }
+
+            if (cboCCA3.SelectedItem != null)
+            {
+                if ((int)cboCCA3.SelectedValue == (int)cboCCA1.SelectedValue ||
+                    (int)cboCCA3.SelectedValue == (int)cboCCA2.SelectedValue)
                 {
-                    await this.ShowMessageAsync("", "RN 3 duplicate selected.");
+                    await this.ShowMessageAsync("", "CCA3 duplicate selected.");
                     return;
                 }
+                else
+                {
+                    if (txtCCA3LOD.Text == "")
+                    {
+                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA3.");
+                        return;
+                    }
+                    else
+                    {
+                        if (Selected.CCA3Id == 0)
+                        {
+                            Selected.CCA3Id = (int)cboCCA3.SelectedValue;
+                            Selected.CCA3Name = cboCCA3.Text;
+                            Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
+                            Selected.StaffCount++;
+                            CollectionManager.UpdateRoster(Selected.CCA3Id, Selected.CCA3LOD, 0.0, Week);
+                        }
+                        else if (Selected.CCA3Id == (int)cboCCA3.SelectedValue)
+                        {
+                            if (Selected.CCA3LOD != double.Parse(txtCCA3LOD.Text))
+                            {
+                                double appointed = double.Parse(txtCCA3LOD.Text) - Selected.CCA3LOD;
+                                CollectionManager.UpdateRoster(Selected.CCA3Id, appointed, 0.0, Week);
+                                Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
+                            }
+                        }
+                        else if (Selected.CCA3Id != (int)cboCCA3.SelectedValue)
+                        {
+                            CollectionManager.UpdateRoster(Selected.CCA3Id, -Selected.CCA3LOD, 0.0, Week);
+                            Selected.CCA3Id = (int)cboCCA3.SelectedValue;
+                            Selected.CCA3Name = cboCCA3.Text;
+                            Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
+                            CollectionManager.UpdateRoster(Selected.CCA3Id, Selected.CCA3LOD, 0.0, Week);
+                        }
+                    }
+                }
             }
-            else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
+            else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
             {
-                CollectionManager.UpdateRoster(Selected.RN3Id, -Selected.RN3LOD, 0.0, Week);
-                Selected.RN3Id = 0;
-                Selected.RN3Name = "";
-                Selected.RN3LOD = 0.0;
+                CollectionManager.UpdateRoster(Selected.CCA3Id, -Selected.CCA3LOD, 0.0, Week);
+                Selected.CCA3Id = 0;
+                Selected.CCA3Name = "";
+                Selected.CCA3LOD = 0.0;
+                Selected.StaffCount--;
             }
+
             //Check if LOD or Bleed values have changed
-            if(txtLOD.Text != Selected.LOD.ToString())
+            if (txtLOD.Text != Selected.LOD.ToString())
             {
                 Selected.LOD = double.Parse(txtLOD.Text);
             }
@@ -620,8 +692,7 @@ namespace ERSApp.Views
                     RolesFilled = false;
                 }
             });
-            Selected.State = RolesFilled ? "Complete" : "Incomplete";
-
+            Selected.State = RolesFilled ? 1 : 0;
             CollectionManager.UpdateSessionStaff(Selected);
             //Go back to main window
             this.DialogResult = true;
