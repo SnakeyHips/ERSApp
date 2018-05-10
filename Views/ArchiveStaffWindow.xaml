@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="ERSApp.Views.ArchiveStaffWindow"
+<Controls:MetroWindow x:Class="ERSApp.Views.ArchiveStaffWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -42,8 +42,7 @@
                           2504 3714,2812 3706,2844 3697,2876 3694,2883 3687,2901 3815,3066 3876,3117 3977,3200 4098,3260 4220,3286 4304,3303
                           4513,3297 4595,3275 Z" Fill="{DynamicResource AccentColorBrush}" RenderTransform="1,0,0,-1,0,0"/>
         </Viewbox>
-        <Button Content="Calculate" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,80" Height="25" Width="75" Click="btnCalculate_Click"/>
-        <Button Content="Delete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnDelete_Click"/>
+        <Button Content="Calculate" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnCalculate_Click"/>
         <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnClose_Click"/>
     </Grid>
 </Controls:MetroWindow>
