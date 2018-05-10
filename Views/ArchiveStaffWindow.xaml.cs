@@ -1,8 +1,8 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
-using MahApps.Metro.Controls;
 using ERSApp.Model;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace ERSApp.Views
@@ -26,6 +26,7 @@ namespace ERSApp.Views
             lstRoster.ItemsSource = Roster;
         }
 
+        //Delete method not used atm
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (lstRoster.SelectedIndex > -1)
@@ -37,7 +38,7 @@ namespace ERSApp.Views
                 {
                     Staff Selected = (Staff)lstRoster.SelectedItem;
                     CollectionManager.DeleteRoster(Selected.Id, (double)lstWeeks.SelectedValue);
-                    lstRoster.Items.Remove(Selected);
+                    //lstRoster.Items.Remove(Selected);
                 }
             }
         }
