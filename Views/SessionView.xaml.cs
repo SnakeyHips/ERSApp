@@ -39,7 +39,7 @@ namespace ERSApp.Views
             AddSessionWindow addSessionWindow = new AddSessionWindow();
             addSessionWindow.Owner = mainWindow;
             addSessionWindow.ShowDialog();
-            if(addSessionWindow.DialogResult == true)
+            if (addSessionWindow.DialogResult == true)
             {
                 dateSession.SelectedDate = addSessionWindow.dateSession.SelectedDate;
             }
@@ -50,9 +50,9 @@ namespace ERSApp.Views
             if (lstSessions.SelectedIndex > -1)
             {
                 if (SessionViewModel.SelectedSession.SV1Id == 0 && SessionViewModel.SelectedSession.DRI1Id == 0 &&
-                    SessionViewModel.SelectedSession.DRI2Id == 0 && SessionViewModel.SelectedSession.RN1Id == 0 && 
-                    SessionViewModel.SelectedSession.RN2Id == 0 && SessionViewModel.SelectedSession.RN3Id == 0 && 
-                    SessionViewModel.SelectedSession.CCA1Id == 0 && SessionViewModel.SelectedSession.CCA2Id == 0 && 
+                    SessionViewModel.SelectedSession.DRI2Id == 0 && SessionViewModel.SelectedSession.RN1Id == 0 &&
+                    SessionViewModel.SelectedSession.RN2Id == 0 && SessionViewModel.SelectedSession.RN3Id == 0 &&
+                    SessionViewModel.SelectedSession.CCA1Id == 0 && SessionViewModel.SelectedSession.CCA2Id == 0 &&
                     SessionViewModel.SelectedSession.CCA3Id == 0)
                 {
                     UpdateSessionWindow updateSessionWindow = new UpdateSessionWindow(SessionViewModel.SelectedSession);
@@ -183,48 +183,48 @@ namespace ERSApp.Views
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                sessionTable.AddCell(new Phrase(new Chunk("Day", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("Date", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("Location", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("Time", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("LOD", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("Chairs", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("Bleeds", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("RN1", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("RN2", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("RN3", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("SV1", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("DRI1", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("DRI2", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("CCA1", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("CCA2", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("CCA3", bold)));
-                sessionTable.AddCell(new Phrase(new Chunk("Count", bold)));
+                sessionTable.AddCell(new Paragraph("Day", bold));
+                sessionTable.AddCell(new Paragraph("Date", bold));
+                sessionTable.AddCell(new Paragraph("Location", bold));
+                sessionTable.AddCell(new Paragraph("Time", bold));
+                sessionTable.AddCell(new Paragraph("LOD", bold));
+                sessionTable.AddCell(new Paragraph("Chairs", bold));
+                sessionTable.AddCell(new Paragraph("Bleeds", bold));
+                sessionTable.AddCell(new Paragraph("RN1", bold));
+                sessionTable.AddCell(new Paragraph("RN2", bold));
+                sessionTable.AddCell(new Paragraph("RN3", bold));
+                sessionTable.AddCell(new Paragraph("SV1", bold));
+                sessionTable.AddCell(new Paragraph("DRI1", bold));
+                sessionTable.AddCell(new Paragraph("DRI2", bold));
+                sessionTable.AddCell(new Paragraph("CCA1", bold));
+                sessionTable.AddCell(new Paragraph("CCA2", bold));
+                sessionTable.AddCell(new Paragraph("CCA3", bold));
+                sessionTable.AddCell(new Paragraph("Count", bold));
 
                 foreach (Session s in sessions)
                 {
-                    sessionTable.AddCell(new Phrase(new Chunk(DateTime.Parse(s.Date).DayOfWeek.ToString(), norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.Date, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.Location, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.ClinicTime, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.LOD.ToString(), norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.Chairs.ToString(), norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.Bleeds.ToString(), norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.RN1Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.RN2Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.RN3Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.SV1Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.DRI1Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.DRI2Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.CCA1Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.CCA2Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.CCA3Name, norm)));
-                    sessionTable.AddCell(new Phrase(new Chunk(s.StaffCount.ToString(), norm)));
+                    sessionTable.AddCell(new Paragraph(DateTime.Parse(s.Date).DayOfWeek.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Date, norm));
+                    sessionTable.AddCell(new Paragraph(s.Location, norm));
+                    sessionTable.AddCell(new Paragraph(s.ClinicTime, norm));
+                    sessionTable.AddCell(new Paragraph(s.LOD.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Chairs.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Bleeds.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.RN1Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.RN2Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.RN3Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.SV1Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.DRI1Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.DRI2Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.CCA1Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.CCA2Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.CCA3Name, norm));
+                    sessionTable.AddCell(new Paragraph(s.StaffCount.ToString(), norm));
                 }
 
                 //Title used with date and time when created
-                Paragraph titleParagraph = new Paragraph(new Phrase(new Chunk(
-                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count-1].Date, bold)));
+                Paragraph titleParagraph = new Paragraph(
+                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, bold);
                 titleParagraph.Alignment = Element.ALIGN_CENTER;
 
                 //Creates and adds everything to pdf output
