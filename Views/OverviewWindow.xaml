@@ -36,7 +36,7 @@
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding State}" Value="0">
-                            <Setter Property="Foreground" Value="LightGray"/>
+                            <Setter Property="Foreground" Value="Silver"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </DataTrigger>
                     </Style.Triggers>
