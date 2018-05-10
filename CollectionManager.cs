@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -43,16 +43,15 @@ namespace ERSApp
 
         public static int AddSession(Session s)
         {
-            string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Location=@Location AND StartTime=@StartTime) " +
-                "INSERT INTO SessionTable (Date, StartTime, EndTime, Length, Location, MDC, Chairs, SV1Id, SV1Name," +
-                " SV1Start, SV1End, DRI1Id, DRI1Name, DRI1Start, DRI1End, DRI2Id, DRI2Name, DRI2Start, DRI2End, RN1Id, RN1Name, RN1Start, " +
-                "RN1End, RN2Id, RN2Name, RN2Start, RN2End, RN3Id, RN3Name, RN3Start, RN3End, CCA1Id, CCA1Name, CCA1Start, " +
-                "CCA1End, CCA2Id, CCA2Name, CCA2Start, CCA2End, CCA3Id, CCA3Name, CCA3Start, CCA3End, State) " +
-                "VALUES (@Date, @StartTime, @EndTime, @Length, @Location, @MDC, @Chairs, @SV1Id, @SV1Name, @SV1Start, " +
-                "@SV1End, @DRI1Id, @DRI1Name, @DRI1Start, @DRI1End, @DRI2Id, @DRI2Name, @DRI2Start, @DRI2End, @RN1Id, " +
-                "@RN1Name, @RN1Start, @RN1End, @RN2Id, @RN2Name, @RN2Start, @RN2End, @RN3Id, @RN3Name, @RN3Start, " +
-                "@RN3End, @CCA1Id, @CCA1Name, @CCA1Start, @CCA1End, @CCA2Id, @CCA2Name, @CCA2Start, @CCA2End, " +
-                "@CCA3Id, @CCA3Name, @CCA3Start, @CCA3End, @State);";
+            string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Location=@Location AND ClinicTime=@ClinicTime) " +
+                "INSERT INTO SessionTable (Date, Location, ClinicTime, LOD, Type, Chairs, Bleeds, SV1Id, SV1Name, " +
+                "SV1LOD, DRI1Id, DRI1Name, DRI1LOD, DRI2Id, DRI2Name, DRI2LOD, RN1Id, RN1Name, RN1LOD, " +
+                "RN2Id, RN2Name, RN2LOD, RN3Id, RN3Name, RN3LOD, CCA1Id, CCA1Name, CCA1LOD, " +
+                "CCA2Id, CCA2Name, CCA2LOD, CCA3Id, CCA3Name, CCA3LOD, StaffCount, State) " +
+                "VALUES (@Date, @Location, @ClinicTime, @LOD, @Type, @Chairs, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, " +
+                "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI2Id, @DRI2Name, @DRI2LOD, @RN1Id, @RN1Name, @RN1LOD, " +
+                "@RN2Id, @RN2Name, @RN2LOD, @RN3Id, @RN3Name, @RN3LOD, @CCA1Id, @CCA1Name, @CCA1LOD, " +
+                "@CCA2Id, @CCA2Name, @CCA2LOD, @CCA3Id, @CCA3Name, @CCA3LOD, @StaffCount, @State);";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -68,28 +67,29 @@ namespace ERSApp
             }
         }
 
-        public static void UpdateSession(Session s)
+        public static int UpdateSession(Session s)
         {
             string query = "UPDATE SessionTable" +
-                " SET StartTime=@StartTime, EndTime=@EndTime, Length=@Length, Location=@Location, MDC=@MDC, Chairs=@Chairs" +
-                " WHERE Date=@Date AND StartTime=@StartTime;";
+                " SET ClinicTime=@ClinicTime, Location=@Location, LOD=@LOD, Type=@Type, Chairs=@Chairs, Bleeds=@Bleeds" +
+                " WHERE Date=@Date AND ClinicTime=@ClinicTime;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    conn.Execute(query, s);
+                    return conn.Execute(query, s);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
+                    return -1;
                 }
             }
         }
 
         public static void DeleteSession(Session s)
         {
-            string query = "DELETE FROM SessionTable WHERE Date=@Date AND Location=@Location AND StartTime=@StartTime;";
+            string query = "DELETE FROM SessionTable WHERE Date=@Date AND Location=@Location AND ClinicTime=@ClinicTime;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -106,17 +106,18 @@ namespace ERSApp
 
         public static void UpdateSessionStaff(Session s)
         {
-            string query = "UPDATE SessionTable" +
-                " SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1Start=@SV1Start, SV1End=@SV1End," +
-                " DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1Start=@DRI1Start, DRI1End=@DRI1End," +
-                " DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2Start=@DRI2Start, DRI2End=@DRI2End," +
-                " RN1Id=@RN1Id, RN1Name=@RN1Name, RN1Start=@RN1Start, RN1End=@RN1End," +
-                " RN2Id=@RN2Id, RN2Name=@RN2Name, RN2Start=@RN2Start, RN2End=@RN2End," +
-                " RN3Id=@RN3Id, RN3Name=@RN3Name, RN3Start=@RN3Start, RN3End=@RN3End," +
-                " CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1Start=@CCA1Start, CCA1End=@CCA1End," +
-                " CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2Start=@CCA2Start, CCA2End=@CCA2End," +
-                " CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3Start=@CCA3Start, CCA3End=@CCA3End," +
-                " State=@State WHERE Date=@Date AND StartTime=@StartTime AND Location=@Location;";
+            string query = "UPDATE SessionTable " +
+                "SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1LOD=@SV1LOD, " +
+                "DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1LOD=@DRI1LOD, " +
+                "DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2LOD=@DRI2LOD, " +
+                "RN1Id=@RN1Id, RN1Name=@RN1Name, RN1LOD=@RN1LOD, " +
+                "RN2Id=@RN2Id, RN2Name=@RN2Name, RN2LOD=@RN2LOD, " +
+                "RN3Id=@RN3Id, RN3Name=@RN3Name, RN3LOD=@RN3LOD, " +
+                "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, " +
+                "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, " +
+                "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, " +
+                "StaffCount=@StaffCount, State=@State " +
+                "WHERE Date=@Date AND Location=@Location AND ClinicTime=@ClinicTime;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
