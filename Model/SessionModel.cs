@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace ERSApp.Model
 {
@@ -9,49 +9,41 @@ namespace ERSApp.Model
     public class Session : INotifyPropertyChanged
     {
         private string date;
-        private string startTime;
-        private string endTime;
-        private double length;
         private string location;
-        private string mdc;
+        private string clinicTime;
+        private double lod;
+        private string type;
         private int chairs;
+        private int bleeds;
         private int sv1Id;
         private string sv1Name;
-        private string sv1Start;
-        private string sv1End;
+        private double sv1LOD;
         private int dri1Id;
         private string dri1Name;
-        private string dri1Start;
-        private string dri1End;
+        private double dri1LOD;
         private int dri2Id;
         private string dri2Name;
-        private string dri2Start;
-        private string dri2End;
+        private double dri2LOD;
         private int rn1Id;
         private string rn1Name;
-        private string rn1Start;
-        private string rn1End;
+        private double rn1LOD;
         private int rn2Id;
         private string rn2Name;
-        private string rn2Start;
-        private string rn2End;
+        private double rn2LOD;
         private int rn3Id;
         private string rn3Name;
-        private string rn3Start;
-        private string rn3End;
+        private double rn3LOD;
         private int cca1Id;
         private string cca1Name;
-        private string cca1Start;
-        private string cca1End;
+        private double cca1LOD;
         private int cca2Id;
         private string cca2Name;
-        private string cca2Start;
-        private string cca2End;
+        private double cca2LOD;
         private int cca3Id;
         private string cca3Name;
-        private string cca3Start;
-        private string cca3End;
-        private string state;
+        private double cca3LOD;
+        private int staffCount;
+        private int state;
 
 
         public string Date
@@ -66,54 +58,6 @@ namespace ERSApp.Model
                 {
                     date = value;
                     RaisePropertyChanged("Date");
-                }
-            }
-        }
-
-        public string StartTime
-        {
-            get
-            {
-                return startTime;
-            }
-            set
-            {
-                if (startTime != value)
-                {
-                    startTime = value;
-                    RaisePropertyChanged("StartTime");
-                }
-            }
-        }
-
-        public string EndTime
-        {
-            get
-            {
-                return endTime;
-            }
-            set
-            {
-                if (endTime != value)
-                {
-                    endTime = value;
-                    RaisePropertyChanged("EndTime");
-                }
-            }
-        }
-
-        public double Length
-        {
-            get
-            {
-                return length;
-            }
-            set
-            {
-                if (length != value)
-                {
-                    length = value;
-                    RaisePropertyChanged("Length");
                 }
             }
         }
@@ -134,18 +78,50 @@ namespace ERSApp.Model
             }
         }
 
-        public string MDC
+        public string ClinicTime
         {
             get
             {
-                return mdc;
+                return clinicTime;
             }
             set
             {
-                if (mdc != value)
+                if (clinicTime != value)
                 {
-                    mdc = value;
-                    RaisePropertyChanged("MDC");
+                    clinicTime = value;
+                    RaisePropertyChanged("ClinicTime");
+                }
+            }
+        }
+
+        public double LOD
+        {
+            get
+            {
+                return lod;
+            }
+            set
+            {
+                if (lod != value)
+                {
+                    lod = value;
+                    RaisePropertyChanged("LOD");
+                }
+            }
+        }
+
+        public string Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                if (type != value)
+                {
+                    type = value;
+                    RaisePropertyChanged("Type");
                 }
             }
         }
@@ -163,6 +139,22 @@ namespace ERSApp.Model
                 {
                     chairs = value;
                     RaisePropertyChanged("Chairs");
+                }
+            }
+        }
+
+        public int Bleeds
+        {
+            get
+            {
+                return bleeds;
+            }
+            set
+            {
+                if (bleeds != value)
+                {
+                    bleeds = value;
+                    RaisePropertyChanged("Bleeds");
                 }
             }
         }
@@ -199,34 +191,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string SV1Start
+        public double SV1LOD
         {
             get
             {
-                return sv1Start;
+                return sv1LOD;
             }
             set
             {
-                if (sv1Start != value)
+                if (sv1LOD != value)
                 {
-                    sv1Start = value;
-                    RaisePropertyChanged("SV1Start");
-                }
-            }
-        }
-
-        public string SV1End
-        {
-            get
-            {
-                return sv1End;
-            }
-            set
-            {
-                if (sv1End != value)
-                {
-                    sv1End = value;
-                    RaisePropertyChanged("SV1End");
+                    sv1LOD = value;
+                    RaisePropertyChanged("SV1LOD");
                 }
             }
         }
@@ -263,34 +239,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string DRI1Start
+        public double DRI1LOD
         {
             get
             {
-                return dri1Start;
+                return dri1LOD;
             }
             set
             {
-                if (dri1Start != value)
+                if (dri1LOD != value)
                 {
-                    dri1Start = value;
-                    RaisePropertyChanged("DRI1Start");
-                }
-            }
-        }
-
-        public string DRI1End
-        {
-            get
-            {
-                return dri1End;
-            }
-            set
-            {
-                if (dri1End != value)
-                {
-                    dri1End = value;
-                    RaisePropertyChanged("DRI1End");
+                    dri1LOD = value;
+                    RaisePropertyChanged("DRI1LOD");
                 }
             }
         }
@@ -327,34 +287,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string DRI2Start
+        public double DRI2LOD
         {
             get
             {
-                return dri2Start;
+                return dri2LOD;
             }
             set
             {
-                if (dri2Start != value)
+                if (dri2LOD != value)
                 {
-                    dri2Start = value;
-                    RaisePropertyChanged("DRI2Start");
-                }
-            }
-        }
-
-        public string DRI2End
-        {
-            get
-            {
-                return dri2End;
-            }
-            set
-            {
-                if (dri2End != value)
-                {
-                    dri2End = value;
-                    RaisePropertyChanged("DRI2End");
+                    dri2LOD = value;
+                    RaisePropertyChanged("DRI2LOD");
                 }
             }
         }
@@ -391,34 +335,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string RN1Start
+        public double RN1LOD
         {
             get
             {
-                return rn1Start;
+                return rn1LOD;
             }
             set
             {
-                if (rn1Start != value)
+                if (rn1LOD != value)
                 {
-                    rn1Start = value;
-                    RaisePropertyChanged("RN1Start");
-                }
-            }
-        }
-
-        public string RN1End
-        {
-            get
-            {
-                return rn1End;
-            }
-            set
-            {
-                if (rn1End != value)
-                {
-                    rn1End = value;
-                    RaisePropertyChanged("RN1End");
+                    rn1LOD = value;
+                    RaisePropertyChanged("RN1LOD");
                 }
             }
         }
@@ -455,34 +383,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string RN2Start
+        public double RN2LOD
         {
             get
             {
-                return rn2Start;
+                return rn2LOD;
             }
             set
             {
-                if (rn2Start != value)
+                if (rn2LOD != value)
                 {
-                    rn2Start = value;
-                    RaisePropertyChanged("RN2Start");
-                }
-            }
-        }
-
-        public string RN2End
-        {
-            get
-            {
-                return rn2End;
-            }
-            set
-            {
-                if (rn2End != value)
-                {
-                    rn2End = value;
-                    RaisePropertyChanged("RN2End");
+                    rn2LOD = value;
+                    RaisePropertyChanged("RN2LOD");
                 }
             }
         }
@@ -519,34 +431,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string RN3Start
+        public double RN3LOD
         {
             get
             {
-                return rn3Start;
+                return rn3LOD;
             }
             set
             {
-                if (rn3Start != value)
+                if (rn3LOD != value)
                 {
-                    rn3Start = value;
-                    RaisePropertyChanged("RN3Start");
-                }
-            }
-        }
-
-        public string RN3End
-        {
-            get
-            {
-                return rn3End;
-            }
-            set
-            {
-                if (rn3End != value)
-                {
-                    rn3End = value;
-                    RaisePropertyChanged("RN3End");
+                    rn3LOD = value;
+                    RaisePropertyChanged("RN3LOD");
                 }
             }
         }
@@ -583,34 +479,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string CCA1Start
+        public double CCA1LOD
         {
             get
             {
-                return cca1Start;
+                return cca1LOD;
             }
             set
             {
-                if (cca1Start != value)
+                if (cca1LOD != value)
                 {
-                    cca1Start = value;
-                    RaisePropertyChanged("CCA1Start");
-                }
-            }
-        }
-
-        public string CCA1End
-        {
-            get
-            {
-                return cca1End;
-            }
-            set
-            {
-                if (cca1End != value)
-                {
-                    cca1End = value;
-                    RaisePropertyChanged("CCA1End");
+                    cca1LOD = value;
+                    RaisePropertyChanged("CCA1LOD");
                 }
             }
         }
@@ -647,34 +527,18 @@ namespace ERSApp.Model
             }
         }
 
-        public string CCA2Start
+        public double CCA2LOD
         {
             get
             {
-                return cca2Start;
+                return cca2LOD;
             }
             set
             {
-                if (cca2Start != value)
+                if (cca2LOD != value)
                 {
-                    cca2Start = value;
-                    RaisePropertyChanged("CCA2Start");
-                }
-            }
-        }
-
-        public string CCA2End
-        {
-            get
-            {
-                return cca2End;
-            }
-            set
-            {
-                if (cca2End != value)
-                {
-                    cca2End = value;
-                    RaisePropertyChanged("CCA2End");
+                    cca2LOD = value;
+                    RaisePropertyChanged("CCA2LOD");
                 }
             }
         }
@@ -711,39 +575,39 @@ namespace ERSApp.Model
             }
         }
 
-        public string CCA3Start
+        public double CCA3LOD
         {
             get
             {
-                return cca3Start;
+                return cca3LOD;
             }
             set
             {
-                if (cca3Start != value)
+                if (cca3LOD != value)
                 {
-                    cca3Start = value;
-                    RaisePropertyChanged("CCA3Start");
+                    cca3LOD = value;
+                    RaisePropertyChanged("CCA3LOD");
                 }
             }
         }
 
-        public string CCA3End
+        public int StaffCount
         {
             get
             {
-                return cca3End;
+                return staffCount;
             }
             set
             {
-                if (cca3End != value)
+                if (staffCount != value)
                 {
-                    cca3End = value;
-                    RaisePropertyChanged("CCA3End");
+                    staffCount = value;
+                    RaisePropertyChanged("StaffCount");
                 }
             }
         }
 
-        public string State
+        public int State
         {
             get
             {
