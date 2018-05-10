@@ -15,7 +15,7 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = this;
-            tabOverview.Header = CollectionManager.SelectedDate.DayOfWeek.ToString() + " - " +
+            lblHeader.Content = CollectionManager.SelectedDate.DayOfWeek.ToString() + " - " +
                 CollectionManager.SelectedDate.ToShortDateString();
             OverviewSessions = new ObservableCollection<Session>(SessionViewModel.Sessions);
             foreach(Session s in OverviewSessions)
