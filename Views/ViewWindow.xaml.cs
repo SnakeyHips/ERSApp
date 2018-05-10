@@ -16,7 +16,7 @@ namespace ERSApp.Views
             this.DataContext = this;
             this.Selected = s;
             //Set UI to match selected
-            tabSessionStaff.Header = DateTime.Parse(Selected.Date).DayOfWeek.ToString() +
+            lblHeader.Content = DateTime.Parse(Selected.Date).DayOfWeek.ToString() +
                 " - " + Selected.Date + " - " + Selected.Location;
             txtClinicTime.Text = Selected.ClinicTime;
             txtLOD.Text = Selected.LOD.ToString();
