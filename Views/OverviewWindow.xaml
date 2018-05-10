@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         Title="StaffSessionWindow" Height="500" Width="1155">
     <Grid Margin="15,0,15,15">
-        <TabItem Name ="tabOverview" Header="Day - Date" IsSelected="True"></TabItem>
+        <Label Name ="lblHeader" Content="Day - Date" FontSize="26" Foreground="{DynamicResource AccentColorBrush}"/>
         <ComboBox Name="cboLocation" HorizontalAlignment="Center" Height="23" Margin="0,7.5,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboLocation_SelectionChanged"/>
         <ListView Name="lstOverview" HorizontalAlignment="Left" Margin="0,43,0,40" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=OverviewSessions}" SelectedValuePath="Location">
@@ -36,7 +36,7 @@
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding State}" Value="0">
-                            <Setter Property="Foreground" Value="Tomato"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </DataTrigger>
                     </Style.Triggers>
