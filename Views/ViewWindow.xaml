@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Title="Staff View" Height="775" Width="650">
     <Grid Name="grdStaff" Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Day - Date" FontSize="26" HorizontalAlignment="Left" Foreground="{DynamicResource AccentColorBrush}"/>
