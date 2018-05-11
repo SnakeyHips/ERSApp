@@ -8,6 +8,9 @@ using System.Windows.Input;
 using System.Text.RegularExpressions;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using LiveCharts;
+using LiveCharts.Wpf;
+using LiveCharts.Defaults;
 using ERSApp.Model;
 
 namespace ERSApp.Views
@@ -22,6 +25,7 @@ namespace ERSApp.Views
         public List<Staff> RNList { get; set; }
         public List<Staff> CCAList { get; set; }
         public List<string> TimesList { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
         double Week = CollectionManager.GetWeek(CollectionManager.SelectedDate);
 
         public StaffSessionWindow(Session s)
@@ -37,6 +41,7 @@ namespace ERSApp.Views
             CCAList = AvailableStaff.Where(x => x.Role == "CCA").ToList();
 
             this.Selected = s;
+            SeriesCollection = new SeriesCollection();
             double Start = double.Parse(Selected.ClinicTime.Substring(0, 2));
             double End = Start + Selected.LOD;
 
@@ -82,46 +87,55 @@ namespace ERSApp.Views
             {
                 cboSV1.SelectedValue = Selected.SV1Id;
                 txtSV1LOD.Text = Selected.SV1LOD.ToString();
+                SeriesCollection.Add(CreateRow("SV1", 255, 105, 97, Selected.SV1LOD));
             }
             if (Selected.DRI1Id != 0)
             {
                 cboDRI1.SelectedValue = Selected.DRI1Id;
                 txtDRI1LOD.Text = Selected.DRI1LOD.ToString();
+                SeriesCollection.Add(CreateRow("DRI1", 177, 156, 217, Selected.DRI1LOD));
             }
             if (Selected.DRI2Id != 0)
             {
                 cboDRI2.SelectedValue = Selected.DRI2Id;
                 txtDRI2LOD.Text = Selected.DRI2LOD.ToString();
+                SeriesCollection.Add(CreateRow("DRI2", 192, 174, 224, Selected.DRI2LOD));
             }
             if (Selected.RN1Id != 0)
             {
                 cboRN1.SelectedValue = Selected.RN1Id;
                 txtRN1LOD.Text = Selected.RN1LOD.ToString();
+                SeriesCollection.Add(CreateRow("RN1", 134, 197, 218, Selected.RN1LOD));
             }
             if (Selected.RN2Id != 0)
             {
                 cboRN2.SelectedValue = Selected.RN2Id;
                 txtRN2LOD.Text = Selected.RN2LOD.ToString();
+                SeriesCollection.Add(CreateRow("RN2", 153, 207, 224, Selected.RN2LOD));
             }
             if (Selected.RN3Id != 0)
             {
                 cboRN3.SelectedValue = Selected.RN3Id;
                 txtRN3LOD.Text = Selected.RN3LOD.ToString();
+                SeriesCollection.Add(CreateRow("RN3", 173, 216, 230, Selected.RN3LOD));
             }
             if (Selected.CCA1Id != 0)
             {
                 cboCCA1.SelectedValue = Selected.CCA1Id;
                 txtCCA1LOD.Text = Selected.CCA1LOD.ToString();
+                SeriesCollection.Add(CreateRow("CCA1", 139, 226, 139, Selected.CCA1LOD));
             }
             if (Selected.CCA2Id != 0)
             {
                 cboCCA2.SelectedValue = Selected.CCA2Id;
                 txtCCA2LOD.Text = Selected.CCA2LOD.ToString();
+                SeriesCollection.Add(CreateRow("CCA2", 160, 231, 160, Selected.CCA2LOD));
             }
             if (Selected.CCA3Id != 0)
             {
                 cboCCA3.SelectedValue = Selected.CCA3Id;
                 txtCCA3LOD.Text = Selected.CCA3LOD.ToString();
+                SeriesCollection.Add(CreateRow("CCA3", 180, 236, 180, Selected.CCA3LOD));
             }
         }
 
@@ -272,6 +286,22 @@ namespace ERSApp.Views
             {
                 txtCCA3LOD.Text = txtLOD.Text;
             }
+        }
+
+        //Method for adding gantt row on chart
+        private RowSeries CreateRow(string title, byte r, byte g, byte b, double lod)
+        {
+            if (xAxis.MinValue > -lod)
+            {
+                xAxis.MinValue = -lod;
+            }
+
+            return new RowSeries
+            {
+                Title = title,
+                Fill = new SolidColorBrush(Color.FromRgb(r, g, b)),
+                Values = new ChartValues<GanttPoint> { new GanttPoint(-lod, lod) }
+            };
         }
 
         //Update Staff info - lots of if statements as properties can't be passed through methods
