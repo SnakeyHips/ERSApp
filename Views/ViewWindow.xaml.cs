@@ -21,6 +21,7 @@ namespace ERSApp.Views
             txtClinicTime.Text = Selected.ClinicTime;
             txtLOD.Text = Selected.LOD.ToString();
             txtType.Text = Selected.Type;
+            txtStaffCount.Text = Selected.StaffCount.ToString();
             txtChairs.Text = Selected.Chairs.ToString();
             txtBleeds.Text = Selected.Bleeds.ToString();
 
