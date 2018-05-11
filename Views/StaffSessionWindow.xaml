@@ -53,7 +53,7 @@
         <Button Content="x" HorizontalAlignment="Right" Margin="0,220,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="btnResetCCA2_Click"/>
         <ComboBox Name="cboCCA3" HorizontalAlignment="Right" Height="23" Margin="0,260,93,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding Path=CCAList}" DisplayMemberPath="Name" SelectedValuePath="Id" BorderBrush="{DynamicResource AccentColorBrush}" IsEnabled="False" SelectionChanged="cboCCA3_SelectionChanged"/>
         <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,260,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}" IsEnabled="False"/>
-        <Button Content="x" HorizontalAlignment="Right" Margin="0,260,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="btnResetCCA2_Click"/>
+        <Button Content="x" HorizontalAlignment="Right" Margin="0,260,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="btnResetCCA3_Click"/>
         <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Width="43" Margin="0,39,0,0">
             <Path Data="F 1 M 795,3551 C 494,3480 244,3285 110,3015 -29,2737 -36,2382 90,2102 157,1955 216,1882 877,1127 1544,366 1861,
                           10 1874,10 1881,10 1932,60 1986,122 2041,184 2224,392 2393,585 2563,777 2705,936 2708,937 2712,939 2899,730 3124,475
