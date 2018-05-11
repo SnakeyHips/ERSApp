@@ -171,6 +171,69 @@ namespace ERSApp.Views
             txtCCA3LOD.IsEnabled = true;
         }
 
+        private void btnResetSV1_Click(object sender, RoutedEventArgs e)
+        {
+            cboSV1.SelectedValue = null;
+            txtSV1LOD.Text = null;
+            txtSV1LOD.IsEnabled = false;
+        }
+
+        private void btnResetDRI1_Click(object sender, RoutedEventArgs e)
+        {
+            cboDRI1.SelectedValue = null;
+            txtDRI1LOD.Text = null;
+            txtDRI1LOD.IsEnabled = false;
+        }
+
+        private void btnResetDRI2_Click(object sender, RoutedEventArgs e)
+        {
+            cboDRI2.SelectedValue = null;
+            txtDRI2LOD.Text = null;
+            txtDRI2LOD.IsEnabled = false;
+        }
+
+        private void btnResetRN1_Click(object sender, RoutedEventArgs e)
+        {
+            cboRN1.SelectedValue = null;
+            txtRN1LOD.Text = null;
+            txtRN1LOD.IsEnabled = false;
+        }
+
+        private void btnResetRN2_Click(object sender, RoutedEventArgs e)
+        {
+            cboRN2.SelectedValue = null;
+            txtRN2LOD.Text = null;
+            txtRN2LOD.IsEnabled = false;
+        }
+
+        private void btnResetRN3_Click(object sender, RoutedEventArgs e)
+        {
+            cboRN3.SelectedValue = null;
+            txtRN3LOD.Text = null;
+            txtRN3LOD.IsEnabled = false;
+        }
+
+        private void btnResetCCA1_Click(object sender, RoutedEventArgs e)
+        {
+            cboCCA1.SelectedValue = null;
+            txtCCA1LOD.Text = null;
+            txtCCA1LOD.IsEnabled = false;
+        }
+
+        private void btnResetCCA2_Click(object sender, RoutedEventArgs e)
+        {
+            cboCCA2.SelectedValue = null;
+            txtCCA2LOD.Text = null;
+            txtCCA2LOD.IsEnabled = false;
+        }
+
+        private void btnResetCCA3_Click(object sender, RoutedEventArgs e)
+        {
+            cboCCA3.SelectedValue = null;
+            txtCCA3LOD.Text = null;
+            txtCCA3LOD.IsEnabled = false;
+        }
+
         private void btnAutoLOD_Click(object semder, RoutedEventArgs e)
         {
             if(cboSV1.SelectedItem != null)
@@ -696,41 +759,6 @@ namespace ERSApp.Views
             CollectionManager.UpdateSessionStaff(Selected);
             //Go back to main window
             this.DialogResult = true;
-        }
-
-        //Method to reset cbos if need to reselect staff
-        private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            cboSV1.SelectedValue = null;
-            txtSV1LOD.Text = null;
-            txtSV1LOD.IsEnabled = false;
-
-            cboDRI1.SelectedValue = null;
-            txtDRI1LOD.Text = null;
-            txtDRI1LOD.IsEnabled = false;
-            cboDRI2.SelectedValue = null;
-            txtDRI2LOD.Text = null;
-            txtDRI2LOD.IsEnabled = false;
-
-            cboRN1.SelectedValue = null;
-            txtRN1LOD.Text = null;
-            txtRN1LOD.IsEnabled = false;
-            cboRN2.SelectedValue = null;
-            txtRN2LOD.Text = null;
-            txtRN2LOD.IsEnabled = false;
-            cboRN3.SelectedValue = null;
-            txtRN3LOD.Text = null;
-            txtRN3LOD.IsEnabled = false;
-
-            cboCCA1.SelectedValue = null;
-            txtCCA1LOD.Text = null;
-            txtCCA1LOD.IsEnabled = false;
-            cboCCA2.SelectedValue = null;
-            txtCCA2LOD.Text = null;
-            txtCCA2LOD.IsEnabled = false;
-            cboCCA3.SelectedValue = null;
-            txtCCA3LOD.Text = null;
-            txtCCA3LOD.IsEnabled = false;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
