@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterOwner"
-        Title="Staff View" Height="575" Width="700">
+        Title="Staff View" Height="575" Width="675">
     <Grid Name="grdStaff" Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Day - Date" FontSize="26" HorizontalAlignment="Left" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -16,12 +16,12 @@
         <TextBox Name="txtChairs" HorizontalAlignment="Left" Height="23" Margin="85,90,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Label Content="LOD:" HorizontalAlignment="Left" Margin="35,130,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtLOD" HorizontalAlignment="Left" Height="23" Margin="85,130,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
-        <Label Content="Type:" HorizontalAlignment="Right" Margin="0,50,160,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtType" HorizontalAlignment="Right" Height="23" Margin="0,50,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Staff Count:" HorizontalAlignment="Right" Margin="0,90,160,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtStaffCount" HorizontalAlignment="Right" Height="23" Margin="0,90,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Bleeds:" HorizontalAlignment="Right" Margin="0,130,160,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtBleeds" HorizontalAlignment="Right" Height="23" Margin="0,130,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Type:" HorizontalAlignment="Right" Margin="0,50,193,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtType" HorizontalAlignment="Right" Height="23" Margin="0,50,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Staff Count:" HorizontalAlignment="Right" Margin="0,90,193,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtStaffCount" HorizontalAlignment="Right" Height="23" Margin="0,90,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Bleeds:" HorizontalAlignment="Right" Margin="0,130,193,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtBleeds" HorizontalAlignment="Right" Height="23" Margin="0,130,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
         
         <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,199,0,0" Width="290" Background="{DynamicResource AccentColorBrush3}"></Separator>
         <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,199,0,0" Width="290" Background="{DynamicResource AccentColorBrush3}"></Separator>
@@ -57,7 +57,7 @@
         <ComboBox Name="cboCCA3" HorizontalAlignment="Right" Height="23" Margin="0,440,93,0" VerticalAlignment="Top" Width="150" ItemsSource="{Binding Path=CCAList}" DisplayMemberPath="Name" SelectedValuePath="Id" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboCCA3_SelectionChanged"/>
         <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,440,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}" IsEnabled="False"/>
         <Button Content="x" HorizontalAlignment="Right" Margin="0,440,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="btnResetCCA3_Click"/>
-        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Width="43" Margin="0,39,0,0">
+        <Viewbox VerticalAlignment="Bottom" Height="27" Margin="0,0,0,-27">
             <Path Data="F 1 M 795,3551 C 494,3480 244,3285 110,3015 -29,2737 -36,2382 90,2102 157,1955 216,1882 877,1127 1544,366 1861,
                           10 1874,10 1881,10 1932,60 1986,122 2041,184 2224,392 2393,585 2563,777 2705,936 2708,937 2712,939 2899,730 3124,475
                           3381,183 3540,10 3549,12 3566,15 3709,176 4414,980 4957,1600 5162,1837 5217,1910 5308,2032 5379,2195 5405,2347 5422,
@@ -71,7 +71,7 @@
                           4513,3297 4595,3275 Z" Fill="{DynamicResource AccentColorBrush}" RenderTransform="1,0,0,-1,0,0"/>
         </Viewbox>
         <Button Content="Update" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="btnUpdate_Click"/>
-        <Button Content="Auto LOD" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnAutoLOD_Click"/>
+        <Button Content="Auto LOD" HorizontalAlignment="Right" Margin="0,0,90,0" VerticalAlignment="Bottom" Width="75" Click="btnAutoLOD_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="btnClose_Click"/>
     </Grid>
 </Controls:MetroWindow>
