@@ -72,7 +72,6 @@ namespace ERSApp.Views
             if (lstSessions.SelectedIndex > -1)
             {
                 ViewWindow viewWindow = new ViewWindow(SessionViewModel.SelectedSession);
-                viewWindow.Owner = mainWindow;
                 viewWindow.Show();
             }
         }
@@ -80,7 +79,6 @@ namespace ERSApp.Views
         private void btnOverviewSession_Click(object sender, RoutedEventArgs e)
         {
             OverviewWindow overviewWindow = new OverviewWindow();
-            overviewWindow.Owner = mainWindow;
             overviewWindow.Show();
         }
 
