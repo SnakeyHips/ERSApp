@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterOwner"
-        Title="Staff View" Height="575" Width="650">
+        Title="Staff View" Height="775" Width="650">
     <Grid Name="grdStaff" Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Day - Date" FontSize="26" HorizontalAlignment="Left" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -48,6 +49,20 @@
         <TextBox Name="txtCCA2LOD" HorizontalAlignment="Right" Height="23" Margin="0,400,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
         <TextBox Name="txtCCA3" HorizontalAlignment="Right" Height="23" Margin="0,440,93,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,440,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+
+        <lvc:CartesianChart Margin="0,480,0,40" LegendLocation="Bottom" DataTooltip="{x:Null}" Hoverable="False" Series="{Binding SeriesCollection}">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Name="xAxis" MinValue="-1" MaxValue="0" ShowLabels="False">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis ShowLabels="False" />
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+
         <Viewbox VerticalAlignment="Bottom" Height="27" Margin="0,0,0,-27">
             <Path Data="F 1 M 795,3551 C 494,3480 244,3285 110,3015 -29,2737 -36,2382 90,2102 157,1955 216,1882 877,1127 1544,366 1861,
                           10 1874,10 1881,10 1932,60 1986,122 2041,184 2224,392 2393,585 2563,777 2705,936 2708,937 2712,939 2899,730 3124,475
