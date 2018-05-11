@@ -85,6 +85,11 @@ namespace ERSApp.Views
                 txtCCA3LOD.Text = Selected.CCA3LOD.ToString();
                 SeriesCollection.Add(CreateRow("CCA3", 180, 236, 180, Selected.CCA3LOD));
             }
+            //Used to set window height if no chart present
+            if (SeriesCollection.Count < 1)
+            {
+                this.Height = 575;
+            }
         }
 
         //Method for adding gantt row on chart
