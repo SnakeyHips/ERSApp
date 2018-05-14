@@ -10,7 +10,6 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using LiveCharts;
 using LiveCharts.Wpf;
-using LiveCharts.Defaults;
 using ERSApp.Model;
 
 namespace ERSApp.Views
