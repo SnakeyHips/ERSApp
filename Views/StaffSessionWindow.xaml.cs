@@ -296,16 +296,16 @@ namespace ERSApp.Views
         //Method for adding gantt row on chart
         private RowSeries CreateRow(string title, byte r, byte g, byte b, double lod)
         {
-            if (xAxis.MinValue > -lod)
+            if (xAxis.MaxValue < lod)
             {
-                xAxis.MinValue = -lod;
+                xAxis.MaxValue = lod;
             }
 
             return new RowSeries
             {
                 Title = title,
                 Fill = new SolidColorBrush(Color.FromRgb(r, g, b)),
-                Values = new ChartValues<GanttPoint> { new GanttPoint(-lod, lod) }
+                Values = new ChartValues<double> { lod }
             };
         }
 
