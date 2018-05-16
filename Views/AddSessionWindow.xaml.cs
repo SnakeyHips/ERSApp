@@ -116,7 +116,13 @@ namespace ERSApp.Views
                 };
                 if (CollectionManager.AddSession(temp) > 0)
                 {
-                    CollectionManager.SelectedDate = DateTime.Parse(dateSession.Text);
+                    if(SessionViewModel.Sessions != null)
+                    {
+                        if (SessionViewModel.Sessions[0].Date.Equals(dateSession.Text))
+                        {
+                            SessionViewModel.Sessions.Add(temp);
+                        }
+                    }
                     this.DialogResult = true;
                 }
                 else
