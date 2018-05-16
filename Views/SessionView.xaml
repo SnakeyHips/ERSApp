@@ -4,20 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
-        <ListView Name="lstSessions" HorizontalAlignment="Left" Margin="0,0,0,0" Width="600" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
+        <ListView Name="lstSessions" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sessions}" SelectedItem="{Binding Path=SelectedSession}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" Width="75" DisplayMemberBinding="{Binding Date}"/>
-                    <GridViewColumn Header="Location" Width="75" DisplayMemberBinding="{Binding Location}"/>
-                    <GridViewColumn Header="Time" Width="75" DisplayMemberBinding="{Binding ClinicTime}"/>
-                    <GridViewColumn Header="LOD" Width="75" DisplayMemberBinding="{Binding LOD}"/>
-                    <GridViewColumn Header="Type" Width="75" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Chairs" Width="75" DisplayMemberBinding="{Binding Chairs}"/>
-                    <GridViewColumn Header="Bleeds" Width="75" DisplayMemberBinding="{Binding Bleeds}"/>
-                    <GridViewColumn Header="Count" Width="75" DisplayMemberBinding="{Binding StaffCount}"/>
+                    <GridViewColumn Header="Date" Width="85" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Location" Width="85" DisplayMemberBinding="{Binding Location}"/>
+                    <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding ClinicTime}"/>
+                    <GridViewColumn Header="LOD" Width="80" DisplayMemberBinding="{Binding LOD}"/>
+                    <GridViewColumn Header="Type" Width="85" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Chairs" Width="85" DisplayMemberBinding="{Binding Chairs}"/>
+                    <GridViewColumn Header="Bleeds" Width="85" DisplayMemberBinding="{Binding Bleeds}"/>
+                    <GridViewColumn Header="Count" Width="85" DisplayMemberBinding="{Binding StaffCount}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
