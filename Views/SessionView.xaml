@@ -31,7 +31,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Calendar Name="dateSession" HorizontalAlignment="Right" Margin="0,-3,0,240" FirstDayOfWeek="Monday" SelectedDatesChanged="dateSession_SelectedDatesChanged"></Calendar>
         <Button Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,95,120" Height="25" Width="75" Click="btnAddSession_Click"/>
         <Button Content="Update" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,120" Height="25" Width="75" Click="btnUpdateSession_Click"/>
         <Button Content="Staff" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,95,80" Height="25" Width="75" Click="btnStaffSession_Click"/>
