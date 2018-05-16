@@ -15,10 +15,6 @@ namespace ERSApp.ViewModel
         public static void LoadStaffs()
         {
             Staffs = CollectionManager.GetStaff();
-            foreach (Staff s in Staffs)
-            {
-                s.Status = CollectionManager.GetStatus(s.Id, CollectionManager.SelectedDate);
-            }
         }
 
         private static Staff _selectedStaff;
