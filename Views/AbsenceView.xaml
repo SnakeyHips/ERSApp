@@ -45,7 +45,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Calendar Name="dateAbsence" HorizontalAlignment="Right" Margin="0,-3,0,240" FirstDayOfWeek="Monday"></Calendar>
         <Button Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,120" Height="25" Width="75" Click="btnAddAbsence_Click"/>
         <Button Content="Update" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,80" Height="25" Width="75" Click="btnUpdateAbsence_Click"/>
         <Button Content="Delete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnDelAbsence_Click"/>
