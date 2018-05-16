@@ -12,7 +12,6 @@ using ERSApp.Model;
 using ERSApp.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ERSApp.Views
 {
@@ -26,23 +25,11 @@ namespace ERSApp.Views
             this.DataContext = new SessionViewModel();
         }
 
-        private void dateSession_SelectedDatesChanged(object sender, RoutedEventArgs e)
-        {
-            Mouse.Capture(null);
-            CollectionManager.SelectedDate = dateSession.SelectedDate.Value.Date;
-            SessionViewModel.LoadSessions();
-            lstSessions.ItemsSource = SessionViewModel.Sessions;
-        }
-
         private void btnAddSession_Click(object sender, RoutedEventArgs e)
         {
             AddSessionWindow addSessionWindow = new AddSessionWindow();
             addSessionWindow.Owner = mainWindow;
             addSessionWindow.ShowDialog();
-            if (addSessionWindow.DialogResult == true)
-            {
-                dateSession.SelectedDate = addSessionWindow.dateSession.SelectedDate;
-            }
         }
 
         private async void btnUpdateSession_Click(object sender, RoutedEventArgs e)
