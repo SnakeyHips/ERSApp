@@ -1,21 +1,21 @@
-﻿<UserControl x:Class="ERSApp.Views.StaffView"
+<UserControl x:Class="ERSApp.Views.StaffView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
-        <ListView Name="lstStaff" HorizontalAlignment="Left" Margin="0,0,0,0" Width="600" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
+        <ListView Name="lstStaff" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Staffs}" SelectedItem="{Binding Path=SelectedStaff}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Role" Width="100" DisplayMemberBinding="{Binding Role}"/>
-                    <GridViewColumn Header="Contract" Width="100" DisplayMemberBinding="{Binding ContractHours}"/>
-                    <GridViewColumn Header="Pattern" Width="100" DisplayMemberBinding="{Binding WorkPattern}"/>
-                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Id" Width="112" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="115" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Role" Width="112" DisplayMemberBinding="{Binding Role}"/>
+                    <GridViewColumn Header="Contract" Width="112" DisplayMemberBinding="{Binding ContractHours}"/>
+                    <GridViewColumn Header="Pattern" Width="112" DisplayMemberBinding="{Binding WorkPattern}"/>
+                    <GridViewColumn Header="Status" Width="112" DisplayMemberBinding="{Binding Status}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
