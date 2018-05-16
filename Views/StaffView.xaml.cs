@@ -1,7 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using ERSApp.Model;
 using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
 
@@ -15,15 +13,6 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = new StaffViewModel();
-        }
-
-        private void dateStaff_SelectedDatesChanged(object sender, RoutedEventArgs e)
-        {
-            Mouse.Capture(null);
-            foreach(Staff s in StaffViewModel.Staffs)
-            {
-                s.Status = CollectionManager.GetStatus(s.Id, dateStaff.SelectedDate.Value);
-            }
         }
 
         private void btnAddStaff_Click(object sender, RoutedEventArgs e)
