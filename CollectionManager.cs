@@ -22,8 +22,8 @@ namespace ERSApp
         public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
 
         public static DateTime SelectedDate = DateTime.Now.Date;
-
-        public static ObservableCollection<Session> GetSessions(string date)
+        
+        public static List<Session> GetSessions(string date)
         {
             string query = "SELECT * FROM SessionTable WHERE Date=@Date;";
             using (SqlConnection conn = new SqlConnection(connString))
@@ -31,12 +31,12 @@ namespace ERSApp
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Session>(conn.Query<Session>(query, new { date }).ToList());
+                    return conn.Query<Session>(query, new { date }).ToList();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Session>();
+                    return new List<Session>();
                 }
             };
         }
