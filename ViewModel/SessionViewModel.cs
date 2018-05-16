@@ -1,13 +1,13 @@
-﻿using ERSApp.Model;
+using ERSApp.Model;
 using System.Collections.ObjectModel;
 
 namespace ERSApp.ViewModel
 {
     public class SessionViewModel
     {
-
         public SessionViewModel()
         {
+            Sessions = new ObservableCollection<Session>();
             LoadSessions();
         }
 
@@ -15,7 +15,11 @@ namespace ERSApp.ViewModel
 
         public static void LoadSessions()
         {
-            Sessions = CollectionManager.GetSessions(CollectionManager.SelectedDate.ToShortDateString());
+            Sessions.Clear();
+            foreach(Session s in CollectionManager.GetSessions(CollectionManager.SelectedDate.ToShortDateString()))
+            {
+                Sessions.Add(s);
+            }
         }
 
         private static Session _selectedSession;
