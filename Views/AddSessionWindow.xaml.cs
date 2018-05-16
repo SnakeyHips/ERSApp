@@ -116,7 +116,7 @@ namespace ERSApp.Views
                 };
                 if (CollectionManager.AddSession(temp) > 0)
                 {
-                    if(SessionViewModel.Sessions != null)
+                    if(SessionViewModel.Sessions.Count > 0)
                     {
                         if (SessionViewModel.Sessions[0].Date.Equals(dateSession.Text))
                         {
