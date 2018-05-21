@@ -22,7 +22,7 @@ namespace ERSApp
         public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
 
         public static DateTime SelectedDate = DateTime.Now.Date;
-        
+
         public static List<Session> GetSessions(string date)
         {
             string query = "SELECT * FROM SessionTable WHERE Date=@Date;";
@@ -43,12 +43,12 @@ namespace ERSApp
 
         public static int AddSession(Session s)
         {
-            string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Location=@Location AND ClinicTime=@ClinicTime) " +
-                "INSERT INTO SessionTable (Date, Location, ClinicTime, LOD, Type, Chairs, Bleeds, SV1Id, SV1Name, " +
+            string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
+                "INSERT INTO SessionTable (Date, Type, Site, Time, LOD, Beds, Bleeds, SV1Id, SV1Name, " +
                 "SV1LOD, DRI1Id, DRI1Name, DRI1LOD, DRI2Id, DRI2Name, DRI2LOD, RN1Id, RN1Name, RN1LOD, " +
                 "RN2Id, RN2Name, RN2LOD, RN3Id, RN3Name, RN3LOD, CCA1Id, CCA1Name, CCA1LOD, " +
                 "CCA2Id, CCA2Name, CCA2LOD, CCA3Id, CCA3Name, CCA3LOD, StaffCount, State) " +
-                "VALUES (@Date, @Location, @ClinicTime, @LOD, @Type, @Chairs, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, " +
+                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Beds, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, " +
                 "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI2Id, @DRI2Name, @DRI2LOD, @RN1Id, @RN1Name, @RN1LOD, " +
                 "@RN2Id, @RN2Name, @RN2LOD, @RN3Id, @RN3Name, @RN3LOD, @CCA1Id, @CCA1Name, @CCA1LOD, " +
                 "@CCA2Id, @CCA2Name, @CCA2LOD, @CCA3Id, @CCA3Name, @CCA3LOD, @StaffCount, @State);";
@@ -70,8 +70,8 @@ namespace ERSApp
         public static int UpdateSession(Session s)
         {
             string query = "UPDATE SessionTable" +
-                " SET ClinicTime=@ClinicTime, Location=@Location, LOD=@LOD, Type=@Type, Chairs=@Chairs, Bleeds=@Bleeds" +
-                " WHERE Date=@Date AND ClinicTime=@ClinicTime;";
+                " SET Time=@Time, Type=@Type, Site=@Site, LOD=@LOD, Beds=@Beds, Bleeds=@Bleeds" +
+                " WHERE Date=@Date AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -89,7 +89,7 @@ namespace ERSApp
 
         public static void DeleteSession(Session s)
         {
-            string query = "DELETE FROM SessionTable WHERE Date=@Date AND Location=@Location AND ClinicTime=@ClinicTime;";
+            string query = "DELETE FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -117,7 +117,7 @@ namespace ERSApp
                 "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, " +
                 "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, " +
                 "StaffCount=@StaffCount, State=@State " +
-                "WHERE Date=@Date AND Location=@Location AND ClinicTime=@ClinicTime;";
+                "WHERE Date=@Date AND Site=@Site AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -132,6 +132,42 @@ namespace ERSApp
             }
         }
 
+        public static ObservableCollection<Site> GetSites(string type)
+        {
+            string query = "SELECT * FROM SiteTable Where Type=@Type";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return new ObservableCollection<Site>(conn.Query<Site>(query, new { type }).ToList());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return new ObservableCollection<Site>();
+                }
+            }
+        }
+
+        public static int AddSites(List<Site> sites)
+        {
+            string query = "INSERT INTO SiteTable (Name, Type, Times)" +
+                    "VALUES (@Name, @Type, @Times);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, sites);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
 
         public static ObservableCollection<Staff> GetStaff()
         {
@@ -434,5 +470,24 @@ namespace ERSApp
             return false;
         }
 
+        //Method for reading site csv 
+        //private void btnRead_Click(object sender, RoutedEventArgs e)
+        //{
+        //    SiteList = new List<Site>();
+        //    System.IO.StreamReader file = new System.IO.StreamReader("C:\\Source\\ERSApp\\ERSApp\\Sites.csv");
+        //    string line;
+        //    while ((line = file.ReadLine()) != null)
+        //    {
+        //        string[] array = line.Split(',');
+        //        SiteList.Add(new Site()
+        //        {
+        //            Name = array[0],
+        //            Type = array[1],
+        //            Times = array[2]
+        //        });
+        //    }
+        //    MessageBox.Show(SiteList[0].Name);
+        //    MessageBox.Show(SiteList[SiteList.Count - 1].Name);
+        //}
     }
 }
