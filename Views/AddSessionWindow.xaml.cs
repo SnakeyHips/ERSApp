@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using ERSApp.Model;
+using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -13,31 +15,35 @@ namespace ERSApp.Views
         public AddSessionWindow()
         {
             InitializeComponent();
-            cboClinicTime.Items.Add("08:00");
-            cboClinicTime.Items.Add("09:00");
-            cboClinicTime.Items.Add("10:00");
-            cboClinicTime.Items.Add("11:00");
-            cboClinicTime.Items.Add("12:00");
+            this.DataContext = new SiteViewModel();
+            cboTime.Items.Add("08:00");
+            cboTime.Items.Add("09:00");
+            cboTime.Items.Add("10:00");
+            cboTime.Items.Add("11:00");
+            cboTime.Items.Add("12:00");
             cboType.Items.Add("Community");
             cboType.Items.Add("MDC");
-            PopulateChairs(cboType.Text);
+            TypePopulate(cboType.Text);
         }
 
-        public void PopulateChairs(string type)
+        public void TypePopulate(string type)
         {
-            cboChairs.Items.Clear();
+            cboBeds.Items.Clear();
+            cboTime.Items.Clear();
             if (type.Equals("MDC"))
             {
-                cboChairs.Items.Add("3");
-                cboChairs.Items.Add("6");
+                cboSite.ItemsSource = SiteViewModel.MDCLocations;
+                cboBeds.Items.Add("3");
+                cboBeds.Items.Add("6");
             }
             else
             {
-                cboChairs.Items.Add("4");
-                cboChairs.Items.Add("6");
-                cboChairs.Items.Add("8");
-                cboChairs.Items.Add("9");
-                cboChairs.Items.Add("10");
+                cboSite.ItemsSource = SiteViewModel.CommunityLocations;
+                cboBeds.Items.Add("4");
+                cboBeds.Items.Add("6");
+                cboBeds.Items.Add("8");
+                cboBeds.Items.Add("9");
+                cboBeds.Items.Add("10");
             }
         }
 
@@ -45,11 +51,25 @@ namespace ERSApp.Views
         {
             if (cboType.SelectedIndex == 0)
             {
-                PopulateChairs("Community");
+                TypePopulate("Community");
             }
             else
             {
-                PopulateChairs("MDC");
+                TypePopulate("MDC");
+            }
+        }
+
+        private void cboSite_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (cboSite.SelectedItem != null)
+            {
+                cboTime.Items.Clear();
+                Site Selected = (Site)cboSite.SelectedItem;
+                string[] Times = Selected.Times.Split('/');
+                foreach(string t in Times)
+                {
+                    cboTime.Items.Add(t);
+                }
             }
         }
 
@@ -64,11 +84,15 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please enter a valid Date.");
             }
-            else if (txtLocation.Text == "")
+            else if (cboType.Text == "")
             {
-                await this.ShowMessageAsync("", "Please select a Location.");
+                await this.ShowMessageAsync("", "Please select a Session Type.");
             }
-            else if (cboClinicTime.Text == "")
+            else if (cboSite.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please select a Collection Site.");
+            }
+            else if (cboTime.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select a Clinic Time.");
             }
@@ -80,11 +104,7 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please select a valid Length Of Day.");
             }
-            else if (cboType.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please select a Session Type.");
-            }
-            else if (cboChairs.Text == "")
+            else if (cboBeds.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select a Chair amount.");
             }
@@ -97,11 +117,11 @@ namespace ERSApp.Views
                 Session temp = new Session()
                 {
                     Date = dateSession.Text,
-                    Location = txtLocation.Text,
-                    ClinicTime = cboClinicTime.Text,
-                    LOD = double.Parse(txtLOD.Text),
                     Type = cboType.Text,
-                    Chairs = int.Parse(cboChairs.Text),
+                    Site = cboSite.Text,
+                    Time = cboTime.Text,
+                    LOD = double.Parse(txtLOD.Text),
+                    Beds = int.Parse(cboBeds.Text),
                     Bleeds = int.Parse(txtBleeds.Text),
                     SV1Id = 0, SV1Name = "", SV1LOD = 0.0,
                     DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0,
