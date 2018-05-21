@@ -16,11 +16,6 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = new SiteViewModel();
-            cboTime.Items.Add("08:00");
-            cboTime.Items.Add("09:00");
-            cboTime.Items.Add("10:00");
-            cboTime.Items.Add("11:00");
-            cboTime.Items.Add("12:00");
             cboType.Items.Add("Community");
             cboType.Items.Add("MDC");
             TypePopulate(cboType.Text);
