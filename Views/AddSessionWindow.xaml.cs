@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
@@ -7,6 +6,7 @@ using ERSApp.Model;
 using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Controls;
 
 namespace ERSApp.Views
 {
@@ -92,6 +92,10 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please select a Collection Site.");
             }
+            else if (!CheckSite(cboSite.Text))
+            {
+                await this.ShowMessageAsync("", "Please enter a valid Collection Site.");
+            }
             else if (cboTime.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select a Clinic Time.");
@@ -150,6 +154,21 @@ namespace ERSApp.Views
                     await this.ShowMessageAsync("", "Duplicate Session found.");
                 }
             }
+        }
+
+        //Method for checking valid site entered
+        private bool CheckSite(string site)
+        {
+            bool allowed = false;
+            foreach(Site s in cboSite.Items)
+            {
+                if (s.Name == cboSite.Text)
+                {
+                    allowed = true;
+                    break;
+                }
+            }
+            return allowed;
         }
 
         //Method to force only numbers in textbox input
