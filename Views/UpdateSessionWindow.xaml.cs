@@ -17,14 +17,11 @@ namespace ERSApp.Views
             InitializeComponent();
             this.Selected = s;
             txtDate.Text = Selected.Date;
-            txtLocation.Text = Selected.Location;
-            txtClinicTime.Text = Selected.ClinicTime;
+            txtType.Text = Selected.Type;
+            txtSite.Text = Selected.Site;
+            txtTime.Text = Selected.Time;
             txtLOD.Text = Selected.LOD.ToString();
-            cboType.Items.Add("Community");
-            cboType.Items.Add("MDC");
-            cboType.SelectedItem = Selected.Type;
-            PopulateChairs(cboType.Text);
-            cboChairs.SelectedItem = Selected.Chairs.ToString();
+            cboChairs.SelectedItem = Selected.Beds.ToString();
             txtBleeds.Text = Selected.Bleeds.ToString();
         }
 
@@ -46,18 +43,6 @@ namespace ERSApp.Views
             }
         }
 
-        private void cboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cboType.SelectedIndex == 0)
-            {
-                PopulateChairs("Community");
-            }
-            else
-            {
-                PopulateChairs("MDC");
-            }
-        }
-
         private async void btnUpdateSession_Click(object sender, RoutedEventArgs e)
         {
             //Makes sure each input has an input before being made. Possibly better way to do this but this works and is simple to update
@@ -72,10 +57,6 @@ namespace ERSApp.Views
                 {
                     await this.ShowMessageAsync("", "Please select a valid Length Of Day.");
                 }
-                else if (cboType.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please select a Session Type.");
-                }
                 else if (cboChairs.Text == "")
                 {
                     await this.ShowMessageAsync("", "Please select a Chair amount.");
@@ -87,8 +68,8 @@ namespace ERSApp.Views
                 else
                 {
                     Selected.LOD = double.Parse(txtLOD.Text);
-                    Selected.Type = cboType.Text;
-                    Selected.Chairs = int.Parse(cboChairs.Text);
+                    Selected.Type = txtType.Text;
+                    Selected.Beds = int.Parse(cboChairs.Text);
                     Selected.Bleeds = int.Parse(cboChairs.Text);
                     CollectionManager.UpdateSession(Selected);
                     this.DialogResult = true;
