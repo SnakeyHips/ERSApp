@@ -19,8 +19,8 @@
         <TextBox Name="txtTime" HorizontalAlignment="Right" Height="23" Margin="0,120,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
         <Label Content="LOD: " HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtLOD" Margin="0,160,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
-        <Label Content="Chairs: " HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ComboBox Name="cboChairs" HorizontalAlignment="Right" Height="23" Margin="0,200,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Beds: " HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ComboBox Name="cboBeds" HorizontalAlignment="Right" Height="23" Margin="0,200,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Bleeds: " HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtBleeds" Margin="0,240,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnUpdateSession_Click" IsDefault="True"/>
