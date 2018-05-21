@@ -11,14 +11,14 @@
     <Grid Margin="15,15,15,15">
         <Label Content="Date:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtDate" HorizontalAlignment="Right" Height="23" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Content="Location " HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtLocation" HorizontalAlignment="Right" Height="23" Margin="0,40,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtClinicTime" HorizontalAlignment="Right" Height="23" Margin="0,80,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Content="LOD: " HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtLOD" Margin="0,120,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
-        <Label Content="Type: " HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ComboBox Name="cboType" HorizontalAlignment="Right" Height="23" Margin="0,160,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboType_SelectionChanged"/>
+        <Label Content="Type: " HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtType" HorizontalAlignment="Right" Height="23" Margin="0,40,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Content="Site:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtSite" HorizontalAlignment="Right" Height="23" Margin="0,80,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtTime" HorizontalAlignment="Right" Height="23" Margin="0,120,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Content="LOD: " HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtLOD" Margin="0,160,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Chairs: " HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Name="cboChairs" HorizontalAlignment="Right" Height="23" Margin="0,200,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Bleeds: " HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
