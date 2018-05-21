@@ -18,18 +18,19 @@ namespace ERSApp.Views
             lblHeader.Content = CollectionManager.SelectedDate.DayOfWeek.ToString() + " - " +
                 CollectionManager.SelectedDate.ToShortDateString();
             OverviewSessions = new ObservableCollection<Session>(SessionViewModel.Sessions);
+            //OverviewSessions.Distinct();
             foreach(Session s in OverviewSessions)
             {
-                cboLocation.Items.Add(s.Location);
+                cboFilter.Items.Add(s.Site);
             }
         }
 
-        private void cboLocation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OverviewSessions.Clear();
             foreach(Session s in SessionViewModel.Sessions)
             {
-                if (s.Location.Equals(cboLocation.SelectedValue))
+                if (s.Site.Equals(cboFilter.SelectedValue))
                 {
                     OverviewSessions.Add(s);
                 }
