@@ -21,25 +21,26 @@ namespace ERSApp.Views
             txtSite.Text = Selected.Site;
             txtTime.Text = Selected.Time;
             txtLOD.Text = Selected.LOD.ToString();
-            cboChairs.SelectedItem = Selected.Beds.ToString();
+            PopulateChairs(Selected.Type);
+            cboBeds.SelectedItem = Selected.Beds.ToString();
             txtBleeds.Text = Selected.Bleeds.ToString();
         }
 
         public void PopulateChairs(string type)
         {
-            cboChairs.Items.Clear();
+            cboBeds.Items.Clear();
             if (type.Equals("MDC"))
             {
-                cboChairs.Items.Add("3");
-                cboChairs.Items.Add("6");
+                cboBeds.Items.Add("3");
+                cboBeds.Items.Add("6");
             }
             else
             {
-                cboChairs.Items.Add("4");
-                cboChairs.Items.Add("6");
-                cboChairs.Items.Add("8");
-                cboChairs.Items.Add("9");
-                cboChairs.Items.Add("10");
+                cboBeds.Items.Add("4");
+                cboBeds.Items.Add("6");
+                cboBeds.Items.Add("8");
+                cboBeds.Items.Add("9");
+                cboBeds.Items.Add("10");
             }
         }
 
@@ -57,7 +58,7 @@ namespace ERSApp.Views
                 {
                     await this.ShowMessageAsync("", "Please select a valid Length Of Day.");
                 }
-                else if (cboChairs.Text == "")
+                else if (cboBeds.Text == "")
                 {
                     await this.ShowMessageAsync("", "Please select a Chair amount.");
                 }
@@ -69,8 +70,8 @@ namespace ERSApp.Views
                 {
                     Selected.LOD = double.Parse(txtLOD.Text);
                     Selected.Type = txtType.Text;
-                    Selected.Beds = int.Parse(cboChairs.Text);
-                    Selected.Bleeds = int.Parse(cboChairs.Text);
+                    Selected.Beds = int.Parse(cboBeds.Text);
+                    Selected.Bleeds = int.Parse(cboBeds.Text);
                     CollectionManager.UpdateSession(Selected);
                     this.DialogResult = true;
                 }
