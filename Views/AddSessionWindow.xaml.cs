@@ -47,7 +47,7 @@ namespace ERSApp.Views
             }
         }
 
-        private void cboType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cboType.SelectedIndex == 0)
             {
@@ -59,7 +59,7 @@ namespace ERSApp.Views
             }
         }
 
-        private void cboSite_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cboSite_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cboSite.SelectedItem != null)
             {
