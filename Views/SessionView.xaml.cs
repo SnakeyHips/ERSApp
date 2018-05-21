@@ -12,6 +12,7 @@ using ERSApp.Model;
 using ERSApp.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace ERSApp.Views
 {
@@ -191,10 +192,10 @@ namespace ERSApp.Views
                 {
                     sessionTable.AddCell(new Paragraph(DateTime.Parse(s.Date).DayOfWeek.ToString(), norm));
                     sessionTable.AddCell(new Paragraph(s.Date, norm));
-                    sessionTable.AddCell(new Paragraph(s.Location, norm));
-                    sessionTable.AddCell(new Paragraph(s.ClinicTime, norm));
+                    sessionTable.AddCell(new Paragraph(s.Site, norm));
+                    sessionTable.AddCell(new Paragraph(s.Time, norm));
                     sessionTable.AddCell(new Paragraph(s.LOD.ToString(), norm));
-                    sessionTable.AddCell(new Paragraph(s.Chairs.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Beds.ToString(), norm));
                     sessionTable.AddCell(new Paragraph(s.Bleeds.ToString(), norm));
                     sessionTable.AddCell(new Paragraph(s.RN1Name, norm));
                     sessionTable.AddCell(new Paragraph(s.RN2Name, norm));
