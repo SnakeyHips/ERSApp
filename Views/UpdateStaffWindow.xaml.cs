@@ -24,8 +24,8 @@ namespace ERSApp.Views
             cboRole.Items.Add("RN");
             cboRole.Items.Add("CCA");
             cboRole.SelectedItem = Selected.Role;
-            cboHours.Items.Add("10");
             cboHours.Items.Add("20");
+            cboHours.Items.Add("25");
             cboHours.Items.Add("30");
             cboHours.Items.Add("37.5");
             cboHours.SelectedItem = Selected.ContractHours.ToString();
