@@ -4,12 +4,14 @@ using ERSApp.Model;
 using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace ERSApp.Views
 {
     public partial class OverviewWindow : MetroWindow
     {
         public ObservableCollection<Session> OverviewSessions { get; set; }
+        public HashSet<string> Sites { get; set; }
 
         public OverviewWindow()
         {
@@ -18,10 +20,10 @@ namespace ERSApp.Views
             lblHeader.Content = CollectionManager.SelectedDate.DayOfWeek.ToString() + " - " +
                 CollectionManager.SelectedDate.ToShortDateString();
             OverviewSessions = new ObservableCollection<Session>(SessionViewModel.Sessions);
-            //OverviewSessions.Distinct();
+            Sites = new HashSet<string>();
             foreach(Session s in OverviewSessions)
             {
-                cboFilter.Items.Add(s.Site);
+                Sites.Add(s.Site);
             }
         }
 
