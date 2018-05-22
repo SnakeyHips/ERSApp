@@ -455,21 +455,7 @@ namespace ERSApp
             return double.Parse(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString()
                 + "." + date.Year.ToString());
         }
-
-        //Method for checking duplicates
-        public static bool HasDuplicates(List<int> idList)
-        {
-            HashSet<int> hs = new HashSet<int>();
-            foreach (int id in idList)
-            {
-                if (!hs.Add(id))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+        
         //Method for reading site csv 
         //private void btnRead_Click(object sender, RoutedEventArgs e)
         //{
