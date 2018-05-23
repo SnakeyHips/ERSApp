@@ -207,7 +207,7 @@ namespace ERSApp
 
         public static void UpdateStaff(Staff s)
         {
-            string query = "UPDATE StaffTable SET Role=@Role, ContractHours=@ContractHours WHERE Id=@Id;";
+            string query = "UPDATE StaffTable SET Role=@Role, ContractHours=@ContractHours, WorkPattern=@WorkPattern WHERE Id=@Id;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
