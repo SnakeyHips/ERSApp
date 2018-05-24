@@ -41,7 +41,7 @@ namespace ERSApp.Views
 
             this.Selected = s;
             SeriesCollection = new SeriesCollection();
-            double Start = double.Parse(Selected.ClinicTime.Substring(0, 2));
+            double Start = double.Parse(Selected.Time.Substring(0, 2));
             double End = Start + Selected.LOD;
 
             TimesList = new List<string>();
@@ -72,8 +72,8 @@ namespace ERSApp.Views
 
             //Set UI to match selected
             lblHeader.Content = DateTime.Parse(Selected.Date).DayOfWeek.ToString() +
-                " - " + Selected.Date + " - " + Selected.Location;
-            txtClinicTime.Text = Selected.ClinicTime;
+                " - " + Selected.Date + " - " + Selected.Site;
+            txtClinicTime.Text = Selected.Time;
             txtLOD.Text = Selected.LOD.ToString();
             txtType.Text = Selected.Type;
             txtChairs.Text = Selected.Chairs.ToString();
@@ -307,6 +307,7 @@ namespace ERSApp.Views
                 Values = new ChartValues<double> { lod }
             };
         }
+
 
         //Update Staff info - lots of if statements as properties can't be passed through methods
         //First one is commented as rest are same
