@@ -12,7 +12,6 @@ using ERSApp.Model;
 using ERSApp.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace ERSApp.Views
 {
