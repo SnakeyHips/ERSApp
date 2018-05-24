@@ -15,21 +15,20 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=OverviewSessions}" SelectedValuePath="Location">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Site" Width="75" DisplayMemberBinding="{Binding Site}"/>
-                    <GridViewColumn Header="Time" Width="75" DisplayMemberBinding="{Binding Time}"/>
-                    <GridViewColumn Header="LOD" Width="75" DisplayMemberBinding="{Binding LOD}"/>
-                    <GridViewColumn Header="Beds" Width="75" DisplayMemberBinding="{Binding Beds}"/>
-                    <GridViewColumn Header="Bleeds" Width="75" DisplayMemberBinding="{Binding Bleeds}"/>
-                    <GridViewColumn Header="RN1" Width="75" DisplayMemberBinding="{Binding RN1Name}"/>
-                    <GridViewColumn Header="RN2" Width="75" DisplayMemberBinding="{Binding RN2Name}"/>
-                    <GridViewColumn Header="RN3" Width="75" DisplayMemberBinding="{Binding RN3Name}"/>
-                    <GridViewColumn Header="SV1" Width="75" DisplayMemberBinding="{Binding SV1Name}"/>
-                    <GridViewColumn Header="DRI1" Width="75" DisplayMemberBinding="{Binding DRI1Name}"/>
-                    <GridViewColumn Header="DRI2" Width="75" DisplayMemberBinding="{Binding DRI2Name}"/>
-                    <GridViewColumn Header="CCA1" Width="75" DisplayMemberBinding="{Binding CCA1Name}"/>
-                    <GridViewColumn Header="CCA2" Width="75" DisplayMemberBinding="{Binding CCA2Name}"/>
-                    <GridViewColumn Header="CCA3" Width="75" DisplayMemberBinding="{Binding CCA3Name}"/>
-                    <GridViewColumn Header="Count" Width="75" DisplayMemberBinding="{Binding StaffCount}"/>
+                    <GridViewColumn Header="Site" Width="80" DisplayMemberBinding="{Binding Site}"/>
+                    <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Chairs" Width="80" DisplayMemberBinding="{Binding Chairs}"/>
+                    <GridViewColumn Header="Bleeds" Width="80" DisplayMemberBinding="{Binding Bleeds}"/>
+                    <GridViewColumn Header="RN1" Width="80" DisplayMemberBinding="{Binding RN1Name}"/>
+                    <GridViewColumn Header="RN2" Width="80" DisplayMemberBinding="{Binding RN2Name}"/>
+                    <GridViewColumn Header="RN3" Width="80" DisplayMemberBinding="{Binding RN3Name}"/>
+                    <GridViewColumn Header="SV1" Width="80" DisplayMemberBinding="{Binding SV1Name}"/>
+                    <GridViewColumn Header="DRI1" Width="80" DisplayMemberBinding="{Binding DRI1Name}"/>
+                    <GridViewColumn Header="DRI2" Width="80" DisplayMemberBinding="{Binding DRI2Name}"/>
+                    <GridViewColumn Header="CCA1" Width="80" DisplayMemberBinding="{Binding CCA1Name}"/>
+                    <GridViewColumn Header="CCA2" Width="80" DisplayMemberBinding="{Binding CCA2Name}"/>
+                    <GridViewColumn Header="CCA3" Width="80" DisplayMemberBinding="{Binding CCA3Name}"/>
+                    <GridViewColumn Header="Count" Width="80" DisplayMemberBinding="{Binding StaffCount}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
