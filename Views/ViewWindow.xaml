@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
-        Title="Staff View" Height="775" Width="650">
+        Title="Staff View" Height="750" Width="650">
     <Grid Name="grdStaff" Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Day - Date" FontSize="26" HorizontalAlignment="Left" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
