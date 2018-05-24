@@ -44,11 +44,11 @@ namespace ERSApp
         public static int AddSession(Session s)
         {
             string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
-                "INSERT INTO SessionTable (Date, Type, Site, Time, LOD, Beds, Bleeds, SV1Id, SV1Name, " +
+                "INSERT INTO SessionTable (Date, Type, Site, Time, LOD, Chairs, Bleeds, SV1Id, SV1Name, " +
                 "SV1LOD, DRI1Id, DRI1Name, DRI1LOD, DRI2Id, DRI2Name, DRI2LOD, RN1Id, RN1Name, RN1LOD, " +
                 "RN2Id, RN2Name, RN2LOD, RN3Id, RN3Name, RN3LOD, CCA1Id, CCA1Name, CCA1LOD, " +
                 "CCA2Id, CCA2Name, CCA2LOD, CCA3Id, CCA3Name, CCA3LOD, StaffCount, State) " +
-                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Beds, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, " +
+                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Chairs, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, " +
                 "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI2Id, @DRI2Name, @DRI2LOD, @RN1Id, @RN1Name, @RN1LOD, " +
                 "@RN2Id, @RN2Name, @RN2LOD, @RN3Id, @RN3Name, @RN3LOD, @CCA1Id, @CCA1Name, @CCA1LOD, " +
                 "@CCA2Id, @CCA2Name, @CCA2LOD, @CCA3Id, @CCA3Name, @CCA3LOD, @StaffCount, @State);";
@@ -70,7 +70,7 @@ namespace ERSApp
         public static int UpdateSession(Session s)
         {
             string query = "UPDATE SessionTable" +
-                " SET Time=@Time, Type=@Type, Site=@Site, LOD=@LOD, Beds=@Beds, Bleeds=@Bleeds" +
+                " SET Time=@Time, Type=@Type, Site=@Site, LOD=@LOD, Chairs=@Chairs, Bleeds=@Bleeds" +
                 " WHERE Date=@Date AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -455,7 +455,7 @@ namespace ERSApp
             return double.Parse(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString()
                 + "." + date.Year.ToString());
         }
-        
+
         //Method for reading site csv 
         //private void btnRead_Click(object sender, RoutedEventArgs e)
         //{
