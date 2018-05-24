@@ -49,10 +49,10 @@
         <TextBox Name="txtCCA2LOD" HorizontalAlignment="Right" Height="23" Margin="0,400,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
         <TextBox Name="txtCCA3" HorizontalAlignment="Right" Height="23" Margin="0,440,93,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,440,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        
-        <lvc:CartesianChart Margin="0,480,0,40" LegendLocation="Bottom" DataTooltip="{x:Null}" Hoverable="False" Series="{Binding SeriesCollection}">
+
+        <lvc:CartesianChart Margin="0,480,0,40" DataTooltip="{x:Null}" Hoverable="False" LegendLocation="Bottom" Series="{Binding SeriesCollection}">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Name="xAxis" MinValue="0" MaxValue="1">
+                <lvc:Axis Name="xAxis" MinValue="0" MaxValue="1" >
                     <lvc:Axis.Separator>
                         <lvc:Separator Step="1" />
                     </lvc:Axis.Separator>
