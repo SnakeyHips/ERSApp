@@ -22,25 +22,25 @@ namespace ERSApp.Views
             txtTime.Text = Selected.Time;
             txtLOD.Text = Selected.LOD.ToString();
             PopulateChairs(Selected.Type);
-            cboBeds.SelectedItem = Selected.Beds.ToString();
+            cboChairs.SelectedItem = Selected.Chairs.ToString();
             txtBleeds.Text = Selected.Bleeds.ToString();
         }
 
         public void PopulateChairs(string type)
         {
-            cboBeds.Items.Clear();
+            cboChairs.Items.Clear();
             if (type.Equals("MDC"))
             {
-                cboBeds.Items.Add("3");
-                cboBeds.Items.Add("6");
+                cboChairs.Items.Add("3");
+                cboChairs.Items.Add("6");
             }
             else
             {
-                cboBeds.Items.Add("4");
-                cboBeds.Items.Add("6");
-                cboBeds.Items.Add("8");
-                cboBeds.Items.Add("9");
-                cboBeds.Items.Add("10");
+                cboChairs.Items.Add("4");
+                cboChairs.Items.Add("6");
+                cboChairs.Items.Add("8");
+                cboChairs.Items.Add("9");
+                cboChairs.Items.Add("10");
             }
         }
 
@@ -58,7 +58,7 @@ namespace ERSApp.Views
                 {
                     await this.ShowMessageAsync("", "Please select a valid Length Of Day.");
                 }
-                else if (cboBeds.Text == "")
+                else if (cboChairs.Text == "")
                 {
                     await this.ShowMessageAsync("", "Please select a Chair amount.");
                 }
@@ -70,8 +70,8 @@ namespace ERSApp.Views
                 {
                     Selected.LOD = double.Parse(txtLOD.Text);
                     Selected.Type = txtType.Text;
-                    Selected.Beds = int.Parse(cboBeds.Text);
-                    Selected.Bleeds = int.Parse(cboBeds.Text);
+                    Selected.Chairs = int.Parse(cboChairs.Text);
+                    Selected.Bleeds = int.Parse(txtBleeds.Text);
                     CollectionManager.UpdateSession(Selected);
                     this.DialogResult = true;
                 }
