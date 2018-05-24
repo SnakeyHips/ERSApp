@@ -15,7 +15,7 @@
                     <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding Time}"/>
                     <GridViewColumn Header="LOD" Width="80" DisplayMemberBinding="{Binding LOD}"/>
                     <GridViewColumn Header="Type" Width="85" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Beds" Width="85" DisplayMemberBinding="{Binding Beds}"/>
+                    <GridViewColumn Header="Chairs" Width="85" DisplayMemberBinding="{Binding Chairs}"/>
                     <GridViewColumn Header="Bleeds" Width="85" DisplayMemberBinding="{Binding Bleeds}"/>
                     <GridViewColumn Header="Count" Width="85" DisplayMemberBinding="{Binding StaffCount}"/>
                 </GridView>
