@@ -9,10 +9,10 @@ namespace ERSApp.Model
     public class Session : INotifyPropertyChanged
     {
         private string date;
-        private string location;
-        private string clinicTime;
-        private double lod;
         private string type;
+        private string site;
+        private string time;
+        private double lod;
         private int chairs;
         private int bleeds;
         private int sv1Id;
@@ -62,34 +62,50 @@ namespace ERSApp.Model
             }
         }
 
-        public string Location
+        public string Type
         {
             get
             {
-                return location;
+                return type;
             }
             set
             {
-                if (location != value)
+                if (type != value)
                 {
-                    location = value;
-                    RaisePropertyChanged("Location");
+                    type = value;
+                    RaisePropertyChanged("Type");
                 }
             }
         }
 
-        public string ClinicTime
+        public string Site
         {
             get
             {
-                return clinicTime;
+                return site;
             }
             set
             {
-                if (clinicTime != value)
+                if (site != value)
                 {
-                    clinicTime = value;
-                    RaisePropertyChanged("ClinicTime");
+                    site = value;
+                    RaisePropertyChanged("Site");
+                }
+            }
+        }
+
+        public string Time
+        {
+            get
+            {
+                return time;
+            }
+            set
+            {
+                if (time != value)
+                {
+                    time = value;
+                    RaisePropertyChanged("Time");
                 }
             }
         }
@@ -109,23 +125,6 @@ namespace ERSApp.Model
                 }
             }
         }
-
-        public string Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                if (type != value)
-                {
-                    type = value;
-                    RaisePropertyChanged("Type");
-                }
-            }
-        }
-
 
         public int Chairs
         {
