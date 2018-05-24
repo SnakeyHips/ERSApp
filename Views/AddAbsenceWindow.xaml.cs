@@ -55,10 +55,6 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please enter a Start Date.");
             }
-            else if (DateTime.Parse(dateStart.Text).CompareTo(DateTime.Now) < 0)
-            {
-                await this.ShowMessageAsync("", "Please enter a valid Start Date.");
-            }
             else if (dateEnd.Text == "")
             {
                 await this.ShowMessageAsync("", "Please enter an End Date.");
