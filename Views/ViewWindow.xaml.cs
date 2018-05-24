@@ -20,8 +20,8 @@ namespace ERSApp.Views
             this.Selected = s;
             //Set UI to match selected
             lblHeader.Content = DateTime.Parse(Selected.Date).DayOfWeek.ToString() +
-                " - " + Selected.Date + " - " + Selected.Location;
-            txtClinicTime.Text = Selected.ClinicTime;
+                " - " + Selected.Date + " - " + Selected.Site;
+            txtClinicTime.Text = Selected.Time;
             txtLOD.Text = Selected.LOD.ToString();
             txtType.Text = Selected.Type;
             txtStaffCount.Text = Selected.StaffCount.ToString();
@@ -90,7 +90,7 @@ namespace ERSApp.Views
                 this.Height = 575;
             }
         }
-        
+
         //Method for adding gantt row on chart
         private RowSeries CreateRow(string title, byte r, byte g, byte b, double lod)
         {
