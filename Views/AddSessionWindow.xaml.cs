@@ -23,22 +23,22 @@ namespace ERSApp.Views
 
         public void TypePopulate(string type)
         {
-            cboBeds.Items.Clear();
+            cboChairs.Items.Clear();
             cboTime.Items.Clear();
             if (type.Equals("MDC"))
             {
                 cboSite.ItemsSource = SiteViewModel.MDCLocations;
-                cboBeds.Items.Add("3");
-                cboBeds.Items.Add("6");
+                cboChairs.Items.Add("3");
+                cboChairs.Items.Add("6");
             }
             else
             {
                 cboSite.ItemsSource = SiteViewModel.CommunityLocations;
-                cboBeds.Items.Add("4");
-                cboBeds.Items.Add("6");
-                cboBeds.Items.Add("8");
-                cboBeds.Items.Add("9");
-                cboBeds.Items.Add("10");
+                cboChairs.Items.Add("4");
+                cboChairs.Items.Add("6");
+                cboChairs.Items.Add("8");
+                cboChairs.Items.Add("9");
+                cboChairs.Items.Add("10");
             }
         }
 
@@ -103,7 +103,7 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please select a valid Length Of Day.");
             }
-            else if (cboBeds.Text == "")
+            else if (cboChairs.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select a Chair amount.");
             }
@@ -120,7 +120,7 @@ namespace ERSApp.Views
                     Site = cboSite.Text,
                     Time = cboTime.Text,
                     LOD = double.Parse(txtLOD.Text),
-                    Beds = int.Parse(cboBeds.Text),
+                    Chairs = int.Parse(cboChairs.Text),
                     Bleeds = int.Parse(txtBleeds.Text),
                     SV1Id = 0, SV1Name = "", SV1LOD = 0.0,
                     DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0,
