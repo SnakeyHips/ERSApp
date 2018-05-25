@@ -45,9 +45,10 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Button Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,120" Height="25" Width="75" Click="btnAddStaff_Click"/>
-        <Button Content="Update" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,80" Height="25" Width="75" Click="btnUpdateStaff_Click"/>
-        <Button Content="Archive" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnArchiveStaff_Click"/>
+        <Button Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,160" Height="25" Width="75" Click="btnAddStaff_Click"/>
+        <Button Content="Update" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,120" Height="25" Width="75" Click="btnUpdateStaff_Click"/>
+        <Button Content="Archive" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,80" Height="25" Width="75" Click="btnArchiveStaff_Click"/>
+        <Button Content="Report" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnReportStaff_Click"/>
         <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnClose_Click"/>
     </Grid>
 </UserControl>
