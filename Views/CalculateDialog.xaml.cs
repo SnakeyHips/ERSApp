@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
@@ -14,24 +15,43 @@ namespace ERSApp.Views
 {
     public partial class CalculateDialog : MetroWindow
     {
-        Staff Selected;
         public CalculateDialog()
         {
             InitializeComponent();
         }
 
-        private async void btnFind_Click(object sender, RoutedEventArgs e)
+        private async void btnFindById_Click(object sender, RoutedEventArgs e)
         {
             if (txtId.Text != "")
             {
                 try
                 {
-                    Selected = StaffViewModel.Staffs.First(x => x.Id == int.Parse(txtId.Text));
-                    txtName.Text = Selected.Name;
+                    txtName.Text = StaffViewModel.Staffs.First(x => x.Id == int.Parse(txtId.Text)).Name;
                 }
                 catch
                 {
                     await this.ShowMessageAsync("", "No staff found with ID provided.");
+                }
+            }
+        }
+
+        private void txtId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtName.Clear();
+        }
+
+        private void btnFindByName_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtName.Text != "")
+            {
+                FindByNameDialog findByNameDialog = new FindByNameDialog(txtName.Text);
+                findByNameDialog.Owner = this;
+                findByNameDialog.ShowDialog();
+                if (findByNameDialog.DialogResult == true)
+                {
+                    Staff Found = (Staff)findByNameDialog.lstNames.SelectedItem;
+                    txtId.Text = Found.Id.ToString();
+                    txtName.Text = Found.Name;
                 }
             }
         }
@@ -86,7 +106,7 @@ namespace ERSApp.Views
                 List<Staff> SelectedRange = new List<Staff>();
                 for(double i = weekStart; i < weekEnd; i++)
                 {
-                    Staff temp = CollectionManager.GetStaffRoster(i, Selected.Id);
+                    Staff temp = CollectionManager.GetStaffRoster(i, int.Parse(txtId.Text));
                     if (temp != null)
                     {
                         SelectedRange.Add(temp);
