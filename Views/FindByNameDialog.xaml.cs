@@ -1,4 +1,5 @@
-﻿using System.Windows;
+using System;
+using System.Windows;
 using ERSApp.Model;
 using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
@@ -12,7 +13,7 @@ namespace ERSApp.Views
             InitializeComponent();
             foreach(Staff s in StaffViewModel.Staffs)
             {
-                if (s.Name.Contains(name))
+                if (s.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     lstNames.Items.Add(s);
                 }
