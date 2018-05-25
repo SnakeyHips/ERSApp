@@ -10,7 +10,7 @@
         Title="Add Absence" Height="425" Width="325">
     <Grid Margin="15,15,15,15">
         <Label Content="Staff ID:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtId" Margin="0,0,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <TextBox Name="txtId" Margin="0,0,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" TextChanged="txtId_TextChanged" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Button Content="Find By Id" HorizontalAlignment="Right" Margin="0,40,0,0" VerticalAlignment="Top" Width="85" Click="btnFindById_Click"/>
         <Label Content="Staff Name:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtName" HorizontalAlignment="Right" Height="23" Margin="0,80,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
