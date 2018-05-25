@@ -21,11 +21,12 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Name" Width="112" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Contract" Width="112" DisplayMemberBinding="{Binding ContractHours}"/>
-                    <GridViewColumn Header="Appointed" Width="112" DisplayMemberBinding="{Binding AppointedHours}"/>
-                    <GridViewColumn Header="Absence" Width="112" DisplayMemberBinding="{Binding AbsenceHours}"/>
+                    <GridViewColumn Header="Id" Width="93" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="95" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Contract" Width="93" DisplayMemberBinding="{Binding ContractHours}"/>
+                    <GridViewColumn Header="Appointed" Width="93" DisplayMemberBinding="{Binding AppointedHours}"/>
+                    <GridViewColumn Header="Absence" Width="93" DisplayMemberBinding="{Binding AbsenceHours}"/>
+                    <GridViewColumn Header="Unsocial" Width="93" DisplayMemberBinding="{Binding UnsocialHours}"/>
                 </GridView>
             </ListView.View>
         </ListView>
