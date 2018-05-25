@@ -104,8 +104,7 @@ namespace ERSApp.Views
                 {
                     AbsenceViewModel.Absences.Add(temp);
                     //Update staff's absence hours
-                    CollectionManager.UpdateRoster(temp.StaffId, 0.0, temp.Length, CollectionManager.GetWeek(DateTime.Parse(dateStart.Text)));
-                    this.DialogResult = true;
+                    CollectionManager.UpdateAbsence(temp.StaffId, temp.Length, CollectionManager.GetWeek(DateTime.Parse(dateStart.Text)));                    this.DialogResult = true;
                 }
                 else
                 {
