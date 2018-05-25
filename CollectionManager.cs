@@ -45,13 +45,13 @@ namespace ERSApp
         {
             string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
                 "INSERT INTO SessionTable (Date, Type, Site, Time, LOD, Chairs, Bleeds, SV1Id, SV1Name, " +
-                "SV1LOD, DRI1Id, DRI1Name, DRI1LOD, DRI2Id, DRI2Name, DRI2LOD, RN1Id, RN1Name, RN1LOD, " +
-                "RN2Id, RN2Name, RN2LOD, RN3Id, RN3Name, RN3LOD, CCA1Id, CCA1Name, CCA1LOD, " +
-                "CCA2Id, CCA2Name, CCA2LOD, CCA3Id, CCA3Name, CCA3LOD, StaffCount, State) " +
-                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Chairs, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, " +
-                "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI2Id, @DRI2Name, @DRI2LOD, @RN1Id, @RN1Name, @RN1LOD, " +
-                "@RN2Id, @RN2Name, @RN2LOD, @RN3Id, @RN3Name, @RN3LOD, @CCA1Id, @CCA1Name, @CCA1LOD, " +
-                "@CCA2Id, @CCA2Name, @CCA2LOD, @CCA3Id, @CCA3Name, @CCA3LOD, @StaffCount, @State);";
+                "SV1LOD, SV1UNS, DRI1Id, DRI1Name, DRI1LOD, DRI1UNS, DRI2Id, DRI2Name, DRI2LOD, DRI2UNS, RN1Id, RN1Name, " +
+                "RN1LOD, RN1UNS, RN2Id, RN2Name, RN2LOD, RN2UNS, RN3Id, RN3Name, RN3LOD, RN3UNS, CCA1Id, CCA1Name, CCA1LOD, " +
+                "CCA1UNS, CCA2Id, CCA2Name, CCA2LOD, CCA2UNS, CCA3Id, CCA3Name, CCA3LOD, CCA3UNS, StaffCount, State) " +
+                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Chairs, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, @SV1UNS, " +
+                "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @RN1Id, @RN1Name, @RN1LOD, " +
+                "@RN1UNS, @RN2Id, @RN2Name, @RN2LOD, @RN2UNS, @RN3Id, @RN3Name, @RN3LOD, @RN3UNS, @CCA1Id, @CCA1Name, @CCA1LOD, " +
+                "@CCA1UNS, @CCA2Id, @CCA2Name, @CCA2LOD, @CCA2UNS, @CCA3Id, @CCA3Name, @CCA3LOD, @CCA3UNS, @StaffCount, @State);";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -107,15 +107,15 @@ namespace ERSApp
         public static void UpdateSessionStaff(Session s)
         {
             string query = "UPDATE SessionTable " +
-                "SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1LOD=@SV1LOD, " +
-                "DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1LOD=@DRI1LOD, " +
-                "DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2LOD=@DRI2LOD, " +
-                "RN1Id=@RN1Id, RN1Name=@RN1Name, RN1LOD=@RN1LOD, " +
-                "RN2Id=@RN2Id, RN2Name=@RN2Name, RN2LOD=@RN2LOD, " +
-                "RN3Id=@RN3Id, RN3Name=@RN3Name, RN3LOD=@RN3LOD, " +
-                "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, " +
-                "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, " +
-                "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, " +
+                "SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1LOD=@SV1LOD, SV1UNS=@SV1UNS, " +
+                "DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1LOD=@DRI1LOD, DRI1UNS=@DRI1UNS, " +
+                "DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2LOD=@DRI2LOD, DRI2UNS=@DRI2UNS, " +
+                "RN1Id=@RN1Id, RN1Name=@RN1Name, RN1LOD=@RN1LOD, RN1UNS=@RN1UNS, " +
+                "RN2Id=@RN2Id, RN2Name=@RN2Name, RN2LOD=@RN2LOD, RN2UNS=@RN2UNS, " +
+                "RN3Id=@RN3Id, RN3Name=@RN3Name, RN3LOD=@RN3LOD, RN3UNS=@RN3UNS, " +
+                "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, CCA1UNS=@CCA1UNS, " +
+                "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, CCA2UNS=@CCA2UNS, " +
+                "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, CCA3UNS=@CCA3UNS, " +
                 "StaffCount=@StaffCount, State=@State " +
                 "WHERE Date=@Date AND Site=@Site AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
@@ -317,7 +317,7 @@ namespace ERSApp
         public static ObservableCollection<Staff> GetRoster(double week)
         {
             string query = "SELECT Week, StaffId as Id, StaffName as Name, Role, ContractHours, " +
-                "AppointedHours, AbsenceHours FROM RosterTable WHERE Week=@Week;";
+                "AppointedHours, AbsenceHours, UnsocialHours FROM RosterTable WHERE Week=@Week;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -351,17 +351,17 @@ namespace ERSApp
             }
         }
 
-        public static void AddRoster(int id, double appointed, double absence, double week)
+        public static void AddRoster(int id, double appointed, double absence, double unsocial, double week)
         {
-            string query = "INSERT INTO RosterTable (Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours)" +
-                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence);";
+            string query = "INSERT INTO RosterTable (Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, UnsocialHours)" +
+                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Unsocial);";
             Staff s = StaffViewModel.Staffs.First(x => x.Id == id);
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence });
+                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, unsocial });
                 }
                 catch (Exception ex)
                 {
@@ -370,12 +370,12 @@ namespace ERSApp
             }
         }
 
-        public static void UpdateRoster(int id, double appointed, double absence, double week)
+        public static void UpdateAppointed(int id, double appointed, double week)
         {
             if (id != 0)
             {
                 string query = "UPDATE RosterTable" +
-                    " SET AppointedHours=AppointedHours+@Appointed, AbsenceHours=AbsenceHours+@Absence " +
+                    " SET AppointedHours=AppointedHours+@Appointed " +
                     " WHERE Week=@Week AND StaffId=@Id;";
                 int rows = 0;
                 using (SqlConnection conn = new SqlConnection(connString))
@@ -383,7 +383,7 @@ namespace ERSApp
                     try
                     {
                         conn.Open();
-                        rows = conn.Execute(query, new { appointed, absence, week, id });
+                        rows = conn.Execute(query, new { appointed, week, id });
                     }
                     catch (Exception ex)
                     {
@@ -392,7 +392,91 @@ namespace ERSApp
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, appointed, absence, week);
+                        AddRoster(id, appointed, 0.0, 0.0, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateAbsence(int id, double absence, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AbsenceHours=AbsenceHours+@Absence " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { absence, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, 0.0, absence, 0.0, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateUnsocial(int id, double unsocial, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET UnsocialHours=UnsocialHours+@Unsocial " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { unsocial, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, 0.0, 0.0, unsocial, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateAppointedUnsocial(int id, double appointed, double unsocial, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AppointedHours=AppointedHours+@Appointed, UnsocialHours=UnsocialHours+@Unsocial " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { appointed, unsocial, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, appointed, 0.0, unsocial, week);
                     }
                 }
             }
@@ -455,6 +539,35 @@ namespace ERSApp
             return double.Parse(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString()
                 + "." + date.Year.ToString());
         }
+
+        //Old update roster method which does all hour times at once
+        //public static void UpdateRoster(int id, double appointed, double absence, double unsocial, double week)
+        //{
+        //    if (id != 0)
+        //    {
+        //        string query = "UPDATE RosterTable" +
+        //            " SET AppointedHours=AppointedHours+@Appointed, AbsenceHours=AbsenceHours+@Absence, UnsocialHours=UnsocialHours+@Unsocial " +
+        //            " WHERE Week=@Week AND StaffId=@Id;";
+        //        int rows = 0;
+        //        using (SqlConnection conn = new SqlConnection(connString))
+        //        {
+        //            try
+        //            {
+        //                conn.Open();
+        //                rows = conn.Execute(query, new { appointed, absence, unsocial, week, id });
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show(ex.ToString());
+        //            }
+        //            if (rows == 0)
+        //            {
+        //                //Add in new roster if update fails
+        //                AddRoster(id, appointed, absence, unsocial, week);
+        //            }
+        //        }
+        //    }
+        //}
 
         //Method for reading site csv 
         //private void btnRead_Click(object sender, RoutedEventArgs e)
