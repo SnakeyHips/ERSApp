@@ -186,6 +186,26 @@ namespace ERSApp
                 }
             }
         }
+        
+        public static Session GetStaffSession(string date, string staffid)
+        {
+            string query = "SELECT * FROM SessionTable WHERE Date=@Date AND " +
+                "(SV1Id=@StaffId OR DRI1Id=@StaffId OR DRI2Id=@StaffId " +
+                "OR RN1Id=@StaffId OR RN2Id=@StaffId OR RN3Id=@StaffId " +
+                "OR CCA1Id=@StaffId OR CCA2Id=@StaffId OR CCA3Id=@StaffId)";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.QuerySingle<Session>(query, new { date, staffid });
+                }
+                catch
+                {
+                    return new Session();
+                }
+            }
+        }
 
         public static int AddStaff(Staff s)
         {
