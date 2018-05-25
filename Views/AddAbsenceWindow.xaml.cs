@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -22,7 +22,7 @@ namespace ERSApp.Views
             cboType.Items.Add("Training");
         }
 
-        private async void btnFind_Click(object sender, RoutedEventArgs e)
+        private async void btnFindById_Click(object sender, RoutedEventArgs e)
         {
             if(txtId.Text != "")
             {
@@ -33,6 +33,22 @@ namespace ERSApp.Views
                 catch
                 {
                     await this.ShowMessageAsync("", "No staff found with ID provided.");
+                }
+            }
+        }
+
+        private void btnFindByName_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtName.Text != "")
+            {
+                FindByNameDialog findByNameDialog = new FindByNameDialog(txtName.Text);
+                findByNameDialog.Owner = this;
+                findByNameDialog.ShowDialog();
+                if(findByNameDialog.DialogResult == true)
+                {
+                    Staff Found = (Staff)findByNameDialog.lstNames.SelectedItem;
+                    txtId.Text = Found.Id.ToString();
+                    txtName.Text = Found.Name;
                 }
             }
         }
@@ -83,8 +99,7 @@ namespace ERSApp.Views
                     AbsenceViewModel.Absences.Add(temp);
                     //Update staff's absence hours
                     CollectionManager.UpdateRoster(temp.StaffId, 0.0, temp.Length, CollectionManager.GetWeek(DateTime.Parse(dateStart.Text)));
-                    
-                    this.Close();
+                    this.DialogResult = true;
                 }
                 else
                 {
@@ -103,7 +118,7 @@ namespace ERSApp.Views
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }
