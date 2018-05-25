@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace ERSApp.Model
 {
@@ -14,6 +14,7 @@ namespace ERSApp.Model
         private double contractHours;
         private double appointedHours;
         private double absenceHours;
+        private double unsocialHours;
         private string workPattern;
         private string status;
 
@@ -109,6 +110,22 @@ namespace ERSApp.Model
                 {
                     absenceHours = value;
                     RaisePropertyChanged("AbsenceHours");
+                }
+            }
+        }
+
+        public double UnsocialHours
+        {
+            get
+            {
+                return unsocialHours;
+            }
+            set
+            {
+                if (unsocialHours != value)
+                {
+                    unsocialHours = value;
+                    RaisePropertyChanged("UnsocialHours");
                 }
             }
         }
