@@ -41,7 +41,7 @@ namespace ERSApp.Views
                 Selected.Length = double.Parse(txtHours.Text);
                 CollectionManager.UpdateAbsence(Selected);
                 double absence = Selected.Length - old;
-                CollectionManager.UpdateRoster(Selected.StaffId, 0.0, absence, CollectionManager.GetWeek(DateTime.Parse(txtStart.Text)));
+                CollectionManager.UpdateAbsence(Selected.StaffId, absence, CollectionManager.GetWeek(DateTime.Parse(txtStart.Text)));
                 this.DialogResult = true;
             }
         }
