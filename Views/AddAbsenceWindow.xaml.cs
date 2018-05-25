@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -35,6 +36,11 @@ namespace ERSApp.Views
                     await this.ShowMessageAsync("", "No staff found with ID provided.");
                 }
             }
+        }
+        
+        private void txtId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtName.Clear();
         }
 
         private void btnFindByName_Click(object sender, RoutedEventArgs e)
