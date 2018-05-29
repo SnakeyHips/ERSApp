@@ -59,7 +59,7 @@ namespace ERSApp.Views
                     ContractHours = double.Parse(cboHours.Text),
                     WorkPattern = GetWorkPattern()
                 };
-                if (CollectionManager.AddStaff(temp) > 0)
+                if (StaffViewModel.AddStaff(temp) > 0)
                 {
                     StaffViewModel.Staffs.Add(temp);
                     this.DialogResult = true;
