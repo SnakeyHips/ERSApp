@@ -72,7 +72,7 @@ namespace ERSApp.Views
                         List<Session> ReportSessions = new List<Session>();
                         foreach (DateTime date in Dates)
                         {
-                            Session temp = CollectionManager.GetStaffSession(date.ToShortDateString(), StaffViewModel.SelectedStaff.Id.ToString());
+                            Session temp = StaffViewModel.GetStaffSession(date.ToShortDateString(), StaffViewModel.SelectedStaff.Id.ToString());
                             if(temp != null)
                             {
                                 ReportSessions.Add(temp);
