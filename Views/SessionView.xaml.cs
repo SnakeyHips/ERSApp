@@ -94,7 +94,7 @@ namespace ERSApp.Views
                             MessageDialogStyle.AffirmativeAndNegative);
                     if (choice == MessageDialogResult.Affirmative)
                     {
-                        CollectionManager.DeleteSession(SessionViewModel.SelectedSession);
+                        SessionViewModel.DeleteSession(SessionViewModel.SelectedSession);
                         SessionViewModel.Sessions.Remove(SessionViewModel.SelectedSession);
                     }
                 }
@@ -126,7 +126,7 @@ namespace ERSApp.Views
                     List<Session> ReportSessions = new List<Session>();
                     foreach (DateTime date in Dates)
                     {
-                        ReportSessions.AddRange(CollectionManager.GetSessions(date.ToShortDateString()));
+                        ReportSessions.AddRange(SessionViewModel.GetSessions(date.ToShortDateString()));
                     }
                     if (ReportSessions.Count() > 0)
                     {
@@ -146,7 +146,7 @@ namespace ERSApp.Views
             }
         }
 
-        //MEthod for creating sessions pdf report
+        //Method for creating sessions pdf report
         private async Task CreateSessionReport(List<Session> sessions, string path)
         {
             try
