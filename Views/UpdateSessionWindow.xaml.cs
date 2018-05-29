@@ -2,7 +2,7 @@ using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using ERSApp.Model;
-using System.Windows.Controls;
+using ERSApp.ViewModel;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 
@@ -72,7 +72,7 @@ namespace ERSApp.Views
                     Selected.Type = txtType.Text;
                     Selected.Chairs = int.Parse(cboChairs.Text);
                     Selected.Bleeds = int.Parse(txtBleeds.Text);
-                    CollectionManager.UpdateSession(Selected);
+                    SessionViewModel.UpdateSession(Selected);
                     this.DialogResult = true;
                 }
             }
