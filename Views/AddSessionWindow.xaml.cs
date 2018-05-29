@@ -12,6 +12,7 @@ namespace ERSApp.Views
 {
     public partial class AddSessionWindow : MetroWindow
     {
+
         public AddSessionWindow()
         {
             InitializeComponent();
@@ -122,20 +123,20 @@ namespace ERSApp.Views
                     LOD = double.Parse(txtLOD.Text),
                     Chairs = int.Parse(cboChairs.Text),
                     Bleeds = int.Parse(txtBleeds.Text),
-                    SV1Id = 0, SV1Name = "", SV1LOD = 0.0,
-                    DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0,
-                    DRI2Id = 0, DRI2Name = "", DRI2LOD = 0.0,
-                    RN1Id = 0, RN1Name = "", RN1LOD = 0.0,
-                    RN2Id = 0, RN2Name = "", RN2LOD = 0.0,
-                    RN3Id = 0, RN3Name = "", RN3LOD = 0.0,
-                    CCA1Id = 0, CCA1Name = "", CCA1LOD = 0.0,
-                    CCA2Id = 0, CCA2Name = "", CCA2LOD = 0.0,
-                    CCA3Id = 0, CCA3Name = "", CCA3LOD = 0.0,
+                    SV1Id = 0, SV1Name = "", SV1LOD = 0.0, SV1UNS = 0.0,
+                    DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0, DRI1UNS = 0.0,
+                    DRI2Id = 0, DRI2Name = "", DRI2LOD = 0.0, DRI2UNS = 0.0,
+                    RN1Id = 0, RN1Name = "", RN1LOD = 0.0, RN1UNS = 0.0,
+                    RN2Id = 0, RN2Name = "", RN2LOD = 0.0, RN2UNS = 0.0,
+                    RN3Id = 0, RN3Name = "", RN3LOD = 0.0, RN3UNS = 0.0,
+                    CCA1Id = 0, CCA1Name = "", CCA1LOD = 0.0, CCA1UNS = 0.0,
+                    CCA2Id = 0, CCA2Name = "", CCA2LOD = 0.0, CCA2UNS = 0.0,
+                    CCA3Id = 0, CCA3Name = "", CCA3LOD = 0.0, CCA3UNS = 0.0,
                     StaffCount = 0, State = 0
                 };
-                if (CollectionManager.AddSession(temp) > 0)
+                if (SessionViewModel.AddSession(temp) > 0)
                 {
-                    if(CollectionManager.SelectedDate.Equals(DateTime.Parse(dateSession.Text)))
+                    if(SelectedDate.Date.ToShortDateString().Equals(dateSession.Text))
                     {
                         SessionViewModel.Sessions.Add(temp);
                     }
