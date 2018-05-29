@@ -10,6 +10,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Win32;
 using ERSApp.Model;
+using ERSApp.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,13 +25,13 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = this;
-            Weeks = CollectionManager.GetRosterWeeks();
+            Weeks = StaffViewModel.GetRosterWeeks();
             Roster = new ObservableCollection<Staff>();
         }
 
         private void lstWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Roster = CollectionManager.GetRoster((double)lstWeeks.SelectedValue);
+            Roster = StaffViewModel.GetRoster((double)lstWeeks.SelectedValue);
             lstRoster.ItemsSource = Roster;
         }
 
@@ -45,7 +46,7 @@ namespace ERSApp.Views
                 if (choice == MessageDialogResult.Affirmative)
                 {
                     Staff Selected = (Staff)lstRoster.SelectedItem;
-                    CollectionManager.DeleteRoster(Selected.Id, (double)lstWeeks.SelectedValue);
+                    StaffViewModel.DeleteRoster(Selected.Id, (double)lstWeeks.SelectedValue);
                     //lstRoster.Items.Remove(Selected);
                 }
             }
@@ -69,7 +70,7 @@ namespace ERSApp.Views
                 List<Staff> Rosters = new List<Staff>();
                 foreach (double week in archiveReportDialog.lstReportWeeks.SelectedItems)
                 {
-                    ObservableCollection<Staff> Temp = CollectionManager.GetRoster(week);
+                    ObservableCollection<Staff> Temp = StaffViewModel.GetRoster(week);
                     foreach(Staff s in Temp)
                     {
                         bool match = false;
