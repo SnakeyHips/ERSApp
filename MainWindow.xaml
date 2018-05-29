@@ -20,6 +20,9 @@
             <TabItem Name="tabAbsence" Header="Absence">
                 <views:AbsenceView x:Name="AbsenceViewControl"/>
             </TabItem>
+            <TabItem Name="tabAdmin" Header="Admin">
+                <views:AdminView x:Name="AdminViewControl"/>
+            </TabItem>
         </TabControl>
         <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,39,0,0" Width="171">
             <Calendar Name="dateCalender" FirstDayOfWeek="Monday"  SelectedDatesChanged="dateCalender_SelectedDatesChanged" Height="230"></Calendar>
