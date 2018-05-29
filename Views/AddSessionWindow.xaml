@@ -14,7 +14,13 @@
         <Label Content="Type: " HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Name="cboType" HorizontalAlignment="Right" Height="23" Margin="0,40,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboType_SelectionChanged"/>
         <Label Content="Site: " HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ComboBox Name="cboSite" HorizontalAlignment="Right" Height="23" Margin="0,80,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" DisplayMemberPath="Name" IsEditable="True" IsTextSearchEnabled="True" SelectionChanged="cboSite_SelectionChanged"/>
+        <ComboBox Name="cboSite" HorizontalAlignment="Right" Height="23" Margin="0,80,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" DisplayMemberPath="Name" IsEditable="True" IsTextSearchEnabled="True" SelectionChanged="cboSite_SelectionChanged" Style="{StaticResource VirtualisedMetroComboBox}">
+            <ComboBox.Resources>
+                <Style TargetType="Popup">
+                    <Setter Property="Width" Value="200"/>
+                </Style>
+            </ComboBox.Resources>
+        </ComboBox>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Name="cboTime" HorizontalAlignment="Right" Height="23" Margin="0,120,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="LOD: " HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
