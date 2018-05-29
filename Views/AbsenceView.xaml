@@ -7,7 +7,8 @@
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
         <ListView Name="lstAbsences" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Absences}" SelectedItem="{Binding Path=SelectedAbsence}">
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Absences}" SelectedItem="{Binding Path=SelectedAbsence}"
+                  Style="{DynamicResource VirtualisedMetroListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Staff Id" Width="112" DisplayMemberBinding="{Binding StaffId}"/>
