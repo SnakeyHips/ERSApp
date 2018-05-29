@@ -1,4 +1,4 @@
-﻿using ERSApp.Model;
+using ERSApp.Model;
 using System.Collections.ObjectModel;
 
 namespace ERSApp.ViewModel
@@ -11,6 +11,7 @@ namespace ERSApp.ViewModel
         }
 
         public static ObservableCollection<Absence> Absences { get; set; }
+        public static Absence SelectedAbsence { get; set; }
 
         public static void LoadAbsences()
         {
@@ -21,19 +22,5 @@ namespace ERSApp.ViewModel
             }
         }
 
-        private static Absence _selectedAbsence;
-
-        public static Absence SelectedAbsence
-        {
-            get
-            {
-                return _selectedAbsence;
-            }
-
-            set
-            {
-                _selectedAbsence = value;
-            }
-        }
     }
 }
