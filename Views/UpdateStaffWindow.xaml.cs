@@ -1,10 +1,10 @@
-using System;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using ERSApp.Model;
+using ERSApp.ViewModel;
 using System.Windows.Controls;
 
 namespace ERSApp.Views
@@ -82,7 +82,7 @@ namespace ERSApp.Views
                 Selected.Role = cboRole.Text;
                 Selected.ContractHours = double.Parse(cboHours.Text);
                 Selected.WorkPattern = GetWorkPattern();
-                CollectionManager.UpdateStaff(Selected);
+                StaffViewModel.UpdateStaff(Selected);
                 this.DialogResult = true;
             }
         }
