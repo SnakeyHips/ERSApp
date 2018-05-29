@@ -104,7 +104,7 @@ namespace ERSApp.Views
                 double unsocialCount = 0.0;
 
                 List<Staff> SelectedRange = new List<Staff>();
-                for(double i = weekStart; i < weekEnd; i++)
+                for(double i = weekStart; i <= weekEnd; i++)
                 {
                     Staff temp = CollectionManager.GetStaffRoster(i, int.Parse(txtId.Text));
                     if (temp != null)
