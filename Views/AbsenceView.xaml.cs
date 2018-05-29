@@ -43,10 +43,9 @@ namespace ERSApp.Views
                             MessageDialogStyle.AffirmativeAndNegative);
                 if (choice == MessageDialogResult.Affirmative)
                 {
-                    CollectionManager.UpdateRoster(AbsenceViewModel.SelectedAbsence.StaffId, 0.0,
-                    -AbsenceViewModel.SelectedAbsence.Length,
-                    CollectionManager.GetWeek(DateTime.Parse(AbsenceViewModel.SelectedAbsence.StartDate)));
-                    CollectionManager.DeleteAbsence(AbsenceViewModel.SelectedAbsence);
+                    StaffViewModel.UpdateAbsence(AbsenceViewModel.SelectedAbsence.StaffId, -AbsenceViewModel.SelectedAbsence.Length,
+                    StaffViewModel.GetWeek(DateTime.Parse(AbsenceViewModel.SelectedAbsence.StartDate)));
+                    AbsenceViewModel.DeleteAbsence(AbsenceViewModel.SelectedAbsence);
                     AbsenceViewModel.Absences.Remove(AbsenceViewModel.SelectedAbsence);
                 }
             }
