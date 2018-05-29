@@ -1,25 +1,142 @@
-using ERSApp.Model;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Linq;
+using System.Data.SqlClient;
+using System.Windows;
+using ERSApp.Model;
+using Dapper;
 
 namespace ERSApp.ViewModel
 {
     public class SessionViewModel
     {
+        public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
+        public static ObservableCollection<Session> Sessions { get; set; }
+        public static Session SelectedSession { get; set; }
+
         public SessionViewModel()
         {
             Sessions = new ObservableCollection<Session>();
             LoadSessions();
         }
 
-        public static ObservableCollection<Session> Sessions { get; set; }
-        public static Session SelectedSession { get; set; }
-
         public static void LoadSessions()
         {
             Sessions.Clear();
-            foreach(Session s in CollectionManager.GetSessions(CollectionManager.SelectedDate.ToShortDateString()))
+            foreach(Session s in GetSessions(SelectedDate.Date.ToShortDateString()))
             {
                 Sessions.Add(s);
+            }
+        }
+
+        public static List<Session> GetSessions(string date)
+        {
+            string query = "SELECT * FROM SessionTable WHERE Date=@Date;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Query<Session>(query, new { date }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return new List<Session>();
+                }
+            };
+        }
+
+        public static int AddSession(Session s)
+        {
+            string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
+                "INSERT INTO SessionTable (Date, Type, Site, Time, LOD, Chairs, Bleeds, SV1Id, SV1Name, " +
+                "SV1LOD, SV1UNS, DRI1Id, DRI1Name, DRI1LOD, DRI1UNS, DRI2Id, DRI2Name, DRI2LOD, DRI2UNS, RN1Id, RN1Name, " +
+                "RN1LOD, RN1UNS, RN2Id, RN2Name, RN2LOD, RN2UNS, RN3Id, RN3Name, RN3LOD, RN3UNS, CCA1Id, CCA1Name, CCA1LOD, " +
+                "CCA1UNS, CCA2Id, CCA2Name, CCA2LOD, CCA2UNS, CCA3Id, CCA3Name, CCA3LOD, CCA3UNS, StaffCount, State) " +
+                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Chairs, @Bleeds, @SV1Id, @SV1Name, @SV1LOD, @SV1UNS, " +
+                "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @RN1Id, @RN1Name, @RN1LOD, " +
+                "@RN1UNS, @RN2Id, @RN2Name, @RN2LOD, @RN2UNS, @RN3Id, @RN3Name, @RN3LOD, @RN3UNS, @CCA1Id, @CCA1Name, @CCA1LOD, " +
+                "@CCA1UNS, @CCA2Id, @CCA2Name, @CCA2LOD, @CCA2UNS, @CCA3Id, @CCA3Name, @CCA3LOD, @CCA3UNS, @StaffCount, @State);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        public static int UpdateSession(Session s)
+        {
+            string query = "UPDATE SessionTable" +
+                " SET Time=@Time, Type=@Type, Site=@Site, LOD=@LOD, Chairs=@Chairs, Bleeds=@Bleeds" +
+                " WHERE Date=@Date AND Time=@Time;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        public static void DeleteSession(Session s)
+        {
+            string query = "DELETE FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static void UpdateSessionStaff(Session s)
+        {
+            string query = "UPDATE SessionTable " +
+                "SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1LOD=@SV1LOD, SV1UNS=@SV1UNS, " +
+                "DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1LOD=@DRI1LOD, DRI1UNS=@DRI1UNS, " +
+                "DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2LOD=@DRI2LOD, DRI2UNS=@DRI2UNS, " +
+                "RN1Id=@RN1Id, RN1Name=@RN1Name, RN1LOD=@RN1LOD, RN1UNS=@RN1UNS, " +
+                "RN2Id=@RN2Id, RN2Name=@RN2Name, RN2LOD=@RN2LOD, RN2UNS=@RN2UNS, " +
+                "RN3Id=@RN3Id, RN3Name=@RN3Name, RN3LOD=@RN3LOD, RN3UNS=@RN3UNS, " +
+                "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, CCA1UNS=@CCA1UNS, " +
+                "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, CCA2UNS=@CCA2UNS, " +
+                "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, CCA3UNS=@CCA3UNS, " +
+                "StaffCount=@StaffCount, State=@State " +
+                "WHERE Date=@Date AND Site=@Site AND Time=@Time;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
     }
