@@ -1,21 +1,321 @@
-using ERSApp.Model;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Globalization;
+using System.Linq;
+using System.Data.SqlClient;
+using System.Windows;
+using ERSApp.Model;
+using Dapper;
 
 namespace ERSApp.ViewModel
 {
     public class StaffViewModel
     {
+        public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
+        public static ObservableCollection<Staff> Staffs { get; set; }
+        public static Staff SelectedStaff { get; set; }
+
         public StaffViewModel()
         {
             LoadStaffs();
         }
 
-        public static ObservableCollection<Staff> Staffs { get; set; }
-        public static Staff SelectedStaff { get; set; }
-
         public static void LoadStaffs()
         {
-            Staffs = CollectionManager.GetStaff();
+            Staffs = GetStaff();
+        }
+
+        public static ObservableCollection<Staff> GetStaff()
+        {
+            string query = "SELECT * FROM StaffTable";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return new ObservableCollection<Staff>(conn.Query<Staff>(query).ToList());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return new ObservableCollection<Staff>();
+                }
+            }
+        }
+
+        public static Session GetStaffSession(string date, string staffid)
+        {
+            string query = "SELECT * FROM SessionTable WHERE Date=@Date AND " +
+                "(SV1Id=@StaffId OR DRI1Id=@StaffId OR DRI2Id=@StaffId " +
+                "OR RN1Id=@StaffId OR RN2Id=@StaffId OR RN3Id=@StaffId " +
+                "OR CCA1Id=@StaffId OR CCA2Id=@StaffId OR CCA3Id=@StaffId)";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.QuerySingle<Session>(query, new { date, staffid });
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public static int AddStaff(Staff s)
+        {
+            string query = "INSERT INTO StaffTable (Id, Name, Role, ContractHours, WorkPattern)" +
+                "VALUES (@Id, @Name, @Role, @ContractHours, @WorkPattern);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, s);
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
+        }
+
+        public static void UpdateStaff(Staff s)
+        {
+            string query = "UPDATE StaffTable SET Role=@Role, ContractHours=@ContractHours, WorkPattern=@WorkPattern WHERE Id=@Id;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static ObservableCollection<double> GetRosterWeeks()
+        {
+            string query = "SELECT Week FROM RosterTable;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return new ObservableCollection<double>(conn.Query<double>(query).Distinct().ToList());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return new ObservableCollection<double>();
+                }
+            }
+        }
+
+        public static ObservableCollection<Staff> GetRoster(double week)
+        {
+            string query = "SELECT Week, StaffId as Id, StaffName as Name, Role, ContractHours, " +
+                "AppointedHours, AbsenceHours, UnsocialHours FROM RosterTable WHERE Week=@Week;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return new ObservableCollection<Staff>(conn.Query<Staff>(query, new { week }).ToList());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return new ObservableCollection<Staff>();
+                }
+            }
+        }
+
+        public static Staff GetStaffRoster(double week, int id)
+        {
+            string query = "SELECT * FROM RosterTable WHERE Week=@Week AND StaffId=@Id;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Query<Staff>(query, new { week, id }).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return null;
+                }
+            }
+        }
+
+        public static void AddRoster(int id, double appointed, double absence, double unsocial, double week)
+        {
+            string query = "INSERT INTO RosterTable (Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, UnsocialHours)" +
+                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Unsocial);";
+            Staff s = Staffs.First(x => x.Id == id);
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, unsocial });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static void UpdateAppointed(int id, double appointed, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AppointedHours=AppointedHours+@Appointed " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { appointed, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, appointed, 0.0, 0.0, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateAbsence(int id, double absence, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AbsenceHours=AbsenceHours+@Absence " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { absence, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, 0.0, absence, 0.0, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateUnsocial(int id, double unsocial, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET UnsocialHours=UnsocialHours+@Unsocial " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { unsocial, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, 0.0, 0.0, unsocial, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateAppointedUnsocial(int id, double appointed, double unsocial, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AppointedHours=AppointedHours+@Appointed, UnsocialHours=UnsocialHours+@Unsocial " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { appointed, unsocial, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, appointed, 0.0, unsocial, week);
+                    }
+                }
+            }
+        }
+
+        public static void DeleteRoster(int id, double week)
+        {
+            string query = "DELETE FROM RosterTable WHERE Week=@Week AND StaffId=@Id;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, new { id, week });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static List<Staff> GetAvailableStaff()
+        {
+            return Staffs
+                .Where(x => x.Status == "Okay" && x.WorkPattern.Contains(SelectedDate.Date.DayOfWeek.ToString().Substring(0, 3)))
+                .ToList();
+        }
+
+        public static double GetWeek(DateTime date)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+            return double.Parse(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString()
+                + "." + date.Year.ToString());
         }
     }
 }
