@@ -12,6 +12,7 @@ namespace ERSApp.ViewModel
         }
 
         public static ObservableCollection<Session> Sessions { get; set; }
+        public static Session SelectedSession { get; set; }
 
         public static void LoadSessions()
         {
@@ -19,21 +20,6 @@ namespace ERSApp.ViewModel
             foreach(Session s in CollectionManager.GetSessions(CollectionManager.SelectedDate.ToShortDateString()))
             {
                 Sessions.Add(s);
-            }
-        }
-
-        private static Session _selectedSession;
-
-        public static Session SelectedSession
-        {
-            get
-            {
-                return _selectedSession;
-            }
-
-            set
-            {
-                _selectedSession = value;
             }
         }
     }
