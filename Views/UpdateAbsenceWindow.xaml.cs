@@ -4,6 +4,7 @@ using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using ERSApp.Model;
+using ERSApp.ViewModel;
 using System.Text.RegularExpressions;
 
 namespace ERSApp.Views
@@ -39,9 +40,9 @@ namespace ERSApp.Views
                 Selected.Type = cboType.Text;
                 double old = Selected.Length;
                 Selected.Length = double.Parse(txtHours.Text);
-                CollectionManager.UpdateAbsence(Selected);
+                AbsenceViewModel.UpdateAbsence(Selected);
                 double absence = Selected.Length - old;
-                CollectionManager.UpdateAbsence(Selected.StaffId, absence, CollectionManager.GetWeek(DateTime.Parse(txtStart.Text)));
+                StaffViewModel.UpdateAbsence(Selected.StaffId, absence, StaffViewModel.GetWeek(DateTime.Parse(txtStart.Text)));
                 this.DialogResult = true;
             }
         }
