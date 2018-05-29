@@ -72,7 +72,11 @@ namespace ERSApp.Views
                         List<Session> ReportSessions = new List<Session>();
                         foreach (DateTime date in Dates)
                         {
-                            ReportSessions.Add(CollectionManager.GetStaffSession(date.ToShortDateString(), StaffViewModel.SelectedStaff.Id.ToString()));
+                            Session temp = CollectionManager.GetStaffSession(date.ToShortDateString(), StaffViewModel.SelectedStaff.Id.ToString());
+                            if(temp != null)
+                            {
+                                ReportSessions.Add(temp);
+                            }
                         }
                         if (ReportSessions.Count() > 0)
                         {
@@ -87,6 +91,10 @@ namespace ERSApp.Views
                                 //disable main window and activate progress ring while report is being created
                                 await CreateSessionReport(ReportSessions, saveDialog.FileName);
                             }
+                        }
+                        else
+                        {
+                            await mainWindow.ShowMessageAsync("", "No sessions found for that staff.");
                         }
                     }
                 }
