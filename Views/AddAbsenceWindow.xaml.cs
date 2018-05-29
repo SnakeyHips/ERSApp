@@ -37,7 +37,7 @@ namespace ERSApp.Views
                 }
             }
         }
-        
+
         private void txtId_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtName.Clear();
@@ -100,11 +100,12 @@ namespace ERSApp.Views
                     EndDate = dateEnd.Text,
                     Length = double.Parse(txtHours.Text)
                 };
-                if(CollectionManager.AddAbsence(temp) > 0)
+                if(AbsenceViewModel.AddAbsence(temp) > 0)
                 {
                     AbsenceViewModel.Absences.Add(temp);
                     //Update staff's absence hours
-                    CollectionManager.UpdateAbsence(temp.StaffId, temp.Length, CollectionManager.GetWeek(DateTime.Parse(dateStart.Text)));                    this.DialogResult = true;
+                    StaffViewModel.UpdateAbsence(temp.StaffId, temp.Length, StaffViewModel.GetWeek(DateTime.Parse(dateStart.Text)));
+                    this.DialogResult = true;
                 }
                 else
                 {
