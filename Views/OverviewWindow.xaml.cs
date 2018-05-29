@@ -17,8 +17,8 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = this;
-            lblHeader.Content = CollectionManager.SelectedDate.DayOfWeek.ToString() + " - " +
-                CollectionManager.SelectedDate.ToShortDateString();
+            lblHeader.Content = SelectedDate.Date.DayOfWeek.ToString() + " - " +
+                SelectedDate.Date.ToShortDateString();
             OverviewSessions = new ObservableCollection<Session>(SessionViewModel.Sessions);
             Sites = new HashSet<string>();
             foreach(Session s in OverviewSessions)
@@ -39,11 +39,9 @@ namespace ERSApp.Views
             }
         }
 
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
     }
 }
