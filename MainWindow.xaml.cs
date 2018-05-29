@@ -11,6 +11,7 @@ namespace ERSApp
 {
     public partial class MainWindow : MetroWindow
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,16 +24,25 @@ namespace ERSApp
             {
                 ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Crimson"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                dateCalender.Opacity = 1;
             }
             else if (tabStaff.IsSelected)
             {
                 ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Mauve"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                dateCalender.Opacity = 1;
             }
             else if (tabAbsence.IsSelected)
             {
                 ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Olive"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                dateCalender.Opacity = 1;
+            }
+            else if (tabAdmin.IsSelected)
+            {
+                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Steel"),
+                        ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                dateCalender.Opacity = 0;
             }
         }
 
@@ -40,11 +50,11 @@ namespace ERSApp
         private void dateCalender_SelectedDatesChanged(object sender, RoutedEventArgs e)
         {
             Mouse.Capture(null);
-            CollectionManager.SelectedDate = dateCalender.SelectedDate.Value.Date;
+            SelectedDate.Date = dateCalender.SelectedDate.Value.Date;
             SessionViewModel.LoadSessions();
             foreach (Staff s in StaffViewModel.Staffs)
             {
-                s.Status = CollectionManager.GetStatus(s.Id, CollectionManager.SelectedDate);
+                s.Status = AbsenceViewModel.GetStatus(s.Id, SelectedDate.Date);
             }
         }
     }
