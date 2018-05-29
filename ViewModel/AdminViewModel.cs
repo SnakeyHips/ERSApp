@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
@@ -60,6 +60,112 @@ namespace ERSApp.ViewModel
                 {
                     MessageBox.Show(ex.ToString());
                     return new ObservableCollection<Holiday>();
+                }
+            }
+        }
+
+        public static int AddHoliday(Holiday h)
+        {
+            string query = "IF NOT EXISTS (SELECT * FROM HolidayTable WHERE Date=@Date) " +
+                "INSERT INTO HolidayTable (Name, Date) VALUES (@Name, @Date);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, h);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        public static void UpdateHoliday(Holiday h)
+        {
+            string query = "UPDATE HolidayTable SET Date=@Date WHERE Name=@Name;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, h);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static void DeleteHoliday(Holiday h)
+        {
+            string query = "DELETE FROM HolidayTable WHERE Name=@Name AND Date=@Date;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, h);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static int AddSite(Site s)
+        {
+            string query = "IF NOT EXISTS (SELECT * FROM SiteTable WHERE Name=@Name) " +
+                "INSERT INTO SiteTable (Name, Type, Times) VALUES (@Name, @Type, @Times);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        public static void UpdateSite(Site s)
+        {
+            string query = "UPDATE SiteTable SET Times=@Times WHERE Name=@Name;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static void DeleteSite(Site s)
+        {
+            string query = "DELETE FROM SiteTable WHERE Name=@Name AND Type=@Type AND Times=@Times;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }
