@@ -90,7 +90,6 @@ namespace ERSApp.Views
 
                             if (result == true)
                             {
-                                //disable main window and activate progress ring while report is being created
                                 await CreateSessionReport(ReportSessions, saveDialog.FileName);
                             }
                         }
