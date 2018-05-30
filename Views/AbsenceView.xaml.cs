@@ -14,7 +14,10 @@ namespace ERSApp.Views
         public AbsenceView()
         {
             InitializeComponent();
-            this.DataContext = new AbsenceViewModel();
+            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.DataContext = new AbsenceViewModel();
+            }
         }
 
         private void btnAddAbsence_Click(object sender, RoutedEventArgs e)
