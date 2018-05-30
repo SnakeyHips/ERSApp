@@ -29,6 +29,16 @@ namespace ERSApp.Views
             AddSessionWindow addSessionWindow = new AddSessionWindow();
             addSessionWindow.Owner = mainWindow;
             addSessionWindow.ShowDialog();
+            if(addSessionWindow.DialogResult == true)
+            {
+                Calendar cal = mainWindow.FindChild<Calendar>("dateCalender");
+                if(cal.SelectedDate != addSessionWindow.dateSession.SelectedDate)
+                {
+                    cal.SelectedDate = addSessionWindow.dateSession.SelectedDate;
+                    cal.DisplayDate = addSessionWindow.dateSession.SelectedDate.Value;
+                    SelectedDate.Date = addSessionWindow.dateSession.SelectedDate.Value;
+                }
+            }
         }
 
         private async void btnUpdateSession_Click(object sender, RoutedEventArgs e)
