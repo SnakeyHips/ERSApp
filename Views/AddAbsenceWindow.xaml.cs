@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,7 +28,15 @@ namespace ERSApp.Views
             {
                 try
                 {
-                    txtName.Text = StaffViewModel.Staffs.First(x => x.Id == int.Parse(txtId.Text)).Name;
+                    int textId = int.Parse(txtId.Text);
+                    foreach(Staff s in StaffViewModel.Staffs)
+                    {
+                        if(s.Id == textId)
+                        {
+                            txtName.Text = s.Name;
+                            break;
+                        }
+                    }
                 }
                 catch
                 {
