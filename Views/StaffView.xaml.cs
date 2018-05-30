@@ -60,21 +60,21 @@ namespace ERSApp.Views
                 staffReportDialog.ShowDialog();
                 if (staffReportDialog.DialogResult == true)
                 {
-                    List<DateTime> Dates = new List<DateTime>();
+                    List<string> Dates = new List<string>();
                     DateTime Start = DateTime.Parse(staffReportDialog.dateStart.Text);
                     DateTime End = DateTime.Parse(staffReportDialog.dateEnd.Text);
 
                     for (DateTime dt = Start; dt <= End; dt = dt.AddDays(1))
                     {
-                        Dates.Add(dt);
+                        Dates.Add(dt.ToShortDateString());
                     }
 
                     if (Dates.Count > 0)
                     {
                         List<Session> ReportSessions = new List<Session>();
-                        foreach (DateTime date in Dates)
+                        foreach (string date in Dates)
                         {
-                            Session temp = StaffViewModel.GetStaffSession(date.ToShortDateString(), StaffViewModel.SelectedStaff.Id.ToString());
+                            Session temp = SessionViewModel.GetStaffSession(date, StaffViewModel.SelectedStaff.Id.ToString());
                             if(temp != null)
                             {
                                 ReportSessions.Add(temp);
