@@ -13,7 +13,10 @@ namespace ERSApp.Views
         public AdminView()
         {
             InitializeComponent();
-            this.DataContext = new AdminViewModel();
+            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.DataContext = new AdminViewModel();
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
