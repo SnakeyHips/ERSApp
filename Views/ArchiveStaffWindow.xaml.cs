@@ -101,7 +101,6 @@ namespace ERSApp.Views
 
                     if (result == true)
                     {
-                        //disable main window and activate progress ring while report is being created
                         string start = archiveReportDialog.lstReportWeeks.SelectedItems[0].ToString();
                         string end = archiveReportDialog.lstReportWeeks.SelectedItems[archiveReportDialog.lstReportWeeks.SelectedItems.Count-1].ToString();
                         await CreateSessionReport(Rosters, start, end, saveDialog.FileName);
