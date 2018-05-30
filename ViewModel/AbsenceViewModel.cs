@@ -107,7 +107,7 @@ namespace ERSApp.ViewModel
         {
             try
             {
-                return AbsenceViewModel.Absences.First(x => x.StaffId == id
+                return Absences.First(x => x.StaffId == id
                 && DateTime.Parse(x.StartDate).CompareTo(selectedDate) <= 0
                 && DateTime.Parse(x.EndDate).CompareTo(selectedDate) >= 0).Type;
             }
