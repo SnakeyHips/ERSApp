@@ -21,7 +21,10 @@ namespace ERSApp.Views
         public StaffView()
         {
             InitializeComponent();
-            this.DataContext = new StaffViewModel();
+            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.DataContext = new StaffViewModel();
+            }
         }
 
         private void btnAddStaff_Click(object sender, RoutedEventArgs e)
