@@ -29,14 +29,7 @@ namespace ERSApp.Views
             {
                 try
                 {
-                    foreach(Staff s in StaffViewModel.Staffs)
-                    {
-                        if (s.Id == int.Parse(txtId.Text))
-                        {
-                            txtName.Text = s.Name;
-                            break;
-                        }
-                    }
+                    txtName.Text = StaffViewModel.Staffs.First(x => x.Id == int.Parse(txtId.Text)).Name;
                 }
                 catch
                 {
