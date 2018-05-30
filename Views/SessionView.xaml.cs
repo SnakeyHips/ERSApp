@@ -21,7 +21,10 @@ namespace ERSApp.Views
         public SessionView()
         {
             InitializeComponent();
-            this.DataContext = new SessionViewModel();
+            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.DataContext = new SessionViewModel();
+            }
         }
 
         private void btnAddSession_Click(object sender, RoutedEventArgs e)
