@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -92,7 +91,7 @@ namespace ERSApp.Views
                         }
                     }
                 }
-                if (Rosters.Count() > 0)
+                if (Rosters.Count > 0)
                 {
                     SaveFileDialog saveDialog = new SaveFileDialog();
                     saveDialog.Title = "Choose Report Save Location";
