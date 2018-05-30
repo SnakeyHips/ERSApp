@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
@@ -121,14 +120,14 @@ namespace ERSApp.Views
                     Dates.Add(dt);
                 }
 
-                if (Dates.Count() > 0)
+                if (Dates.Count > 0)
                 {
                     List<Session> ReportSessions = new List<Session>();
                     foreach (DateTime date in Dates)
                     {
                         ReportSessions.AddRange(SessionViewModel.GetSessions(date.ToShortDateString()));
                     }
-                    if (ReportSessions.Count() > 0)
+                    if (ReportSessions.Count > 0)
                     {
                         SaveFileDialog saveDialog = new SaveFileDialog();
                         saveDialog.Title = "Choose Report Save Location";
