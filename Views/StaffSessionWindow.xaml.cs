@@ -369,7 +369,7 @@ namespace ERSApp.Views
                         //Assign new appoint staff
                         Selected.SV1Id = (int)cboSV1.SelectedValue;
                         Selected.SV1Name = cboSV1.Text;
-                        Selected.SV1LOD = double.Parse(txtLOD.Text);
+                        Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
                         Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
                         Selected.StaffCount++;
                         //Add onto new staff's appointed hours/New record created in sql method
@@ -442,7 +442,7 @@ namespace ERSApp.Views
                     {
                         Selected.DRI1Id = (int)cboDRI1.SelectedValue;
                         Selected.DRI1Name = cboDRI1.Text;
-                        Selected.DRI1LOD = double.Parse(txtLOD.Text);
+                        Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
                         Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
                         Selected.StaffCount++;
                         StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
@@ -507,7 +507,7 @@ namespace ERSApp.Views
                         {
                             Selected.DRI2Id = (int)cboDRI2.SelectedValue;
                             Selected.DRI2Name = cboDRI2.Text;
-                            Selected.DRI2LOD = double.Parse(txtLOD.Text);
+                            Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
                             Selected.DRI2UNS = double.Parse(txtDRI2UNS.Text);
                             Selected.StaffCount++;
                             StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
@@ -567,7 +567,7 @@ namespace ERSApp.Views
                     {
                         Selected.RN1Id = (int)cboRN1.SelectedValue;
                         Selected.RN1Name = cboRN1.Text;
-                        Selected.RN1LOD = double.Parse(txtLOD.Text);
+                        Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
                         Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
                         StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
                     }
@@ -630,7 +630,7 @@ namespace ERSApp.Views
                         {
                             Selected.RN2Id = (int)cboRN2.SelectedValue;
                             Selected.RN2Name = cboRN2.Text;
-                            Selected.RN2LOD = double.Parse(txtLOD.Text);
+                            Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
                             Selected.RN2UNS = double.Parse(txtRN2UNS.Text);
                             StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
                         }
@@ -695,7 +695,7 @@ namespace ERSApp.Views
                         {
                             Selected.RN3Id = (int)cboRN3.SelectedValue;
                             Selected.RN3Name = cboRN3.Text;
-                            Selected.RN3LOD = double.Parse(txtLOD.Text);
+                            Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
                             Selected.RN3UNS = double.Parse(txtRN3UNS.Text);
                             StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
                         }
@@ -753,7 +753,7 @@ namespace ERSApp.Views
                     {
                         Selected.CCA1Id = (int)cboCCA1.SelectedValue;
                         Selected.CCA1Name = cboCCA1.Text;
-                        Selected.CCA1LOD = double.Parse(txtLOD.Text);
+                        Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
                         Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
                         Selected.StaffCount++;
                         StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
@@ -818,7 +818,7 @@ namespace ERSApp.Views
                         {
                             Selected.CCA2Id = (int)cboCCA2.SelectedValue;
                             Selected.CCA2Name = cboCCA2.Text;
-                            Selected.CCA2LOD = double.Parse(txtLOD.Text);
+                            Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
                             Selected.CCA2UNS = double.Parse(txtCCA2UNS.Text);
                             Selected.StaffCount++;
                             StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
@@ -885,7 +885,7 @@ namespace ERSApp.Views
                         {
                             Selected.CCA3Id = (int)cboCCA3.SelectedValue;
                             Selected.CCA3Name = cboCCA3.Text;
-                            Selected.CCA3LOD = double.Parse(txtLOD.Text);
+                            Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
                             Selected.CCA3UNS = double.Parse(txtCCA3UNS.Text);
                             Selected.StaffCount++;
                             StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
