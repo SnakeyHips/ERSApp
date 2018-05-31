@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
-        <TabControl Name="tabsAdmin" Margin="0,0,0,0">
+        <TabControl Name="tabsAdmin" Margin="0,0,0,0" Padding="-1">
             <TabItem Header="Holidays" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
                 <views:HolidayView/>
             </TabItem>
