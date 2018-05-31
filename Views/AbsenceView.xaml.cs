@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using ERSApp.Model;
 using ERSApp.ViewModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -25,6 +26,17 @@ namespace ERSApp.Views
             AddAbsenceWindow addAbsenceWindow = new AddAbsenceWindow();
             addAbsenceWindow.Owner = mainWindow;
             addAbsenceWindow.ShowDialog();
+            if(addAbsenceWindow.DialogResult == true)
+            {
+                int id = int.Parse(addAbsenceWindow.txtId.Text);
+                foreach (Staff s in StaffViewModel.Staffs)
+                {
+                    if (s.Id == id)
+                    {
+                        s.Status = AbsenceViewModel.GetStatus(id);
+                    }
+                }
+            }
         }
 
         private void btnUpdateAbsence_Click(object sender, RoutedEventArgs e)
@@ -34,6 +46,16 @@ namespace ERSApp.Views
                 UpdateAbsenceWindow updateAbsenceWindow = new UpdateAbsenceWindow(AbsenceViewModel.SelectedAbsence);
                 updateAbsenceWindow.Owner = mainWindow;
                 updateAbsenceWindow.ShowDialog();
+                if (updateAbsenceWindow.DialogResult == true)
+                {
+                    foreach (Staff s in StaffViewModel.Staffs)
+                    {
+                        if (s.Id == AbsenceViewModel.SelectedAbsence.StaffId)
+                        {
+                            s.Status = AbsenceViewModel.GetStatus(s.Id);
+                        }
+                    }
+                }
             }
         }
 
@@ -49,6 +71,13 @@ namespace ERSApp.Views
                     StaffViewModel.UpdateAbsence(AbsenceViewModel.SelectedAbsence.StaffId, -AbsenceViewModel.SelectedAbsence.Length,
                     StaffViewModel.GetWeek(DateTime.Parse(AbsenceViewModel.SelectedAbsence.StartDate)));
                     AbsenceViewModel.DeleteAbsence(AbsenceViewModel.SelectedAbsence);
+                    foreach (Staff s in StaffViewModel.Staffs)
+                    {
+                        if (s.Id == AbsenceViewModel.SelectedAbsence.StaffId)
+                        {
+                            s.Status = "Okay";
+                        }
+                    }
                     AbsenceViewModel.Absences.Remove(AbsenceViewModel.SelectedAbsence);
                 }
             }
