@@ -4,37 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:views = "clr-namespace:ERSApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
         <TabControl Name="tabsAdmin" Margin="0,0,0,0">
             <TabItem Header="Holidays" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
-                <ListView Name="lstHolidays" HorizontalAlignment="Left" Margin="0,0,0,0" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Holidays}" SelectedItem="{Binding Path=SelectedHoliday}" Style="{DynamicResource VirtualisedMetroListView}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="225" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Date" Width="225" DisplayMemberBinding="{Binding Date}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <views:HolidayView/>
             </TabItem>
             <TabItem Header="Sites" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
-                <ListView Name="lstSites" HorizontalAlignment="Left" Margin="0,0,0,0" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sites}" SelectedItem="{Binding Path=SelectedSite}" Style="{DynamicResource VirtualisedMetroListView}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Type" Width="150" DisplayMemberBinding="{Binding Type}"/>
-                            <GridViewColumn Header="Times" Width="150" DisplayMemberBinding="{Binding Times}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <views:SiteView/>
             </TabItem>
         </TabControl>
-        <Button Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,120" Height="25" Width="75" Click="btnAdd_Click"/>
-        <Button Content="Update" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,80" Height="25" Width="75" Click="btnUpdate_Click"/>
-        <Button Content="Delete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnDelete_Click"/>
-        <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnClose_Click"/>
     </Grid>
 </UserControl>
