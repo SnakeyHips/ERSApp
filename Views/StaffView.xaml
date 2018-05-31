@@ -6,9 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
-        <ListView Name="lstStaff" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Staffs}" SelectedItem="{Binding Path=SelectedStaff}" 
-                  Style="{DynamicResource VirtualisedMetroListView}">
+        <ListView Name="lstStaff" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Staffs}" SelectedItem="{Binding Path=SelectedStaff}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="112" DisplayMemberBinding="{Binding Id}"/>
