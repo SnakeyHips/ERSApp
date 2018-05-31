@@ -15,8 +15,7 @@
         WindowStartupLocation="CenterOwner"
         Height="300" Width="200">
     <Grid Margin="15, 15, 15, 15">
-        <ListView Name="lstReportWeeks" Margin="0,0,0,40" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Weeks}" Style="{DynamicResource VirtualisedMetroListView}">
+        <ListView Name="lstReportWeeks" Margin="0,0,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Weeks}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Week.Year" Width="170"/>
