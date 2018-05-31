@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
-        <TabControl Margin="0,0,0,0">
-            <TabItem Name="tabHolidays" Header="Holidays" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
+        <TabControl Name="tabsAdmin" Margin="0,0,0,0">
+            <TabItem Header="Holidays" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
                 <ListView Name="lstHolidays" HorizontalAlignment="Left" Margin="0,0,0,0" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Holidays}" SelectedItem="{Binding Path=SelectedHoliday}" Style="{DynamicResource VirtualisedMetroListView}">
                     <ListView.View>
@@ -19,7 +19,7 @@
                     </ListView.View>
                 </ListView>
             </TabItem>
-            <TabItem Name="tabSites" Header="Sites" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
+            <TabItem Header="Sites" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
                 <ListView Name="lstSites" HorizontalAlignment="Left" Margin="0,0,0,0" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sites}" SelectedItem="{Binding Path=SelectedSite}" Style="{DynamicResource VirtualisedMetroListView}">
                     <ListView.View>
