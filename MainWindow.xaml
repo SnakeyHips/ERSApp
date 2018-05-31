@@ -10,17 +10,17 @@
         WindowStartupLocation="CenterScreen"
         Title="Electronic Roster System" Height="550" Width="900">
     <Grid Margin="15,0,15,15">
-        <TabControl Margin="0,0,0,0" SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Name="tabSessions" Header="Sessions">
+        <TabControl Name="tabsMain" Margin="0,0,0,0" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="Sessions">
                 <views:SessionView x:Name="SessionViewControl"/>
             </TabItem>
-            <TabItem Name="tabStaff" Header="Staff">
+            <TabItem Header="Staff">
                 <views:StaffView x:Name="StaffViewControl"/>
             </TabItem>
-            <TabItem Name="tabAbsence" Header="Absence">
+            <TabItem Header="Absence">
                 <views:AbsenceView x:Name="AbsenceViewControl"/>
             </TabItem>
-            <TabItem Name="tabAdmin" Header="Admin">
+            <TabItem Header="Admin">
                 <views:AdminView x:Name="AdminViewControl"/>
             </TabItem>
         </TabControl>
