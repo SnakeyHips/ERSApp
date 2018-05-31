@@ -23,23 +23,19 @@ namespace ERSApp
             switch (tabsMain.SelectedIndex)
             {
                 case 0:
-                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Crimson"),
-                        ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Crimson"), ThemeManager.GetAppTheme("BaseLight"));
                     dateCalender.Opacity = 1;
                     break;
                 case 1:
-                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Mauve"),
-                        ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Mauve"), ThemeManager.GetAppTheme("BaseLight"));
                     dateCalender.Opacity = 1;
                     break;
                 case 2:
-                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Olive"),
-                        ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Olive"), ThemeManager.GetAppTheme("BaseLight"));
                     dateCalender.Opacity = 1;
                     break;
                 case 3:
-                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Sienna"),
-                        ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Sienna"), ThemeManager.GetAppTheme("BaseLight"));
                     dateCalender.Opacity = 0;
                     break;
             }
