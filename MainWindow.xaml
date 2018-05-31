@@ -12,16 +12,16 @@
     <Grid Margin="15,0,15,15">
         <TabControl Name="tabsMain" Margin="0,0,0,0" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Sessions">
-                <views:SessionView x:Name="SessionViewControl"/>
+                <views:SessionView/>
             </TabItem>
             <TabItem Header="Staff">
-                <views:StaffView x:Name="StaffViewControl"/>
+                <views:StaffView/>
             </TabItem>
             <TabItem Header="Absence">
-                <views:AbsenceView x:Name="AbsenceViewControl"/>
+                <views:AbsenceView/>
             </TabItem>
             <TabItem Header="Admin">
-                <views:AdminView x:Name="AdminViewControl"/>
+                <views:AdminView/>
             </TabItem>
         </TabControl>
         <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,39,0,0" Width="171">
