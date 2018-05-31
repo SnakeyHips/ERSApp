@@ -19,7 +19,7 @@
             </ListView.View>
         </ListView>
         <ListView Name="lstRoster" HorizontalAlignment="Left" Width="560" Margin="115,0,0,0" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" Style="{DynamicResource VirtualisedMetroListView}">
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Roster}" Style="{DynamicResource VirtualisedMetroListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="93" DisplayMemberBinding="{Binding Id}"/>
