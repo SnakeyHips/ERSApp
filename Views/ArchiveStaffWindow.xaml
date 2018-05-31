@@ -9,17 +9,14 @@
         WindowStartupLocation="CenterOwner"
         Title="Staff Archive" Height="500" Width="800">
     <Grid Margin="15,15,15,15">
-        <ListView Name="lstWeeks" HorizontalAlignment="Left" Width="100" Margin="0,0,0,0" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Weeks}"  SelectionChanged="lstWeeks_SelectionChanged" 
-                  Style="{DynamicResource VirtualisedMetroListView}">
+        <ListView Name="lstWeeks" HorizontalAlignment="Left" Width="100" Margin="0,0,0,0" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Weeks}" SelectionChanged="lstWeeks_SelectionChanged" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Week.Year" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Name="lstRoster" HorizontalAlignment="Left" Width="560" Margin="115,0,0,0" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Roster}" Style="{DynamicResource VirtualisedMetroListView}">
+        <ListView Name="lstRoster" HorizontalAlignment="Left" Width="560" Margin="115,0,0,0" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Roster}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="93" DisplayMemberBinding="{Binding Id}"/>
