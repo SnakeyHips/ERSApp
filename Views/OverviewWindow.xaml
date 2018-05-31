@@ -17,9 +17,7 @@
                 </Style>
             </ComboBox.Resources>
         </ComboBox>
-        <ListView Name="lstOverview" HorizontalAlignment="Left" Margin="0,43,0,40" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=OverviewSessions}" SelectedValuePath="Location" 
-                  Style="{DynamicResource VirtualisedMetroListView}">
+        <ListView Name="lstOverview" HorizontalAlignment="Left" Margin="0,43,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=OverviewSessions}" SelectedValuePath="Location" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Site" Width="80" DisplayMemberBinding="{Binding Site}"/>
