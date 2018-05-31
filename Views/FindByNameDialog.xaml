@@ -15,8 +15,7 @@
         WindowStartupLocation="CenterOwner"
         Height="250" Width="350">
     <Grid Margin="15, 15, 15, 15">
-        <ListView Name="lstNames" Margin="0,0,0,40" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Weeks}" >
+               <ListView Name="lstNames" Margin="0,0,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Weeks}" Style="{DynamicResource VirtualisedMetroListView}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Id}"/>
