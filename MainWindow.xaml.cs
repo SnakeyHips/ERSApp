@@ -20,29 +20,28 @@ namespace ERSApp
         //TabControl selection handler for saving which tab was last selected and app accent
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tabSessions.IsSelected)
+            switch (tabsMain.SelectedIndex)
             {
-                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Crimson"),
+                case 0:
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Crimson"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
-                dateCalender.Opacity = 1;
-            }
-            else if (tabStaff.IsSelected)
-            {
-                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Mauve"),
+                    dateCalender.Opacity = 1;
+                    break;
+                case 1:
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Mauve"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
-                dateCalender.Opacity = 1;
-            }
-            else if (tabAbsence.IsSelected)
-            {
-                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Olive"),
+                    dateCalender.Opacity = 1;
+                    break;
+                case 2:
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Olive"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
-                dateCalender.Opacity = 1;
-            }
-            else if (tabAdmin.IsSelected)
-            {
-                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Steel"),
+                    dateCalender.Opacity = 1;
+                    break;
+                case 3:
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Steel"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
-                dateCalender.Opacity = 0;
+                    dateCalender.Opacity = 0;
+                    break;
             }
         }
 
