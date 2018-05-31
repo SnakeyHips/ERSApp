@@ -30,8 +30,11 @@ namespace ERSApp.Views
 
         private void lstWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Roster = StaffViewModel.GetRoster((double)lstWeeks.SelectedValue);
-            lstRoster.ItemsSource = Roster;
+            Roster.Clear();
+            foreach(Staff s in StaffViewModel.GetRoster((double)lstWeeks.SelectedValue))
+            {
+                Roster.Add(s);
+            }
         }
 
         //Delete method not used atm
