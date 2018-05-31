@@ -54,7 +54,7 @@ namespace ERSApp
             SessionViewModel.LoadSessions();
             foreach (Staff s in StaffViewModel.Staffs)
             {
-                s.Status = AbsenceViewModel.GetStatus(s.Id, SelectedDate.Date);
+                s.Status = AbsenceViewModel.GetStatus(s.Id);
             }
         }
     }
