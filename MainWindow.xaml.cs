@@ -38,7 +38,7 @@ namespace ERSApp
                     dateCalender.Opacity = 1;
                     break;
                 case 3:
-                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Steel"),
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(x => x.Name == "Sienna"),
                         ThemeManager.AppThemes.First(x => x.Name == "BaseLight"));
                     dateCalender.Opacity = 0;
                     break;
