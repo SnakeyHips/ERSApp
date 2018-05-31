@@ -25,7 +25,7 @@ namespace ERSApp.ViewModel
             Absences = GetAbsences();
             foreach (Staff s in StaffViewModel.Staffs)
             {
-                s.Status = GetStatus(s.Id, SelectedDate.Date);
+                s.Status = GetStatus(s.Id);
             }
         }
 
@@ -103,18 +103,20 @@ namespace ERSApp.ViewModel
             }
         }
 
-        public static string GetStatus(int id, DateTime selectedDate)
+        public static string GetStatus(int id)
         {
-            try
+            string status = "Okay";
+            foreach(Absence a in Absences)
             {
-                return Absences.First(x => x.StaffId == id
-                && DateTime.Parse(x.StartDate).CompareTo(selectedDate) <= 0
-                && DateTime.Parse(x.EndDate).CompareTo(selectedDate) >= 0).Type;
+                if (a.StaffId == id
+                    && DateTime.Parse(a.StartDate).CompareTo(SelectedDate.Date) <= 0
+                    && DateTime.Parse(a.EndDate).CompareTo(SelectedDate.Date) >= 0)
+                {
+                    status = a.Type;
+                    break;
+                }
             }
-            catch
-            {
-                return "Okay";
-            }
+            return status;
         }
     }
 }
