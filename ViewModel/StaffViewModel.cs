@@ -285,9 +285,15 @@ namespace ERSApp.ViewModel
 
         public static List<Staff> GetAvailableStaff()
         {
-            return Staffs
-                .Where(x => x.Status == "Okay" && x.WorkPattern.Contains(SelectedDate.Date.DayOfWeek.ToString().Substring(0, 3)))
-                .ToList();
+            List<Staff> Available = new List<Staff>();
+            foreach (Staff s in Staffs)
+            {
+                if (s.Status == "Okay" && s.WorkPattern.Contains(SelectedDate.Date.DayOfWeek.ToString().Substring(0, 3)))
+                {
+                    Available.Add(s);
+                }
+            }
+            return Available;
         }
 
         public static double GetWeek(DateTime date)
