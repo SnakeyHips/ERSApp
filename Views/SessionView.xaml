@@ -6,9 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
-        <ListView Name="lstSessions" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sessions}" SelectedItem="{Binding Path=SelectedSession}" 
-                  Style="{DynamicResource VirtualisedMetroListView}">
+        <ListView Name="lstSessions" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sessions}" SelectedItem="{Binding Path=SelectedSession}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Date" Width="85" DisplayMemberBinding="{Binding Date}"/>
