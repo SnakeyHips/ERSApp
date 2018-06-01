@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Electronic Roster System" Height="550" Width="900">
     <Grid Margin="15,0,15,15">
-        <TabControl Name="tabsMain" Margin="0,0,0,0" Padding="0" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Name="tabsMain" Margin="0,0,0,0" Padding="-1" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Sessions">
                 <views:SessionView/>
             </TabItem>
@@ -24,10 +24,10 @@
                 <views:AdminView/>
             </TabItem>
         </TabControl>
-        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,37,0,0" Width="171">
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,36,0,0" Width="171">
             <Calendar Name="dateCalender" FirstDayOfWeek="Monday"  SelectedDatesChanged="dateCalender_SelectedDatesChanged" Height="230"></Calendar>
         </Viewbox>
-        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Width="43" Margin="0,37,0,0">
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Margin="0,35,0,0">
             <Path Data="F 1 M 795,3551 C 494,3480 244,3285 110,3015 -29,2737 -36,2382 90,2102 157,1955 216,1882 877,1127 1544,366 1861,
                           10 1874,10 1881,10 1932,60 1986,122 2041,184 2224,392 2393,585 2563,777 2705,936 2708,937 2712,939 2899,730 3124,475
                           3381,183 3540,10 3549,12 3566,15 3709,176 4414,980 4957,1600 5162,1837 5217,1910 5308,2032 5379,2195 5405,2347 5422,
