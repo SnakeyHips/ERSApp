@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ERSApp.Model
+namespace ERSApp.Models
 {
     public class AbsenceModel
     {
