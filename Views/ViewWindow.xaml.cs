@@ -4,7 +4,7 @@ using System.Windows.Media;
 using MahApps.Metro.Controls;
 using LiveCharts;
 using LiveCharts.Wpf;
-using ERSApp.Model;
+using ERSApp.Models;
 
 namespace ERSApp.Views
 {
