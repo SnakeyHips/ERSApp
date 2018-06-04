@@ -163,6 +163,29 @@ namespace ERSApp.Views
             }
             return allowed;
         }
+        
+                //Method for checking if selected date is weekend/holiday
+        public bool CheckHoliday()
+        {
+            bool holiday = false;
+            if (dateSession.SelectedDate.Value.DayOfWeek.Equals(DayOfWeek.Saturday) 
+                || dateSession.SelectedDate.Value.DayOfWeek.Equals(DayOfWeek.Sunday))
+            {
+                holiday = true;
+            }
+            else
+            {
+                string date = dateSession.SelectedDate.Value.ToShortDateString();
+                foreach (Holiday h in AdminViewModel.Holidays)
+                {
+                    if (h.Date.Equals(date))
+                    {
+                        holiday = true;
+                    }
+                }
+            }
+            return holiday;
+        }
 
         //Method to force only numbers in textbox input
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
