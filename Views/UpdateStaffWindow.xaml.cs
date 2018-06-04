@@ -3,8 +3,8 @@ using System.Text;
 using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using ERSApp.Model;
-using ERSApp.ViewModel;
+using ERSApp.Models;
+using ERSApp.ViewModels;
 using System.Windows.Controls;
 
 namespace ERSApp.Views
