@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ERSApp.Model
+namespace ERSApp.Models
 {
     public static class SelectedDate
     {
