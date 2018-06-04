@@ -1,6 +1,6 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
-using ERSApp.ViewModel;
+using ERSApp.ViewModels;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
