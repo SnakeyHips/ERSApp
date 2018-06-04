@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
-using ERSApp.Model;
-using ERSApp.ViewModel;
+using ERSApp.Models;
+using ERSApp.ViewModels;
 using MahApps.Metro.Controls;
 
 namespace ERSApp.Views
