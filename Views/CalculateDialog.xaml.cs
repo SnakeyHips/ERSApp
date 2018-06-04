@@ -5,8 +5,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using ERSApp.Model;
-using ERSApp.ViewModel;
+using ERSApp.Models;
+using ERSApp.ViewModels;
 using System.Collections.Generic;
 
 
