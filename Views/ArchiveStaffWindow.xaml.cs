@@ -8,8 +8,8 @@ using MahApps.Metro.Controls.Dialogs;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Win32;
-using ERSApp.Model;
-using ERSApp.ViewModel;
+using ERSApp.Models;
+using ERSApp.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
