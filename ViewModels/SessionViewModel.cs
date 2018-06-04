@@ -5,10 +5,10 @@ using System.Configuration;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Windows;
-using ERSApp.Model;
+using ERSApp.Models;
 using Dapper;
 
-namespace ERSApp.ViewModel
+namespace ERSApp.ViewModels
 {
     public class SessionViewModel
     {
