@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
-using ERSApp.Model;
-using ERSApp.ViewModel;
+using ERSApp.Models;
+using ERSApp.ViewModels;
 using MahApps.Metro.Controls;
 using System.Windows.Controls;
 using System.Collections.Generic;
