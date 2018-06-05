@@ -30,17 +30,22 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Staff> GetStaff()
         {
             string query = "SELECT * FROM StaffTable";
+            ObservableCollection<Staff> temp = new ObservableCollection<Staff>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Staff>(conn.Query<Staff>(query).ToList());
+                    foreach(Staff s in conn.Query<Staff>(query))
+                    {
+                        temp.Add(s);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Staff>();
+                    return temp;
                 }
             }
         }
@@ -83,12 +88,17 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<double> GetRosterWeeks()
         {
             string query = "SELECT Week FROM RosterTable;";
+            HashSet<double> temp = new HashSet<double>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<double>(conn.Query<double>(query).Distinct().ToList());
+                    foreach(double d in conn.Query<double>(query))
+                    {
+                        temp.Add(d);
+                    }
+                    return new ObservableCollection<double>(temp);
                 }
                 catch (Exception ex)
                 {
@@ -102,17 +112,22 @@ namespace ERSApp.ViewModels
         {
             string query = "SELECT Week, StaffId as Id, StaffName as Name, Role, ContractHours, " +
                 "AppointedHours, HolidayHours, AbsenceHours, UnsocialHours FROM RosterTable WHERE Week=@Week;";
+            ObservableCollection<Staff> temp = new ObservableCollection<Staff>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Staff>(conn.Query<Staff>(query, new { week }).ToList());
+                    foreach (Staff s in conn.Query<Staff>(query, new { week }))
+                    {
+                        temp.Add(s);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Staff>();
+                    return temp;
                 }
             }
         }
@@ -120,12 +135,21 @@ namespace ERSApp.ViewModels
         public static Staff GetStaffRoster(double week, int id)
         {
             string query = "SELECT * FROM RosterTable WHERE Week=@Week AND StaffId=@Id;";
+            Staff temp = new Staff();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return conn.Query<Staff>(query, new { week, id }).FirstOrDefault();
+                    foreach (Staff s in conn.Query<Staff>(query, new { week, id }))
+                    {
+                        if (s.Id == id)
+                        {
+                            temp = s;
+                            break;
+                        }
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
@@ -140,13 +164,21 @@ namespace ERSApp.ViewModels
             string query = "INSERT INTO RosterTable " +
                 "(Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, HolidayHours, UnsocialHours)" +
                 " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Holiday, @Unsocial);";
-            Staff s = Staffs.First(x => x.Id == id);
+            Staff temp = new Staff();
+            foreach(Staff s in Staffs)
+            {
+                if(s.Id == id)
+                {
+                    temp = s;
+                    break;
+                }
+            }
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, holiday, unsocial });
+                    conn.Execute(query, new { week, id, temp.Name, temp.Role, temp.ContractHours, appointed, absence, holiday, unsocial });
                 }
                 catch (Exception ex)
                 {
