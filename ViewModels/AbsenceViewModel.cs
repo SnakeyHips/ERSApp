@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
 using System.Data.SqlClient;
 using System.Windows;
 using ERSApp.Models;
@@ -32,17 +31,22 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Absence> GetAbsences()
         {
             string query = "SELECT * FROM AbsenceTable";
+            ObservableCollection<Absence> temp = new ObservableCollection<Absence>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Absence>(conn.Query<Absence>(query).ToList());
+                    foreach(Absence a in conn.Query<Absence>(query))
+                    {
+                        temp.Add(a);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Absence>();
+                    return temp;
                 }
             }
         }
