@@ -373,7 +373,15 @@ namespace ERSApp.Views
                         Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
                         Selected.StaffCount++;
                         //Add onto new staff's appointed hours/New record created in sql method
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        //First check if holiday or not
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
                     }
                     //Check if different staff selected from before
                     else if (Selected.SV1Id == (int)cboSV1.SelectedValue)
@@ -384,6 +392,10 @@ namespace ERSApp.Views
                             //If so, update times and appointed hours to use times selected
                             double appointed = double.Parse(txtSV1LOD.Text) - Selected.SV1LOD;
                             StaffViewModel.UpdateAppointed(Selected.SV1Id, appointed, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateHoliday(Selected.SV1Id, appointed, Week);
+                            }
                             Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
                         }
                         //Check if different unsocial selected from before
@@ -399,15 +411,28 @@ namespace ERSApp.Views
                     else if (Selected.SV1Id != (int)cboSV1.SelectedValue)
                     {
                         //Update old staff's appointed hours to remove length
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
-
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                        }
                         //Assign new appoint staff
                         Selected.SV1Id = (int)cboSV1.SelectedValue;
                         Selected.SV1Name = cboSV1.Text;
                         Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
                         Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
                         //Add onto new staff's appointed hours/New record created in sql method
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
                     }
                 }
             }
@@ -415,7 +440,14 @@ namespace ERSApp.Views
             else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
             {
                 //Remove staff's appointed hours
-                StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                }
                 //Remove any saved staff info
                 Selected.SV1Id = 0;
                 Selected.SV1Name = "";
@@ -445,7 +477,14 @@ namespace ERSApp.Views
                         Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
                         Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
                         Selected.StaffCount++;
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        }
                     }
                     else if (Selected.DRI1Id == (int)cboDRI1.SelectedValue)
                     {
@@ -453,6 +492,10 @@ namespace ERSApp.Views
                         {
                             double appointed = double.Parse(txtDRI1LOD.Text) - Selected.DRI1LOD;
                             StaffViewModel.UpdateAppointed(Selected.DRI1Id, appointed, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateHoliday(Selected.DRI1Id, appointed, Week);
+                            }
                             Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
                         }
                         if (Selected.DRI1UNS != double.Parse(txtDRI1UNS.Text))
@@ -464,18 +507,39 @@ namespace ERSApp.Views
                     }
                     else if (Selected.DRI1Id != (int)cboDRI1.SelectedValue)
                     {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                        }
                         Selected.DRI1Id = (int)cboDRI1.SelectedValue;
                         Selected.DRI1Name = cboDRI1.Text;
                         Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
                         Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        }
                     }
                 }
             }
             else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                }
                 Selected.DRI1Id = 0;
                 Selected.DRI1Name = "";
                 Selected.DRI1LOD = 0.0;
@@ -486,7 +550,7 @@ namespace ERSApp.Views
             {
                 if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
                 {
-                    await this.ShowMessageAsync("", "Driver 2 duplicate selected.");
+                    await this.ShowMessageAsync("", "DRI2 duplicate selected.");
                     return;
                 }
                 else
@@ -510,7 +574,14 @@ namespace ERSApp.Views
                             Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
                             Selected.DRI2UNS = double.Parse(txtDRI2UNS.Text);
                             Selected.StaffCount++;
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
+                            }
                         }
                         else if (Selected.DRI2Id == (int)cboDRI2.SelectedValue)
                         {
@@ -518,6 +589,10 @@ namespace ERSApp.Views
                             {
                                 double appointed = double.Parse(txtDRI2LOD.Text) - Selected.DRI2LOD;
                                 StaffViewModel.UpdateAppointed(Selected.DRI2Id, appointed, Week);
+                                if (Selected.Holiday)
+                                {
+                                    StaffViewModel.UpdateHoliday(Selected.DRI2Id, appointed, Week);
+                                }
                                 Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
                             }
                             if (Selected.DRI2UNS != double.Parse(txtDRI2UNS.Text))
@@ -529,19 +604,40 @@ namespace ERSApp.Views
                         }
                         else if (Selected.DRI2Id != (int)cboDRI2.SelectedValue)
                         {
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                            }
                             Selected.DRI2Id = (int)cboDRI2.SelectedValue;
                             Selected.DRI2Name = cboDRI2.Text;
                             Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
                             Selected.DRI2UNS = double.Parse(txtDRI2UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, Selected.DRI2LOD, Selected.DRI2UNS, Week);
+                            }
                         }
                     }
                 }
             }
             else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                }
                 Selected.DRI2Id = 0;
                 Selected.DRI2Name = "";
                 Selected.DRI2LOD = 0.0;
@@ -569,7 +665,14 @@ namespace ERSApp.Views
                         Selected.RN1Name = cboRN1.Text;
                         Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
                         Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        }
                     }
                     else if (Selected.RN1Id == (int)cboRN1.SelectedValue)
                     {
@@ -577,6 +680,10 @@ namespace ERSApp.Views
                         {
                             double appointed = double.Parse(txtRN1LOD.Text) - Selected.RN1LOD;
                             StaffViewModel.UpdateAppointed(Selected.RN1Id, appointed, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateHoliday(Selected.RN1Id, appointed, Week);
+                            }
                             Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
                         }
                         if (Selected.RN1UNS != double.Parse(txtRN1UNS.Text))
@@ -588,18 +695,39 @@ namespace ERSApp.Views
                     }
                     else if (Selected.RN1Id != (int)cboRN1.SelectedValue)
                     {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                        }
                         Selected.RN1Id = (int)cboRN1.SelectedValue;
                         Selected.RN1Name = cboRN1.Text;
                         Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
                         Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        }
                     }
                 }
             }
             else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                }
                 Selected.RN1Id = 0;
                 Selected.RN1Name = "";
                 Selected.RN1LOD = 0.0;
@@ -609,7 +737,7 @@ namespace ERSApp.Views
             {
                 if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
                 {
-                    await this.ShowMessageAsync("", "RNver 2 duplicate selected.");
+                    await this.ShowMessageAsync("", "RN2 duplicate selected.");
                     return;
                 }
                 else
@@ -632,7 +760,14 @@ namespace ERSApp.Views
                             Selected.RN2Name = cboRN2.Text;
                             Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
                             Selected.RN2UNS = double.Parse(txtRN2UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
+                            }
                         }
                         else if (Selected.RN2Id == (int)cboRN2.SelectedValue)
                         {
@@ -640,6 +775,10 @@ namespace ERSApp.Views
                             {
                                 double appointed = double.Parse(txtRN2LOD.Text) - Selected.RN2LOD;
                                 StaffViewModel.UpdateAppointed(Selected.RN2Id, appointed, Week);
+                                if (Selected.Holiday)
+                                {
+                                    StaffViewModel.UpdateHoliday(Selected.RN2Id, appointed, Week);
+                                }
                                 Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
                             }
                             if (Selected.RN2UNS != double.Parse(txtRN2UNS.Text))
@@ -651,19 +790,40 @@ namespace ERSApp.Views
                         }
                         else if (Selected.RN2Id != (int)cboRN2.SelectedValue)
                         {
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                            }
                             Selected.RN2Id = (int)cboRN2.SelectedValue;
                             Selected.RN2Name = cboRN2.Text;
                             Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
                             Selected.RN2UNS = double.Parse(txtRN2UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, Selected.RN2LOD, Selected.RN2UNS, Week);
+                            }
                         }
                     }
                 }
             }
             else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                }
                 Selected.RN2Id = 0;
                 Selected.RN2Name = "";
                 Selected.RN2LOD = 0.0;
@@ -697,7 +857,14 @@ namespace ERSApp.Views
                             Selected.RN3Name = cboRN3.Text;
                             Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
                             Selected.RN3UNS = double.Parse(txtRN3UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
+                            }
                         }
                         else if (Selected.RN3Id == (int)cboRN3.SelectedValue)
                         {
@@ -705,6 +872,10 @@ namespace ERSApp.Views
                             {
                                 double appointed = double.Parse(txtRN3LOD.Text) - Selected.RN3LOD;
                                 StaffViewModel.UpdateAppointed(Selected.RN3Id, appointed, Week);
+                                if (Selected.Holiday)
+                                {
+                                    StaffViewModel.UpdateHoliday(Selected.RN3Id, appointed, Week);
+                                }
                                 Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
                             }
                             if (Selected.RN3UNS != double.Parse(txtRN3UNS.Text))
@@ -716,19 +887,40 @@ namespace ERSApp.Views
                         }
                         else if (Selected.RN3Id != (int)cboRN3.SelectedValue)
                         {
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                            }
                             Selected.RN3Id = (int)cboRN3.SelectedValue;
                             Selected.RN3Name = cboRN3.Text;
                             Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
                             Selected.RN3UNS = double.Parse(txtRN3UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, Selected.RN3LOD, Selected.RN3UNS, Week);
+                            }
                         }
                     }
                 }
             }
             else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                }
                 Selected.RN3Id = 0;
                 Selected.RN3Name = "";
                 Selected.RN3LOD = 0.0;
@@ -756,7 +948,14 @@ namespace ERSApp.Views
                         Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
                         Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
                         Selected.StaffCount++;
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        }
                     }
                     else if (Selected.CCA1Id == (int)cboCCA1.SelectedValue)
                     {
@@ -764,6 +963,10 @@ namespace ERSApp.Views
                         {
                             double appointed = double.Parse(txtCCA1LOD.Text) - Selected.CCA1LOD;
                             StaffViewModel.UpdateAppointed(Selected.CCA1Id, appointed, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateHoliday(Selected.CCA1Id, appointed, Week);
+                            }
                             Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
                         }
                         if (Selected.CCA1UNS != double.Parse(txtCCA1UNS.Text))
@@ -775,18 +978,39 @@ namespace ERSApp.Views
                     }
                     else if (Selected.CCA1Id != (int)cboCCA1.SelectedValue)
                     {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                        }
                         Selected.CCA1Id = (int)cboCCA1.SelectedValue;
                         Selected.CCA1Name = cboCCA1.Text;
                         Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
                         Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        }
                     }
                 }
             }
             else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                }
                 Selected.CCA1Id = 0;
                 Selected.CCA1Name = "";
                 Selected.CCA1LOD = 0.0;
@@ -797,7 +1021,7 @@ namespace ERSApp.Views
             {
                 if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
                 {
-                    await this.ShowMessageAsync("", "CCAver 2 duplicate selected.");
+                    await this.ShowMessageAsync("", "CCA2 duplicate selected.");
                     return;
                 }
                 else
@@ -821,7 +1045,14 @@ namespace ERSApp.Views
                             Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
                             Selected.CCA2UNS = double.Parse(txtCCA2UNS.Text);
                             Selected.StaffCount++;
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
+                            }
                         }
                         else if (Selected.CCA2Id == (int)cboCCA2.SelectedValue)
                         {
@@ -829,6 +1060,10 @@ namespace ERSApp.Views
                             {
                                 double appointed = double.Parse(txtCCA2LOD.Text) - Selected.CCA2LOD;
                                 StaffViewModel.UpdateAppointed(Selected.CCA2Id, appointed, Week);
+                                if (Selected.Holiday)
+                                {
+                                    StaffViewModel.UpdateHoliday(Selected.CCA2Id, appointed, Week);
+                                }
                                 Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
                             }
                             if (Selected.CCA2UNS != double.Parse(txtCCA2UNS.Text))
@@ -840,19 +1075,40 @@ namespace ERSApp.Views
                         }
                         else if (Selected.CCA2Id != (int)cboCCA2.SelectedValue)
                         {
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                            }
                             Selected.CCA2Id = (int)cboCCA2.SelectedValue;
                             Selected.CCA2Name = cboCCA2.Text;
                             Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
                             Selected.CCA2UNS = double.Parse(txtCCA2UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, Selected.CCA2LOD, Selected.CCA2UNS, Week);
+                            }
                         }
                     }
                 }
             }
             else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                }
                 Selected.CCA2Id = 0;
                 Selected.CCA2Name = "";
                 Selected.CCA2LOD = 0.0;
@@ -888,7 +1144,14 @@ namespace ERSApp.Views
                             Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
                             Selected.CCA3UNS = double.Parse(txtCCA3UNS.Text);
                             Selected.StaffCount++;
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
+                            }
                         }
                         else if (Selected.CCA3Id == (int)cboCCA3.SelectedValue)
                         {
@@ -896,6 +1159,10 @@ namespace ERSApp.Views
                             {
                                 double appointed = double.Parse(txtCCA3LOD.Text) - Selected.CCA3LOD;
                                 StaffViewModel.UpdateAppointed(Selected.CCA3Id, appointed, Week);
+                                if (Selected.Holiday)
+                                {
+                                    StaffViewModel.UpdateHoliday(Selected.CCA3Id, appointed, Week);
+                                }
                                 Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
                             }
                             if (Selected.CCA3UNS != double.Parse(txtCCA3UNS.Text))
@@ -907,19 +1174,40 @@ namespace ERSApp.Views
                         }
                         else if (Selected.CCA3Id != (int)cboCCA3.SelectedValue)
                         {
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                            }
                             Selected.CCA3Id = (int)cboCCA3.SelectedValue;
                             Selected.CCA3Name = cboCCA3.Text;
                             Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
                             Selected.CCA3UNS = double.Parse(txtCCA3UNS.Text);
-                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
+                            }
+                            else
+                            {
+                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, Selected.CCA3LOD, Selected.CCA3UNS, Week);
+                            }
                         }
                     }
                 }
             }
             else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
             {
-                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                if (Selected.Holiday)
+                {
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                }
                 Selected.CCA3Id = 0;
                 Selected.CCA3Name = "";
                 Selected.CCA3LOD = 0.0;
