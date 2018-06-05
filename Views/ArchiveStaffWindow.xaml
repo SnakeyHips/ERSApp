@@ -19,12 +19,13 @@
         <ListView Name="lstRoster" HorizontalAlignment="Left" Width="560" Margin="115,0,0,0" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Roster}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="93" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Name" Width="95" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Contract" Width="93" DisplayMemberBinding="{Binding ContractHours}"/>
-                    <GridViewColumn Header="Appointed" Width="93" DisplayMemberBinding="{Binding AppointedHours}"/>
-                    <GridViewColumn Header="Absence" Width="93" DisplayMemberBinding="{Binding AbsenceHours}"/>
-                    <GridViewColumn Header="Unsocial" Width="93" DisplayMemberBinding="{Binding UnsocialHours}"/>
+                    <GridViewColumn Header="Id" Width="80" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Contract" Width="80" DisplayMemberBinding="{Binding ContractHours}"/>
+                    <GridViewColumn Header="Appointed" Width="80" DisplayMemberBinding="{Binding AppointedHours}"/>
+                    <GridViewColumn Header="Absence" Width="80" DisplayMemberBinding="{Binding AbsenceHours}"/>
+                    <GridViewColumn Header="Holiday" Width="80" DisplayMemberBinding="{Binding HolidayHours}"/>
+                    <GridViewColumn Header="Unsocial" Width="80" DisplayMemberBinding="{Binding UnsocialHours}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -41,6 +42,7 @@
                           2504 3714,2812 3706,2844 3697,2876 3694,2883 3687,2901 3815,3066 3876,3117 3977,3200 4098,3260 4220,3286 4304,3303
                           4513,3297 4595,3275 Z" Fill="{DynamicResource AccentColorBrush}" RenderTransform="1,0,0,-1,0,0"/>
         </Viewbox>
+        <Button Content="Clean" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,120" Height="25" Width="75" Click="btnClean_Click"/>
         <Button Content="Calculate" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,80" Height="25" Width="75" Click="btnCalculate_Click"/>
         <Button Content="Report" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,40" Height="25" Width="75" Click="btnReportStaff_Click"/>
         <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnClose_Click"/>
