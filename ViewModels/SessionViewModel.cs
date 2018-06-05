@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
 using System.Data.SqlClient;
 using System.Windows;
 using ERSApp.Models;
@@ -34,17 +33,22 @@ namespace ERSApp.ViewModels
         public static List<Session> GetSessions(string date)
         {
             string query = "SELECT * FROM SessionTable WHERE Date=@Date;";
+            List<Session> temp = new List<Session>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return conn.Query<Session>(query, new { date }).ToList();
+                    foreach(Session s in conn.Query<Session>(query, new { date }))
+                    {
+                        temp.Add(s);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new List<Session>();
+                    return temp;
                 }
             };
         }
