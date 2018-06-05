@@ -14,6 +14,7 @@ namespace ERSApp.Models
         private double contractHours;
         private double appointedHours;
         private double absenceHours;
+        private double holidayHours;
         private double unsocialHours;
         private string workPattern;
         private string status;
@@ -110,6 +111,22 @@ namespace ERSApp.Models
                 {
                     absenceHours = value;
                     RaisePropertyChanged("AbsenceHours");
+                }
+            }
+        }
+
+        public double HolidayHours
+        {
+            get
+            {
+                return holidayHours;
+            }
+            set
+            {
+                if (holidayHours != value)
+                {
+                    holidayHours = value;
+                    RaisePropertyChanged("HolidayHours");
                 }
             }
         }
