@@ -37,19 +37,21 @@ namespace ERSApp.Views
             }
         }
 
-        //Delete method not used atm
-        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async void btnClean_Click(object sender, RoutedEventArgs e)
         {
-            if (lstRoster.SelectedIndex > -1)
-            {
-                MessageDialogResult choice = await this.ShowMessageAsync("",
-                    "Are you sure you want to delete this Archive?",
+            MessageDialogResult choice = await this.ShowMessageAsync("",
+                    "Are you sure you want to clean this Week?",
                     MessageDialogStyle.AffirmativeAndNegative);
-                if (choice == MessageDialogResult.Affirmative)
+            if (choice == MessageDialogResult.Affirmative)
+            {
+                //Reverse for loop so works
+                for(int i = Roster.Count-1; i >= 0; i--)
                 {
-                    Staff Selected = (Staff)lstRoster.SelectedItem;
-                    StaffViewModel.DeleteRoster(Selected.Id, (double)lstWeeks.SelectedValue);
-                    //lstRoster.Items.Remove(Selected);
+                    if (Roster[i].AppointedHours == 0 && Roster[i].AbsenceHours == 0 && Roster[i].UnsocialHours == 0)
+                    {
+                        StaffViewModel.DeleteRoster(Roster[i].Id, (double)lstWeeks.SelectedValue);
+                        Roster.RemoveAt(i);
+                    }
                 }
             }
         }
@@ -82,8 +84,9 @@ namespace ERSApp.Views
                             {
                                 match = true;
                                 r.ContractHours += s.ContractHours;
-                                r.AppointedHours += s.ContractHours;
+                                r.AppointedHours += s.AppointedHours;
                                 r.AbsenceHours += s.AbsenceHours;
+                                r.HolidayHours += s.HolidayHours;
                                 r.UnsocialHours += s.UnsocialHours;
                                 break;
                             }
@@ -101,7 +104,7 @@ namespace ERSApp.Views
                     saveDialog.FileName = "Roster Report";
                     saveDialog.Filter = "PDF document (*.pdf)|*.pdf";
                     bool? result = saveDialog.ShowDialog();
-
+            
                     if (result == true)
                     {
                         string start = archiveReportDialog.lstReportWeeks.SelectedItems[0].ToString();
@@ -112,7 +115,7 @@ namespace ERSApp.Views
             }
         }
 
-        //MEthod for creating sessions pdf report
+        //Method for creating sessions pdf report
         private async Task CreateSessionReport(List<Staff> rosters, string start, string end, string path)
         {
             try
@@ -125,7 +128,7 @@ namespace ERSApp.Views
                 PdfWriter writer = PdfWriter.GetInstance(report, fs);
 
                 //Table for displaying stock quantities with 2 being amount of columns
-                PdfPTable RosterTable = new PdfPTable(8);
+                PdfPTable RosterTable = new PdfPTable(9);
                 RosterTable.SpacingBefore = 10f;
                 RosterTable.WidthPercentage = 100;
 
@@ -140,6 +143,7 @@ namespace ERSApp.Views
                 RosterTable.AddCell(new Paragraph("Contract", bold));
                 RosterTable.AddCell(new Paragraph("Appointed", bold));
                 RosterTable.AddCell(new Paragraph("Absence", bold));
+                RosterTable.AddCell(new Paragraph("Holiday", bold));
                 RosterTable.AddCell(new Paragraph("Unsocial", bold));
                 RosterTable.AddCell(new Paragraph("Neg", bold));
                 RosterTable.AddCell(new Paragraph("CO", bold));
@@ -151,6 +155,7 @@ namespace ERSApp.Views
                     RosterTable.AddCell(new Paragraph(s.ContractHours.ToString(), norm));
                     RosterTable.AddCell(new Paragraph(s.AppointedHours.ToString(), norm));
                     RosterTable.AddCell(new Paragraph(s.AbsenceHours.ToString(), norm));
+                    RosterTable.AddCell(new Paragraph(s.HolidayHours.ToString(), norm));
                     RosterTable.AddCell(new Paragraph(s.UnsocialHours.ToString(), norm));
                     double difference = s.ContractHours - (s.AppointedHours + s.AbsenceHours);
                     if(difference > 0)
