@@ -101,7 +101,7 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Staff> GetRoster(double week)
         {
             string query = "SELECT Week, StaffId as Id, StaffName as Name, Role, ContractHours, " +
-                "AppointedHours, AbsenceHours, UnsocialHours FROM RosterTable WHERE Week=@Week;";
+                "AppointedHours, HolidayHours, AbsenceHours, UnsocialHours FROM RosterTable WHERE Week=@Week;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -135,17 +135,18 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static void AddRoster(int id, double appointed, double absence, double unsocial, double week)
+        public static void AddRoster(int id, double appointed, double absence, double holiday, double unsocial, double week)
         {
-            string query = "INSERT INTO RosterTable (Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, UnsocialHours)" +
-                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Unsocial);";
+            string query = "INSERT INTO RosterTable " +
+                "(Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, HolidayHours, UnsocialHours)" +
+                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Holiday, @Unsocial);";
             Staff s = Staffs.First(x => x.Id == id);
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, unsocial });
+                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, holiday, unsocial });
                 }
                 catch (Exception ex)
                 {
@@ -176,7 +177,29 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, appointed, 0.0, 0.0, week);
+                        AddRoster(id, appointed, 0.0, 0.0, 0.0, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateHoliday(int id, double holiday, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET HolidayHours=HolidayHours+@Holiday " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        conn.Execute(query, new { holiday, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
                     }
                 }
             }
@@ -204,7 +227,7 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, 0.0, absence, 0.0, week);
+                        AddRoster(id, 0.0, 0.0, absence, 0.0, week);
                     }
                 }
             }
@@ -217,22 +240,16 @@ namespace ERSApp.ViewModels
                 string query = "UPDATE RosterTable" +
                     " SET UnsocialHours=UnsocialHours+@Unsocial " +
                     " WHERE Week=@Week AND StaffId=@Id;";
-                int rows = 0;
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
                         conn.Open();
-                        rows = conn.Execute(query, new { unsocial, week, id });
+                        conn.Execute(query, new { unsocial, week, id });
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString());
-                    }
-                    if (rows == 0)
-                    {
-                        //Add in new roster if update fails
-                        AddRoster(id, 0.0, 0.0, unsocial, week);
                     }
                 }
             }
@@ -260,7 +277,35 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, appointed, 0.0, unsocial, week);
+                        AddRoster(id, appointed, 0.0, 0.0, unsocial, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateAppointedHolidayUnsocial(int id, double appointed, double unsocial, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AppointedHours=AppointedHours+@Appointed, HolidayHours=HolidayHours+@Appointed, UnsocialHours=UnsocialHours+@Unsocial " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { appointed, unsocial, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, appointed, 0.0, appointed, unsocial, week);
                     }
                 }
             }
