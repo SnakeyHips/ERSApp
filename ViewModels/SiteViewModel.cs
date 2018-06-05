@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
 using System.Data.SqlClient;
 using System.Windows;
 using ERSApp.Models;
@@ -30,17 +29,22 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Site> GetSitesType(string type)
         {
             string query = "SELECT * FROM SiteTable Where Type=@Type";
+            ObservableCollection<Site> temp = new ObservableCollection<Site>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Site>(conn.Query<Site>(query, new { type }).ToList());
+                    foreach(Site s in conn.Query<Site>(query, new { type }))
+                    {
+                        temp.Add(s);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Site>();
+                    return temp;
                 }
             }
         }
