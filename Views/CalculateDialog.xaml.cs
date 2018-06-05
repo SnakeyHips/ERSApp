@@ -26,9 +26,9 @@ namespace ERSApp.Views
                 try
                 {
                     int textId = int.Parse(txtId.Text);
-                    foreach(Staff s in StaffViewModel.Staffs)
+                    foreach (Staff s in StaffViewModel.Staffs)
                     {
-                        if(s.Id == textId)
+                        if (s.Id == textId)
                         {
                             txtName.Text = s.Name;
                             break;
@@ -103,17 +103,18 @@ namespace ERSApp.Views
             }
             else
             {
-                double weekStart = CollectionManager.GetWeek(DateTime.Parse(dateStart.Text));
-                double weekEnd = CollectionManager.GetWeek(DateTime.Parse(dateEnd.Text));
+                double weekStart = StaffViewModel.GetWeek(DateTime.Parse(dateStart.Text));
+                double weekEnd = StaffViewModel.GetWeek(DateTime.Parse(dateEnd.Text));
                 double contractCount = 0.0;
                 double appointedCount = 0.0;
                 double absenceCount = 0.0;
+                double holidayCount = 0.0;
                 double unsocialCount = 0.0;
 
                 List<Staff> SelectedRange = new List<Staff>();
                 for(double i = weekStart; i <= weekEnd; i++)
                 {
-                    Staff temp = CollectionManager.GetStaffRoster(i, int.Parse(txtId.Text));
+                    Staff temp = StaffViewModel.GetStaffRoster(i, int.Parse(txtId.Text));
                     if (temp != null)
                     {
                         SelectedRange.Add(temp);
@@ -125,11 +126,13 @@ namespace ERSApp.Views
                     contractCount += s.ContractHours;
                     appointedCount += s.AppointedHours;
                     absenceCount += s.AbsenceHours;
+                    holidayCount += s.HolidayHours;
                     unsocialCount += s.UnsocialHours;
                 }
                 txtContractCount.Text = contractCount.ToString();
                 txtAppointedCount.Text = appointedCount.ToString();
                 txtAbsenceCount.Text = absenceCount.ToString();
+                txtHolidayCount.Text = holidayCount.ToString();
                 txtUnsocialCount.Text = unsocialCount.ToString();
             }
         }
