@@ -123,6 +123,7 @@ namespace ERSApp.Views
                     LOD = double.Parse(txtLOD.Text),
                     Chairs = int.Parse(cboChairs.Text),
                     Bleeds = int.Parse(txtBleeds.Text),
+                    Holiday = CheckHoliday(),
                     SV1Id = 0, SV1Name = "", SV1LOD = 0.0, SV1UNS = 0.0,
                     DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0, DRI1UNS = 0.0,
                     DRI2Id = 0, DRI2Name = "", DRI2LOD = 0.0, DRI2UNS = 0.0,
