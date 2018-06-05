@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Linq;
 using System.Data.SqlClient;
 using System.Windows;
 using ERSApp.Models;
@@ -30,22 +31,17 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Site> GetSites()
         {
             string query = "SELECT * FROM SiteTable";
-            ObservableCollection<Site> temp = new ObservableCollection<Site>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    foreach(Site s in conn.Query<Site>(query))
-                    {
-                        temp.Add(s);
-                    }
-                    return temp;
+                    return new ObservableCollection<Site>(conn.Query<Site>(query).ToList());
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return temp;
+                    return new ObservableCollection<Site>();
                 }
             }
         }
@@ -53,22 +49,17 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Holiday> GetHolidays()
         {
             string query = "SELECT * FROM HolidayTable";
-            ObservableCollection<Holiday> temp = new ObservableCollection<Holiday>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    foreach (Holiday h in conn.Query<Holiday>(query))
-                    {
-                        temp.Add(h);
-                    }
-                    return temp;
+                    return new ObservableCollection<Holiday>(conn.Query<Holiday>(query).ToList());
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return temp;
+                    return new ObservableCollection<Holiday>();
                 }
             }
         }
