@@ -15,6 +15,7 @@ namespace ERSApp.Models
         private double lod;
         private int chairs;
         private int bleeds;
+        private bool holiday;
         private int sv1Id;
         private string sv1Name;
         private double sv1LOD;
@@ -163,6 +164,22 @@ namespace ERSApp.Models
                 {
                     bleeds = value;
                     RaisePropertyChanged("Bleeds");
+                }
+            }
+        }
+
+        public bool Holiday
+        {
+            get
+            {
+                return holiday;
+            }
+            set
+            {
+                if (holiday != value)
+                {
+                    holiday = value;
+                    RaisePropertyChanged("Holiday");
                 }
             }
         }
