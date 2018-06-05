@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
 using System.Data.SqlClient;
 using System.Windows;
 using ERSApp.Models;
@@ -31,17 +30,22 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Site> GetSites()
         {
             string query = "SELECT * FROM SiteTable";
+            ObservableCollection<Site> temp = new ObservableCollection<Site>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Site>(conn.Query<Site>(query).ToList());
+                    foreach(Site s in conn.Query<Site>(query))
+                    {
+                        temp.Add(s);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Site>();
+                    return temp;
                 }
             }
         }
@@ -49,17 +53,22 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Holiday> GetHolidays()
         {
             string query = "SELECT * FROM HolidayTable";
+            ObservableCollection<Holiday> temp = new ObservableCollection<Holiday>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<Holiday>(conn.Query<Holiday>(query).ToList());
+                    foreach (Holiday h in conn.Query<Holiday>(query))
+                    {
+                        temp.Add(h);
+                    }
+                    return temp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<Holiday>();
+                    return temp;
                 }
             }
         }
