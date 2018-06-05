@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,7 +19,6 @@ namespace ERSApp.Views
         Session Selected;
         public List<Staff> AvailableStaff { get; set; }
         public List<Staff> SVList { get; set; }
-        public List<Staff> DSVList { get; set; }
         public List<Staff> DRIList { get; set; }
         public List<Staff> RNList { get; set; }
         public List<Staff> CCAList { get; set; }
@@ -34,11 +32,28 @@ namespace ERSApp.Views
             this.DataContext = this;
             AvailableStaff = StaffViewModel.GetAvailableStaff();
             //Put all relevant roles in respective list
-            SVList = AvailableStaff.Where(x => x.Role == "SV").ToList();
-            DSVList = AvailableStaff.Where(x => x.Role == "DSV").ToList();
-            DRIList = AvailableStaff.Where(x => x.Role == "DRI").ToList();
-            RNList = AvailableStaff.Where(x => x.Role == "RN").ToList();
-            CCAList = AvailableStaff.Where(x => x.Role == "CCA").ToList();
+            SVList = new List<Staff>();
+            DRIList = new List<Staff>();
+            RNList = new List<Staff>();
+            CCAList = new List<Staff>();
+            foreach (Staff x in AvailableStaff)
+            {
+                switch (x.Role)
+                {
+                    case "SV":
+                        SVList.Add(x);
+                        break;
+                    case "DRI":
+                        DRIList.Add(x);
+                        break;
+                    case "RN":
+                        RNList.Add(x);
+                        break;
+                    case "CCA":
+                        CCAList.Add(x);
+                        break;
+                }
+            }
 
             this.Selected = s;
             SeriesCollection = new SeriesCollection();
@@ -349,234 +364,211 @@ namespace ERSApp.Views
         //First one is commented as rest are same
         private async void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //First check for duplicates
-            if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
+            //First check if there is a selected item
+            if (cboSV1.SelectedItem != null)
             {
-                await this.ShowMessageAsync("", "DRI2 duplicate selected.");
-                return;
-            }
-            else if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
-            {
-                await this.ShowMessageAsync("", "RN2 duplicate selected.");
-                return;
-            }
-            else if ((int)cboRN3.SelectedValue == (int)cboRN1.SelectedValue ||
-                (int)cboRN3.SelectedValue == (int)cboRN2.SelectedValue)
-            {
-                await this.ShowMessageAsync("", "RN3 duplicate selected.");
-                return;
-            }
-            else if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
-            {
-                await this.ShowMessageAsync("", "CCA2 duplicate selected.");
-                return;
-            }
-            else if ((int)cboCCA3.SelectedValue == (int)cboCCA1.SelectedValue ||
-                (int)cboCCA3.SelectedValue == (int)cboCCA2.SelectedValue)
-            {
-                await this.ShowMessageAsync("", "CCA3 duplicate selected.");
-                return;
-            }
-            else
-            {
-                //First check if there is a selected item
-                if (cboSV1.SelectedItem != null)
+                if (txtSV1LOD.Text == "")
                 {
-                    if (txtSV1LOD.Text == "")
+                    await this.ShowMessageAsync("", "Please enter a LOD value for SV1.");
+                    return;
+                }
+                if (txtSV1UNS.Text == "")
+                {
+                    await this.ShowMessageAsync("", "Please enter a Unsocial value for SV1.");
+                    return;
+                }
+                else
+                {
+                    if (Selected.SV1Id == 0)
                     {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for SV1.");
-                        return;
-                    }
-                    if (txtSV1UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for SV1.");
-                        return;
-                    }
-                    else
-                    {
-                        if (Selected.SV1Id == 0)
+                        //Assign new appoint staff
+                        Selected.SV1Id = (int)cboSV1.SelectedValue;
+                        Selected.SV1Name = cboSV1.Text;
+                        Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
+                        Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
+                        Selected.StaffCount++;
+                        //Add onto new staff's appointed hours/New record created in sql method
+                        //First check if holiday or not
+                        if (Selected.Holiday)
                         {
-                            //Assign new appoint staff
-                            Selected.SV1Id = (int)cboSV1.SelectedValue;
-                            Selected.SV1Name = cboSV1.Text;
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
+                    }
+                    //Check if different staff selected from before
+                    else if (Selected.SV1Id == (int)cboSV1.SelectedValue)
+                    {
+                        //Check if different times selected from before
+                        if (Selected.SV1LOD != double.Parse(txtSV1LOD.Text))
+                        {
+                            //If so, update times and appointed hours to use times selected
+                            double appointed = double.Parse(txtSV1LOD.Text) - Selected.SV1LOD;
+                            StaffViewModel.UpdateAppointed(Selected.SV1Id, appointed, Week);
+                            if (Selected.Holiday)
+                            {
+                                StaffViewModel.UpdateHoliday(Selected.SV1Id, appointed, Week);
+                            }
                             Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
+                        }
+                        //Check if different unsocial selected from before
+                        if (Selected.SV1UNS != double.Parse(txtSV1UNS.Text))
+                        {
+                            //If so, update times and appointed hours to use times selected
+                            double unsocial = double.Parse(txtSV1UNS.Text) - Selected.SV1UNS;
+                            StaffViewModel.UpdateUnsocial(Selected.SV1Id, unsocial, Week);
                             Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
-                            Selected.StaffCount++;
-                            //Add onto new staff's appointed hours/New record created in sql method
-                            //First check if holiday or not
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
-                            }
                         }
-                        //Check if different staff selected from before
-                        else if (Selected.SV1Id == (int)cboSV1.SelectedValue)
+                    }
+                    //Check if no previous staff selected
+                    else if (Selected.SV1Id != (int)cboSV1.SelectedValue)
+                    {
+                        //Update old staff's appointed hours to remove length
+                        if (Selected.Holiday)
                         {
-                            //Check if different times selected from before
-                            if (Selected.SV1LOD != double.Parse(txtSV1LOD.Text))
-                            {
-                                //If so, update times and appointed hours to use times selected
-                                double appointed = double.Parse(txtSV1LOD.Text) - Selected.SV1LOD;
-                                StaffViewModel.UpdateAppointed(Selected.SV1Id, appointed, Week);
-                                if (Selected.Holiday)
-                                {
-                                    StaffViewModel.UpdateHoliday(Selected.SV1Id, appointed, Week);
-                                }
-                                Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
-                            }
-                            //Check if different unsocial selected from before
-                            if (Selected.SV1UNS != double.Parse(txtSV1UNS.Text))
-                            {
-                                //If so, update times and appointed hours to use times selected
-                                double unsocial = double.Parse(txtSV1UNS.Text) - Selected.SV1UNS;
-                                StaffViewModel.UpdateUnsocial(Selected.SV1Id, unsocial, Week);
-                                Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
-                            }
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
                         }
-                        //Check if no previous staff selected
-                        else if (Selected.SV1Id != (int)cboSV1.SelectedValue)
+                        else
                         {
-                            //Update old staff's appointed hours to remove length
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
-                            }
-                            //Assign new appoint staff
-                            Selected.SV1Id = (int)cboSV1.SelectedValue;
-                            Selected.SV1Name = cboSV1.Text;
-                            Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
-                            Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
-                            //Add onto new staff's appointed hours/New record created in sql method
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
-                            }
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                        }
+                        //Assign new appoint staff
+                        Selected.SV1Id = (int)cboSV1.SelectedValue;
+                        Selected.SV1Name = cboSV1.Text;
+                        Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
+                        Selected.SV1UNS = double.Parse(txtSV1UNS.Text);
+                        //Add onto new staff's appointed hours/New record created in sql method
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, Selected.SV1LOD, Selected.SV1UNS, Week);
                         }
                     }
                 }
-                //Else remove if reset staff has been pressed
-                else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
+            }
+            //Else remove if reset staff has been pressed
+            else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
+            {
+                //Remove staff's appointed hours
+                if (Selected.Holiday)
                 {
-                    //Remove staff's appointed hours
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
-                    }
-                    //Remove any saved staff info
-                    Selected.SV1Id = 0;
-                    Selected.SV1Name = "";
-                    Selected.SV1LOD = 0.0;
-                    Selected.StaffCount--;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.SV1Id, -Selected.SV1LOD, -Selected.SV1UNS, Week);
+                }
+                //Remove any saved staff info
+                Selected.SV1Id = 0;
+                Selected.SV1Name = "";
+                Selected.SV1LOD = 0.0;
+                Selected.StaffCount--;
+            }
 
-                //Do same for other roles
-                if (cboDRI1.SelectedItem != null)
+            //Do same for other roles
+            if (cboDRI1.SelectedItem != null)
+            {
+                if (txtDRI1LOD.Text == "")
                 {
-                    if (txtDRI1LOD.Text == "")
+                    await this.ShowMessageAsync("", "Please enter a LOD value for DRI1.");
+                    return;
+                }
+                if (txtDRI1UNS.Text == "")
+                {
+                    await this.ShowMessageAsync("", "Please enter a Unsocial value for DRI1.");
+                    return;
+                }
+                else
+                {
+                    if (Selected.DRI1Id == 0)
                     {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for DRI1.");
-                        return;
-                    }
-                    if (txtDRI1UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for DRI1.");
-                        return;
-                    }
-                    else
-                    {
-                        if (Selected.DRI1Id == 0)
+                        Selected.DRI1Id = (int)cboDRI1.SelectedValue;
+                        Selected.DRI1Name = cboDRI1.Text;
+                        Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
+                        Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
+                        Selected.StaffCount++;
+                        if (Selected.Holiday)
                         {
-                            Selected.DRI1Id = (int)cboDRI1.SelectedValue;
-                            Selected.DRI1Name = cboDRI1.Text;
-                            Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
-                            Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
-                            Selected.StaffCount++;
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
-                            }
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
                         }
-                        else if (Selected.DRI1Id == (int)cboDRI1.SelectedValue)
+                        else
                         {
-                            if (Selected.DRI1LOD != double.Parse(txtDRI1LOD.Text))
-                            {
-                                double appointed = double.Parse(txtDRI1LOD.Text) - Selected.DRI1LOD;
-                                StaffViewModel.UpdateAppointed(Selected.DRI1Id, appointed, Week);
-                                if (Selected.Holiday)
-                                {
-                                    StaffViewModel.UpdateHoliday(Selected.DRI1Id, appointed, Week);
-                                }
-                                Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
-                            }
-                            if (Selected.DRI1UNS != double.Parse(txtDRI1UNS.Text))
-                            {
-                                double unsocial = double.Parse(txtDRI1UNS.Text) - Selected.DRI1UNS;
-                                StaffViewModel.UpdateUnsocial(Selected.DRI1Id, unsocial, Week);
-                                Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
-                            }
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
                         }
-                        else if (Selected.DRI1Id != (int)cboDRI1.SelectedValue)
+                    }
+                    else if (Selected.DRI1Id == (int)cboDRI1.SelectedValue)
+                    {
+                        if (Selected.DRI1LOD != double.Parse(txtDRI1LOD.Text))
                         {
+                            double appointed = double.Parse(txtDRI1LOD.Text) - Selected.DRI1LOD;
+                            StaffViewModel.UpdateAppointed(Selected.DRI1Id, appointed, Week);
                             if (Selected.Holiday)
                             {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                                StaffViewModel.UpdateHoliday(Selected.DRI1Id, appointed, Week);
                             }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
-                            }
-                            Selected.DRI1Id = (int)cboDRI1.SelectedValue;
-                            Selected.DRI1Name = cboDRI1.Text;
                             Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
+                        }
+                        if (Selected.DRI1UNS != double.Parse(txtDRI1UNS.Text))
+                        {
+                            double unsocial = double.Parse(txtDRI1UNS.Text) - Selected.DRI1UNS;
+                            StaffViewModel.UpdateUnsocial(Selected.DRI1Id, unsocial, Week);
                             Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
-                            }
+                        }
+                    }
+                    else if (Selected.DRI1Id != (int)cboDRI1.SelectedValue)
+                    {
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                        }
+                        Selected.DRI1Id = (int)cboDRI1.SelectedValue;
+                        Selected.DRI1Name = cboDRI1.Text;
+                        Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
+                        Selected.DRI1UNS = double.Parse(txtDRI1UNS.Text);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, Selected.DRI1LOD, Selected.DRI1UNS, Week);
                         }
                     }
                 }
-                else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
+            }
+            else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
-                    }
-                    Selected.DRI1Id = 0;
-                    Selected.DRI1Name = "";
-                    Selected.DRI1LOD = 0.0;
-                    Selected.StaffCount--;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.DRI1Id, -Selected.DRI1LOD, -Selected.DRI1UNS, Week);
+                }
+                Selected.DRI1Id = 0;
+                Selected.DRI1Name = "";
+                Selected.DRI1LOD = 0.0;
+                Selected.StaffCount--;
+            }
 
-                if (cboDRI2.SelectedItem != null)
+            if (cboDRI2.SelectedItem != null)
+            {
+                if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "DRI2 duplicate selected.");
+                    return;
+                }
+                else
                 {
                     if (txtDRI2LOD.Text == "")
                     {
@@ -650,112 +642,120 @@ namespace ERSApp.Views
                         }
                     }
                 }
-                else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
+            }
+            else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
-                    }
-                    Selected.DRI2Id = 0;
-                    Selected.DRI2Name = "";
-                    Selected.DRI2LOD = 0.0;
-                    Selected.StaffCount--;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.DRI2Id, -Selected.DRI2LOD, -Selected.DRI2UNS, Week);
+                }
+                Selected.DRI2Id = 0;
+                Selected.DRI2Name = "";
+                Selected.DRI2LOD = 0.0;
+                Selected.StaffCount--;
+            }
 
-                //Get RN selected info
-                if (cboRN1.SelectedItem != null)
+            //Get RN selected info
+            if (cboRN1.SelectedItem != null)
+            {
+                if (txtRN1LOD.Text == "")
                 {
-                    if (txtRN1LOD.Text == "")
+                    await this.ShowMessageAsync("", "Please enter a LOD value for RN1.");
+                    return;
+                }
+                if (txtRN1UNS.Text == "")
+                {
+                    await this.ShowMessageAsync("", "Please enter a Unsocial value for RN1.");
+                    return;
+                }
+                else
+                {
+                    if (Selected.RN1Id == 0)
                     {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for RN1.");
-                        return;
-                    }
-                    if (txtRN1UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for RN1.");
-                        return;
-                    }
-                    else
-                    {
-                        if (Selected.RN1Id == 0)
+                        Selected.RN1Id = (int)cboRN1.SelectedValue;
+                        Selected.RN1Name = cboRN1.Text;
+                        Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
+                        Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
+                        if (Selected.Holiday)
                         {
-                            Selected.RN1Id = (int)cboRN1.SelectedValue;
-                            Selected.RN1Name = cboRN1.Text;
-                            Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
-                            Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
-                            }
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
                         }
-                        else if (Selected.RN1Id == (int)cboRN1.SelectedValue)
+                        else
                         {
-                            if (Selected.RN1LOD != double.Parse(txtRN1LOD.Text))
-                            {
-                                double appointed = double.Parse(txtRN1LOD.Text) - Selected.RN1LOD;
-                                StaffViewModel.UpdateAppointed(Selected.RN1Id, appointed, Week);
-                                if (Selected.Holiday)
-                                {
-                                    StaffViewModel.UpdateHoliday(Selected.RN1Id, appointed, Week);
-                                }
-                                Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
-                            }
-                            if (Selected.RN1UNS != double.Parse(txtRN1UNS.Text))
-                            {
-                                double unsocial = double.Parse(txtRN1UNS.Text) - Selected.RN1UNS;
-                                StaffViewModel.UpdateUnsocial(Selected.RN1Id, unsocial, Week);
-                                Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
-                            }
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
                         }
-                        else if (Selected.RN1Id != (int)cboRN1.SelectedValue)
+                    }
+                    else if (Selected.RN1Id == (int)cboRN1.SelectedValue)
+                    {
+                        if (Selected.RN1LOD != double.Parse(txtRN1LOD.Text))
                         {
+                            double appointed = double.Parse(txtRN1LOD.Text) - Selected.RN1LOD;
+                            StaffViewModel.UpdateAppointed(Selected.RN1Id, appointed, Week);
                             if (Selected.Holiday)
                             {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                                StaffViewModel.UpdateHoliday(Selected.RN1Id, appointed, Week);
                             }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
-                            }
-                            Selected.RN1Id = (int)cboRN1.SelectedValue;
-                            Selected.RN1Name = cboRN1.Text;
                             Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
+                        }
+                        if (Selected.RN1UNS != double.Parse(txtRN1UNS.Text))
+                        {
+                            double unsocial = double.Parse(txtRN1UNS.Text) - Selected.RN1UNS;
+                            StaffViewModel.UpdateUnsocial(Selected.RN1Id, unsocial, Week);
                             Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
-                            }
+                        }
+                    }
+                    else if (Selected.RN1Id != (int)cboRN1.SelectedValue)
+                    {
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                        }
+                        Selected.RN1Id = (int)cboRN1.SelectedValue;
+                        Selected.RN1Name = cboRN1.Text;
+                        Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
+                        Selected.RN1UNS = double.Parse(txtRN1UNS.Text);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, Selected.RN1LOD, Selected.RN1UNS, Week);
                         }
                     }
                 }
-                else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
+            }
+            else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
-                    }
-                    Selected.RN1Id = 0;
-                    Selected.RN1Name = "";
-                    Selected.RN1LOD = 0.0;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.RN1Id, -Selected.RN1LOD, -Selected.RN1UNS, Week);
+                }
+                Selected.RN1Id = 0;
+                Selected.RN1Name = "";
+                Selected.RN1LOD = 0.0;
+            }
 
-                if (cboRN2.SelectedItem != null)
+            if (cboRN2.SelectedItem != null)
+            {
+                if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "RN2 duplicate selected.");
+                    return;
+                }
+                else
                 {
                     if (txtRN2LOD.Text == "")
                     {
@@ -828,22 +828,31 @@ namespace ERSApp.Views
                         }
                     }
                 }
-                else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
+            }
+            else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
-                    }
-                    Selected.RN2Id = 0;
-                    Selected.RN2Name = "";
-                    Selected.RN2LOD = 0.0;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.RN2Id, -Selected.RN2LOD, -Selected.RN2UNS, Week);
+                }
+                Selected.RN2Id = 0;
+                Selected.RN2Name = "";
+                Selected.RN2LOD = 0.0;
+            }
 
-                if (cboRN3.SelectedItem != null)
+            if (cboRN3.SelectedItem != null)
+            {
+                if ((int)cboRN3.SelectedValue == (int)cboRN1.SelectedValue ||
+                    (int)cboRN3.SelectedValue == (int)cboRN2.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "RN3 duplicate selected.");
+                    return;
+                }
+                else
                 {
                     if (txtRN3LOD.Text == "")
                     {
@@ -916,113 +925,121 @@ namespace ERSApp.Views
                         }
                     }
                 }
-                else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
+            }
+            else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
-                    }
-                    Selected.RN3Id = 0;
-                    Selected.RN3Name = "";
-                    Selected.RN3LOD = 0.0;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.RN3Id, -Selected.RN3LOD, -Selected.RN3UNS, Week);
+                }
+                Selected.RN3Id = 0;
+                Selected.RN3Name = "";
+                Selected.RN3LOD = 0.0;
+            }
 
-                //Get CCA selected info
-                if (cboCCA1.SelectedItem != null)
+            //Get CCA selected info
+            if (cboCCA1.SelectedItem != null)
+            {
+                if (txtCCA1LOD.Text == "")
                 {
-                    if (txtCCA1LOD.Text == "")
+                    await this.ShowMessageAsync("", "Please enter a LOD value for CCA1.");
+                    return;
+                }
+                if (txtCCA1UNS.Text == "")
+                {
+                    await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA1.");
+                    return;
+                }
+                else
+                {
+                    if (Selected.CCA1Id == 0)
                     {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA1.");
-                        return;
-                    }
-                    if (txtCCA1UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA1.");
-                        return;
-                    }
-                    else
-                    {
-                        if (Selected.CCA1Id == 0)
+                        Selected.CCA1Id = (int)cboCCA1.SelectedValue;
+                        Selected.CCA1Name = cboCCA1.Text;
+                        Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
+                        Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
+                        Selected.StaffCount++;
+                        if (Selected.Holiday)
                         {
-                            Selected.CCA1Id = (int)cboCCA1.SelectedValue;
-                            Selected.CCA1Name = cboCCA1.Text;
-                            Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
-                            Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
-                            Selected.StaffCount++;
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
-                            }
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
                         }
-                        else if (Selected.CCA1Id == (int)cboCCA1.SelectedValue)
+                        else
                         {
-                            if (Selected.CCA1LOD != double.Parse(txtCCA1LOD.Text))
-                            {
-                                double appointed = double.Parse(txtCCA1LOD.Text) - Selected.CCA1LOD;
-                                StaffViewModel.UpdateAppointed(Selected.CCA1Id, appointed, Week);
-                                if (Selected.Holiday)
-                                {
-                                    StaffViewModel.UpdateHoliday(Selected.CCA1Id, appointed, Week);
-                                }
-                                Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
-                            }
-                            if (Selected.CCA1UNS != double.Parse(txtCCA1UNS.Text))
-                            {
-                                double unsocial = double.Parse(txtCCA1UNS.Text) - Selected.CCA1UNS;
-                                StaffViewModel.UpdateUnsocial(Selected.CCA1Id, unsocial, Week);
-                                Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
-                            }
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
                         }
-                        else if (Selected.CCA1Id != (int)cboCCA1.SelectedValue)
+                    }
+                    else if (Selected.CCA1Id == (int)cboCCA1.SelectedValue)
+                    {
+                        if (Selected.CCA1LOD != double.Parse(txtCCA1LOD.Text))
                         {
+                            double appointed = double.Parse(txtCCA1LOD.Text) - Selected.CCA1LOD;
+                            StaffViewModel.UpdateAppointed(Selected.CCA1Id, appointed, Week);
                             if (Selected.Holiday)
                             {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                                StaffViewModel.UpdateHoliday(Selected.CCA1Id, appointed, Week);
                             }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
-                            }
-                            Selected.CCA1Id = (int)cboCCA1.SelectedValue;
-                            Selected.CCA1Name = cboCCA1.Text;
                             Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
+                        }
+                        if (Selected.CCA1UNS != double.Parse(txtCCA1UNS.Text))
+                        {
+                            double unsocial = double.Parse(txtCCA1UNS.Text) - Selected.CCA1UNS;
+                            StaffViewModel.UpdateUnsocial(Selected.CCA1Id, unsocial, Week);
                             Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
-                            if (Selected.Holiday)
-                            {
-                                StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
-                            }
-                            else
-                            {
-                                StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
-                            }
+                        }
+                    }
+                    else if (Selected.CCA1Id != (int)cboCCA1.SelectedValue)
+                    {
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                        }
+                        Selected.CCA1Id = (int)cboCCA1.SelectedValue;
+                        Selected.CCA1Name = cboCCA1.Text;
+                        Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
+                        Selected.CCA1UNS = double.Parse(txtCCA1UNS.Text);
+                        if (Selected.Holiday)
+                        {
+                            StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
+                        }
+                        else
+                        {
+                            StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, Selected.CCA1LOD, Selected.CCA1UNS, Week);
                         }
                     }
                 }
-                else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
+            }
+            else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
-                    }
-                    Selected.CCA1Id = 0;
-                    Selected.CCA1Name = "";
-                    Selected.CCA1LOD = 0.0;
-                    Selected.StaffCount--;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.CCA1Id, -Selected.CCA1LOD, -Selected.CCA1UNS, Week);
+                }
+                Selected.CCA1Id = 0;
+                Selected.CCA1Name = "";
+                Selected.CCA1LOD = 0.0;
+                Selected.StaffCount--;
+            }
 
-                if (cboCCA2.SelectedItem != null)
+            if (cboCCA2.SelectedItem != null)
+            {
+                if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "CCA2 duplicate selected.");
+                    return;
+                }
+                else
                 {
                     if (txtCCA2LOD.Text == "")
                     {
@@ -1096,23 +1113,32 @@ namespace ERSApp.Views
                         }
                     }
                 }
-                else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
+            }
+            else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
-                    }
-                    Selected.CCA2Id = 0;
-                    Selected.CCA2Name = "";
-                    Selected.CCA2LOD = 0.0;
-                    Selected.StaffCount--;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.CCA2Id, -Selected.CCA2LOD, -Selected.CCA2UNS, Week);
+                }
+                Selected.CCA2Id = 0;
+                Selected.CCA2Name = "";
+                Selected.CCA2LOD = 0.0;
+                Selected.StaffCount--;
+            }
 
-                if (cboCCA3.SelectedItem != null)
+            if (cboCCA3.SelectedItem != null)
+            {
+                if ((int)cboCCA3.SelectedValue == (int)cboCCA1.SelectedValue ||
+                    (int)cboCCA3.SelectedValue == (int)cboCCA2.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "CCA3 duplicate selected.");
+                    return;
+                }
+                else
                 {
                     if (txtCCA3LOD.Text == "")
                     {
@@ -1186,21 +1212,21 @@ namespace ERSApp.Views
                         }
                     }
                 }
-                else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
+            }
+            else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
+            {
+                if (Selected.Holiday)
                 {
-                    if (Selected.Holiday)
-                    {
-                        StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
-                    }
-                    else
-                    {
-                        StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
-                    }
-                    Selected.CCA3Id = 0;
-                    Selected.CCA3Name = "";
-                    Selected.CCA3LOD = 0.0;
-                    Selected.StaffCount--;
+                    StaffViewModel.UpdateAppointedHolidayUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
                 }
+                else
+                {
+                    StaffViewModel.UpdateAppointedUnsocial(Selected.CCA3Id, -Selected.CCA3LOD, -Selected.CCA3UNS, Week);
+                }
+                Selected.CCA3Id = 0;
+                Selected.CCA3Name = "";
+                Selected.CCA3LOD = 0.0;
+                Selected.StaffCount--;
             }
 
             //Check if LOD or Bleed values have changed
@@ -1215,13 +1241,13 @@ namespace ERSApp.Views
 
             //Go through and check if all roles are filled or not
             bool RolesFilled = true;
-            grdStaff.FindChildren<ComboBox>().ToList().ForEach(x =>
+            foreach(ComboBox cbo in grdStaff.FindChildren<ComboBox>())
             {
-                if (x.IsEnabled && x.Text == "")
+                if (cbo.IsEnabled && cbo.Text == "")
                 {
                     RolesFilled = false;
                 }
-            });
+            }
             Selected.State = RolesFilled ? 1 : 0;
             SessionViewModel.UpdateSessionStaff(Selected);
             //Go back to main window
