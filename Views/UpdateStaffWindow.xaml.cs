@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Text;
 using System.Windows;
 using MahApps.Metro.Controls;
@@ -32,33 +31,35 @@ namespace ERSApp.Views
             SetCheckboxes(Selected.WorkPattern);
         }
 
-        //Method to go through and check checkboxes based on work pattern string
+                //Method to go through and check checkboxes based on work pattern string
         private void SetCheckboxes(string workpattern)
         {
             if(workpattern != null)
             {
-                workpattern.Split(',').ToList().ForEach(x =>
+                string[] pattern = workpattern.Split(',');
+                foreach(string p in pattern)
                 {
-                    CheckBox cbx = (CheckBox)FindName("cbx" + x);
-                    if(cbx != null)
+                    CheckBox cbx = (CheckBox)FindName("cbx" + p);
+                    if (cbx != null)
                     {
                         cbx.IsChecked = true;
                     }
-                });
+                }
             }
         }
+
 
         private string GetWorkPattern()
         {
             StringBuilder workpattern = new StringBuilder();
-            grdUpdateStaff.FindChildren<CheckBox>().ToList().ForEach(x =>
+            foreach(CheckBox cbx in grdUpdateStaff.FindChildren<CheckBox>())
             {
-                if (x.IsChecked == true)
+                if (cbx.IsChecked == true)
                 {
-                    workpattern.Append(x.Content);
+                    workpattern.Append(cbx.Content);
                     workpattern.Append(",");
                 }
-            });
+            }
             if (workpattern.Length > 0)
             {
                 workpattern.Remove(workpattern.Length - 1, 1);
