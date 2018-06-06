@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -75,15 +74,15 @@ namespace ERSApp.Views
         private string GetWorkPattern()
         {
             StringBuilder workpattern = new StringBuilder();
-            grdAddStaff.FindChildren<CheckBox>().ToList().ForEach(x =>
+            foreach (CheckBox cbx in grdAddStaff.FindChildren<CheckBox>())
             {
-                if (x.IsChecked == true)
+                if (cbx.IsChecked == true)
                 {
-                    workpattern.Append(x.Content);
+                    workpattern.Append(cbx.Content);
                     workpattern.Append(",");
                 }
-            });
-            if(workpattern.Length > 0)
+            }
+            if (workpattern.Length > 0)
             {
                 workpattern.Remove(workpattern.Length - 1, 1);
             }
