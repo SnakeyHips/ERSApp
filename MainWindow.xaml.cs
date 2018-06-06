@@ -23,19 +23,19 @@ namespace ERSApp
             {
                 case 0:
                     ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Crimson"), ThemeManager.GetAppTheme("BaseLight"));
-                    dateCalender.Opacity = 1;
+                    dateCalender.Visibility = Visibility.Visible;
                     break;
                 case 1:
                     ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Mauve"), ThemeManager.GetAppTheme("BaseLight"));
-                    dateCalender.Opacity = 1;
+                    dateCalender.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Olive"), ThemeManager.GetAppTheme("BaseLight"));
-                    dateCalender.Opacity = 1;
+                    dateCalender.Visibility = Visibility.Visible;
                     break;
                 case 3:
                     ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Sienna"), ThemeManager.GetAppTheme("BaseLight"));
-                    dateCalender.Opacity = 0;
+                    dateCalender.Visibility = Visibility.Collapsed;
                     break;
             }
         }
