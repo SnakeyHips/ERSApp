@@ -228,6 +228,7 @@ namespace ERSApp.Views
             cboSV1.SelectedValue = null;
             txtSV1LOD.Text = null;
             txtSV1LOD.IsEnabled = false;
+            txtSV1UNS.Text = null;
             txtSV1UNS.IsEnabled = false;
         }
 
@@ -236,6 +237,7 @@ namespace ERSApp.Views
             cboDRI1.SelectedValue = null;
             txtDRI1LOD.Text = null;
             txtDRI1LOD.IsEnabled = false;
+            txtDRI1UNS.Text = null;
             txtDRI1UNS.IsEnabled = false;
         }
 
@@ -244,6 +246,7 @@ namespace ERSApp.Views
             cboDRI2.SelectedValue = null;
             txtDRI2LOD.Text = null;
             txtDRI2LOD.IsEnabled = false;
+            txtDRI2UNS.Text = null;
             txtDRI2UNS.IsEnabled = false;
         }
 
@@ -252,6 +255,7 @@ namespace ERSApp.Views
             cboRN1.SelectedValue = null;
             txtRN1LOD.Text = null;
             txtRN1LOD.IsEnabled = false;
+            txtRN1UNS.Text = null;
             txtRN1UNS.IsEnabled = false;
         }
 
@@ -260,6 +264,7 @@ namespace ERSApp.Views
             cboRN2.SelectedValue = null;
             txtRN2LOD.Text = null;
             txtRN2LOD.IsEnabled = false;
+            txtRN2UNS.Text = null;
             txtRN2UNS.IsEnabled = false;
         }
 
@@ -268,6 +273,7 @@ namespace ERSApp.Views
             cboRN3.SelectedValue = null;
             txtRN3LOD.Text = null;
             txtRN3LOD.IsEnabled = false;
+            txtRN3UNS.Text = null;
             txtRN3UNS.IsEnabled = false;
         }
 
@@ -276,6 +282,7 @@ namespace ERSApp.Views
             cboCCA1.SelectedValue = null;
             txtCCA1LOD.Text = null;
             txtCCA1LOD.IsEnabled = false;
+            txtCCA1UNS.Text = null;
             txtCCA1UNS.IsEnabled = false;
         }
 
@@ -284,6 +291,7 @@ namespace ERSApp.Views
             cboCCA2.SelectedValue = null;
             txtCCA2LOD.Text = null;
             txtCCA2LOD.IsEnabled = false;
+            txtCCA2UNS.Text = null;
             txtCCA2UNS.IsEnabled = false;
         }
 
@@ -292,6 +300,7 @@ namespace ERSApp.Views
             cboCCA3.SelectedValue = null;
             txtCCA3LOD.Text = null;
             txtCCA3LOD.IsEnabled = false;
+            txtCCA3UNS.Text = null;
             txtCCA3UNS.IsEnabled = false;
         }
 
