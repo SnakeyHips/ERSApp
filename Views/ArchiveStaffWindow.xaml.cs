@@ -198,5 +198,29 @@ namespace ERSApp.Views
         {
             this.DialogResult = false;
         }
+        
+        private string HoursString(double hours)
+        {
+            double trunc = Math.Truncate(hours);
+            string hoursString = trunc.ToString();
+            double remainder = hours - Math.Truncate(hours);
+            if(remainder == 0.75)
+            {
+                hoursString += ":45";
+            }
+            else if (remainder == 0.5)
+            {
+                hoursString += ":30";
+            }
+            else if (remainder == 0.25)
+            {
+                hoursString += ":15";
+            }
+            else
+            {
+                hoursString += ":00";
+            }
+            return hoursString;
+        }
     }
 }
