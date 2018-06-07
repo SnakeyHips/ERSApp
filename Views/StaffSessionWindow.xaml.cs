@@ -306,7 +306,7 @@ namespace ERSApp.Views
 
         private void btnAutoLOD_Click(object semder, RoutedEventArgs e)
         {
-            if(cboSV1.SelectedItem != null)
+            if (cboSV1.SelectedItem != null)
             {
                 txtSV1LOD.Text = txtLOD.Text;
                 txtSV1UNS.Text = "0";
@@ -394,7 +394,7 @@ namespace ERSApp.Views
 
             //Go through and check if all roles are filled or not
             bool RolesFilled = true;
-            foreach(ComboBox cbo in grdStaff.FindChildren<ComboBox>())
+            foreach (ComboBox cbo in grdStaff.FindChildren<ComboBox>())
             {
                 if (cbo.IsEnabled && cbo.Text == "")
                 {
@@ -479,6 +479,7 @@ namespace ERSApp.Views
                 Selected.SV1Id = 0;
                 Selected.SV1Name = "";
                 Selected.SV1LOD = 0.0;
+                Selected.SV1UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -538,6 +539,7 @@ namespace ERSApp.Views
                 Selected.DRI1Id = 0;
                 Selected.DRI1Name = "";
                 Selected.DRI1LOD = 0.0;
+                Selected.DRI1UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -604,6 +606,7 @@ namespace ERSApp.Views
                 Selected.DRI2Id = 0;
                 Selected.DRI2Name = "";
                 Selected.DRI2LOD = 0.0;
+                Selected.DRI2UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -662,6 +665,7 @@ namespace ERSApp.Views
                 Selected.RN1Id = 0;
                 Selected.RN1Name = "";
                 Selected.RN1LOD = 0.0;
+                Selected.RN1UNS = 0.0;
             }
 
             if (cboRN2.SelectedItem != null)
@@ -726,6 +730,7 @@ namespace ERSApp.Views
                 Selected.RN2Id = 0;
                 Selected.RN2Name = "";
                 Selected.RN2LOD = 0.0;
+                Selected.RN2UNS = 0.0;
             }
 
             if (cboRN3.SelectedItem != null)
@@ -791,6 +796,7 @@ namespace ERSApp.Views
                 Selected.RN3Id = 0;
                 Selected.RN3Name = "";
                 Selected.RN3LOD = 0.0;
+                Selected.RN3UNS = 0.0;
             }
 
             //Get CCA selected info
@@ -849,6 +855,7 @@ namespace ERSApp.Views
                 Selected.CCA1Id = 0;
                 Selected.CCA1Name = "";
                 Selected.CCA1LOD = 0.0;
+                Selected.CCA1UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -915,6 +922,7 @@ namespace ERSApp.Views
                 Selected.CCA2Id = 0;
                 Selected.CCA2Name = "";
                 Selected.CCA2LOD = 0.0;
+                Selected.CCA2UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -982,6 +990,7 @@ namespace ERSApp.Views
                 Selected.CCA3Id = 0;
                 Selected.CCA3Name = "";
                 Selected.CCA3LOD = 0.0;
+                Selected.CCA3UNS = 0.0;
                 Selected.StaffCount--;
             }
         }
@@ -1023,8 +1032,7 @@ namespace ERSApp.Views
                         {
                             //If so, update times and appointed hours to use times selected
                             double appointed = double.Parse(txtSV1LOD.Text) - Selected.SV1LOD;
-                            StaffViewModel.UpdateAppointed(Selected.SV1Id, appointed, Week);
-                            StaffViewModel.UpdateHoliday(Selected.SV1Id, appointed, Week);
+                            StaffViewModel.UpdateAppointedHoliday(Selected.SV1Id, appointed, Week);
                             Selected.SV1LOD = double.Parse(txtSV1LOD.Text);
                         }
                         //Check if different unsocial selected from before
@@ -1060,6 +1068,7 @@ namespace ERSApp.Views
                 Selected.SV1Id = 0;
                 Selected.SV1Name = "";
                 Selected.SV1LOD = 0.0;
+                Selected.SV1UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -1092,8 +1101,7 @@ namespace ERSApp.Views
                         if (Selected.DRI1LOD != double.Parse(txtDRI1LOD.Text))
                         {
                             double appointed = double.Parse(txtDRI1LOD.Text) - Selected.DRI1LOD;
-                            StaffViewModel.UpdateAppointed(Selected.DRI1Id, appointed, Week);
-                            StaffViewModel.UpdateHoliday(Selected.DRI1Id, appointed, Week);
+                            StaffViewModel.UpdateAppointedHoliday(Selected.DRI1Id, appointed, Week);
                             Selected.DRI1LOD = double.Parse(txtDRI1LOD.Text);
                         }
                         if (Selected.DRI1UNS != double.Parse(txtDRI1UNS.Text))
@@ -1120,6 +1128,7 @@ namespace ERSApp.Views
                 Selected.DRI1Id = 0;
                 Selected.DRI1Name = "";
                 Selected.DRI1LOD = 0.0;
+                Selected.DRI1UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -1158,8 +1167,7 @@ namespace ERSApp.Views
                             if (Selected.DRI2LOD != double.Parse(txtDRI2LOD.Text))
                             {
                                 double appointed = double.Parse(txtDRI2LOD.Text) - Selected.DRI2LOD;
-                                StaffViewModel.UpdateAppointed(Selected.DRI2Id, appointed, Week);
-                                StaffViewModel.UpdateHoliday(Selected.DRI2Id, appointed, Week);
+                                StaffViewModel.UpdateAppointedHoliday(Selected.DRI2Id, appointed, Week);
                                 Selected.DRI2LOD = double.Parse(txtDRI2LOD.Text);
                             }
                             if (Selected.DRI2UNS != double.Parse(txtDRI2UNS.Text))
@@ -1187,6 +1195,7 @@ namespace ERSApp.Views
                 Selected.DRI2Id = 0;
                 Selected.DRI2Name = "";
                 Selected.DRI2LOD = 0.0;
+                Selected.DRI2UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -1218,8 +1227,7 @@ namespace ERSApp.Views
                         if (Selected.RN1LOD != double.Parse(txtRN1LOD.Text))
                         {
                             double appointed = double.Parse(txtRN1LOD.Text) - Selected.RN1LOD;
-                            StaffViewModel.UpdateAppointed(Selected.RN1Id, appointed, Week);
-                            StaffViewModel.UpdateHoliday(Selected.RN1Id, appointed, Week);
+                            StaffViewModel.UpdateAppointedHoliday(Selected.RN1Id, appointed, Week);
                             Selected.RN1LOD = double.Parse(txtRN1LOD.Text);
                         }
                         if (Selected.RN1UNS != double.Parse(txtRN1UNS.Text))
@@ -1246,6 +1254,7 @@ namespace ERSApp.Views
                 Selected.RN1Id = 0;
                 Selected.RN1Name = "";
                 Selected.RN1LOD = 0.0;
+                Selected.RN1UNS = 0.0;
             }
 
             if (cboRN2.SelectedItem != null)
@@ -1282,8 +1291,7 @@ namespace ERSApp.Views
                             if (Selected.RN2LOD != double.Parse(txtRN2LOD.Text))
                             {
                                 double appointed = double.Parse(txtRN2LOD.Text) - Selected.RN2LOD;
-                                StaffViewModel.UpdateAppointed(Selected.RN2Id, appointed, Week);
-                                StaffViewModel.UpdateHoliday(Selected.RN2Id, appointed, Week);
+                                StaffViewModel.UpdateAppointedHoliday(Selected.RN2Id, appointed, Week);
                                 Selected.RN2LOD = double.Parse(txtRN2LOD.Text);
                             }
                             if (Selected.RN2UNS != double.Parse(txtRN2UNS.Text))
@@ -1311,6 +1319,7 @@ namespace ERSApp.Views
                 Selected.RN2Id = 0;
                 Selected.RN2Name = "";
                 Selected.RN2LOD = 0.0;
+                Selected.RN2UNS = 0.0;
             }
 
             if (cboRN3.SelectedItem != null)
@@ -1348,8 +1357,7 @@ namespace ERSApp.Views
                             if (Selected.RN3LOD != double.Parse(txtRN3LOD.Text))
                             {
                                 double appointed = double.Parse(txtRN3LOD.Text) - Selected.RN3LOD;
-                                StaffViewModel.UpdateAppointed(Selected.RN3Id, appointed, Week);
-                                StaffViewModel.UpdateHoliday(Selected.RN3Id, appointed, Week);
+                                StaffViewModel.UpdateAppointedHoliday(Selected.RN3Id, appointed, Week);
                                 Selected.RN3LOD = double.Parse(txtRN3LOD.Text);
                             }
                             if (Selected.RN3UNS != double.Parse(txtRN3UNS.Text))
@@ -1377,6 +1385,7 @@ namespace ERSApp.Views
                 Selected.RN3Id = 0;
                 Selected.RN3Name = "";
                 Selected.RN3LOD = 0.0;
+                Selected.RN3UNS = 0.0;
             }
 
             //Get CCA selected info
@@ -1408,8 +1417,7 @@ namespace ERSApp.Views
                         if (Selected.CCA1LOD != double.Parse(txtCCA1LOD.Text))
                         {
                             double appointed = double.Parse(txtCCA1LOD.Text) - Selected.CCA1LOD;
-                            StaffViewModel.UpdateAppointed(Selected.CCA1Id, appointed, Week);
-                            StaffViewModel.UpdateHoliday(Selected.CCA1Id, appointed, Week);
+                            StaffViewModel.UpdateAppointedHoliday(Selected.CCA1Id, appointed, Week);
                             Selected.CCA1LOD = double.Parse(txtCCA1LOD.Text);
                         }
                         if (Selected.CCA1UNS != double.Parse(txtCCA1UNS.Text))
@@ -1436,6 +1444,7 @@ namespace ERSApp.Views
                 Selected.CCA1Id = 0;
                 Selected.CCA1Name = "";
                 Selected.CCA1LOD = 0.0;
+                Selected.CCA1UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -1474,8 +1483,7 @@ namespace ERSApp.Views
                             if (Selected.CCA2LOD != double.Parse(txtCCA2LOD.Text))
                             {
                                 double appointed = double.Parse(txtCCA2LOD.Text) - Selected.CCA2LOD;
-                                StaffViewModel.UpdateAppointed(Selected.CCA2Id, appointed, Week);
-                                StaffViewModel.UpdateHoliday(Selected.CCA2Id, appointed, Week);
+                                StaffViewModel.UpdateAppointedHoliday(Selected.CCA2Id, appointed, Week);
                                 Selected.CCA2LOD = double.Parse(txtCCA2LOD.Text);
                             }
                             if (Selected.CCA2UNS != double.Parse(txtCCA2UNS.Text))
@@ -1503,6 +1511,7 @@ namespace ERSApp.Views
                 Selected.CCA2Id = 0;
                 Selected.CCA2Name = "";
                 Selected.CCA2LOD = 0.0;
+                Selected.CCA2UNS = 0.0;
                 Selected.StaffCount--;
             }
 
@@ -1542,8 +1551,7 @@ namespace ERSApp.Views
                             if (Selected.CCA3LOD != double.Parse(txtCCA3LOD.Text))
                             {
                                 double appointed = double.Parse(txtCCA3LOD.Text) - Selected.CCA3LOD;
-                                StaffViewModel.UpdateAppointed(Selected.CCA3Id, appointed, Week);
-                                StaffViewModel.UpdateHoliday(Selected.CCA3Id, appointed, Week);
+                                StaffViewModel.UpdateAppointedHoliday(Selected.CCA3Id, appointed, Week);
                                 Selected.CCA3LOD = double.Parse(txtCCA3LOD.Text);
                             }
                             if (Selected.CCA3UNS != double.Parse(txtCCA3UNS.Text))
@@ -1571,6 +1579,7 @@ namespace ERSApp.Views
                 Selected.CCA3Id = 0;
                 Selected.CCA3Name = "";
                 Selected.CCA3LOD = 0.0;
+                Selected.CCA3UNS = 0.0;
                 Selected.StaffCount--;
             }
         }
