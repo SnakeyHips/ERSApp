@@ -477,7 +477,7 @@ namespace ERSApp.Views
                     Selected.StaffCount++;
                 }
                 //Add onto new staff's appointed hours/New record created in sql method
-                StaffViewModel.UpdateAppointedHolidayUnsocial(id, lod, uns, Week);
+                 StaffViewModel.UpdateAppointedHolidayUnsocial(cboid, txtlod, txtuns, Week);
             }
             //Check if same staff selected
             else if (id == cboid)
@@ -510,7 +510,7 @@ namespace ERSApp.Views
                 Accessor[Selected, lodname] = txtlod;
                 Accessor[Selected, unsname] = txtuns;
                 //Add onto new staff's appointed hours/New record created in sql method
-                StaffViewModel.UpdateAppointedHolidayUnsocial(id, lod, uns, Week);
+                 StaffViewModel.UpdateAppointedHolidayUnsocial(cboid, txtlod, txtuns, Week);
             }
         }
 
