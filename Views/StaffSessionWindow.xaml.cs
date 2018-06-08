@@ -527,7 +527,7 @@ namespace ERSApp.Views
             Accessor[Selected, idname] = 0;
             Accessor[Selected, name] = "";
             Accessor[Selected, lodname] = 0.0;
-            Accessor[Selected, unsname] = 0;
+            Accessor[Selected, unsname] = 0.0;
             if (!name.StartsWith("RN"))
             {
                 Selected.StaffCount--;
