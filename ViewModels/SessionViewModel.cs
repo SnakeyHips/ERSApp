@@ -19,6 +19,7 @@ namespace ERSApp.ViewModels
         public SessionViewModel()
         {
             Sessions = new ObservableCollection<Session>();
+            SelectedDate.Date = DateTime.Now;
             LoadSessions();
         }
 
