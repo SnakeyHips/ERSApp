@@ -17,7 +17,7 @@ namespace ERSApp.Views
     public partial class StaffSessionWindow : MetroWindow
     {
         Session Selected;
-        TypeAccessor Accessor;
+        Type Accessor;
         public List<Staff> AvailableStaff { get; set; }
         public List<Staff> SVList { get; set; }
         public List<Staff> DRIList { get; set; }
@@ -57,7 +57,7 @@ namespace ERSApp.Views
             }
 
             this.Selected = s;
-            Accessor = TypeAccessor.Create(Selected.GetType());
+            Accessor = Selected.GetType();
             SeriesCollection = new SeriesCollection();
             double Start = double.Parse(Selected.Time.Substring(0, 2));
             double End = Start + Selected.LOD;
