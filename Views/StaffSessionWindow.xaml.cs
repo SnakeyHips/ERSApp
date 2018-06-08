@@ -11,13 +11,14 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using LiveCharts;
 using LiveCharts.Wpf;
+using FastMember;
 
 namespace ERSApp.Views
 {
     public partial class StaffSessionWindow : MetroWindow
     {
         Session Selected;
-        Type Accessor;
+        TypeAccessor Accessor;
         public List<Staff> AvailableStaff { get; set; }
         public List<Staff> SVList { get; set; }
         public List<Staff> DRIList { get; set; }
@@ -57,7 +58,7 @@ namespace ERSApp.Views
             }
 
             this.Selected = s;
-            Accessor = Selected.GetType();
+            Accessor = TypeAccessor.Create(Selected.GetType());
             SeriesCollection = new SeriesCollection();
             double Start = double.Parse(Selected.Time.Substring(0, 2));
             double End = Start + Selected.LOD;
@@ -375,6 +376,8 @@ namespace ERSApp.Views
         //First one is commented as rest are same
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             if (Selected.Holiday)
             {
                 UpdateStaffHoliday();
@@ -405,14 +408,10 @@ namespace ERSApp.Views
             }
             Selected.State = RolesFilled ? 1 : 0;
             SessionViewModel.UpdateSessionStaff(Selected);
+            sw.Stop();
+            MessageBox.Show(sw.ElapsedMilliseconds.ToString());
             //Go back to main window
             this.DialogResult = true;
-        }
-
-        //Method for setting properties
-        private void SetProperty(string name, object value)
-        {
-            Accessor.GetProperty(name).SetValue(Selected, value);
         }
 
         private void Update(int id, string idname, string name, double lod, string lodname,
@@ -421,10 +420,10 @@ namespace ERSApp.Views
             if (id == 0)
             {
                 //Assign new appoint staff
-                SetProperty(idname, cboid);
-                SetProperty(name, cboname);
-                SetProperty(lodname, txtlod);
-                SetProperty(unsname, txtuns);
+                Accessor[Selected, idname] = cboid;
+                Accessor[Selected, name] = cboname;
+                Accessor[Selected, lodname] = txtlod;
+                Accessor[Selected, unsname] = txtuns;
                 if (!name.StartsWith("RN"))
                 {
                     Selected.StaffCount++;
@@ -441,7 +440,7 @@ namespace ERSApp.Views
                     //If so, update times and appointed hours to use times selected
                     double appointed = txtlod - lod;
                     StaffViewModel.UpdateAppointed(id, appointed, Week);
-                    SetProperty(lodname, txtlod);
+                    Accessor[Selected, lodname] = txtlod;
                 }
                 //Check if different unsocial selected
                 if (uns != txtuns)
@@ -449,7 +448,7 @@ namespace ERSApp.Views
                     //If so, update times and appointed hours to use times selected
                     double unsocial = txtuns - uns;
                     StaffViewModel.UpdateUnsocial(id, unsocial, Week);
-                    SetProperty(unsname, txtuns);
+                    Accessor[Selected, unsname] = txtuns;
                 }
             }
             //Check if different staff selected
@@ -458,25 +457,25 @@ namespace ERSApp.Views
                 //Update old staff's appointed hours to remove length
                 StaffViewModel.UpdateAppointedUnsocial(id, -lod, -uns, Week);
                 //Assign new appoint staff
-                SetProperty(idname, cboid);
-                SetProperty(name, cboname);
-                SetProperty(lodname, txtlod);
-                SetProperty(unsname, txtuns);
+                Accessor[Selected, idname] = cboid;
+                Accessor[Selected, name] = cboname;
+                Accessor[Selected, lodname] = txtlod;
+                Accessor[Selected, unsname] = txtuns;
                 //Add onto new staff's appointed hours/New record created in sql method
                 StaffViewModel.UpdateAppointedUnsocial(cboid, txtlod, txtuns, Week);
             }
         }
 
-        private void UpdateHoliday(int id, string idname, string name, double lod, string lodname, 
+        private void UpdateHoliday(int id, string idname, string name, double lod, string lodname,
             double uns, string unsname, int cboid, string cboname, double txtlod, double txtuns)
         {
             if (id == 0)
             {
                 //Assign new appoint staff
-                SetProperty(idname, cboid);
-                SetProperty(name, cboname);
-                SetProperty(lodname, txtlod);
-                SetProperty(unsname, txtuns);
+                Accessor[Selected, idname] = cboid;
+                Accessor[Selected, name] = cboname;
+                Accessor[Selected, lodname] = txtlod;
+                Accessor[Selected, unsname] = txtuns;
                 if (!name.StartsWith("RN"))
                 {
                     Selected.StaffCount++;
@@ -493,7 +492,7 @@ namespace ERSApp.Views
                     //If so, update times and appointed hours to use times selected
                     double appointed = txtlod - lod;
                     StaffViewModel.UpdateAppointedHoliday(id, appointed, Week);
-                    SetProperty(lodname, txtlod);
+                    Accessor[Selected, lodname] = txtlod;
                 }
                 //Check if different unsocial selected
                 if (uns != txtuns)
@@ -501,7 +500,7 @@ namespace ERSApp.Views
                     //If so, update times and appointed hours to use times selected
                     double unsocial = txtuns - uns;
                     StaffViewModel.UpdateUnsocial(id, unsocial, Week);
-                    SetProperty(unsname, txtuns);
+                    Accessor[Selected, unsname] = txtuns;
                 }
             }
             //Check if different staff selected
@@ -510,25 +509,25 @@ namespace ERSApp.Views
                 //Update old staff's appointed hours to remove length
                 StaffViewModel.UpdateAppointedHolidayUnsocial(id, -lod, -uns, Week);
                 //Assign new appoint staff
-                SetProperty(idname, cboid);
-                SetProperty(name, cboname);
-                SetProperty(lodname, txtlod);
-                SetProperty(unsname, txtuns);
+                Accessor[Selected, idname] = cboid;
+                Accessor[Selected, name] = cboname;
+                Accessor[Selected, lodname] = txtlod;
+                Accessor[Selected, unsname] = txtuns;
                 //Add onto new staff's appointed hours/New record created in sql method
                 StaffViewModel.UpdateAppointedHolidayUnsocial(cboid, txtlod, txtuns, Week);
             }
         }
 
-        private void Reset(int id, string idname, string name, double lod, 
+        private void Reset(int id, string idname, string name, double lod,
             string lodname, double uns, string unsname)
         {
             //Remove staff's appointed hours
             StaffViewModel.UpdateAppointedUnsocial(id, -lod, -uns, Week);
             //Remove any saved staff info
-            SetProperty(idname, 0);
-            SetProperty(name, "");
-            SetProperty(lodname, 0.0);
-            SetProperty(unsname, 0.0);
+            Accessor[Selected, idname] = 0;
+            Accessor[Selected, name] = "";
+            Accessor[Selected, lodname] = 0.0;
+            Accessor[Selected, unsname] = 0;
             if (!name.StartsWith("RN"))
             {
                 Selected.StaffCount--;
