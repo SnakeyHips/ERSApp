@@ -18,6 +18,7 @@ namespace ERSApp.Views
     public partial class StaffSessionWindow : MetroWindow
     {
         Session Selected;
+        TypeAccessor Accessor;
         public List<Staff> AvailableStaff { get; set; }
         public List<Staff> SVList { get; set; }
         public List<Staff> DRIList { get; set; }
@@ -26,7 +27,6 @@ namespace ERSApp.Views
         public List<string> TimesList { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
         double Week = StaffViewModel.GetWeek(SelectedDate.Date);
-        TypeAccessor Accessor;
 
         public StaffSessionWindow(Session s)
         {
@@ -425,12 +425,12 @@ namespace ERSApp.Views
                     Selected.StaffCount++;
                 }
                 //Add onto new staff's appointed hours/New record created in sql method
-                StaffViewModel.UpdateAppointedUnsocial(id, lod, uns, Week);
+                StaffViewModel.UpdateAppointedUnsocial(cboid, txtlod, txtuns, Week);
             }
-            //Check if different staff selected from before
+            //Check if same staff selected
             else if (id == cboid)
             {
-                //Check if different times selected from before
+                //Check if different times selected
                 if (lod != txtlod)
                 {
                     //If so, update times and appointed hours to use times selected
@@ -438,7 +438,7 @@ namespace ERSApp.Views
                     StaffViewModel.UpdateAppointed(id, appointed, Week);
                     Accessor[Selected, lodname] = txtlod;
                 }
-                //Check if different unsocial selected from before
+                //Check if different unsocial selected
                 if (uns != txtuns)
                 {
                     //If so, update times and appointed hours to use times selected
@@ -447,7 +447,7 @@ namespace ERSApp.Views
                     Accessor[Selected, unsname] = txtuns;
                 }
             }
-            //Check if no previous staff selected
+            //Check if different staff selected
             else if (id != cboid)
             {
                 //Update old staff's appointed hours to remove length
@@ -458,7 +458,7 @@ namespace ERSApp.Views
                 Accessor[Selected, lodname] = txtlod;
                 Accessor[Selected, unsname] = txtuns;
                 //Add onto new staff's appointed hours/New record created in sql method
-                StaffViewModel.UpdateAppointedUnsocial(id, lod, uns, Week);
+                StaffViewModel.UpdateAppointedUnsocial(cboid, txtlod, txtuns, Week);
             }
         }
 
@@ -479,10 +479,10 @@ namespace ERSApp.Views
                 //Add onto new staff's appointed hours/New record created in sql method
                 StaffViewModel.UpdateAppointedHolidayUnsocial(id, lod, uns, Week);
             }
-            //Check if different staff selected from before
+            //Check if same staff selected
             else if (id == cboid)
             {
-                //Check if different times selected from before
+                //Check if different times selected
                 if (lod != txtlod)
                 {
                     //If so, update times and appointed hours to use times selected
@@ -490,7 +490,7 @@ namespace ERSApp.Views
                     StaffViewModel.UpdateAppointedHoliday(id, appointed, Week);
                     Accessor[Selected, lodname] = txtlod;
                 }
-                //Check if different unsocial selected from before
+                //Check if different unsocial selected
                 if (uns != txtuns)
                 {
                     //If so, update times and appointed hours to use times selected
@@ -499,7 +499,7 @@ namespace ERSApp.Views
                     Accessor[Selected, unsname] = txtuns;
                 }
             }
-            //Check if no previous staff selected
+            //Check if different staff selected
             else if (id != cboid)
             {
                 //Update old staff's appointed hours to remove length
