@@ -376,8 +376,6 @@ namespace ERSApp.Views
         //First one is commented as rest are same
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
             if (Selected.Holiday)
             {
                 UpdateStaffHoliday();
@@ -408,8 +406,6 @@ namespace ERSApp.Views
             }
             Selected.State = RolesFilled ? 1 : 0;
             SessionViewModel.UpdateSessionStaff(Selected);
-            sw.Stop();
-            MessageBox.Show(sw.ElapsedMilliseconds.ToString());
             //Go back to main window
             this.DialogResult = true;
         }
