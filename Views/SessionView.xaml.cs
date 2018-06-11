@@ -169,34 +169,29 @@ namespace ERSApp.Views
 
                 PdfWriter writer = PdfWriter.GetInstance(report, fs);
 
-                //Table for displaying stock quantities with 2 being amount of columns
+                //Table for displaying stock quantities with 17 being amount of columns
                 PdfPTable sessionTable = new PdfPTable(17);
                 sessionTable.SpacingBefore = 10f;
                 sessionTable.WidthPercentage = 100;
 
                 //Used for creating bold font
-                Font header = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
+                Font title = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
                 Font bold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8);
+                bold.Color = BaseColor.WHITE;
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                sessionTable.AddCell(new Paragraph("Day", bold));
-                sessionTable.AddCell(new Paragraph("Date", bold));
-                sessionTable.AddCell(new Paragraph("Location", bold));
-                sessionTable.AddCell(new Paragraph("Time", bold));
-                sessionTable.AddCell(new Paragraph("LOD", bold));
-                sessionTable.AddCell(new Paragraph("Chairs", bold));
-                sessionTable.AddCell(new Paragraph("Bleeds", bold));
-                sessionTable.AddCell(new Paragraph("RN1", bold));
-                sessionTable.AddCell(new Paragraph("RN2", bold));
-                sessionTable.AddCell(new Paragraph("RN3", bold));
-                sessionTable.AddCell(new Paragraph("SV1", bold));
-                sessionTable.AddCell(new Paragraph("DRI1", bold));
-                sessionTable.AddCell(new Paragraph("DRI2", bold));
-                sessionTable.AddCell(new Paragraph("CCA1", bold));
-                sessionTable.AddCell(new Paragraph("CCA2", bold));
-                sessionTable.AddCell(new Paragraph("CCA3", bold));
-                sessionTable.AddCell(new Paragraph("Count", bold));
+                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "Bleeds", "RN1",
+                    "RN2", "RN2", "RN3", "SV1", "DRI1", "DRI2", "CCA1", "CCA2", "CCA3", "Count"};
+
+                foreach (string h in headers)
+                {
+                    sessionTable.AddCell(new PdfPCell(new Paragraph(h, bold))
+                    {
+                        HorizontalAlignment = Element.ALIGN_CENTER,
+                        BackgroundColor = BaseColor.GRAY
+                    });
+                }
 
                 foreach (Session s in sessions)
                 {
@@ -221,7 +216,7 @@ namespace ERSApp.Views
 
                 //Title used with date and time when created
                 Paragraph titleParagraph = new Paragraph(
-                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, header);
+                    "Session Report: " + sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, title);
                 titleParagraph.Alignment = Element.ALIGN_CENTER;
 
                 //Creates and adds everything to pdf output
