@@ -128,61 +128,63 @@ namespace ERSApp.Views
                 PdfWriter writer = PdfWriter.GetInstance(report, fs);
 
                 //Table for displaying stock quantities with 2 being amount of columns
-                PdfPTable RosterTable = new PdfPTable(9);
-                RosterTable.SpacingBefore = 10f;
-                RosterTable.WidthPercentage = 100;
+                PdfPTable rosterTable = new PdfPTable(9);
+                rosterTable.SpacingBefore = 10f;
+                rosterTable.WidthPercentage = 100;
 
                 //Used for creating bold font
-                Font header = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
+                Font title = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
                 Font bold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8);
+                bold.Color = BaseColor.WHITE;
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                RosterTable.AddCell(new Paragraph("Id", bold));
-                RosterTable.AddCell(new Paragraph("Name", bold));
-                RosterTable.AddCell(new Paragraph("Contract", bold));
-                RosterTable.AddCell(new Paragraph("Appointed", bold));
-                RosterTable.AddCell(new Paragraph("Absence", bold));
-                RosterTable.AddCell(new Paragraph("Holiday", bold));
-                RosterTable.AddCell(new Paragraph("Unsocial", bold));
-                RosterTable.AddCell(new Paragraph("Neg", bold));
-                RosterTable.AddCell(new Paragraph("CO", bold));
+                string[] headers = { "Id", "Name", "Contract", "Appointed", "Absence", "Holiday", "Unsocial", "Neg", "CO"};
+
+                foreach(string h in headers)
+                {
+                    rosterTable.AddCell(new PdfPCell(new Paragraph(h, bold))
+                    {
+                        HorizontalAlignment = Element.ALIGN_CENTER,
+                        BackgroundColor = BaseColor.GRAY
+                    });
+                }
 
                 foreach (Staff s in rosters)
                 {
-                    RosterTable.AddCell(new Paragraph(s.Id.ToString(), norm));
-                    RosterTable.AddCell(new Paragraph(s.Name, norm));
-                    RosterTable.AddCell(new Paragraph(s.ContractHours.ToString(), norm));
-                    RosterTable.AddCell(new Paragraph(s.AppointedHours.ToString(), norm));
-                    RosterTable.AddCell(new Paragraph(s.AbsenceHours.ToString(), norm));
-                    RosterTable.AddCell(new Paragraph(s.HolidayHours.ToString(), norm));
-                    RosterTable.AddCell(new Paragraph(s.UnsocialHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.Id.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.Name, norm));
+                    rosterTable.AddCell(new Paragraph(s.ContractHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.AppointedHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.AbsenceHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.HolidayHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.UnsocialHours.ToString(), norm));
                     double difference = s.ContractHours - (s.AppointedHours + s.AbsenceHours);
-                    if(difference > 0)
+                    if (difference > 0)
                     {
-                        RosterTable.AddCell(new Paragraph(difference.ToString(), norm));
-                        RosterTable.AddCell(new Paragraph("0", norm));
+                        rosterTable.AddCell(new Paragraph(difference.ToString(), norm));
+                        rosterTable.AddCell(new Paragraph("0", norm));
                     }
                     else if (difference < 0)
                     {
-                        RosterTable.AddCell(new Paragraph("0", norm));
-                        RosterTable.AddCell(new Paragraph(Math.Abs(difference).ToString(), norm));
+                        rosterTable.AddCell(new Paragraph("0", norm));
+                        rosterTable.AddCell(new Paragraph(Math.Abs(difference).ToString(), norm));
                     }
                     else
                     {
-                        RosterTable.AddCell(new Paragraph("0", norm));
-                        RosterTable.AddCell(new Paragraph("0", norm));
+                        rosterTable.AddCell(new Paragraph("0", norm));
+                        rosterTable.AddCell(new Paragraph("0", norm));
                     }
                 }
 
                 //Title used with date and time when created
-                Paragraph titleParagraph = new Paragraph("Roster Report: Week " + start + " - Week " + end, header);
+                Paragraph titleParagraph = new Paragraph("Roster Report: Week " + start + " - Week " + end, title);
                 titleParagraph.Alignment = Element.ALIGN_CENTER;
 
                 //Creates and adds everything to pdf output
                 report.Open();
                 report.Add(titleParagraph);
-                report.Add(RosterTable);
+                report.Add(rosterTable);
                 report.Close();
 
                 await this.ShowMessageAsync("", "Report created successfully!");
