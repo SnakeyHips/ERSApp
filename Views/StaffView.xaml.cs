@@ -120,18 +120,22 @@ namespace ERSApp.Views
                 sessionTable.WidthPercentage = 100;
 
                 //Used for creating bold font
-                Font header = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
+                Font title = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
                 Font bold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8);
+                bold.Color = BaseColor.WHITE;
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                sessionTable.AddCell(new Paragraph("Day", bold));
-                sessionTable.AddCell(new Paragraph("Date", bold));
-                sessionTable.AddCell(new Paragraph("Location", bold));
-                sessionTable.AddCell(new Paragraph("Time", bold));
-                sessionTable.AddCell(new Paragraph("LOD", bold));
-                sessionTable.AddCell(new Paragraph("Chairs", bold));
-                sessionTable.AddCell(new Paragraph("Bleeds", bold));
+                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "Bleeds"};
+
+                foreach (string h in headers)
+                {
+                    sessionTable.AddCell(new PdfPCell(new Paragraph(h, bold))
+                    {
+                        HorizontalAlignment = Element.ALIGN_CENTER,
+                        BackgroundColor = BaseColor.GRAY
+                    });
+                }
 
                 foreach (Session s in sessions)
                 {
@@ -147,7 +151,7 @@ namespace ERSApp.Views
                 //Title used with date and time when created
                 Paragraph titleParagraph = new Paragraph(
                     StaffViewModel.SelectedStaff.Id + " - " + StaffViewModel.SelectedStaff.Name+ " Report: " + 
-                    sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, header);
+                    sessions[0].Date + " - " + sessions[sessions.Count - 1].Date, title);
                 titleParagraph.Alignment = Element.ALIGN_CENTER;
 
                 //Creates and adds everything to pdf output
