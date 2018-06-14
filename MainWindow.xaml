@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
-        Title="Electronic Roster System" Height="550" Width="900">
+        Title="Electronic Roster System" Height="550" Width="892">
     <Grid Margin="15,0,15,15">
         <TabControl Name="tabsMain" Margin="0,0,0,0" Padding="-1" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Sessions">
