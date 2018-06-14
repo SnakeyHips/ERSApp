@@ -25,7 +25,7 @@
             </TabItem>
         </TabControl>
         <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,36,0,0" Width="171">
-            <Calendar Name="dateCalender" FirstDayOfWeek="Monday"  SelectedDatesChanged="dateCalender_SelectedDatesChanged" Height="230"></Calendar>
+            <Calendar Name="dateCalender" FirstDayOfWeek="Monday"  SelectedDatesChanged="dateCalender_SelectedDatesChanged" Height="230" BorderBrush="{DynamicResource AccentColorBrush}"></Calendar>
         </Viewbox>
         <ContentControl Content="{DynamicResource WBSIcon}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Margin="0,35,0,0"/>
     </Grid>
