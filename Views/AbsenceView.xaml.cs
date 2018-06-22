@@ -58,6 +58,12 @@ namespace ERSApp.Views
                 }
             }
         }
+        
+        private void btnViewAbsence_Click(object sender, RoutedEventArgs e)
+        {
+            AbsenceViewWindow absenceViewWindow = new AbsenceViewWindow();
+            absenceViewWindow.Show();
+        }
 
         private async void btnDelAbsence_Click(object sender, RoutedEventArgs e)
         {
