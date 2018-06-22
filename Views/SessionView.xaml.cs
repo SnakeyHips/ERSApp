@@ -119,14 +119,14 @@ namespace ERSApp.Views
 
         private async void btnReportSession_Click(object sender, RoutedEventArgs e)
         {
-            StaffReportDialog staffReportDialog = new StaffReportDialog();
-            staffReportDialog.Owner = mainWindow;
-            staffReportDialog.ShowDialog();
-            if (staffReportDialog.DialogResult == true)
+            ReportDialog reportDialog = new ReportDialog();
+            reportDialog.Owner = mainWindow;
+            reportDialog.ShowDialog();
+            if (reportDialog.DialogResult == true)
             {
                 List<string> Dates = new List<string>();
-                DateTime Start = DateTime.Parse(staffReportDialog.dateStart.Text);
-                DateTime End = DateTime.Parse(staffReportDialog.dateEnd.Text);
+                DateTime Start = DateTime.Parse(reportDialog.dateStart.Text);
+                DateTime End = DateTime.Parse(reportDialog.dateEnd.Text);
 
                 for (DateTime dt = Start; dt <= End; dt = dt.AddDays(1))
                 {
