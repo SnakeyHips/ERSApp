@@ -13,7 +13,7 @@ namespace ERSApp.Models
         private string type;
         private string startDate;
         private string endDate;
-        private double length;
+        private double hours;
 
         public int StaffId
         {
@@ -95,18 +95,18 @@ namespace ERSApp.Models
             }
         }
 
-        public double Length
+        public double Hours
         {
             get
             {
-                return length;
+                return hours;
             }
             set
             {
-                if (length != value)
+                if (hours != value)
                 {
-                    length = value;
-                    RaisePropertyChanged("Length");
+                    hours = value;
+                    RaisePropertyChanged("Hours");
                 }
             }
         }
