@@ -181,8 +181,8 @@ namespace ERSApp.Views
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "Bleeds", "RN1",
-                    "RN2", "RN2", "RN3", "SV1", "DRI1", "DRI2", "CCA1", "CCA2", "CCA3", "Count"};
+                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "Bleeds",
+                    "RN1", "RN2", "RN3", "SV1", "DRI1", "DRI2", "CCA1", "CCA2", "CCA3", "Count"};
 
                 foreach (string h in headers)
                 {
