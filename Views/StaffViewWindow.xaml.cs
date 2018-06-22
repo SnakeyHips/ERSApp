@@ -32,23 +32,36 @@ namespace ERSApp.Views
 
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
-            StaffSessions.Clear();
-            List<string> Dates = new List<string>();
-            DateTime Start = DateTime.Parse(dateStart.Text);
-            DateTime End = DateTime.Parse(dateEnd.Text);
-            for (DateTime dt = Start; dt <= End; dt = dt.AddDays(1))
+            if (dateStart.Text == "")
             {
-                Dates.Add(dt.ToShortDateString());
+                await this.ShowMessageAsync("", "Please enter a Start Date.");
             }
-
-            if (Dates.Count > 0)
+            else if (dateEnd.Text == "")
             {
-                foreach (string date in Dates)
+                await this.ShowMessageAsync("", "Please enter an End Date.");
+            }
+            else if (dateEnd.SelectedDate.Value.CompareTo(dateStart.SelectedDate.Value) < 0)
+            {
+                await this.ShowMessageAsync("", "Please enter a valid End Date.");
+            }
+            else
+            {
+                StaffSessions.Clear();
+                List<string> Dates = new List<string>();
+                for (DateTime dt = dateStart.SelectedDate.Value; dt <= dateEnd.SelectedDate.Value; dt = dt.AddDays(1))
                 {
-                    Session temp = SessionViewModel.GetStaffSession(date, Selected.Id.ToString());
-                    if (temp != null)
+                    Dates.Add(dt.ToShortDateString());
+                }
+
+                if (Dates.Count > 0)
+                {
+                    foreach (string date in Dates)
                     {
-                        StaffSessions.Add(temp);
+                        Session temp = SessionViewModel.GetStaffSession(date, Selected.Id.ToString());
+                        if (temp != null)
+                        {
+                            StaffSessions.Add(temp);
+                        }
                     }
                 }
             }
