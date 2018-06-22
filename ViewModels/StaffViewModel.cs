@@ -227,7 +227,7 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, 0.0, 0.0, absence, 0.0, week);
+                        AddRoster(id, 0.0, absence, 0.0, 0.0, week);
                     }
                 }
             }
