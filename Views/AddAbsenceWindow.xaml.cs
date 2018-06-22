@@ -88,7 +88,7 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please enter an End Date.");
             }
-            else if (DateTime.Parse(dateEnd.Text).CompareTo(DateTime.Parse(dateStart.Text)) < 0)
+            else if (dateEnd.SelectedDate.Value.CompareTo(dateStart.SelectedDate.Value) < 0)
             {
                 await this.ShowMessageAsync("", "Please enter a valid End Date.");
             }
@@ -105,13 +105,13 @@ namespace ERSApp.Views
                     Type = cboType.Text,
                     StartDate = dateStart.Text,
                     EndDate = dateEnd.Text,
-                    Length = double.Parse(txtHours.Text)
+                    Hours = double.Parse(txtHours.Text)
                 };
                 if(AbsenceViewModel.AddAbsence(temp) > 0)
                 {
                     AbsenceViewModel.Absences.Add(temp);
                     //Update staff's absence hours
-                    StaffViewModel.UpdateAbsence(temp.StaffId, temp.Length, StaffViewModel.GetWeek(DateTime.Parse(dateStart.Text)));
+                    StaffViewModel.UpdateAbsence(temp.StaffId, temp.Hours, StaffViewModel.GetWeek(DateTime.Parse(dateStart.Text)));
                     this.DialogResult = true;
                 }
                 else
