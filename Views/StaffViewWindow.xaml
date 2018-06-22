@@ -1,0 +1,44 @@
+<Controls:MetroWindow x:Class="ERSApp.Views.StaffViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        WindowStartupLocation="CenterScreen"
+        Title="StaffSessionWindow" Height="500" Width="630">
+    <Grid Margin="15,0,15,15">
+        <Label Name ="lblHeader" Content="Staff - Sessions" FontSize="26" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="0,43,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <DatePicker Name="dateStart" HorizontalAlignment="Left" Height="23" Margin="75,43,0,0" VerticalAlignment="Top" Width="175" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Label Content="End Date:" HorizontalAlignment="Center" Margin="0,43,10,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <DatePicker Name="dateEnd" HorizontalAlignment="Center" Height="23" Margin="240,43,0,0" VerticalAlignment="Top" Width="175" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Button Content="View" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,0,0" Height="25" Width="75" Click="btnView_Click"/>
+        <ListView Name="lstStaffView" HorizontalAlignment="Left" Margin="0,83,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=StaffSessions}" SelectedValuePath="Location" Style="{DynamicResource JakeListView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Day" Width="100" DisplayMemberBinding="{Binding Day}"/>
+                    <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Site" Width="100" DisplayMemberBinding="{Binding Site}"/>
+                    <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Chairs" Width="100" DisplayMemberBinding="{Binding Chairs}"/>
+                    <GridViewColumn Header="Bleeds" Width="100" DisplayMemberBinding="{Binding Bleeds}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State}" Value="0">
+                            <Setter Property="Foreground" Value="Silver"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ContentControl Content="{DynamicResource WBSIcon}" VerticalAlignment="Bottom" Height="27" Margin="0,0,0,-27"/>
+        <Button Content="Report" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnReportStaff_Click" IsDefault="True"/>
+        <Button Content="Close" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnClose_Click" IsCancel="True"/>
+    </Grid>
+</Controls:MetroWindow>
