@@ -9,6 +9,7 @@ namespace ERSApp.Models
     public class Session : INotifyPropertyChanged
     {
         private string date;
+        private string day;
         private string type;
         private string site;
         private string time;
@@ -68,6 +69,22 @@ namespace ERSApp.Models
                 {
                     date = value;
                     RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        public string Day
+        {
+            get
+            {
+                return day;
+            }
+            set
+            {
+                if (day != value)
+                {
+                    day = value;
+                    RaisePropertyChanged("Day");
                 }
             }
         }
