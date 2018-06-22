@@ -195,7 +195,7 @@ namespace ERSApp.Views
 
                 foreach (Session s in sessions)
                 {
-                    sessionTable.AddCell(new Paragraph(DateTime.Parse(s.Date).DayOfWeek.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Day, norm));
                     sessionTable.AddCell(new Paragraph(s.Date, norm));
                     sessionTable.AddCell(new Paragraph(s.Site, norm));
                     sessionTable.AddCell(new Paragraph(s.Time, norm));
