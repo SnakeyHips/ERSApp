@@ -38,6 +38,15 @@ namespace ERSApp.Views
                 }
             }
         }
+        
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            OverviewSessions.Clear();
+            foreach(Session s in SessionViewModel.Sessions)
+            {
+                OverviewSessions.Add(s);
+            }
+        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
