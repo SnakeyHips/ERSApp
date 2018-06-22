@@ -53,11 +53,11 @@ namespace ERSApp.ViewModels
         public static int AddSession(Session s)
         {
             string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
-                "INSERT INTO SessionTable (Date, Type, Site, Time, LOD, Chairs, Bleeds, Holiday, SV1Id, SV1Name, " +
+                "INSERT INTO SessionTable (Date, Day, Type, Site, Time, LOD, Chairs, Bleeds, Holiday, SV1Id, SV1Name, " +
                 "SV1LOD, SV1UNS, DRI1Id, DRI1Name, DRI1LOD, DRI1UNS, DRI2Id, DRI2Name, DRI2LOD, DRI2UNS, RN1Id, RN1Name, " +
                 "RN1LOD, RN1UNS, RN2Id, RN2Name, RN2LOD, RN2UNS, RN3Id, RN3Name, RN3LOD, RN3UNS, CCA1Id, CCA1Name, CCA1LOD, " +
                 "CCA1UNS, CCA2Id, CCA2Name, CCA2LOD, CCA2UNS, CCA3Id, CCA3Name, CCA3LOD, CCA3UNS, StaffCount, State) " +
-                "VALUES (@Date, @Type, @Site, @Time, @LOD, @Chairs, @Bleeds, @Holiday, @SV1Id, @SV1Name, @SV1LOD, @SV1UNS, " +
+                "VALUES (@Date, @Day, @Type, @Site, @Time, @LOD, @Chairs, @Bleeds, @Holiday, @SV1Id, @SV1Name, @SV1LOD, @SV1UNS, " +
                 "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @RN1Id, @RN1Name, @RN1LOD, " +
                 "@RN1UNS, @RN2Id, @RN2Name, @RN2LOD, @RN2UNS, @RN3Id, @RN3Name, @RN3LOD, @RN3UNS, @CCA1Id, @CCA1Name, @CCA1LOD, " +
                 "@CCA1UNS, @CCA2Id, @CCA2Name, @CCA2LOD, @CCA2UNS, @CCA3Id, @CCA3Name, @CCA3LOD, @CCA3UNS, @StaffCount, @State);";
