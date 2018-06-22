@@ -50,8 +50,8 @@ namespace ERSApp.ViewModels
         public static int AddAbsence(Absence a)
         {
             string query = "IF NOT EXISTS (SELECT * FROM AbsenceTable WHERE StaffId=@StaffId AND StartDate=@StartDate) " +
-                "INSERT INTO AbsenceTable (StaffId, StaffName, Type, StartDate, EndDate, Length)" +
-                "VALUES (@StaffId, @StaffName, @Type, @StartDate, @EndDate, @Length);";
+                "INSERT INTO AbsenceTable (StaffId, StaffName, Type, StartDate, EndDate, Hours)" +
+                "VALUES (@StaffId, @StaffName, @Type, @StartDate, @EndDate, @Hours);";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -70,7 +70,7 @@ namespace ERSApp.ViewModels
         public static void UpdateAbsence(Absence a)
         {
             string query = "UPDATE AbsenceTable" +
-                " SET Type=@Type, Length=@Length" +
+                " SET Type=@Type, Hours=@Hours" +
                 " WHERE StaffId=@StaffId AND StartDate=@StartDate;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
