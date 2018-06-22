@@ -41,6 +41,7 @@ namespace ERSApp.Views
         
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
+            cboFilter.SelectedItem = null;
             OverviewSessions.Clear();
             foreach(Session s in SessionViewModel.Sessions)
             {
