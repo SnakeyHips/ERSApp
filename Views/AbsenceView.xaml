@@ -14,7 +14,7 @@
                     <GridViewColumn Header="Type" Width="112" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Start Date" Width="112" DisplayMemberBinding="{Binding StartDate}"/>
                     <GridViewColumn Header="End Date" Width="112" DisplayMemberBinding="{Binding EndDate}"/>
-                    <GridViewColumn Header="Length" Width="112" DisplayMemberBinding="{Binding Length}"/>
+                    <GridViewColumn Header="Hours" Width="112" DisplayMemberBinding="{Binding Hours}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
