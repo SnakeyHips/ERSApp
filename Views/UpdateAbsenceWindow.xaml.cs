@@ -18,7 +18,7 @@ namespace ERSApp.Views
             this.Selected = a;
             txtId.Text = Selected.StaffId.ToString();
             txtName.Text = Selected.StaffName;
-            txtHours.Text = Selected.Length.ToString();
+            txtHours.Text = Selected.Hours.ToString();
             cboType.Items.Add("Day Off");
             cboType.Items.Add("Annual Leave");
             cboType.Items.Add("Sick Leave");
@@ -38,10 +38,10 @@ namespace ERSApp.Views
             else
             {
                 Selected.Type = cboType.Text;
-                double old = Selected.Length;
-                Selected.Length = double.Parse(txtHours.Text);
+                double old = Selected.Hours;
+                Selected.Hours = double.Parse(txtHours.Text);
                 AbsenceViewModel.UpdateAbsence(Selected);
-                double absence = Selected.Length - old;
+                double absence = Selected.Hours - old;
                 StaffViewModel.UpdateAbsence(Selected.StaffId, absence, StaffViewModel.GetWeek(DateTime.Parse(txtStart.Text)));
                 this.DialogResult = true;
             }
