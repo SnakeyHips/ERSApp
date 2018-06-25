@@ -11,6 +11,8 @@ namespace ERSApp.Models
         private int id;
         private string name;
         private string role;
+        private string address;
+        private string number;
         private double contractHours;
         private double appointedHours;
         private double absenceHours;
@@ -63,6 +65,38 @@ namespace ERSApp.Models
                 {
                     role = value;
                     RaisePropertyChanged("Role");
+                }
+            }
+        }
+
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                if (address != value)
+                {
+                    address = value;
+                    RaisePropertyChanged("Address");
+                }
+            }
+        }
+
+        public string Number
+        {
+            get
+            {
+                return number;
+            }
+            set
+            {
+                if (number != value)
+                {
+                    number = value;
+                    RaisePropertyChanged("Number");
                 }
             }
         }
