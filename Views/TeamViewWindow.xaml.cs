@@ -25,6 +25,15 @@ namespace ERSApp.Views
             TeamSites = new ObservableCollection<TeamSite>();
             Selected = t;
             lblHeader.Content = Selected.Name;
+            SV1Column.Header = Selected.SV1Name;
+            DRI1Column.Header = Selected.DRI1Name;
+            DRI2Column.Header = Selected.DRI2Name;
+            RN1Column.Header = Selected.RN1Name;
+            RN2Column.Header = Selected.RN2Name;
+            RN3Column.Header = Selected.RN3Name;
+            CCA1Column.Header = Selected.CCA1Name;
+            CCA2Column.Header = Selected.CCA2Name;
+            CCA3Column.Header = Selected.CCA3Name;
         }
 
         private async void btnView_Click(object sender, RoutedEventArgs e)
