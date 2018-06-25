@@ -15,7 +15,7 @@
         <Label Content="End Date:" HorizontalAlignment="Center" Margin="0,43,10,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <DatePicker Name="dateEnd" HorizontalAlignment="Center" Height="23" Margin="240,43,0,0" VerticalAlignment="Top" Width="175" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Button Content="View" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,0,0" Height="25" Width="75" Click="btnView_Click"/>
-        <ListView Name="lstTeamView" HorizontalAlignment="Left" Margin="0,83,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=TeamSessions}" Style="{DynamicResource JakeListView}">
+        <ListView Name="lstTeamView" HorizontalAlignment="Left" Margin="0,83,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=TeamSites}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Day" Width="81" DisplayMemberBinding="{Binding Day}"/>
