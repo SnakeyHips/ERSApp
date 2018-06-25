@@ -16,9 +16,9 @@
         <Label Content="Role:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Name="cboRole" Margin="0,80,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Address:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtAddress" Margin="0,120,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="11" BorderBrush="{DynamicResource AccentColorBrush}" />
+        <TextBox Name="txtAddress" Margin="0,120,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" BorderBrush="{DynamicResource AccentColorBrush}" />
         <Label Content="Number:" HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtNumber" Margin="0,160,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="11" BorderBrush="{DynamicResource AccentColorBrush}" />
+        <TextBox Name="txtNumber" Margin="0,160,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="12" BorderBrush="{DynamicResource AccentColorBrush}" />
         <Label Content="Hours:" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Name="cboHours" Margin="0,200,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Work Pattern:" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
