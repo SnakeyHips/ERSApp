@@ -32,17 +32,25 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please enter an ID.");
             }
-            else if (txtFirstName.Text == "")
+            else if (txtName.Text == "")
             {
                 await this.ShowMessageAsync("", "Please enter a First Name.");
-            }
-            else if (txtLastName.Text == "")
-            {
-                await this.ShowMessageAsync("", "Please enter a Last Name.");
             }
             else if (cboRole.Text == "")
             {
                 await this.ShowMessageAsync("", "Please enter a Role.");
+            }
+            else if (txtAddress.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please enter a Address.");
+            }
+            else if (txtNumber.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please enter a Contact Number.");
+            }
+            else if (txtNumber.Text.Length != 11)
+            {
+                await this.ShowMessageAsync("", "Please enter a valid Contact Number.");
             }
             else if (cboHours.Text == "")
             {
@@ -53,8 +61,10 @@ namespace ERSApp.Views
                 Staff temp = new Staff()
                 {
                     Id = int.Parse(txtId.Text),
-                    Name = txtFirstName.Text + " " + txtLastName.Text,
+                    Name = txtName.Text,
                     Role = cboRole.Text,
+                    Address = txtAddress.Text,
+                    Number = txtNumber.Text,
                     ContractHours = double.Parse(cboHours.Text),
                     WorkPattern = GetWorkPattern()
                 };
