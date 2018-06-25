@@ -341,6 +341,7 @@ namespace ERSApp.Models
     
     public class TeamSite : INotifyPropertyChanged
     {
+        private string date,
         private string sv1Name;
         private string sv1Site;
         private string dri1Name;
@@ -359,6 +360,22 @@ namespace ERSApp.Models
         private string cca2Site;
         private string cca3Name;
         private string cca3Site;
+
+        public string Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                if (date != value)
+                {
+                    date = value;
+                    RaisePropertyChanged("Date");
+                }
+            }
+        }
 
         public string SV1Name
         {
