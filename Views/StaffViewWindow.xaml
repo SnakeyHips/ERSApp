@@ -18,12 +18,13 @@
         <ListView Name="lstStaffView" HorizontalAlignment="Left" Margin="0,83,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=StaffSessions}" SelectedValuePath="Location" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Day" Width="100" DisplayMemberBinding="{Binding Day}"/>
-                    <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Date}"/>
-                    <GridViewColumn Header="Site" Width="100" DisplayMemberBinding="{Binding Site}"/>
-                    <GridViewColumn Header="Time" Width="100" DisplayMemberBinding="{Binding Time}"/>
-                    <GridViewColumn Header="Chairs" Width="100" DisplayMemberBinding="{Binding Chairs}"/>
-                    <GridViewColumn Header="Bleeds" Width="100" DisplayMemberBinding="{Binding Bleeds}"/>
+                    <GridViewColumn Header="Day" Width="85" DisplayMemberBinding="{Binding Day}"/>
+                    <GridViewColumn Header="Date" Width="85" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Site" Width="90" DisplayMemberBinding="{Binding Site}"/>
+                    <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Chairs" Width="85" DisplayMemberBinding="{Binding Chairs}"/>
+                    <GridViewColumn Header="OCC" Width="85" DisplayMemberBinding="{Binding OCC}"/>
+                    <GridViewColumn Header="Estimate" Width="85" DisplayMemberBinding="{Binding Estimate}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
