@@ -15,7 +15,8 @@ namespace ERSApp.Models
         private string time;
         private double lod;
         private int chairs;
-        private int bleeds;
+        private int occ;
+        private int estimate;
         private bool holiday;
         private int sv1Id;
         private string sv1Name;
@@ -169,18 +170,34 @@ namespace ERSApp.Models
             }
         }
 
-        public int Bleeds
+        public int OCC
         {
             get
             {
-                return bleeds;
+                return occ;
             }
             set
             {
-                if (bleeds != value)
+                if (occ != value)
                 {
-                    bleeds = value;
-                    RaisePropertyChanged("Bleeds");
+                    occ = value;
+                    RaisePropertyChanged("OCC");
+                }
+            }
+        }
+
+        public int Estimate
+        {
+            get
+            {
+                return estimate;
+            }
+            set
+            {
+                if (estimate != value)
+                {
+                    estimate = value;
+                    RaisePropertyChanged("Estimate");
                 }
             }
         }
