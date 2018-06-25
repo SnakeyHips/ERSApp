@@ -13,7 +13,7 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         WindowStartupLocation="CenterOwner"
-        Height="175" Width="325">
+        Height="150" Width="325">
     <Grid Margin="15, 15, 15, 15">
         <Label Content="Start Date:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <DatePicker Name="dateStart" HorizontalAlignment="Right" Height="23" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
