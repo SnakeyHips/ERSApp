@@ -18,7 +18,7 @@ namespace ERSApp.Views
         public UpdateTeamWindow(Team s)
         {
             InitializeComponent();
-            this.DataContext = new SiteViewModel();
+            this.DataContext = this;
             Selected = s;
             foreach (Staff x in StaffViewModel.Staffs)
             {
