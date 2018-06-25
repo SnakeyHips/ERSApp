@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Windows;
 using ERSApp.Models;
 using ERSApp.ViewModels;
@@ -38,6 +38,15 @@ namespace ERSApp.Views
                         break;
                 }
             }
+            cboSV1.SelectedValue = Selected.SV1Id;
+            cboDRI1.SelectedValue = Selected.DRI1Id;
+            cboDRI2.SelectedValue = Selected.DRI2Id;
+            cboRN1.SelectedValue = Selected.RN1Id;
+            cboRN2.SelectedValue = Selected.RN2Id;
+            cboRN3.SelectedValue = Selected.RN3Id;
+            cboCCA1.SelectedValue = Selected.CCA1Id;
+            cboCCA2.SelectedValue = Selected.CCA2Id;
+            cboCCA3.SelectedValue = Selected.CCA3Id;
         }
 
         private async void btnUpdateTeam_Click(object sender, RoutedEventArgs e)
