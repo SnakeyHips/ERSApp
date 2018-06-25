@@ -235,5 +235,37 @@ namespace ERSApp.ViewModels
         //    MessageBox.Show(SiteList[0].Name);
         //    MessageBox.Show(SiteList[SiteList.Count - 1].Name);
         //}
+        
+                //public static void  StaffCSV()
+        //{
+        //    List<Staff> StaffList = new List<Staff>();
+        //    System.IO.StreamReader file = new System.IO.StreamReader("C:\\Source\\ERSApp\\ERSApp\\staffs.csv");
+        //    string line;
+        //    try
+        //    {
+        //        while ((line = file.ReadLine()) != null)
+        //        {
+        //            string[] array = line.Split('/');
+        //            StaffList.Add(new Staff()
+        //            {
+        //                Id = Convert.ToInt32(array[0]),
+        //                Name = array[1],
+        //                Role = array[2],
+        //                Address = array[3],
+        //                Number = array[4],
+        //                ContractHours = Convert.ToDouble(array[5]),
+        //                WorkPattern = array[6]
+        //            });
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //    foreach (Staff s in StaffList)
+        //    {
+        //        AddStaff(s);
+        //    }
+        //}
     }
 }
