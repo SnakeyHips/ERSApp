@@ -10,15 +10,15 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="72" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="SV1" Width="67" DisplayMemberBinding="{Binding SV1}"/>
-                    <GridViewColumn Header="DRI1" Width="67" DisplayMemberBinding="{Binding DRI1}"/>
-                    <GridViewColumn Header="DRI2" Width="67" DisplayMemberBinding="{Binding DRI2}"/>
-                    <GridViewColumn Header="RN1" Width="67" DisplayMemberBinding="{Binding RN1}"/>
-                    <GridViewColumn Header="RN2" Width="67" DisplayMemberBinding="{Binding RN2}"/>
-                    <GridViewColumn Header="RN3" Width="67" DisplayMemberBinding="{Binding RN3}"/>
-                    <GridViewColumn Header="CCA1" Width="67" DisplayMemberBinding="{Binding CCA1}"/>
-                    <GridViewColumn Header="CCA2" Width="67" DisplayMemberBinding="{Binding CCA2}"/>
-                    <GridViewColumn Header="CCA3" Width="67" DisplayMemberBinding="{Binding CCA3}"/>
+                    <GridViewColumn Header="SV1" Width="67" DisplayMemberBinding="{Binding SV1Name}"/>
+                    <GridViewColumn Header="DRI1" Width="67" DisplayMemberBinding="{Binding DRI1Name}"/>
+                    <GridViewColumn Header="DRI2" Width="67" DisplayMemberBinding="{Binding DRI2Name}"/>
+                    <GridViewColumn Header="RN1" Width="67" DisplayMemberBinding="{Binding RN1Name}"/>
+                    <GridViewColumn Header="RN2" Width="67" DisplayMemberBinding="{Binding RN2Name}"/>
+                    <GridViewColumn Header="RN3" Width="67" DisplayMemberBinding="{Binding RN3Name}"/>
+                    <GridViewColumn Header="CCA1" Width="67" DisplayMemberBinding="{Binding CCA1Name}"/>
+                    <GridViewColumn Header="CCA2" Width="67" DisplayMemberBinding="{Binding CCA2Name}"/>
+                    <GridViewColumn Header="CCA3" Width="67" DisplayMemberBinding="{Binding CCA3Name}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
