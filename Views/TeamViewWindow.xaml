@@ -18,17 +18,17 @@
         <ListView Name="lstTeamView" HorizontalAlignment="Left" Margin="0,83,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=TeamSessions}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Day" Width="55" DisplayMemberBinding="{Binding Day}"/>
-                    <GridViewColumn Header="Date" Width="60" DisplayMemberBinding="{Binding Date}"/>
-                    <GridViewColumn Header="{Binding SV1Name}" Width="55" DisplayMemberBinding="{Binding SV1Site}"/>
-                    <GridViewColumn Header="{Binding DRI1Name}" Width="55" DisplayMemberBinding="{Binding DRI1Site}"/>
-                    <GridViewColumn Header="{Binding DRI2Name}" Width="55" DisplayMemberBinding="{Binding DRI2Site}"/>
-                    <GridViewColumn Header="{Binding RN1Name}" Width="55" DisplayMemberBinding="{Binding RN1Site}"/>
-                    <GridViewColumn Header="{Binding RN2Name}" Width="55" DisplayMemberBinding="{Binding RN2Site}"/>
-                    <GridViewColumn Header="{Binding RN3Name}" Width="55" DisplayMemberBinding="{Binding RN3Site}"/>
-                    <GridViewColumn Header="{Binding CCA1Name}" Width="55" DisplayMemberBinding="{Binding CCA1Site}"/>
-                    <GridViewColumn Header="{Binding CCA2Name}" Width="55" DisplayMemberBinding="{Binding CCA2Site}"/>
-                    <GridViewColumn Header="{Binding CCA3Name}" Width="55" DisplayMemberBinding="{Binding CCA3Site}"/>
+                    <GridViewColumn Header="Day" Width="81" DisplayMemberBinding="{Binding Day}"/>
+                    <GridViewColumn Header="Date" Width="81" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn x:Name="SV1Column" Width="82" DisplayMemberBinding="{Binding SV1Site}"/>
+                    <GridViewColumn x:Name="DRI1Column" Width="82" DisplayMemberBinding="{Binding DRI1Site}"/>
+                    <GridViewColumn x:Name="DRI2Column" Width="82" DisplayMemberBinding="{Binding DRI2Site}"/>
+                    <GridViewColumn x:Name="RN1Column" Width="82" DisplayMemberBinding="{Binding RN1Site}"/>
+                    <GridViewColumn x:Name="RN2Column" Width="82" DisplayMemberBinding="{Binding RN2Site}"/>
+                    <GridViewColumn x:Name="RN3Column" Width="82" DisplayMemberBinding="{Binding RN3Site}"/>
+                    <GridViewColumn x:Name="CCA1Column" Width="82" DisplayMemberBinding="{Binding CCA1Site}"/>
+                    <GridViewColumn x:Name="CCA2Column" Width="82" DisplayMemberBinding="{Binding CCA2Site}"/>
+                    <GridViewColumn x:Name="CCA3Column" Width="82" DisplayMemberBinding="{Binding CCA3Site}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
