@@ -171,7 +171,7 @@ namespace ERSApp.Views
                 PdfWriter writer = PdfWriter.GetInstance(report, fs);
 
                 //Table for displaying stock quantities with 17 being amount of columns
-                PdfPTable sessionTable = new PdfPTable(17);
+                PdfPTable sessionTable = new PdfPTable(18);
                 sessionTable.SpacingBefore = 10f;
                 sessionTable.WidthPercentage = 100;
 
@@ -182,7 +182,7 @@ namespace ERSApp.Views
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "Bleeds",
+                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "OCC", "Estimate", 
                     "RN1", "RN2", "RN3", "SV1", "DRI1", "DRI2", "CCA1", "CCA2", "CCA3", "Count"};
 
                 foreach (string h in headers)
@@ -202,7 +202,8 @@ namespace ERSApp.Views
                     sessionTable.AddCell(new Paragraph(s.Time, norm));
                     sessionTable.AddCell(new Paragraph(s.LOD.ToString(), norm));
                     sessionTable.AddCell(new Paragraph(s.Chairs.ToString(), norm));
-                    sessionTable.AddCell(new Paragraph(s.Bleeds.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.OCC.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Estimate.ToString(), norm));
                     sessionTable.AddCell(new Paragraph(s.RN1Name, norm));
                     sessionTable.AddCell(new Paragraph(s.RN2Name, norm));
                     sessionTable.AddCell(new Paragraph(s.RN3Name, norm));
