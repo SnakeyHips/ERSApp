@@ -108,9 +108,13 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please select a Chair amount.");
             }
-            else if (txtBleeds.Text == "")
+            else if (txtOCC.Text == "")
             {
-                await this.ShowMessageAsync("", "Please select an estimated Bleed amount.");
+                await this.ShowMessageAsync("", "Please enter an OCC value.");
+            }
+            else if (txtEstimate.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please enter an Estimate value.");
             }
             else
             {
@@ -122,7 +126,8 @@ namespace ERSApp.Views
                     Time = cboTime.Text,
                     LOD = double.Parse(txtLOD.Text),
                     Chairs = int.Parse(cboChairs.Text),
-                    Bleeds = int.Parse(txtBleeds.Text),
+                    OCC = int.Parse(txtOCC.Text),
+                    Estimate = int.Parse(txtEstimate.Text),
                     Holiday = CheckHoliday(),
                     SV1Id = 0, SV1Name = "", SV1LOD = 0.0, SV1UNS = 0.0,
                     DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0, DRI1UNS = 0.0,
