@@ -338,4 +338,320 @@ namespace ERSApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
+    public class TeamSite : INotifyPropertyChanged
+    {
+        private int sv1Id;
+        private string sv1Site;
+        private int dri1Id;
+        private string dri1Site;
+        private int dri2Id;
+        private string dri2Site;
+        private int rn1Id;
+        private string rn1Site;
+        private int rn2Id;
+        private string rn2Site;
+        private int rn3Id;
+        private string rn3Site;
+        private int cca1Id;
+        private string cca1Site;
+        private int cca2Id;
+        private string cca2Site;
+        private int cca3Id;
+        private string cca3Site;
+
+        public int SV1Id
+        {
+            get
+            {
+                return sv1Id;
+            }
+            set
+            {
+                if (sv1Id != value)
+                {
+                    sv1Id = value;
+                    RaisePropertyChanged("SV1Id");
+                }
+            }
+        }
+
+        public string SV1Site
+        {
+            get
+            {
+                return sv1Site;
+            }
+            set
+            {
+                if (sv1Site != value)
+                {
+                    sv1Site = value;
+                    RaisePropertyChanged("SV1Site");
+                }
+            }
+        }
+
+        public int DRI1Id
+        {
+            get
+            {
+                return dri1Id;
+            }
+            set
+            {
+                if (dri1Id != value)
+                {
+                    dri1Id = value;
+                    RaisePropertyChanged("DRI1Id");
+                }
+            }
+        }
+
+        public string DRI1Site
+        {
+            get
+            {
+                return dri1Site;
+            }
+            set
+            {
+                if (dri1Site != value)
+                {
+                    dri1Site = value;
+                    RaisePropertyChanged("DRI1Site");
+                }
+            }
+        }
+
+        public int DRI2Id
+        {
+            get
+            {
+                return dri2Id;
+            }
+            set
+            {
+                if (dri2Id != value)
+                {
+                    dri2Id = value;
+                    RaisePropertyChanged("DRI2Id");
+                }
+            }
+        }
+
+        public string DRI2Site
+        {
+            get
+            {
+                return dri2Site;
+            }
+            set
+            {
+                if (dri2Site != value)
+                {
+                    dri2Site = value;
+                    RaisePropertyChanged("DRI2Site");
+                }
+            }
+        }
+
+        public int RN1Id
+        {
+            get
+            {
+                return rn1Id;
+            }
+            set
+            {
+                if (rn1Id != value)
+                {
+                    rn1Id = value;
+                    RaisePropertyChanged("RN1Id");
+                }
+            }
+        }
+
+        public string RN1Site
+        {
+            get
+            {
+                return rn1Site;
+            }
+            set
+            {
+                if (rn1Site != value)
+                {
+                    rn1Site = value;
+                    RaisePropertyChanged("RN1Site");
+                }
+            }
+        }
+
+        public int RN2Id
+        {
+            get
+            {
+                return rn2Id;
+            }
+            set
+            {
+                if (rn2Id != value)
+                {
+                    rn2Id = value;
+                    RaisePropertyChanged("RN2Id");
+                }
+            }
+        }
+
+        public string RN2Site
+        {
+            get
+            {
+                return rn2Site;
+            }
+            set
+            {
+                if (rn2Site != value)
+                {
+                    rn2Site = value;
+                    RaisePropertyChanged("RN2Site");
+                }
+            }
+        }
+
+        public int RN3Id
+        {
+            get
+            {
+                return rn3Id;
+            }
+            set
+            {
+                if (rn3Id != value)
+                {
+                    rn3Id = value;
+                    RaisePropertyChanged("RN3Id");
+                }
+            }
+        }
+
+        public string RN3Site
+        {
+            get
+            {
+                return rn3Site;
+            }
+            set
+            {
+                if (rn3Site != value)
+                {
+                    rn3Site = value;
+                    RaisePropertyChanged("RN3Site");
+                }
+            }
+        }
+
+        public int CCA1Id
+        {
+            get
+            {
+                return cca1Id;
+            }
+            set
+            {
+                if (cca1Id != value)
+                {
+                    cca1Id = value;
+                    RaisePropertyChanged("CCA1Id");
+                }
+            }
+        }
+
+        public string CCA1Site
+        {
+            get
+            {
+                return cca1Site;
+            }
+            set
+            {
+                if (cca1Site != value)
+                {
+                    cca1Site = value;
+                    RaisePropertyChanged("CCA1Site");
+                }
+            }
+        }
+
+        public int CCA2Id
+        {
+            get
+            {
+                return cca2Id;
+            }
+            set
+            {
+                if (cca2Id != value)
+                {
+                    cca2Id = value;
+                    RaisePropertyChanged("CCA2Id");
+                }
+            }
+        }
+
+        public string CCA2Site
+        {
+            get
+            {
+                return cca2Site;
+            }
+            set
+            {
+                if (cca2Site != value)
+                {
+                    cca2Site = value;
+                    RaisePropertyChanged("CCA2Site");
+                }
+            }
+        }
+
+        public int CCA3Id
+        {
+            get
+            {
+                return cca3Id;
+            }
+            set
+            {
+                if (cca3Id != value)
+                {
+                    cca3Id = value;
+                    RaisePropertyChanged("CCA3Id");
+                }
+            }
+        }
+
+        public string CCA3Site
+        {
+            get
+            {
+                return cca3Site;
+            }
+            set
+            {
+                if (cca3Site != value)
+                {
+                    cca3Site = value;
+                    RaisePropertyChanged("CCA3Site");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+    }
 }
