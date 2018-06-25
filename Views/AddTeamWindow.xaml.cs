@@ -133,6 +133,7 @@ namespace ERSApp.Views
                 };
                 if (TeamViewModel.AddTeam(temp) > 0)
                 {
+                    TeamViewModel.Teams.Add(temp);
                     this.DialogResult = true;
                 }
                 else
