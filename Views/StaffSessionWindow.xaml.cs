@@ -96,8 +96,8 @@ namespace ERSApp.Views
             txtLOD.Text = Selected.LOD.ToString();
             txtType.Text = Selected.Type;
             txtChairs.Text = Selected.Chairs.ToString();
-            txtBleeds.Text = Selected.Bleeds.ToString();
-            txtStaffCount.Text = Selected.StaffCount.ToString();
+            txtOCC.Text = Selected.OCC.ToString();
+            txtEstimate.Text = Selected.Estimate.ToString();
 
             //Autopopulate cbos from StaffList
             //Pastel colours from colorhexa.com
@@ -385,14 +385,10 @@ namespace ERSApp.Views
                 UpdateStaff();
             }
 
-            //Check if LOD or Bleed values have changed
+            //Check if LOD has changed
             if (txtLOD.Text != Selected.LOD.ToString())
             {
                 Selected.LOD = double.Parse(txtLOD.Text);
-            }
-            if (txtBleeds.Text != Selected.Bleeds.ToString())
-            {
-                Selected.Bleeds = int.Parse(txtBleeds.Text);
             }
 
             //Go through and check if all roles are filled or not
