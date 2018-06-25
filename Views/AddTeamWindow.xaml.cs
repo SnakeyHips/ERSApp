@@ -17,7 +17,7 @@ namespace ERSApp.Views
         public AddTeamWindow()
         {
             InitializeComponent();
-            this.DataContext = new SiteViewModel();
+            this.DataContext = this;
             SVList = new List<Staff>();
             DRIList = new List<Staff>();
             RNList = new List<Staff>();
