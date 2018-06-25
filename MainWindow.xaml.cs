@@ -30,10 +30,14 @@ namespace ERSApp
                     dateCalender.Visibility = Visibility.Visible;
                     break;
                 case 2:
-                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Olive"), ThemeManager.GetAppTheme("BaseLight"));
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Steel"), ThemeManager.GetAppTheme("BaseLight"));
                     dateCalender.Visibility = Visibility.Visible;
                     break;
                 case 3:
+                    ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Olive"), ThemeManager.GetAppTheme("BaseLight"));
+                    dateCalender.Visibility = Visibility.Visible;
+                    break;
+                case 4:
                     ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent("Sienna"), ThemeManager.GetAppTheme("BaseLight"));
                     dateCalender.Visibility = Visibility.Collapsed;
                     break;
