@@ -23,7 +23,8 @@ namespace ERSApp.Views
             txtLOD.Text = Selected.LOD.ToString();
             PopulateChairs(Selected.Type);
             cboChairs.SelectedItem = Selected.Chairs.ToString();
-            txtBleeds.Text = Selected.Bleeds.ToString();
+            txtOCC.Text = Selected.OCC.ToString();
+            txtEstimate.Text = Selected.Estimate.ToString();
         }
 
         public void PopulateChairs(string type)
@@ -62,16 +63,21 @@ namespace ERSApp.Views
                 {
                     await this.ShowMessageAsync("", "Please select a Chair amount.");
                 }
-                else if (txtBleeds.Text == "")
+                else if (txtOCC.Text == "")
                 {
-                    await this.ShowMessageAsync("", "Please select an estimated Bleed amount.");
+                    await this.ShowMessageAsync("", "Please enter an OCC value.");
+                }
+                else if (txtEstimate.Text == "")
+                {
+                    await this.ShowMessageAsync("", "Please enter an Estimate value.");
                 }
                 else
                 {
                     Selected.LOD = double.Parse(txtLOD.Text);
                     Selected.Type = txtType.Text;
                     Selected.Chairs = int.Parse(cboChairs.Text);
-                    Selected.Bleeds = int.Parse(txtBleeds.Text);
+                    Selected.OCC = int.Parse(txtOCC.Text);
+                    Selected.Estimate = int.Parse(txtEstimate.Text);
                     SessionViewModel.UpdateSession(Selected);
                     this.DialogResult = true;
                 }
