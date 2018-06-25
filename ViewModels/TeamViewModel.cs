@@ -46,7 +46,7 @@ namespace ERSApp.ViewModels
         public static int AddGroup(Team g)
         {
             string query = "IF NOT EXISTS (SELECT * FROM TeamTable WHERE Name=@Name) " +
-                 "INSERT INTO GroupTable (Name, SV1Id, SV1Name, DRI1Id, DRI1Name, DRI2Id, DRI2Name, RN1Id, RN1Name, " +
+                 "INSERT INTO TeamTable (Name, SV1Id, SV1Name, DRI1Id, DRI1Name, DRI2Id, DRI2Name, RN1Id, RN1Name, " +
                 "RN2Id, RN2Name, RN3Id, RN3Name, CCA1Id, CCA1Name, CCA2Id, CCA2Name, CCA3Id, CCA3Name) " +
                 "VALUES (@Name, @SV1Id, @SV1Name, @DRI1Id, @DRI1Name, @DRI2Id, @DRI2Name, @RN1Id, @RN1Name, " +
                 "@RN2Id, @RN2Name, @RN3Id, @RN3Name, @CCA1Id, @CCA1Name, @CCA2Id, @CCA2Name, @CCA3Id, @CCA3Name);";
