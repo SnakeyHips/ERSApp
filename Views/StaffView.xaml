@@ -9,12 +9,14 @@
         <ListView Name="lstStaff" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Staffs}" SelectedItem="{Binding Path=SelectedStaff}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="112" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Name" Width="115" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Role" Width="112" DisplayMemberBinding="{Binding Role}"/>
-                    <GridViewColumn Header="Contract" Width="112" DisplayMemberBinding="{Binding ContractHours}"/>
-                    <GridViewColumn Header="Pattern" Width="112" DisplayMemberBinding="{Binding WorkPattern}"/>
-                    <GridViewColumn Header="Status" Width="112" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Id" Width="84" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="87" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Role" Width="84" DisplayMemberBinding="{Binding Role}"/>
+                    <GridViewColumn Header="Address" Width="84" DisplayMemberBinding="{Binding Address}"/>
+                    <GridViewColumn Header="Number" Width="84" DisplayMemberBinding="{Binding Number}"/>
+                    <GridViewColumn Header="Contract" Width="84" DisplayMemberBinding="{Binding ContractHours}"/>
+                    <GridViewColumn Header="Pattern" Width="84" DisplayMemberBinding="{Binding WorkPattern}"/>
+                    <GridViewColumn Header="Status" Width="84" DisplayMemberBinding="{Binding Status}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
