@@ -1,10 +1,12 @@
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using ERSApp.Models;
 using ERSApp.ViewModels;
-using System.Windows.Controls;
 
 namespace ERSApp.Views
 {
@@ -23,6 +25,8 @@ namespace ERSApp.Views
             cboRole.Items.Add("RN");
             cboRole.Items.Add("CCA");
             cboRole.SelectedItem = Selected.Role;
+            txtAddress.Text = Selected.Address;
+            txtNumber.Text = Selected.Number;
             cboHours.Items.Add("20");
             cboHours.Items.Add("25");
             cboHours.Items.Add("30");
@@ -31,7 +35,7 @@ namespace ERSApp.Views
             SetCheckboxes(Selected.WorkPattern);
         }
 
-                //Method to go through and check checkboxes based on work pattern string
+        //Method to go through and check checkboxes based on work pattern string
         private void SetCheckboxes(string workpattern)
         {
             if(workpattern != null)
@@ -47,7 +51,6 @@ namespace ERSApp.Views
                 }
             }
         }
-
 
         private string GetWorkPattern()
         {
@@ -74,6 +77,14 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please select a Role.");
             }
+            else if (txtAddress.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please enter a Address.");
+            }
+            else if (txtNumber.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please enter a Contact Number.");
+            }
             else if (cboHours.Text == "")
             {
                 await this.ShowMessageAsync("", "Please select Contract Hours.");
@@ -81,11 +92,21 @@ namespace ERSApp.Views
             else
             {
                 Selected.Role = cboRole.Text;
+                Selected.Address = txtAddress.Text;
+                Selected.Number = txtNumber.Text;
                 Selected.ContractHours = double.Parse(cboHours.Text);
                 Selected.WorkPattern = GetWorkPattern();
                 StaffViewModel.UpdateStaff(Selected);
                 this.DialogResult = true;
             }
+        }
+
+        //Method to force only numbers in textbox input
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            //Use this in the xaml file to only allow numbers in input
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
