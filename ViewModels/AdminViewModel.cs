@@ -13,9 +13,9 @@ namespace ERSApp.ViewModels
     {
         public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
         public static ObservableCollection<Site> Sites { get; set; }
-        public static ObservableCollection<SpecialDate> SpecialDates { get; set; }
+        public static ObservableCollection<Holiday> Holidays { get; set; }
         public static Site SelectedSite { get; set; }
-        public static SpecialDate SelectedSpecialDate { get; set; }
+        public static Holiday SelectedHoliday { get; set; }
 
         public AdminViewModel()
         {
@@ -24,7 +24,7 @@ namespace ERSApp.ViewModels
 
         public static void LoadAdmins()
         {
-            SpecialDates = GetSpecialDates();
+            Holidays = GetHolidays();
             Sites = GetSites();
         }
 
@@ -46,7 +46,7 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static ObservableCollection<SpecialDate> GetSpecialDates()
+        public static ObservableCollection<Holiday> GetHolidays()
         {
             string query = "SELECT * FROM HolidayTable";
             using (SqlConnection conn = new SqlConnection(connString))
@@ -54,20 +54,20 @@ namespace ERSApp.ViewModels
                 try
                 {
                     conn.Open();
-                    return new ObservableCollection<SpecialDate>(conn.Query<SpecialDate>(query).ToList());
+                    return new ObservableCollection<Holiday>(conn.Query<Holiday>(query).ToList());
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                    return new ObservableCollection<SpecialDate>();
+                    return new ObservableCollection<Holiday>();
                 }
             }
         }
 
-        public static int AddHoliday(SpecialDate h)
+        public static int AddHoliday(Holiday h)
         {
-            string query = "IF NOT EXISTS (SELECT * FROM SpecialDateTable WHERE Date=@Date) " +
-                "INSERT INTO SpecialDateTable (Name, Date) VALUES (@Name, @Date);";
+            string query = "IF NOT EXISTS (SELECT * FROM HolidayTable WHERE Date=@Date) " +
+                "INSERT INTO HolidayTable (Name, Date) VALUES (@Name, @Date);";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -83,9 +83,9 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static void UpdateHoliday(SpecialDate h)
+        public static void UpdateHoliday(Holiday h)
         {
-            string query = "UPDATE SpecialDateTable SET Date=@Date WHERE Name=@Name;";
+            string query = "UPDATE HolidayTable SET Date=@Date WHERE Name=@Name;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -100,9 +100,9 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static void DeleteHoliday(SpecialDate h)
+        public static void DeleteHoliday(Holiday h)
         {
-            string query = "DELETE FROM SpecialDateTable WHERE Name=@Name AND Date=@Date;";
+            string query = "DELETE FROM HolidayTable WHERE Name=@Name AND Date=@Date;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
