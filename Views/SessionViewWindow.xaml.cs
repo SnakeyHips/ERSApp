@@ -24,9 +24,9 @@ namespace ERSApp.Views
             txtClinicTime.Text = Selected.Time;
             txtLOD.Text = Selected.LOD.ToString();
             txtType.Text = Selected.Type;
-            txtStaffCount.Text = Selected.StaffCount.ToString();
             txtChairs.Text = Selected.Chairs.ToString();
-            txtBleeds.Text = Selected.Bleeds.ToString();
+            txtOCC.Text = Selected.OCC.ToString();
+            txtEstimate.Text = Selected.Estimate.ToString();
             SeriesCollection = new SeriesCollection();
 
             //Autopopulate cbos from StaffList
