@@ -13,7 +13,7 @@ namespace ERSApp.ViewModels
     {
         public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
         public static ObservableCollection<Team> Teams { get; set; }
-        public static string SelectedTeam { get; set; }
+        public static Team SelectedTeam { get; set; }
 
         public TeamViewModel()
         {
