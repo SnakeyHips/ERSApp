@@ -2,11 +2,11 @@ using System.ComponentModel;
 
 namespace ERSApp.Models
 {
-    public class SpecialDateModel
+    public class HolidayModel
     {
     }
 
-    public class SpecialDate : INotifyPropertyChanged
+    public class Holiday : INotifyPropertyChanged
     {
         private string name;
         private string date;
