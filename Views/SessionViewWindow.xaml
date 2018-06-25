@@ -1,4 +1,4 @@
-<Controls:MetroWindow x:Class="ERSApp.Views.ViewWindow"
+<Controls:MetroWindow x:Class="ERSApp.Views.SessionViewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,10 +19,10 @@
         <TextBox Name="txtLOD" HorizontalAlignment="Left" Height="23" Margin="85,130,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Label Content="Type:" HorizontalAlignment="Right" Margin="0,50,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtType" HorizontalAlignment="Right" Height="23" Margin="0,50,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Staff Count:" HorizontalAlignment="Right" Margin="0,90,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtStaffCount" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Bleeds:" HorizontalAlignment="Right" Margin="0,130,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtBleeds" HorizontalAlignment="Right" Height="23" Margin="0,130,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="OCC:" HorizontalAlignment="Right" Margin="0,90,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtOCC" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Estimate:" HorizontalAlignment="Right" Margin="0,130,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtEstimate" HorizontalAlignment="Right" Height="23" Margin="0,130,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,199,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"></Separator>
         <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,199,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"></Separator>
         <Label Content="Staff" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" FontWeight="DemiBold" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"/>
