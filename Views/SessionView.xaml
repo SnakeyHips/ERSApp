@@ -9,14 +9,15 @@
         <ListView Name="lstSessions" HorizontalAlignment="Left" Margin="0,0,0,0" Width="675" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=Sessions}" SelectedItem="{Binding Path=SelectedSession}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" Width="85" DisplayMemberBinding="{Binding Date}"/>
-                    <GridViewColumn Header="Site" Width="85" DisplayMemberBinding="{Binding Site}"/>
-                    <GridViewColumn Header="Time" Width="85" DisplayMemberBinding="{Binding Time}"/>
-                    <GridViewColumn Header="LOD" Width="80" DisplayMemberBinding="{Binding LOD}"/>
-                    <GridViewColumn Header="Type" Width="85" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Chairs" Width="85" DisplayMemberBinding="{Binding Chairs}"/>
-                    <GridViewColumn Header="Bleeds" Width="85" DisplayMemberBinding="{Binding Bleeds}"/>
-                    <GridViewColumn Header="Count" Width="85" DisplayMemberBinding="{Binding StaffCount}"/>
+                    <GridViewColumn Header="Date" Width="75" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Site" Width="75" DisplayMemberBinding="{Binding Site}"/>
+                    <GridViewColumn Header="Time" Width="75" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="LOD" Width="75" DisplayMemberBinding="{Binding LOD}"/>
+                    <GridViewColumn Header="Type" Width="75" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Chairs" Width="75" DisplayMemberBinding="{Binding Chairs}"/>
+                    <GridViewColumn Header="OCC" Width="75" DisplayMemberBinding="{Binding OCC}"/>
+                    <GridViewColumn Header="Estimate" Width="75" DisplayMemberBinding="{Binding Estimate}"/>
+                    <GridViewColumn Header="Count" Width="75" DisplayMemberBinding="{Binding StaffCount}"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
