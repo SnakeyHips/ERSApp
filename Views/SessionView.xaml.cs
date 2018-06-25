@@ -31,10 +31,11 @@ namespace ERSApp.Views
         {
             AddSessionWindow addSessionWindow = new AddSessionWindow();
             addSessionWindow.Owner = mainWindow;
+            Calendar cal = mainWindow.FindChild<Calendar>("dateCalender");
+            addSessionWindow.dateSession.SelectedDate = cal.SelectedDate;
             addSessionWindow.ShowDialog();
             if(addSessionWindow.DialogResult == true)
             {
-                Calendar cal = mainWindow.FindChild<Calendar>("dateCalender");
                 if(cal.SelectedDate != addSessionWindow.dateSession.SelectedDate)
                 {
                     cal.SelectedDate = addSessionWindow.dateSession.SelectedDate;
