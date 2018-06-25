@@ -17,6 +17,9 @@
             <TabItem Header="Staff">
                 <views:StaffView/>
             </TabItem>
+            <TabItem Header="Teams">
+                <views:TeamView/>
+            </TabItem>
             <TabItem Header="Absence">
                 <views:AbsenceView/>
             </TabItem>
