@@ -18,6 +18,10 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = new SiteViewModel();
+            SVList = new List<Staff>();
+            DRIList = new List<Staff>();
+            RNList = new List<Staff>();
+            CCAList = new List<Staff>();
             foreach (Staff x in StaffViewModel.Staffs)
             {
                 switch (x.Role)
