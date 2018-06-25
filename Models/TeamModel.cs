@@ -338,39 +338,40 @@ namespace ERSApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
+    
     public class TeamSite : INotifyPropertyChanged
     {
-        private int sv1Id;
+        private string sv1Name;
         private string sv1Site;
-        private int dri1Id;
+        private string dri1Name;
         private string dri1Site;
-        private int dri2Id;
+        private string dri2Name;
         private string dri2Site;
-        private int rn1Id;
+        private string rn1Name;
         private string rn1Site;
-        private int rn2Id;
+        private string rn2Name;
         private string rn2Site;
-        private int rn3Id;
+        private string rn3Name;
         private string rn3Site;
-        private int cca1Id;
+        private string cca1Name;
         private string cca1Site;
-        private int cca2Id;
+        private string cca2Name;
         private string cca2Site;
-        private int cca3Id;
+        private string cca3Name;
         private string cca3Site;
 
-        public int SV1Id
+        public string SV1Name
         {
             get
             {
-                return sv1Id;
+                return sv1Name;
             }
             set
             {
-                if (sv1Id != value)
+                if (sv1Name != value)
                 {
-                    sv1Id = value;
-                    RaisePropertyChanged("SV1Id");
+                    sv1Name = value;
+                    RaisePropertyChanged("SV1Name");
                 }
             }
         }
@@ -391,18 +392,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int DRI1Id
+        public string DRI1Name
         {
             get
             {
-                return dri1Id;
+                return dri1Name;
             }
             set
             {
-                if (dri1Id != value)
+                if (dri1Name != value)
                 {
-                    dri1Id = value;
-                    RaisePropertyChanged("DRI1Id");
+                    dri1Name = value;
+                    RaisePropertyChanged("DRI1Name");
                 }
             }
         }
@@ -423,18 +424,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int DRI2Id
+        public string DRI2Name
         {
             get
             {
-                return dri2Id;
+                return dri2Name;
             }
             set
             {
-                if (dri2Id != value)
+                if (dri2Name != value)
                 {
-                    dri2Id = value;
-                    RaisePropertyChanged("DRI2Id");
+                    dri2Name = value;
+                    RaisePropertyChanged("DRI2Name");
                 }
             }
         }
@@ -455,18 +456,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int RN1Id
+        public string RN1Name
         {
             get
             {
-                return rn1Id;
+                return rn1Name;
             }
             set
             {
-                if (rn1Id != value)
+                if (rn1Name != value)
                 {
-                    rn1Id = value;
-                    RaisePropertyChanged("RN1Id");
+                    rn1Name = value;
+                    RaisePropertyChanged("RN1Name");
                 }
             }
         }
@@ -487,18 +488,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int RN2Id
+        public string RN2Name
         {
             get
             {
-                return rn2Id;
+                return rn2Name;
             }
             set
             {
-                if (rn2Id != value)
+                if (rn2Name != value)
                 {
-                    rn2Id = value;
-                    RaisePropertyChanged("RN2Id");
+                    rn2Name = value;
+                    RaisePropertyChanged("RN2Name");
                 }
             }
         }
@@ -519,18 +520,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int RN3Id
+        public string RN3Name
         {
             get
             {
-                return rn3Id;
+                return rn3Name;
             }
             set
             {
-                if (rn3Id != value)
+                if (rn3Name != value)
                 {
-                    rn3Id = value;
-                    RaisePropertyChanged("RN3Id");
+                    rn3Name = value;
+                    RaisePropertyChanged("RN3Name");
                 }
             }
         }
@@ -551,18 +552,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int CCA1Id
+        public string CCA1Name
         {
             get
             {
-                return cca1Id;
+                return cca1Name;
             }
             set
             {
-                if (cca1Id != value)
+                if (cca1Name != value)
                 {
-                    cca1Id = value;
-                    RaisePropertyChanged("CCA1Id");
+                    cca1Name = value;
+                    RaisePropertyChanged("CCA1Name");
                 }
             }
         }
@@ -583,18 +584,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int CCA2Id
+        public string CCA2Name
         {
             get
             {
-                return cca2Id;
+                return cca2Name;
             }
             set
             {
-                if (cca2Id != value)
+                if (cca2Name != value)
                 {
-                    cca2Id = value;
-                    RaisePropertyChanged("CCA2Id");
+                    cca2Name = value;
+                    RaisePropertyChanged("CCA2Name");
                 }
             }
         }
@@ -615,18 +616,18 @@ namespace ERSApp.Models
             }
         }
 
-        public int CCA3Id
+        public string CCA3Name
         {
             get
             {
-                return cca3Id;
+                return cca3Name;
             }
             set
             {
-                if (cca3Id != value)
+                if (cca3Name != value)
                 {
-                    cca3Id = value;
-                    RaisePropertyChanged("CCA3Id");
+                    cca3Name = value;
+                    RaisePropertyChanged("CCA3Name");
                 }
             }
         }
