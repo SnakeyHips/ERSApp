@@ -19,10 +19,10 @@
         <TextBox Name="txtLOD" HorizontalAlignment="Left" Height="23" Margin="85,130,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Type:" HorizontalAlignment="Right" Margin="0,50,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtType" HorizontalAlignment="Right" Height="23" Margin="0,50,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Staff Count:" HorizontalAlignment="Right" Margin="0,90,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtStaffCount" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Bleeds:" HorizontalAlignment="Right" Margin="0,130,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtBleeds" HorizontalAlignment="Right" Height="23" Margin="0,130,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Label Content="OCC:" HorizontalAlignment="Right" Margin="0,90,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtOCC" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Estimate:" HorizontalAlignment="Right" Margin="0,130,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtEstimate" HorizontalAlignment="Right" Height="23" Margin="0,130,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
 
         <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,199,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"></Separator>
         <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,199,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"></Separator>
