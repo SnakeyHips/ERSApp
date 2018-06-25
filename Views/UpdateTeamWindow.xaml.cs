@@ -19,6 +19,10 @@ namespace ERSApp.Views
         {
             InitializeComponent();
             this.DataContext = this;
+            SVList = new List<Staff>();
+            DRIList = new List<Staff>();
+            RNList = new List<Staff>();
+            CCAList = new List<Staff>();
             Selected = s;
             foreach (Staff x in StaffViewModel.Staffs)
             {
