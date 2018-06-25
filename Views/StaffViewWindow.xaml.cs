@@ -100,7 +100,7 @@ namespace ERSApp.Views
                 PdfWriter writer = PdfWriter.GetInstance(report, fs);
 
                 //Table for displaying stock quantities with 2 being amount of columns
-                PdfPTable sessionTable = new PdfPTable(7);
+                PdfPTable sessionTable = new PdfPTable(8);
                 sessionTable.SpacingBefore = 10f;
                 sessionTable.WidthPercentage = 100;
 
@@ -111,7 +111,7 @@ namespace ERSApp.Views
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "Bleeds" };
+                string[] headers = { "Day", "Date", "Location", "Time", "LOD", "Chairs", "OCC", "Estimate" };
 
                 foreach (string h in headers)
                 {
@@ -130,7 +130,8 @@ namespace ERSApp.Views
                     sessionTable.AddCell(new Paragraph(s.Time, norm));
                     sessionTable.AddCell(new Paragraph(s.LOD.ToString(), norm));
                     sessionTable.AddCell(new Paragraph(s.Chairs.ToString(), norm));
-                    sessionTable.AddCell(new Paragraph(s.Bleeds.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.OCC.ToString(), norm));
+                    sessionTable.AddCell(new Paragraph(s.Estimate.ToString(), norm));
                 }
 
                 //Title used with date and time when created
