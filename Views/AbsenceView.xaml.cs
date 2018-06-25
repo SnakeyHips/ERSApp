@@ -33,7 +33,7 @@ namespace ERSApp.Views
                 {
                     if (s.Id == id)
                     {
-                        s.Status = AbsenceViewModel.GetStatus(id);
+                        s.Status = AbsenceViewModel.GetStatus(id, SelectedDate.Date);
                     }
                 }
             }
@@ -52,7 +52,7 @@ namespace ERSApp.Views
                     {
                         if (s.Id == AbsenceViewModel.SelectedAbsence.StaffId)
                         {
-                            s.Status = AbsenceViewModel.GetStatus(s.Id);
+                            s.Status = AbsenceViewModel.GetStatus(s.Id, SelectedDate.Date);
                         }
                     }
                 }
