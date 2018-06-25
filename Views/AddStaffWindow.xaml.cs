@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -48,7 +48,7 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please enter a Contact Number.");
             }
-            else if (txtNumber.Text.Length != 11)
+            else if (txtNumber.Text.Length < 11)
             {
                 await this.ShowMessageAsync("", "Please enter a valid Contact Number.");
             }
