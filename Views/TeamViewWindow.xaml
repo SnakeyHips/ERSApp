@@ -1,0 +1,49 @@
+﻿<Controls:MetroWindow x:Class="ERSApp.Views.TeamViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        WindowStartupLocation="CenterScreen"
+        Title="Team View" Height="500" Width="630">
+    <Grid Margin="15,0,15,15">
+        <Label Name ="lblHeader" Content="Team - Sessions" FontSize="26" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="0,43,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <DatePicker Name="dateStart" HorizontalAlignment="Left" Height="23" Margin="75,43,0,0" VerticalAlignment="Top" Width="175" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Label Content="End Date:" HorizontalAlignment="Center" Margin="0,43,10,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <DatePicker Name="dateEnd" HorizontalAlignment="Center" Height="23" Margin="240,43,0,0" VerticalAlignment="Top" Width="175" BorderBrush="{DynamicResource AccentColorBrush}"/>
+        <Button Content="View" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,0,0" Height="25" Width="75" Click="btnView_Click"/>
+        <ListView Name="lstTeamView" HorizontalAlignment="Left" Margin="0,83,0,40" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Path=TeamSessions}" Style="{DynamicResource JakeListView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Day" Width="55" DisplayMemberBinding="{Binding Day}"/>
+                    <GridViewColumn Header="Date" Width="60" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="{Binding SV1Name}" Width="55" DisplayMemberBinding="{Binding SV1Site}"/>
+                    <GridViewColumn Header="{Binding DRI1Name}" Width="55" DisplayMemberBinding="{Binding DRI1Site}"/>
+                    <GridViewColumn Header="{Binding DRI2Name}" Width="55" DisplayMemberBinding="{Binding DRI2Site}"/>
+                    <GridViewColumn Header="{Binding RN1Name}" Width="55" DisplayMemberBinding="{Binding RN1Site}"/>
+                    <GridViewColumn Header="{Binding RN2Name}" Width="55" DisplayMemberBinding="{Binding RN2Site}"/>
+                    <GridViewColumn Header="{Binding RN3Name}" Width="55" DisplayMemberBinding="{Binding RN3Site}"/>
+                    <GridViewColumn Header="{Binding CCA1Name}" Width="55" DisplayMemberBinding="{Binding CCA1Site}"/>
+                    <GridViewColumn Header="{Binding CCA2Name}" Width="55" DisplayMemberBinding="{Binding CCA2Site}"/>
+                    <GridViewColumn Header="{Binding CCA3Name}" Width="55" DisplayMemberBinding="{Binding CCA3Site}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State}" Value="0">
+                            <Setter Property="Foreground" Value="Silver"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ContentControl Content="{DynamicResource WBSIcon}" VerticalAlignment="Bottom" Height="27" Margin="0,0,0,-27"/>
+        <Button Content="Report" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnReportStaff_Click" IsDefault="True"/>
+        <Button Content="Close" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnClose_Click" IsCancel="True"/>
+    </Grid>
+</Controls:MetroWindow>
