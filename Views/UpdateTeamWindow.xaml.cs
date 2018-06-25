@@ -42,6 +42,7 @@ namespace ERSApp.Views
                         break;
                 }
             }
+            txtName.Text = Selected.Name;
             cboSV1.SelectedValue = Selected.SV1Id;
             cboDRI1.SelectedValue = Selected.DRI1Id;
             cboDRI2.SelectedValue = Selected.DRI2Id;
