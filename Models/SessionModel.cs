@@ -23,41 +23,49 @@ namespace ERSApp.Models
         private string sv1Name;
         private double sv1LOD;
         private double sv1UNS;
+        private double sv1OT;
         private int dri1Id;
         private string dri1Name;
         private double dri1LOD;
         private double dri1UNS;
+        private double dri1OT;
         private int dri2Id;
         private string dri2Name;
         private double dri2LOD;
         private double dri2UNS;
+        private double dri2OT;
         private int rn1Id;
         private string rn1Name;
         private double rn1LOD;
         private double rn1UNS;
+        private double rn1OT;
         private int rn2Id;
         private string rn2Name;
         private double rn2LOD;
         private double rn2UNS;
+        private double rn2OT;
         private int rn3Id;
         private string rn3Name;
         private double rn3LOD;
         private double rn3UNS;
+        private double rn3OT;
         private int cca1Id;
         private string cca1Name;
         private double cca1LOD;
         private double cca1UNS;
+        private double cca1OT;
         private int cca2Id;
         private string cca2Name;
         private double cca2LOD;
         private double cca2UNS;
+        private double cca2OT;
         private int cca3Id;
         private string cca3Name;
         private double cca3LOD;
         private double cca3UNS;
+        private double cca3OT;
         private int staffCount;
         private int state;
-
 
         public string Date
         {
@@ -74,7 +82,7 @@ namespace ERSApp.Models
                 }
             }
         }
-        
+
         public string Day
         {
             get
@@ -218,7 +226,7 @@ namespace ERSApp.Models
                 }
             }
         }
-        
+
         public string Note
         {
             get
@@ -299,6 +307,22 @@ namespace ERSApp.Models
             }
         }
 
+        public double SV1OT
+        {
+            get
+            {
+                return sv1OT;
+            }
+            set
+            {
+                if (sv1OT != value)
+                {
+                    sv1OT = value;
+                    RaisePropertyChanged("SV1OT");
+                }
+            }
+        }
+
         public int DRI1Id
         {
             get
@@ -359,6 +383,22 @@ namespace ERSApp.Models
                 {
                     dri1UNS = value;
                     RaisePropertyChanged("DRI1UNS");
+                }
+            }
+        }
+
+        public double DRI1OT
+        {
+            get
+            {
+                return dri1OT;
+            }
+            set
+            {
+                if (dri1OT != value)
+                {
+                    dri1OT = value;
+                    RaisePropertyChanged("DRI1OT");
                 }
             }
         }
@@ -427,6 +467,22 @@ namespace ERSApp.Models
             }
         }
 
+        public double DRI2OT
+        {
+            get
+            {
+                return dri2OT;
+            }
+            set
+            {
+                if (dri2OT != value)
+                {
+                    dri2OT = value;
+                    RaisePropertyChanged("DRI2OT");
+                }
+            }
+        }
+
         public int RN1Id
         {
             get
@@ -487,6 +543,22 @@ namespace ERSApp.Models
                 {
                     rn1UNS = value;
                     RaisePropertyChanged("RN1UNS");
+                }
+            }
+        }
+
+        public double RN1OT
+        {
+            get
+            {
+                return rn1OT;
+            }
+            set
+            {
+                if (rn1OT != value)
+                {
+                    rn1OT = value;
+                    RaisePropertyChanged("RN1OT");
                 }
             }
         }
@@ -555,6 +627,22 @@ namespace ERSApp.Models
             }
         }
 
+        public double RN2OT
+        {
+            get
+            {
+                return rn2OT;
+            }
+            set
+            {
+                if (rn2OT != value)
+                {
+                    rn2OT = value;
+                    RaisePropertyChanged("RN2OT");
+                }
+            }
+        }
+
         public int RN3Id
         {
             get
@@ -615,6 +703,22 @@ namespace ERSApp.Models
                 {
                     rn3UNS = value;
                     RaisePropertyChanged("RN3UNS");
+                }
+            }
+        }
+
+        public double RN3OT
+        {
+            get
+            {
+                return rn3OT;
+            }
+            set
+            {
+                if (rn3OT != value)
+                {
+                    rn3OT = value;
+                    RaisePropertyChanged("RN3OT");
                 }
             }
         }
@@ -683,6 +787,22 @@ namespace ERSApp.Models
             }
         }
 
+        public double CCA1OT
+        {
+            get
+            {
+                return cca1OT;
+            }
+            set
+            {
+                if (cca1OT != value)
+                {
+                    cca1OT = value;
+                    RaisePropertyChanged("CCA1OT");
+                }
+            }
+        }
+
         public int CCA2Id
         {
             get
@@ -747,6 +867,22 @@ namespace ERSApp.Models
             }
         }
 
+        public double CCA2OT
+        {
+            get
+            {
+                return cca2OT;
+            }
+            set
+            {
+                if (cca2OT != value)
+                {
+                    cca2OT = value;
+                    RaisePropertyChanged("CCA2OT");
+                }
+            }
+        }
+
         public int CCA3Id
         {
             get
@@ -807,6 +943,22 @@ namespace ERSApp.Models
                 {
                     cca3UNS = value;
                     RaisePropertyChanged("CCA3UNS");
+                }
+            }
+        }
+
+        public double CCA3OT
+        {
+            get
+            {
+                return cca3OT;
+            }
+            set
+            {
+                if (cca3OT != value)
+                {
+                    cca3OT = value;
+                    RaisePropertyChanged("CCA3OT");
                 }
             }
         }
