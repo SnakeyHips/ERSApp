@@ -13,7 +13,7 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         WindowStartupLocation="CenterOwner"
-        Title="Calculate Dialog" Height="490" Width="325">
+        Title="Calculate Dialog" Height="530" Width="325">
     <Grid Margin="15, 15, 15, 15">
         <Label Content="Staff ID:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtId" Margin="0,0,25,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="175" IsUndoEnabled="False" PreviewTextInput="NumberValidationTextBox" MaxLength="4" TextChanged="txtId_TextChanged" BorderBrush="{DynamicResource AccentColorBrush}"/>
@@ -27,16 +27,18 @@
         <Button Content="3 Months" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,120,0,0" Height="25" Width="75" Click="btnMonth_Click"/>
         <Label Content="End Date:" HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <DatePicker Name="dateEnd" HorizontalAlignment="Right" Height="23" Margin="0,160,0,0" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
-        <Label Name="lblContractCount" Content="Contract:" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Contract:" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtContractCount" Margin="0,200,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblAppointedCount" Content="Appointed:" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Appointed:" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtAppointedCount" Margin="0,240,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblAbsenceCount" Content="Absence:" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Absence:" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtAbsenceCount" Margin="0,280,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblHolidayCount" Content="Holiday:" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Holiday:" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtHolidayCount" Margin="0,320,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Name="lblUnsocialCount" Content="Unsocial:" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Unsocial:" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtUnsocialCount" Margin="0,360,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Content="Overtime:" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtOvertimeCount" Margin="0,400,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
         <Button Content="Calculate" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCalculate_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCancel_Click"/>
     </Grid>
