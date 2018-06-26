@@ -8,58 +8,69 @@
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterOwner"
-        Title="Staff View" Height="750" Width="760">
+        Title="Staff View" Height="750" Width="850">
     <Grid Name="grdStaff" Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Day - Date" FontSize="26" HorizontalAlignment="Left" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtClinicTime" HorizontalAlignment="Left" Height="23" Margin="85,50,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Chairs:" HorizontalAlignment="Left" Margin="25,90,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtChairs" HorizontalAlignment="Left" Height="23" Margin="85,90,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="LOD:" HorizontalAlignment="Left" Margin="35,130,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtLOD" HorizontalAlignment="Left" Height="23" Margin="85,130,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Type:" HorizontalAlignment="Right" Margin="0,50,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtType" HorizontalAlignment="Right" Height="23" Margin="0,50,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="OCC:" HorizontalAlignment="Right" Margin="0,90,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtOCC" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Label Content="Estimate:" HorizontalAlignment="Right" Margin="0,130,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtEstimate" HorizontalAlignment="Right" Height="23" Margin="0,130,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,189,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"/>
-        <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,189,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"/>
-        <Label Content="Staff" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Top" FontWeight="DemiBold" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"/>
-        <Label Content="Staff Name" HorizontalAlignment="Center" Margin="0,205,100,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
-        <Label Content="LOD" HorizontalAlignment="Center" Margin="120,205,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
-        <Label Content="Unsocial" HorizontalAlignment="Center" Margin="240,205,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
-        <Label Content="Supervisor:" HorizontalAlignment="Center" Margin="0,230,340,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtSV1" HorizontalAlignment="Center" Height="23" Margin="0,230,100,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtSV1LOD" HorizontalAlignment="Center" Height="23" Margin="120,230,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtSV1UNS" HorizontalAlignment="Center" Height="23" Margin="240,230,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <Label Content="Drivers: " HorizontalAlignment="Center" Margin="0,270,320,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtDRI1" HorizontalAlignment="Center" Height="23" Margin="0,270,100,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtDRI1LOD" HorizontalAlignment="Center" Height="23" Margin="120,270,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtDRI1UNS" HorizontalAlignment="Center" Height="23" Margin="240,270,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtDRI2" HorizontalAlignment="Center" Height="23" Margin="0,310,100,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtDRI2LOD" HorizontalAlignment="Center" Height="23" Margin="120,310,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtDRI2UNS" HorizontalAlignment="Center" Height="23" Margin="240,310,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <Label Content="RNs: " HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtRN1" HorizontalAlignment="Left" Height="23" Margin="50,360,0,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtRN1LOD" HorizontalAlignment="Left" Height="23" Margin="210,360,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtRN1UNS" HorizontalAlignment="Left" Height="23" Margin="270,360,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtRN2" HorizontalAlignment="Left" Height="23" Margin="50,400,0,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtRN2LOD" HorizontalAlignment="Left" Height="23" Margin="210,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtRN2UNS" HorizontalAlignment="Left" Height="23" Margin="270,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtRN3" HorizontalAlignment="Left" Height="23" Margin="50,440,0,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtRN3LOD" HorizontalAlignment="Left" Height="23" Margin="210,440,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtRN3UNS" HorizontalAlignment="Left" Height="23" Margin="270,440,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <Label Content="CCAs: " HorizontalAlignment="Right" Margin="0,360,313,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtCCA1" HorizontalAlignment="Right" Height="23" Margin="0,360,153,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtCCA1LOD" HorizontalAlignment="Right" Height="23" Margin="0,360,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA1UNS" HorizontalAlignment="Right" Height="23" Margin="0,360,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA2" HorizontalAlignment="Right" Height="23" Margin="0,400,153,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtCCA2LOD" HorizontalAlignment="Right" Height="23" Margin="0,400,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA2UNS" HorizontalAlignment="Right" Height="23" Margin="0,400,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA3" HorizontalAlignment="Right" Height="23" Margin="0,440,153,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,440,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA3UNS" HorizontalAlignment="Right" Height="23" Margin="0,440,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <Label Content="LOD:" HorizontalAlignment="Left" Margin="35,90,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtLOD" HorizontalAlignment="Left" Height="23" Margin="85,90,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Type:" HorizontalAlignment="Center" Margin="0,50,210,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtType" HorizontalAlignment="Center" Height="23" Margin="0,50,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Chairs:" HorizontalAlignment="Center" Margin="0,90,215,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtChairs" HorizontalAlignment="Center" Height="23" Margin="0,90,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="OCC:" HorizontalAlignment="Right" Margin="0,50,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtOCC" HorizontalAlignment="Right" Height="23" Margin="0,50,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <Label Content="Estimate:" HorizontalAlignment="Right" Margin="0,90,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtEstimate" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+
+        <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,149,0,0" Width="375" Background="{DynamicResource AccentColorBrush3}"/>
+        <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,149,0,0" Width="375" Background="{DynamicResource AccentColorBrush3}"/>
+        <Label Content="Staff" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" FontWeight="DemiBold" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Staff Name" HorizontalAlignment="Center" Margin="0,165,190,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="LOD" HorizontalAlignment="Center" Margin="30,165,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Unsocial" HorizontalAlignment="Center" Margin="150,165,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="OT" HorizontalAlignment="Center" Margin="270,165,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Supervisor:" HorizontalAlignment="Center" Margin="0,190,440,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="cboSV1" HorizontalAlignment="Center" Height="23" Margin="0,190,190,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtSV1LOD" HorizontalAlignment="Center" Height="23" Margin="30,190,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtSV1UNS" HorizontalAlignment="Center" Height="23" Margin="150,190,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtSV1OT" HorizontalAlignment="Center" Height="23" Margin="270,190,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <Label Content="Drivers: " HorizontalAlignment="Center" Margin="0,230,410,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="cboDRI1" HorizontalAlignment="Center" Height="23" Margin="0,230,190,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtDRI1LOD" HorizontalAlignment="Center" Height="23" Margin="30,230,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtDRI1UNS" HorizontalAlignment="Center" Height="23" Margin="150,230,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtDRI1OT" HorizontalAlignment="Center" Height="23" Margin="270,230,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="cboDRI2" HorizontalAlignment="Center" Height="23" Margin="0,270,190,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtDRI2LOD" HorizontalAlignment="Center" Height="23" Margin="30,270,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtDRI2UNS" HorizontalAlignment="Center" Height="23" Margin="150,270,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtDRI2OT" HorizontalAlignment="Center" Height="23" Margin="270,270,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <Label Content="RNs: " HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="cboRN1" HorizontalAlignment="Left" Height="23" Margin="50,320,0,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtRN1LOD" HorizontalAlignment="Left" Height="23" Margin="210,320,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtRN1UNS" HorizontalAlignment="Left" Height="23" Margin="270,320,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtRN1OT" HorizontalAlignment="Left" Height="23" Margin="330,320,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="cboRN2" HorizontalAlignment="Left" Height="23" Margin="50,360,0,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtRN2LOD" HorizontalAlignment="Left" Height="23" Margin="210,360,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtRN2UNS" HorizontalAlignment="Left" Height="23" Margin="270,360,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtRN2OT" HorizontalAlignment="Left" Height="23" Margin="330,360,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="cboRN3" HorizontalAlignment="Left" Height="23" Margin="50,400,0,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtRN3LOD" HorizontalAlignment="Left" Height="23" Margin="210,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtRN3UNS" HorizontalAlignment="Left" Height="23" Margin="270,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtRN3OT" HorizontalAlignment="Left" Height="23" Margin="330,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <Label Content="CCAs: " HorizontalAlignment="Right" Margin="0,320,373,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="cboCCA1" HorizontalAlignment="Right" Height="23" Margin="0,320,213,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtCCA1LOD" HorizontalAlignment="Right" Height="23" Margin="0,320,153,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA1UNS" HorizontalAlignment="Right" Height="23" Margin="0,320,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA1OT" HorizontalAlignment="Right" Height="23" Margin="0,320,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="cboCCA2" HorizontalAlignment="Right" Height="23" Margin="0,360,213,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtCCA2LOD" HorizontalAlignment="Right" Height="23" Margin="0,360,153,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA2UNS" HorizontalAlignment="Right" Height="23" Margin="0,360,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA2OT" HorizontalAlignment="Right" Height="23" Margin="0,360,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="cboCCA3" HorizontalAlignment="Right" Height="23" Margin="0,400,213,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,400,153,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA3UNS" HorizontalAlignment="Right" Height="23" Margin="0,400,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA3OT" HorizontalAlignment="Right" Height="23" Margin="0,400,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
         <lvc:CartesianChart Margin="0,480,0,40" LegendLocation="Bottom" DataTooltip="{x:Null}" Hoverable="False" Series="{Binding SeriesCollection}">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Name="xAxis" MinValue="0" MaxValue="1">
