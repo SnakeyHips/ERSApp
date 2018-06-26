@@ -105,7 +105,7 @@ namespace ERSApp.Views
             //Used to set window height if no chart present
             if (SeriesCollection.Count < 1)
             {
-                this.Height = 575;
+                this.Height = 525;
             }
         }
 
