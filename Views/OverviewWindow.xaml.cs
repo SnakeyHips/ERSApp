@@ -48,6 +48,20 @@ namespace ERSApp.Views
                 OverviewSessions.Add(s);
             }
         }
+        
+        //Method for viewing session note
+        private void btnNote_Click(object sender, RoutedEventArgs e)
+        {
+            if(lstOverview.SelectedValue != null)
+            {
+                NoteDialog noteDialog = new NoteDialog();
+                noteDialog.Owner = this;
+                noteDialog.txtNote.Text = (string)lstOverview.SelectedValue;
+                noteDialog.txtNote.IsEnabled = false;
+                noteDialog.btnAccept.Visibility = Visibility.Collapsed;
+                noteDialog.ShowDialog();
+            }
+        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
