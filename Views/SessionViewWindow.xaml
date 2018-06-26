@@ -23,9 +23,12 @@
         <TextBox Name="txtOCC" HorizontalAlignment="Right" Height="23" Margin="0,90,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Label Content="Estimate:" HorizontalAlignment="Right" Margin="0,130,245,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtEstimate" HorizontalAlignment="Right" Height="23" Margin="0,130,85,0" TextAlignment="Right" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,199,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"></Separator>
-        <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,199,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"></Separator>
-        <Label Content="Staff" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" FontWeight="DemiBold" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Separator HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,189,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"/>
+        <Separator HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,189,0,0" Width="330" Background="{DynamicResource AccentColorBrush3}"/>
+        <Label Content="Staff" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Top" FontWeight="DemiBold" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Staff Name" HorizontalAlignment="Center" Margin="0,205,100,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="LOD" HorizontalAlignment="Center" Margin="120,205,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
+        <Label Content="Unsocial" HorizontalAlignment="Center" Margin="240,205,0,0" VerticalAlignment="Top" FontWeight="DemiBold" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Supervisor:" HorizontalAlignment="Center" Margin="0,230,340,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtSV1" HorizontalAlignment="Center" Height="23" Margin="0,230,100,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <TextBox Name="txtSV1LOD" HorizontalAlignment="Center" Height="23" Margin="120,230,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
