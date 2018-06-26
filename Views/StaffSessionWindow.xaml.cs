@@ -367,13 +367,28 @@ namespace ERSApp.Views
                 Team Selected = (Team)teamDialog.lstTeamDialog.SelectedItem;
                 cboSV1.SelectedValue = Selected.SV1Id;
                 cboDRI1.SelectedValue = Selected.DRI1Id;
-                cboDRI2.SelectedValue = Selected.DRI2Id;
+                if (cboDRI2.IsEnabled)
+                {
+                    cboDRI2.SelectedValue = Selected.DRI2Id;
+                }
                 cboRN1.SelectedValue = Selected.RN1Id;
-                cboRN2.SelectedValue = Selected.RN2Id;
-                cboRN3.SelectedValue = Selected.RN3Id;
+                if (cboRN2.IsEnabled)
+                {
+                    cboRN2.SelectedValue = Selected.RN2Id;
+                }
+                if (cboRN3.IsEnabled)
+                {
+                    cboRN3.SelectedValue = Selected.RN3Id;
+                }
                 cboCCA1.SelectedValue = Selected.CCA1Id;
-                cboCCA2.SelectedValue = Selected.CCA2Id;
-                cboCCA3.SelectedValue = Selected.CCA3Id;
+                if (cboCCA2.IsEnabled)
+                {
+                    cboCCA2.SelectedValue = Selected.CCA2Id;
+                }
+                if (cboCCA3.IsEnabled)
+                {
+                    cboCCA3.SelectedValue = Selected.CCA3Id;
+                }
             }
         }
 
