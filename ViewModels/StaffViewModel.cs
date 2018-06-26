@@ -56,8 +56,9 @@ namespace ERSApp.ViewModels
                     conn.Open();
                     return conn.Execute(query, s);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    MessageBox.Show(ex.ToString());
                     return -1;
                 }
             }
@@ -102,7 +103,7 @@ namespace ERSApp.ViewModels
         public static ObservableCollection<Staff> GetRoster(double week)
         {
             string query = "SELECT Week, StaffId as Id, StaffName as Name, Role, ContractHours, " +
-                "AppointedHours, HolidayHours, AbsenceHours, UnsocialHours FROM RosterTable WHERE Week=@Week;";
+                "AppointedHours, HolidayHours, AbsenceHours, UnsocialHours, OvertimeHours FROM RosterTable WHERE Week=@Week;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -136,18 +137,18 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static void AddRoster(int id, double appointed, double absence, double holiday, double unsocial, double week)
+        public static void AddRoster(int id, double appointed, double absence, double holiday, double unsocial, double overtime, double week)
         {
             string query = "INSERT INTO RosterTable " +
-                "(Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, HolidayHours, UnsocialHours)" +
-                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Holiday, @Unsocial);";
+                "(Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, HolidayHours, UnsocialHours, OvertimeHours)" +
+                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Holiday, @Unsocial, @Overtime);";
             Staff s = Staffs.First(x => x.Id == id);
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, holiday, unsocial });
+                    conn.Execute(query, new { week, id, s.Name, s.Role, s.ContractHours, appointed, absence, holiday, unsocial, overtime });
                 }
                 catch (Exception ex)
                 {
@@ -178,25 +179,25 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, appointed, 0.0, 0.0, 0.0, week);
+                        AddRoster(id, appointed, 0.0, 0.0, 0.0, 0.0, week);
                     }
                 }
             }
         }
 
-        public static void UpdateHoliday(int id, double holiday, double week)
+        public static void UpdateAppointedHoliday(int id, double appointed, double week)
         {
             if (id != 0)
             {
                 string query = "UPDATE RosterTable" +
-                    " SET HolidayHours=HolidayHours+@Holiday " +
+                    " SET AppointedHours=AppointedHours+@Appointed, HolidayHours=HolidayHours+@Appointed" +
                     " WHERE Week=@Week AND StaffId=@Id;";
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
                         conn.Open();
-                        conn.Execute(query, new { holiday, week, id });
+                        conn.Execute(query, new { appointed, week, id });
                     }
                     catch (Exception ex)
                     {
@@ -228,7 +229,7 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, 0.0, absence, 0.0, 0.0, week);
+                        AddRoster(id, 0.0, absence, 0.0, 0.0, 0.0, week);
                     }
                 }
             }
@@ -256,40 +257,34 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static void UpdateAppointedUnsocial(int id, double appointed, double unsocial, double week)
+        public static void UpdateOvertime(int id, double overtime, double week)
         {
             if (id != 0)
             {
                 string query = "UPDATE RosterTable" +
-                    " SET AppointedHours=AppointedHours+@Appointed, UnsocialHours=UnsocialHours+@Unsocial " +
+                    " SET OvertimeHours=OvertimeHours+@Overtime " +
                     " WHERE Week=@Week AND StaffId=@Id;";
-                int rows = 0;
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
                         conn.Open();
-                        rows = conn.Execute(query, new { appointed, unsocial, week, id });
+                        conn.Execute(query, new { overtime, week, id });
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString());
-                    }
-                    if (rows == 0)
-                    {
-                        //Add in new roster if update fails
-                        AddRoster(id, appointed, 0.0, 0.0, unsocial, week);
                     }
                 }
             }
         }
 
-        public static void UpdateAppointedHolidayUnsocial(int id, double appointed, double unsocial, double week)
+        public static void UpdateHours(int id, double appointed, double unsocial, double overtime, double week)
         {
             if (id != 0)
             {
                 string query = "UPDATE RosterTable" +
-                    " SET AppointedHours=AppointedHours+@Appointed, HolidayHours=HolidayHours+@Appointed, UnsocialHours=UnsocialHours+@Unsocial " +
+                    " SET AppointedHours=AppointedHours+@Appointed, UnsocialHours=UnsocialHours+@Unsocial, OvertimeHours=OvertimeHours+@Overtime " +
                     " WHERE Week=@Week AND StaffId=@Id;";
                 int rows = 0;
                 using (SqlConnection conn = new SqlConnection(connString))
@@ -297,7 +292,7 @@ namespace ERSApp.ViewModels
                     try
                     {
                         conn.Open();
-                        rows = conn.Execute(query, new { appointed, unsocial, week, id });
+                        rows = conn.Execute(query, new { appointed, unsocial, overtime, week, id });
                     }
                     catch (Exception ex)
                     {
@@ -306,7 +301,36 @@ namespace ERSApp.ViewModels
                     if (rows == 0)
                     {
                         //Add in new roster if update fails
-                        AddRoster(id, appointed, 0.0, appointed, unsocial, week);
+                        AddRoster(id, appointed, 0.0, 0.0, unsocial, overtime, week);
+                    }
+                }
+            }
+        }
+
+        public static void UpdateHoursHoliday(int id, double appointed, double unsocial, double overtime, double week)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE RosterTable" +
+                    " SET AppointedHours=AppointedHours+@Appointed, HolidayHours=HolidayHours+@Appointed, " +
+                    "UnsocialHours=UnsocialHours+@Unsocial, OvertimeHours=OvertimeHours+@Overtime " +
+                    " WHERE Week=@Week AND StaffId=@Id;";
+                int rows = 0;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        rows = conn.Execute(query, new { appointed, unsocial, overtime, week, id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    if (rows == 0)
+                    {
+                        //Add in new roster if update fails
+                        AddRoster(id, appointed, 0.0, appointed, unsocial, overtime, week);
                     }
                 }
             }
