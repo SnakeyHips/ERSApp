@@ -116,6 +116,17 @@ namespace ERSApp.Views
             };
         }
 
+        //Method for viewing session note
+        private void btnNote_Click(object sender, RoutedEventArgs e)
+        {
+            NoteDialog noteDialog = new NoteDialog();
+            noteDialog.Owner = this;
+            noteDialog.txtNote.Text = Selected.Note;
+            noteDialog.txtNote.IsEnabled = false;
+            noteDialog.btnAccept.Visibility = Visibility.Collapsed;
+            noteDialog.ShowDialog();
+        }
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
