@@ -28,13 +28,13 @@ namespace ERSApp.Views
             }
             else
             {
-                DialogResult = true;
+                this.DialogResult = true;
             }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            this.DialogResult = false;
         }
     }
 }
