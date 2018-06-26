@@ -25,7 +25,6 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding State}" Value="0">
                             <Setter Property="Foreground" Value="Silver"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
