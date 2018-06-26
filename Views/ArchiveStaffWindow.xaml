@@ -19,13 +19,14 @@
         <ListView Name="lstRoster" HorizontalAlignment="Left" Width="560" Margin="115,0,0,0" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding Roster}" Style="{DynamicResource JakeListView}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="80" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Contract" Width="80" DisplayMemberBinding="{Binding ContractHours}"/>
-                    <GridViewColumn Header="Appointed" Width="80" DisplayMemberBinding="{Binding AppointedHours}"/>
-                    <GridViewColumn Header="Absence" Width="80" DisplayMemberBinding="{Binding AbsenceHours}"/>
-                    <GridViewColumn Header="Holiday" Width="80" DisplayMemberBinding="{Binding HolidayHours}"/>
-                    <GridViewColumn Header="Unsocial" Width="80" DisplayMemberBinding="{Binding UnsocialHours}"/>
+                    <GridViewColumn Header="Id" Width="70" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="70" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Contract" Width="70" DisplayMemberBinding="{Binding ContractHours}"/>
+                    <GridViewColumn Header="Appointed" Width="70" DisplayMemberBinding="{Binding AppointedHours}"/>
+                    <GridViewColumn Header="Absence" Width="70" DisplayMemberBinding="{Binding AbsenceHours}"/>
+                    <GridViewColumn Header="Holiday" Width="70" DisplayMemberBinding="{Binding HolidayHours}"/>
+                    <GridViewColumn Header="Unsocial" Width="70" DisplayMemberBinding="{Binding UnsocialHours}"/>
+                    <GridViewColumn Header="Overtime" Width="70" DisplayMemberBinding="{Binding OvertimeHours}"/>
                 </GridView>
             </ListView.View>
         </ListView>
