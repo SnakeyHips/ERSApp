@@ -114,6 +114,7 @@ namespace ERSApp.Views
                 double absenceCount = 0.0;
                 double holidayCount = 0.0;
                 double unsocialCount = 0.0;
+                double overtimeCount = 0.0;
 
                 List<Staff> SelectedRange = new List<Staff>();
                 for(double i = weekStart; i <= weekEnd; i++)
@@ -132,12 +133,14 @@ namespace ERSApp.Views
                     absenceCount += s.AbsenceHours;
                     holidayCount += s.HolidayHours;
                     unsocialCount += s.UnsocialHours;
+                    overtimeCount += s.OvertimeHours;
                 }
                 txtContractCount.Text = contractCount.ToString();
                 txtAppointedCount.Text = appointedCount.ToString();
                 txtAbsenceCount.Text = absenceCount.ToString();
                 txtHolidayCount.Text = holidayCount.ToString();
                 txtUnsocialCount.Text = unsocialCount.ToString();
+                txtOvertimeCount.Text = overtimeCount.ToString();
             }
         }
         
