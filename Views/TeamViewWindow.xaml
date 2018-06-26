@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="ERSApp.Views.TeamViewWindow"
+<Controls:MetroWindow x:Class="ERSApp.Views.TeamViewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
-        Title="Team View" Height="500" Width="630">
+        Title="Team View" Height="500" Width="930">
     <Grid Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Team - Sessions" FontSize="26" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Start Date:" HorizontalAlignment="Left" Margin="0,43,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -20,27 +20,224 @@
                 <GridView>
                     <GridViewColumn Header="Day" Width="81" DisplayMemberBinding="{Binding Day}"/>
                     <GridViewColumn Header="Date" Width="81" DisplayMemberBinding="{Binding Date}"/>
-                    <GridViewColumn x:Name="SV1Column" Width="82" DisplayMemberBinding="{Binding SV1Site}"/>
-                    <GridViewColumn x:Name="DRI1Column" Width="82" DisplayMemberBinding="{Binding DRI1Site}"/>
-                    <GridViewColumn x:Name="DRI2Column" Width="82" DisplayMemberBinding="{Binding DRI2Site}"/>
-                    <GridViewColumn x:Name="RN1Column" Width="82" DisplayMemberBinding="{Binding RN1Site}"/>
-                    <GridViewColumn x:Name="RN2Column" Width="82" DisplayMemberBinding="{Binding RN2Site}"/>
-                    <GridViewColumn x:Name="RN3Column" Width="82" DisplayMemberBinding="{Binding RN3Site}"/>
-                    <GridViewColumn x:Name="CCA1Column" Width="82" DisplayMemberBinding="{Binding CCA1Site}"/>
-                    <GridViewColumn x:Name="CCA2Column" Width="82" DisplayMemberBinding="{Binding CCA2Site}"/>
-                    <GridViewColumn x:Name="CCA3Column" Width="82" DisplayMemberBinding="{Binding CCA3Site}"/>
+                    <GridViewColumn x:Name="SV1Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=SV1Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding SV1Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SV1Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SV1Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SV1Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SV1Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="DRI1Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=DRI1Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding DRI1Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI1Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI1Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI1Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI1Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="DRI2Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=DRI2Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding DRI2Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI2Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI2Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI2Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DRI2Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="RN1Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=RN1Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RN1Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN1Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN1Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN1Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN1Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="RN2Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=RN2Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RN2Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN2Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN2Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN2Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN2Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="RN3Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=RN3Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RN3Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN3Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN3Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN3Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RN3Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="CCA1Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=CCA1Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding CCA1Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA1Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA1Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA1Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA1Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="CCA2Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=CCA2Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding CCA2Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA2Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA2Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA2Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA2Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="CCA3Column" Width="82">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type ListViewItem}">
+                                <TextBlock Name="Txt" Text="{Binding Path=CCA3Site}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding CCA3Site}" Value="Day Off">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA3Site}" Value="Annual Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="Plum" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA3Site}" Value="Sick Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightSeaGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA3Site}" Value="Special Leave">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="LightCoral" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CCA3Site}" Value="Training">
+                                        <Setter TargetName="Txt" Property="Foreground" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource MetroListViewItem}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding State}" Value="0">
-                            <Setter Property="Foreground" Value="Silver"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
         </ListView>
         <ContentControl Content="{DynamicResource WBSIcon}" VerticalAlignment="Bottom" Height="27" Margin="0,0,0,-27"/>
         <Button Content="Report" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="75" Click="btnReportStaff_Click" IsDefault="True"/>
