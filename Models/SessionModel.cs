@@ -18,6 +18,7 @@ namespace ERSApp.Models
         private int occ;
         private int estimate;
         private bool holiday;
+        private string note;
         private int sv1Id;
         private string sv1Name;
         private double sv1LOD;
@@ -214,6 +215,22 @@ namespace ERSApp.Models
                 {
                     holiday = value;
                     RaisePropertyChanged("Holiday");
+                }
+            }
+        }
+        
+        public string Note
+        {
+            get
+            {
+                return note;
+            }
+            set
+            {
+                if (note != value)
+                {
+                    note = value;
+                    RaisePropertyChanged("Note");
                 }
             }
         }
