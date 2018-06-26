@@ -355,6 +355,27 @@ namespace ERSApp.Views
                 txtCCA3UNS.Text = "0";
             }
         }
+        
+        //Method for adding team to roles
+        private void btnTeam_Click(object sender, RoutedEventArgs e)
+        {
+            TeamDialog teamDialog = new TeamDialog();
+            teamDialog.Owner = this;
+            teamDialog.ShowDialog();
+            if(teamDialog.DialogResult == true)
+            {
+                Team Selected = (Team)teamDialog.lstTeamDialog.SelectedItem;
+                cboSV1.SelectedValue = Selected.SV1Id;
+                cboDRI1.SelectedValue = Selected.DRI1Id;
+                cboDRI2.SelectedValue = Selected.DRI2Id;
+                cboRN1.SelectedValue = Selected.RN1Id;
+                cboRN2.SelectedValue = Selected.RN2Id;
+                cboRN3.SelectedValue = Selected.RN3Id;
+                cboCCA1.SelectedValue = Selected.CCA1Id;
+                cboCCA2.SelectedValue = Selected.CCA2Id;
+                cboCCA3.SelectedValue = Selected.CCA3Id;
+            }
+        }
 
         //Method for adding gantt row on chart
         private RowSeries CreateRow(string title, byte r, byte g, byte b, double lod)
