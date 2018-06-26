@@ -603,7 +603,14 @@ namespace ERSApp.Views
                 Accessor[Selected, name] = cboname;
                 Accessor[Selected, lodname] = txtlod;
                 Accessor[Selected, unsname] = txtuns;
-                Accessor[Selected, otname] = txtot;
+                try
+                {
+                    Accessor[Selected, otname] = txtot;
+                } catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
                 if (!name.StartsWith("RN"))
                 {
                     Selected.StaffCount++;
@@ -690,7 +697,7 @@ namespace ERSApp.Views
                 {
                     Update(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS",
                         Selected.SV1OT, "SV1OT", (int)cboSV1.SelectedValue, cboSV1.Text, double.Parse(txtSV1LOD.Text),
-                        double.Parse(txtSV1UNS.Text), double.Parse(txtSV1UNS.Text));
+                        double.Parse(txtSV1UNS.Text), double.Parse(txtSV1OT.Text));
                 }
             }
             //Else remove if reset staff has been pressed
@@ -716,7 +723,7 @@ namespace ERSApp.Views
                 {
                     Update(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS",
                         Selected.DRI1OT, "DRI1OT", (int)cboDRI1.SelectedValue, cboDRI1.Text, double.Parse(txtDRI1LOD.Text),
-                        double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1UNS.Text));
+                        double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1OT.Text));
                 }
             }
             else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
@@ -747,7 +754,7 @@ namespace ERSApp.Views
                     {
                         Update(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS",
                             Selected.DRI2OT, "DRI2OT", (int)cboDRI2.SelectedValue, cboDRI2.Text, double.Parse(txtDRI2LOD.Text),
-                            double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2UNS.Text));
+                            double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2OT.Text));
                     }
                 }
             }
@@ -773,7 +780,7 @@ namespace ERSApp.Views
                 {
                     Update(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS",
                         Selected.RN1OT, "RN1OT", (int)cboRN1.SelectedValue, cboRN1.Text, double.Parse(txtRN1LOD.Text),
-                        double.Parse(txtRN1UNS.Text), double.Parse(txtRN1UNS.Text));
+                        double.Parse(txtRN1UNS.Text), double.Parse(txtRN1OT.Text));
                 }
             }
             else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
@@ -804,7 +811,7 @@ namespace ERSApp.Views
                     {
                         Update(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS",
                             Selected.RN2OT, "RN2OT", (int)cboRN2.SelectedValue, cboRN2.Text, double.Parse(txtRN2LOD.Text),
-                            double.Parse(txtRN2UNS.Text), double.Parse(txtRN2UNS.Text));
+                            double.Parse(txtRN2UNS.Text), double.Parse(txtRN2OT.Text));
                     }
                 }
             }
@@ -837,7 +844,7 @@ namespace ERSApp.Views
                     {
                         Update(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS",
                             Selected.RN3OT, "RN3OT", (int)cboRN3.SelectedValue, cboRN3.Text, double.Parse(txtRN3LOD.Text),
-                            double.Parse(txtRN3UNS.Text), double.Parse(txtRN3UNS.Text));
+                            double.Parse(txtRN3UNS.Text), double.Parse(txtRN3OT.Text));
                     }
                 }
             }
@@ -863,7 +870,7 @@ namespace ERSApp.Views
                 {
                     Update(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS",
                         Selected.CCA1OT, "CCA1OT", (int)cboCCA1.SelectedValue, cboCCA1.Text, double.Parse(txtCCA1LOD.Text),
-                        double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1UNS.Text));
+                        double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1OT.Text));
                 }
             }
             else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
@@ -894,7 +901,7 @@ namespace ERSApp.Views
                     {
                         Update(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS",
                             Selected.CCA2OT, "CCA2OT", (int)cboCCA2.SelectedValue, cboCCA2.Text, double.Parse(txtCCA2LOD.Text),
-                            double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2UNS.Text));
+                            double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2OT.Text));
                     }
                 }
             }
@@ -927,7 +934,7 @@ namespace ERSApp.Views
                     {
                         Update(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS",
                             Selected.CCA3OT, "CCA3OT", (int)cboCCA3.SelectedValue, cboCCA3.Text, double.Parse(txtCCA3LOD.Text),
-                            double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3UNS.Text));
+                            double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3OT.Text));
                     }
                 }
             }
@@ -956,7 +963,7 @@ namespace ERSApp.Views
                 {
                     UpdateHoliday(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS",
                         Selected.SV1OT, "SV1OT", (int)cboSV1.SelectedValue, cboSV1.Text, double.Parse(txtSV1LOD.Text),
-                        double.Parse(txtSV1UNS.Text), double.Parse(txtSV1UNS.Text));
+                        double.Parse(txtSV1UNS.Text), double.Parse(txtSV1OT.Text));
                 }
             }
             //Else remove if reset staff has been pressed
@@ -982,7 +989,7 @@ namespace ERSApp.Views
                 {
                     UpdateHoliday(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS",
                         Selected.DRI1OT, "DRI1OT", (int)cboDRI1.SelectedValue, cboDRI1.Text, double.Parse(txtDRI1LOD.Text),
-                        double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1UNS.Text));
+                        double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1OT.Text));
                 }
             }
             else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
@@ -1013,7 +1020,7 @@ namespace ERSApp.Views
                     {
                         UpdateHoliday(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS",
                             Selected.DRI2OT, "DRI2OT", (int)cboDRI2.SelectedValue, cboDRI2.Text, double.Parse(txtDRI2LOD.Text),
-                            double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2UNS.Text));
+                            double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2OT.Text));
                     }
                 }
             }
@@ -1039,7 +1046,7 @@ namespace ERSApp.Views
                 {
                     UpdateHoliday(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS",
                         Selected.RN1OT, "RN1OT", (int)cboRN1.SelectedValue, cboRN1.Text, double.Parse(txtRN1LOD.Text),
-                        double.Parse(txtRN1UNS.Text), double.Parse(txtRN1UNS.Text));
+                        double.Parse(txtRN1UNS.Text), double.Parse(txtRN1OT.Text));
                 }
             }
             else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
@@ -1070,7 +1077,7 @@ namespace ERSApp.Views
                     {
                         UpdateHoliday(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS",
                             Selected.RN2OT, "RN2OT", (int)cboRN2.SelectedValue, cboRN2.Text, double.Parse(txtRN2LOD.Text),
-                            double.Parse(txtRN2UNS.Text), double.Parse(txtRN2UNS.Text));
+                            double.Parse(txtRN2UNS.Text), double.Parse(txtRN2OT.Text));
                     }
                 }
             }
@@ -1103,7 +1110,7 @@ namespace ERSApp.Views
                     {
                         UpdateHoliday(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS",
                             Selected.RN3OT, "RN3OT", (int)cboRN3.SelectedValue, cboRN3.Text, double.Parse(txtRN3LOD.Text),
-                            double.Parse(txtRN3UNS.Text), double.Parse(txtRN3UNS.Text));
+                            double.Parse(txtRN3UNS.Text), double.Parse(txtRN3OT.Text));
                     }
                 }
             }
@@ -1129,7 +1136,7 @@ namespace ERSApp.Views
                 {
                     UpdateHoliday(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS",
                         Selected.CCA1OT, "CCA1OT", (int)cboCCA1.SelectedValue, cboCCA1.Text, double.Parse(txtCCA1LOD.Text),
-                        double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1UNS.Text));
+                        double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1OT.Text));
                 }
             }
             else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
@@ -1160,7 +1167,7 @@ namespace ERSApp.Views
                     {
                         UpdateHoliday(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS",
                             Selected.CCA2OT, "CCA2OT", (int)cboCCA2.SelectedValue, cboCCA2.Text, double.Parse(txtCCA2LOD.Text),
-                            double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2UNS.Text));
+                            double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2OT.Text));
                     }
                 }
             }
@@ -1193,7 +1200,7 @@ namespace ERSApp.Views
                     {
                         UpdateHoliday(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS",
                             Selected.CCA3OT, "CCA3OT", (int)cboCCA3.SelectedValue, cboCCA3.Text, double.Parse(txtCCA3LOD.Text),
-                            double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3UNS.Text));
+                            double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3OT.Text));
                     }
                 }
             }
