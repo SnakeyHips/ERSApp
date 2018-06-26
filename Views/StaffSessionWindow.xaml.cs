@@ -185,6 +185,7 @@ namespace ERSApp.Views
         {
             txtSV1LOD.IsEnabled = true;
             txtSV1UNS.IsEnabled = true;
+            txtSV1OT.IsEnabled = true;
             btnResetSV1.IsEnabled = true;
         }
 
@@ -192,6 +193,7 @@ namespace ERSApp.Views
         {
             txtDRI1LOD.IsEnabled = true;
             txtDRI1UNS.IsEnabled = true;
+            txtDRI1OT.IsEnabled = true;
             btnResetDRI1.IsEnabled = true;
         }
 
@@ -199,6 +201,7 @@ namespace ERSApp.Views
         {
             txtDRI2LOD.IsEnabled = true;
             txtDRI2UNS.IsEnabled = true;
+            txtDRI2OT.IsEnabled = true;
             btnResetDRI2.IsEnabled = true;
         }
 
@@ -206,6 +209,7 @@ namespace ERSApp.Views
         {
             txtRN1LOD.IsEnabled = true;
             txtRN1UNS.IsEnabled = true;
+            txtRN1OT.IsEnabled = true;
             btnResetRN1.IsEnabled = true;
         }
 
@@ -213,6 +217,7 @@ namespace ERSApp.Views
         {
             txtRN2LOD.IsEnabled = true;
             txtRN2UNS.IsEnabled = true;
+            txtRN2OT.IsEnabled = true;
             btnResetRN2.IsEnabled = true;
         }
 
@@ -220,6 +225,7 @@ namespace ERSApp.Views
         {
             txtRN3LOD.IsEnabled = true;
             txtRN3UNS.IsEnabled = true;
+            txtRN3OT.IsEnabled = true;
             btnResetRN3.IsEnabled = true;
         }
 
@@ -227,6 +233,7 @@ namespace ERSApp.Views
         {
             txtCCA1LOD.IsEnabled = true;
             txtCCA1UNS.IsEnabled = true;
+            txtCCA1OT.IsEnabled = true;
             btnResetCCA1.IsEnabled = true;
         }
 
@@ -234,6 +241,7 @@ namespace ERSApp.Views
         {
             txtCCA2LOD.IsEnabled = true;
             txtCCA2UNS.IsEnabled = true;
+            txtCCA2OT.IsEnabled = true;
             btnResetCCA2.IsEnabled = true;
         }
 
@@ -241,6 +249,7 @@ namespace ERSApp.Views
         {
             txtCCA3LOD.IsEnabled = true;
             txtCCA3UNS.IsEnabled = true;
+            txtCCA3OT.IsEnabled = true;
             btnResetCCA3.IsEnabled = true;
         }
 
@@ -251,6 +260,8 @@ namespace ERSApp.Views
             txtSV1LOD.IsEnabled = false;
             txtSV1UNS.Text = null;
             txtSV1UNS.IsEnabled = false;
+            txtSV1OT.Text = null;
+            txtSV1OT.IsEnabled = false;
             btnResetSV1.IsEnabled = false;
         }
 
@@ -261,6 +272,8 @@ namespace ERSApp.Views
             txtDRI1LOD.IsEnabled = false;
             txtDRI1UNS.Text = null;
             txtDRI1UNS.IsEnabled = false;
+            txtDRI1OT.Text = null;
+            txtDRI1OT.IsEnabled = false;
             btnResetDRI1.IsEnabled = false;
         }
 
@@ -271,6 +284,8 @@ namespace ERSApp.Views
             txtDRI2LOD.IsEnabled = false;
             txtDRI2UNS.Text = null;
             txtDRI2UNS.IsEnabled = false;
+            txtDRI2OT.Text = null;
+            txtDRI2OT.IsEnabled = false;
             btnResetDRI2.IsEnabled = false;
         }
 
@@ -281,6 +296,8 @@ namespace ERSApp.Views
             txtRN1LOD.IsEnabled = false;
             txtRN1UNS.Text = null;
             txtRN1UNS.IsEnabled = false;
+            txtRN1OT.Text = null;
+            txtRN1OT.IsEnabled = false;
             btnResetRN1.IsEnabled = false;
         }
 
@@ -291,6 +308,8 @@ namespace ERSApp.Views
             txtRN2LOD.IsEnabled = false;
             txtRN2UNS.Text = null;
             txtRN2UNS.IsEnabled = false;
+            txtRN2OT.Text = null;
+            txtRN2OT.IsEnabled = false;
             btnResetRN2.IsEnabled = false;
         }
 
@@ -301,6 +320,8 @@ namespace ERSApp.Views
             txtRN3LOD.IsEnabled = false;
             txtRN3UNS.Text = null;
             txtRN3UNS.IsEnabled = false;
+            txtRN3OT.Text = null;
+            txtRN3OT.IsEnabled = false;
             btnResetRN3.IsEnabled = false;
         }
 
@@ -311,6 +332,8 @@ namespace ERSApp.Views
             txtCCA1LOD.IsEnabled = false;
             txtCCA1UNS.Text = null;
             txtCCA1UNS.IsEnabled = false;
+            txtCCA1OT.Text = null;
+            txtCCA1OT.IsEnabled = false;
             btnResetCCA1.IsEnabled = false;
         }
 
@@ -321,6 +344,8 @@ namespace ERSApp.Views
             txtCCA2LOD.IsEnabled = false;
             txtCCA2UNS.Text = null;
             txtCCA2UNS.IsEnabled = false;
+            txtCCA2OT.Text = null;
+            txtCCA2OT.IsEnabled = false;
             btnResetCCA2.IsEnabled = false;
         }
 
@@ -331,6 +356,8 @@ namespace ERSApp.Views
             txtCCA3LOD.IsEnabled = false;
             txtCCA3UNS.Text = null;
             txtCCA3UNS.IsEnabled = false;
+            txtCCA3OT.Text = null;
+            txtCCA3OT.IsEnabled = false;
             btnResetCCA3.IsEnabled = false;
         }
 
@@ -340,46 +367,55 @@ namespace ERSApp.Views
             {
                 txtSV1LOD.Text = txtLOD.Text;
                 txtSV1UNS.Text = "0";
+                txtSV1OT.Text = "0";
             }
             if (cboDRI1.SelectedItem != null)
             {
                 txtDRI1LOD.Text = txtLOD.Text;
                 txtDRI1UNS.Text = "0";
+                txtDRI1OT.Text = "0";
             }
             if (cboDRI2.SelectedItem != null)
             {
                 txtDRI2LOD.Text = txtLOD.Text;
                 txtDRI2UNS.Text = "0";
+                txtDRI2OT.Text = "0";
             }
             if (cboRN1.SelectedItem != null)
             {
                 txtRN1LOD.Text = txtLOD.Text;
                 txtRN1UNS.Text = "0";
+                txtRN1OT.Text = "0";
             }
             if (cboRN2.SelectedItem != null)
             {
                 txtRN2LOD.Text = txtLOD.Text;
                 txtRN2UNS.Text = "0";
+                txtRN2OT.Text = "0";
             }
             if (cboRN3.SelectedItem != null)
             {
                 txtRN3LOD.Text = txtLOD.Text;
                 txtRN3UNS.Text = "0";
+                txtRN3OT.Text = "0";
             }
             if (cboCCA1.SelectedItem != null)
             {
                 txtCCA1LOD.Text = txtLOD.Text;
                 txtCCA1UNS.Text = "0";
+                txtCCA1OT.Text = "0";
             }
             if (cboCCA2.SelectedItem != null)
             {
                 txtCCA2LOD.Text = txtLOD.Text;
                 txtCCA2UNS.Text = "0";
+                txtCCA2OT.Text = "0";
             }
             if (cboCCA3.SelectedItem != null)
             {
                 txtCCA3LOD.Text = txtLOD.Text;
                 txtCCA3UNS.Text = "0";
+                txtCCA3OT.Text = "0";
             }
         }
 
