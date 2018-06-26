@@ -391,6 +391,28 @@ namespace ERSApp.Views
                 }
             }
         }
+        
+        //Method for adding note
+        private void btnNote_Click(object sender, RoutedEventArgs e)
+        {
+            NoteDialog noteDialog = new NoteDialog();
+            noteDialog.Owner = this;
+            noteDialog.txtNote.Text = Selected.Note;
+            noteDialog.ShowDialog();
+            if (noteDialog.DialogResult == true)
+            {
+                if (noteDialog.txtNote.Text != "")
+                {
+                    Selected.Note = noteDialog.txtNote.Text;
+                    Selected.State = 2;
+                }
+                else
+                {
+                    Selected.Note = "...";
+                    Selected.State = 0;
+                }
+            }
+        }
 
         //Method for adding gantt row on chart
         private RowSeries CreateRow(string title, byte r, byte g, byte b, double lod)
