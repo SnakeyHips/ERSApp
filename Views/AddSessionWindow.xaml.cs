@@ -129,6 +129,7 @@ namespace ERSApp.Views
                     OCC = int.Parse(txtOCC.Text),
                     Estimate = int.Parse(txtEstimate.Text),
                     Holiday = CheckHoliday(),
+                    Note = "...",
                     SV1Id = 0, SV1Name = "", SV1LOD = 0.0, SV1UNS = 0.0,
                     DRI1Id = 0, DRI1Name = "", DRI1LOD = 0.0, DRI1UNS = 0.0,
                     DRI2Id = 0, DRI2Name = "", DRI2LOD = 0.0, DRI2UNS = 0.0,
