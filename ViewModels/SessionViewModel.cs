@@ -53,12 +53,12 @@ namespace ERSApp.ViewModels
         public static int AddSession(Session s)
         {
             string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
-                "INSERT INTO SessionTable (Date, Day, Type, Site, Time, LOD, Chairs, OCC, Estimate, Holiday, SV1Id, SV1Name, " +
+                "INSERT INTO SessionTable (Date, Day, Type, Site, Time, LOD, Chairs, OCC, Estimate, Holiday, Note, SV1Id, SV1Name, " +
                 "SV1LOD, SV1UNS, DRI1Id, DRI1Name, DRI1LOD, DRI1UNS, DRI2Id, DRI2Name, DRI2LOD, DRI2UNS, RN1Id, RN1Name, " +
                 "RN1LOD, RN1UNS, RN2Id, RN2Name, RN2LOD, RN2UNS, RN3Id, RN3Name, RN3LOD, RN3UNS, CCA1Id, CCA1Name, CCA1LOD, " +
                 "CCA1UNS, CCA2Id, CCA2Name, CCA2LOD, CCA2UNS, CCA3Id, CCA3Name, CCA3LOD, CCA3UNS, StaffCount, State) " +
-                "VALUES (@Date, @Day, @Type, @Site, @Time, @LOD, @Chairs, @OCC, @Estimate, @Holiday, @SV1Id, @SV1Name, @SV1LOD, @SV1UNS, " +
-                "@DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @RN1Id, @RN1Name, @RN1LOD, " +
+                "VALUES (@Date, @Day, @Type, @Site, @Time, @LOD, @Chairs, @OCC, @Estimate, @Holiday, @Holiday, @SV1Id, @SV1Name, @SV1LOD, " +
+                "@SV1UNS, @DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @RN1Id, @RN1Name, @RN1LOD, " +
                 "@RN1UNS, @RN2Id, @RN2Name, @RN2LOD, @RN2UNS, @RN3Id, @RN3Name, @RN3LOD, @RN3UNS, @CCA1Id, @CCA1Name, @CCA1LOD, " +
                 "@CCA1UNS, @CCA2Id, @CCA2Name, @CCA2LOD, @CCA2UNS, @CCA3Id, @CCA3Name, @CCA3LOD, @CCA3UNS, @StaffCount, @State);";
             using (SqlConnection conn = new SqlConnection(connString))
@@ -125,7 +125,7 @@ namespace ERSApp.ViewModels
                 "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, CCA1UNS=@CCA1UNS, " +
                 "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, CCA2UNS=@CCA2UNS, " +
                 "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, CCA3UNS=@CCA3UNS, " +
-                "StaffCount=@StaffCount, State=@State " +
+                "StaffCount=@StaffCount, State=@State, Note=@Note " +
                 "WHERE Date=@Date AND Site=@Site AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
