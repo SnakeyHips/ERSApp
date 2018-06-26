@@ -31,6 +31,8 @@ namespace ERSApp.Views
                         if (s.Id == textId)
                         {
                             txtName.Text = s.Name;
+                            txtName.IsEnabled = false;
+                            txtId.IsEnabled = false;
                             break;
                         }
                     }
@@ -59,6 +61,8 @@ namespace ERSApp.Views
                     Staff Found = (Staff)findByNameDialog.lstNames.SelectedItem;
                     txtId.Text = Found.Id.ToString();
                     txtName.Text = Found.Name;
+                    txtName.IsEnabled = false;
+                    txtId.IsEnabled = false;
                 }
             }
         }
