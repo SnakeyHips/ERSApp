@@ -54,13 +54,14 @@ namespace ERSApp.ViewModels
         {
             string query = "IF NOT EXISTS (SELECT * FROM SessionTable WHERE Date=@Date AND Site=@Site AND Time=@Time) " +
                 "INSERT INTO SessionTable (Date, Day, Type, Site, Time, LOD, Chairs, OCC, Estimate, Holiday, Note, SV1Id, SV1Name, " +
-                "SV1LOD, SV1UNS, DRI1Id, DRI1Name, DRI1LOD, DRI1UNS, DRI2Id, DRI2Name, DRI2LOD, DRI2UNS, RN1Id, RN1Name, " +
-                "RN1LOD, RN1UNS, RN2Id, RN2Name, RN2LOD, RN2UNS, RN3Id, RN3Name, RN3LOD, RN3UNS, CCA1Id, CCA1Name, CCA1LOD, " +
-                "CCA1UNS, CCA2Id, CCA2Name, CCA2LOD, CCA2UNS, CCA3Id, CCA3Name, CCA3LOD, CCA3UNS, StaffCount, State) " +
+                "SV1LOD, SV1UNS, SV1OT, DRI1Id, DRI1Name, DRI1LOD, DRI1UNS, DRI1OT, DRI2Id, DRI2Name, DRI2LOD, DRI2UNS, DRI2OT, RN1Id, RN1Name, " +
+                "RN1LOD, RN1UNS, RN1OT, RN2Id, RN2Name, RN2LOD, RN2UNS, RN2OT, RN3Id, RN3Name, RN3LOD, RN3UNS, RN3OT, CCA1Id, CCA1Name, CCA1LOD, " +
+                "CCA1UNS, CCA1OT, CCA2Id, CCA2Name, CCA2LOD, CCA2UNS, CCA2OT, CCA3Id, CCA3Name, CCA3LOD, CCA3UNS, CCA3OT, StaffCount, State) " +
                 "VALUES (@Date, @Day, @Type, @Site, @Time, @LOD, @Chairs, @OCC, @Estimate, @Holiday, @Note, @SV1Id, @SV1Name, @SV1LOD, " +
-                " @SV1UNS, @DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @RN1Id, @RN1Name, @RN1LOD, " +
-                "@RN1UNS, @RN2Id, @RN2Name, @RN2LOD, @RN2UNS, @RN3Id, @RN3Name, @RN3LOD, @RN3UNS, @CCA1Id, @CCA1Name, @CCA1LOD, " +
-                "@CCA1UNS, @CCA2Id, @CCA2Name, @CCA2LOD, @CCA2UNS, @CCA3Id, @CCA3Name, @CCA3LOD, @CCA3UNS, @StaffCount, @State);";
+                " @SV1UNS, @SV1OT, @DRI1Id, @DRI1Name, @DRI1LOD, @DRI1UNS, @DRI1OT, @DRI2Id, @DRI2Name, @DRI2LOD, @DRI2UNS, @DRI1OT, @RN1Id, @RN1Name, " +
+                "@RN1LOD, @RN1UNS, @RN1OT, @RN2Id, @RN2Name, @RN2LOD, @RN2UNS, @RN2OT, @RN3Id, @RN3Name, @RN3LOD, @RN3UNS, @RN3OT, @CCA1Id, @CCA1Name, " +
+                "@CCA1LOD, @CCA1UNS, @CCA1OT, @CCA2Id, @CCA2Name, @CCA2LOD, @CCA2UNS, @CCA2OT, @CCA3Id, @CCA3Name, @CCA3LOD, @CCA3UNS, @CCA3OT, " +
+                "@StaffCount, @State);";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -116,15 +117,15 @@ namespace ERSApp.ViewModels
         public static void UpdateSessionStaff(Session s)
         {
             string query = "UPDATE SessionTable " +
-                "SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1LOD=@SV1LOD, SV1UNS=@SV1UNS, " +
-                "DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1LOD=@DRI1LOD, DRI1UNS=@DRI1UNS, " +
-                "DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2LOD=@DRI2LOD, DRI2UNS=@DRI2UNS, " +
-                "RN1Id=@RN1Id, RN1Name=@RN1Name, RN1LOD=@RN1LOD, RN1UNS=@RN1UNS, " +
-                "RN2Id=@RN2Id, RN2Name=@RN2Name, RN2LOD=@RN2LOD, RN2UNS=@RN2UNS, " +
-                "RN3Id=@RN3Id, RN3Name=@RN3Name, RN3LOD=@RN3LOD, RN3UNS=@RN3UNS, " +
-                "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, CCA1UNS=@CCA1UNS, " +
-                "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, CCA2UNS=@CCA2UNS, " +
-                "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, CCA3UNS=@CCA3UNS, " +
+                "SET SV1Id=@SV1Id, SV1Name=@SV1Name, SV1LOD=@SV1LOD, SV1UNS=@SV1UNS, SV1OT=@SV1OT, " +
+                "DRI1Id=@DRI1Id, DRI1Name=@DRI1Name, DRI1LOD=@DRI1LOD, DRI1UNS=@DRI1UNS, DRI1OT=@DRI1OT, " +
+                "DRI2Id=@DRI2Id, DRI2Name=@DRI2Name, DRI2LOD=@DRI2LOD, DRI2UNS=@DRI2UNS, DRI2OT=@DRI2OT, " +
+                "RN1Id=@RN1Id, RN1Name=@RN1Name, RN1LOD=@RN1LOD, RN1UNS=@RN1UNS, RN1OT=@RN1OT, " +
+                "RN2Id=@RN2Id, RN2Name=@RN2Name, RN2LOD=@RN2LOD, RN2UNS=@RN2UNS, RN2OT=@RN2OT, " +
+                "RN3Id=@RN3Id, RN3Name=@RN3Name, RN3LOD=@RN3LOD, RN3UNS=@RN3UNS, RN3OT=@RN3OT, " +
+                "CCA1Id=@CCA1Id, CCA1Name=@CCA1Name, CCA1LOD=@CCA1LOD, CCA1UNS=@CCA1UNS, CCA1OT=@CCA1OT, " +
+                "CCA2Id=@CCA2Id, CCA2Name=@CCA2Name, CCA2LOD=@CCA2LOD, CCA2UNS=@CCA2UNS, CCA2OT=@CCA2OT, " +
+                "CCA3Id=@CCA3Id, CCA3Name=@CCA3Name, CCA3LOD=@CCA3LOD, CCA3UNS=@CCA3UNS, CCA3OT=@CCA3OT, " +
                 "StaffCount=@StaffCount, State=@State, Note=@Note " +
                 "WHERE Date=@Date AND Site=@Site AND Time=@Time;";
             using (SqlConnection conn = new SqlConnection(connString))
