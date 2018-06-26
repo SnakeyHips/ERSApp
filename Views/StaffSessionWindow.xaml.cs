@@ -678,6 +678,23 @@ namespace ERSApp.Views
             }
         }
 
+        private void ResetHoliday(int id, string idname, string name, double lod,
+            string lodname, double uns, string unsname, double ot, string otname)
+        {
+            //Remove staff's appointed hours
+            StaffViewModel.UpdateHoursHoliday(id, -lod, -uns, -ot, Week);
+            //Remove any saved staff info
+            Accessor[Selected, idname] = 0;
+            Accessor[Selected, name] = "";
+            Accessor[Selected, lodname] = 0.0;
+            Accessor[Selected, unsname] = 0.0;
+            Accessor[Selected, otname] = 0.0;
+            if (!name.StartsWith("RN"))
+            {
+                Selected.StaffCount--;
+            }
+        }
+
         private async void UpdateStaff()
         {
             //First check if there is a selected item
@@ -969,7 +986,7 @@ namespace ERSApp.Views
             //Else remove if reset staff has been pressed
             else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
             {
-                Reset(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS", Selected.SV1OT, "SV1OT");
+                ResetHoliday(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS", Selected.SV1OT, "SV1OT");
             }
 
             //Do same for other roles
@@ -994,7 +1011,7 @@ namespace ERSApp.Views
             }
             else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
             {
-                Reset(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS", Selected.DRI1OT, "DRI1OT");
+                ResetHoliday(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS", Selected.DRI1OT, "DRI1OT");
             }
 
             if (cboDRI2.SelectedItem != null)
@@ -1026,7 +1043,7 @@ namespace ERSApp.Views
             }
             else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
             {
-                Reset(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS", Selected.DRI2OT, "DRI2OT");
+                ResetHoliday(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS", Selected.DRI2OT, "DRI2OT");
             }
 
             //Get RN selected info
@@ -1051,7 +1068,7 @@ namespace ERSApp.Views
             }
             else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
             {
-                Reset(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS", Selected.RN1OT, "RN1OT");
+                ResetHoliday(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS", Selected.RN1OT, "RN1OT");
             }
 
             if (cboRN2.SelectedItem != null)
@@ -1083,7 +1100,7 @@ namespace ERSApp.Views
             }
             else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
             {
-                Reset(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS", Selected.RN2OT, "RN2OT");
+                ResetHoliday(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS", Selected.RN2OT, "RN2OT");
             }
 
             if (cboRN3.SelectedItem != null)
@@ -1116,7 +1133,7 @@ namespace ERSApp.Views
             }
             else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
             {
-                Reset(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS", Selected.RN3OT, "RN3OT");
+                ResetHoliday(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS", Selected.RN3OT, "RN3OT");
             }
 
             //Get CCA selected info
@@ -1141,7 +1158,7 @@ namespace ERSApp.Views
             }
             else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
             {
-                Reset(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS", Selected.CCA1OT, "CCA1OT");
+                ResetHoliday(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS", Selected.CCA1OT, "CCA1OT");
             }
 
             if (cboCCA2.SelectedItem != null)
@@ -1173,7 +1190,7 @@ namespace ERSApp.Views
             }
             else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
             {
-                Reset(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS", Selected.CCA2OT, "CCA2OT");
+                ResetHoliday(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS", Selected.CCA2OT, "CCA2OT");
             }
 
             if (cboCCA3.SelectedItem != null)
@@ -1206,7 +1223,7 @@ namespace ERSApp.Views
             }
             else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
             {
-                Reset(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS", Selected.CCA3OT, "CCA3OT");
+                ResetHoliday(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS", Selected.CCA3OT, "CCA3OT");
             }
         }
 
