@@ -88,6 +88,7 @@ namespace ERSApp.Views
                                 r.AbsenceHours += s.AbsenceHours;
                                 r.HolidayHours += s.HolidayHours;
                                 r.UnsocialHours += s.UnsocialHours;
+                                r.OvertimeHours += s.OvertimeHours;
                                 break;
                             }
                         }
@@ -128,7 +129,7 @@ namespace ERSApp.Views
                 PdfWriter writer = PdfWriter.GetInstance(report, fs);
 
                 //Table for displaying stock quantities with 2 being amount of columns
-                PdfPTable rosterTable = new PdfPTable(9);
+                PdfPTable rosterTable = new PdfPTable(10);
                 rosterTable.SpacingBefore = 10f;
                 rosterTable.WidthPercentage = 100;
 
@@ -139,7 +140,8 @@ namespace ERSApp.Views
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                string[] headers = { "Id", "Name", "Contract", "Appointed", "Absence", "Holiday", "Unsocial", "Neg", "CO"};
+                string[] headers = { "Id", "Name", "Contract", "Appointed", "Absence", "Holiday", "Unsocial",
+                    "Overtime", "Neg", "CO"};
 
                 foreach(string h in headers)
                 {
@@ -159,6 +161,7 @@ namespace ERSApp.Views
                     rosterTable.AddCell(new Paragraph(s.AbsenceHours.ToString(), norm));
                     rosterTable.AddCell(new Paragraph(s.HolidayHours.ToString(), norm));
                     rosterTable.AddCell(new Paragraph(s.UnsocialHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.OvertimeHours.ToString(), norm));
                     double difference = s.ContractHours - (s.AppointedHours + s.AbsenceHours);
                     if (difference > 0)
                     {
