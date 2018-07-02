@@ -9,11 +9,14 @@
              d:DesignHeight="450" d:DesignWidth="870">
     <Grid>
         <TabControl Name="tabsAdmin" Margin="0,0,0,0" Padding="-1">
-            <TabItem Header="Special Dates" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
-                <views:HolidayView/>
-            </TabItem>
             <TabItem Header="Sites" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
                 <views:SiteView/>
+            </TabItem>
+            <TabItem Header="Skills" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
+                <views:SkillView/>
+            </TabItem>
+            <TabItem Header="Special Dates" Controls:ControlsHelper.HeaderFontSize="20" VerticalAlignment="Center">
+                <views:HolidayView/>
             </TabItem>
         </TabControl>
     </Grid>
