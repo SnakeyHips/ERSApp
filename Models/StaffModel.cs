@@ -11,6 +11,7 @@ namespace ERSApp.Models
         private int id;
         private string name;
         private string role;
+        private string skill;
         private string address;
         private string number;
         private double contractHours;
@@ -66,6 +67,22 @@ namespace ERSApp.Models
                 {
                     role = value;
                     RaisePropertyChanged("Role");
+                }
+            }
+        }
+        
+        public string Skill
+        {
+            get
+            {
+                return skill;
+            }
+            set
+            {
+                if (skill != value)
+                {
+                    skill = value;
+                    RaisePropertyChanged("Skill");
                 }
             }
         }
