@@ -13,8 +13,10 @@ namespace ERSApp.ViewModels
     {
         public static string connString = ConfigurationManager.ConnectionStrings["ERSDBConnectionString"].ConnectionString;
         public static ObservableCollection<Site> Sites { get; set; }
+        public static ObservableCollection<Skill> Skills { get; set; }
         public static ObservableCollection<Holiday> Holidays { get; set; }
         public static Site SelectedSite { get; set; }
+        public static Skill SelectedSkill { get; set; }
         public static Holiday SelectedHoliday { get; set; }
 
         public AdminViewModel()
@@ -24,8 +26,9 @@ namespace ERSApp.ViewModels
 
         public static void LoadAdmins()
         {
-            Holidays = GetHolidays();
             Sites = GetSites();
+            Skills = GetSkills();
+            Holidays = GetHolidays();
         }
 
         public static ObservableCollection<Site> GetSites()
@@ -46,6 +49,24 @@ namespace ERSApp.ViewModels
             }
         }
 
+        public static ObservableCollection<Skill> GetSkills()
+        {
+            string query = "SELECT * FROM SkillTable";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return new ObservableCollection<Skill>(conn.Query<Skill>(query).ToList());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return new ObservableCollection<Skill>();
+                }
+            }
+        }
+
         public static ObservableCollection<Holiday> GetHolidays()
         {
             string query = "SELECT * FROM HolidayTable";
@@ -60,6 +81,95 @@ namespace ERSApp.ViewModels
                 {
                     MessageBox.Show(ex.ToString());
                     return new ObservableCollection<Holiday>();
+                }
+            }
+        }
+
+        public static int AddSite(Site s)
+        {
+            string query = "IF NOT EXISTS (SELECT * FROM SiteTable WHERE Name=@Name) " +
+                "INSERT INTO SiteTable (Name, Type, Times) VALUES (@Name, @Type, @Times);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        public static void UpdateSite(Site s)
+        {
+            string query = "UPDATE SiteTable SET Times=@Times WHERE Name=@Name;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static void DeleteSite(Site s)
+        {
+            string query = "DELETE FROM SiteTable WHERE Name=@Name AND Type=@Type AND Times=@Times;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public static int AddSkill(Skill s)
+        {
+            string query = "IF NOT EXISTS (SELECT * FROM SkillTable WHERE Role=@Role, Name=@Name) " +
+                "INSERT INTO SkillTable (Role, Name) VALUES (@Role, @Name);";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        public static void DeleteSkill(Skill s)
+        {
+            string query = "DELETE FROM SkillTable WHERE Role=@Role AND Name=@Name;";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Execute(query, s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }
@@ -117,58 +227,6 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static int AddSite(Site s)
-        {
-            string query = "IF NOT EXISTS (SELECT * FROM SiteTable WHERE Name=@Name) " +
-                "INSERT INTO SiteTable (Name, Type, Times) VALUES (@Name, @Type, @Times);";
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
-                    return conn.Execute(query, s);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                    return -1;
-                }
-            }
-        }
-
-        public static void UpdateSite(Site s)
-        {
-            string query = "UPDATE SiteTable SET Times=@Times WHERE Name=@Name;";
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
-                    conn.Execute(query, s);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-        }
-
-        public static void DeleteSite(Site s)
-        {
-            string query = "DELETE FROM SiteTable WHERE Name=@Name AND Type=@Type AND Times=@Times;";
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                try
-                {
-                    conn.Open();
-                    conn.Execute(query, s);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-        }
         //public static int AddSites(List<Site> sites)
         //{
         //    string query = "INSERT INTO SiteTable (Name, Type, Times)" +
@@ -235,8 +293,8 @@ namespace ERSApp.ViewModels
         //    MessageBox.Show(SiteList[0].Name);
         //    MessageBox.Show(SiteList[SiteList.Count - 1].Name);
         //}
-        
-                //public static void  StaffCSV()
+
+        //public static void  StaffCSV()
         //{
         //    List<Staff> StaffList = new List<Staff>();
         //    System.IO.StreamReader file = new System.IO.StreamReader("C:\\Source\\ERSApp\\ERSApp\\staffs.csv");
