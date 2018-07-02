@@ -47,8 +47,8 @@ namespace ERSApp.ViewModels
 
         public static int AddStaff(Staff s)
         {
-            string query = "INSERT INTO StaffTable (Id, Name, Role, Address, Number, ContractHours, WorkPattern)" +
-                "VALUES (@Id, @Name, @Role, @Address, @Number, @ContractHours, @WorkPattern);";
+            string query = "INSERT INTO StaffTable (Id, Name, Role, Skill, Address, Number, ContractHours, WorkPattern)" +
+                "VALUES (@Id, @Name, @Role, @Skill, @Address, @Number, @ContractHours, @WorkPattern);";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -66,7 +66,7 @@ namespace ERSApp.ViewModels
 
         public static void UpdateStaff(Staff s)
         {
-            string query = "UPDATE StaffTable SET Role=@Role, Address=@Address, Number=@Number, " +
+            string query = "UPDATE StaffTable SET Role=@Role, Skill=@Skill, Address=@Address, Number=@Number, " +
                 "ContractHours=@ContractHours, WorkPattern=@WorkPattern WHERE Id=@Id;";
             using (SqlConnection conn = new SqlConnection(connString))
             {
