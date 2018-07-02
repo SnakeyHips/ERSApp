@@ -25,6 +25,7 @@ namespace ERSApp.Views
             cboRole.Items.Add("RN");
             cboRole.Items.Add("CCA");
             cboRole.SelectedItem = Selected.Role;
+            cboSkill.SelectedItem = Selected.Skill;
             txtAddress.Text = Selected.Address;
             txtNumber.Text = Selected.Number;
             cboHours.Items.Add("20");
@@ -33,6 +34,18 @@ namespace ERSApp.Views
             cboHours.Items.Add("37.5");
             cboHours.SelectedItem = Selected.ContractHours.ToString();
             SetCheckboxes(Selected.WorkPattern);
+        }
+
+        private void cboRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cboSkill.Items.Clear();
+            foreach (Skill s in AdminViewModel.Skills)
+            {
+                if (s.Role.Equals(cboRole.SelectedItem))
+                {
+                    cboSkill.Items.Add(s.Name);
+                }
+            }
         }
 
         //Method to go through and check checkboxes based on work pattern string
@@ -77,6 +90,10 @@ namespace ERSApp.Views
             {
                 await this.ShowMessageAsync("", "Please select a Role.");
             }
+            else if (cboSkill.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please select a Skill.");
+            }
             else if (txtAddress.Text == "")
             {
                 await this.ShowMessageAsync("", "Please enter a Address.");
@@ -92,6 +109,7 @@ namespace ERSApp.Views
             else
             {
                 Selected.Role = cboRole.Text;
+                Selected.Skill = cboSkill.Text;
                 Selected.Address = txtAddress.Text;
                 Selected.Number = txtNumber.Text;
                 Selected.ContractHours = double.Parse(cboHours.Text);
