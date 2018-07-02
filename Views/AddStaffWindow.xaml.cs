@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +25,18 @@ namespace ERSApp.Views
             cboHours.Items.Add("37.5");
         }
 
+        private void cboRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cboSkill.Items.Clear();
+            foreach(Skill s in AdminViewModel.Skills)
+            {
+                if (s.Role.Equals(cboRole.SelectedItem))
+                {
+                    cboSkill.Items.Add(s.Name);
+                }
+            }
+        }
+
         private async void btnAddStaff_Click(object sender, RoutedEventArgs e)
         {
             //Makes sure each input has an input before being made
@@ -39,6 +51,10 @@ namespace ERSApp.Views
             else if (cboRole.Text == "")
             {
                 await this.ShowMessageAsync("", "Please enter a Role.");
+            }
+            else if (cboSkill.Text == "")
+            {
+                await this.ShowMessageAsync("", "Please enter a Skill.");
             }
             else if (txtAddress.Text == "")
             {
@@ -63,6 +79,7 @@ namespace ERSApp.Views
                     Id = int.Parse(txtId.Text),
                     Name = txtName.Text,
                     Role = cboRole.Text,
+                    Skill = cboSkill.Text,
                     Address = txtAddress.Text,
                     Number = txtNumber.Text,
                     ContractHours = double.Parse(cboHours.Text),
