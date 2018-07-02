@@ -14,7 +14,7 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtName" Margin="0,40,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsUndoEnabled="False" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Role:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ComboBox Name="cboRole" Margin="0,80,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboRole_SelectionChanged"//>
+        <ComboBox Name="cboRole" Margin="0,80,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}" SelectionChanged="cboRole_SelectionChanged"/>
         <Label Content="Skill:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <ComboBox Name="cboSkill" Margin="0,120,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" BorderBrush="{DynamicResource AccentColorBrush}"/>
         <Label Content="Address:" HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
