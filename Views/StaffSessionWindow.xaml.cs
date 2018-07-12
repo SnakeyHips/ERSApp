@@ -425,7 +425,7 @@ namespace ERSApp.Views
             TeamDialog teamDialog = new TeamDialog();
             teamDialog.Owner = this;
             teamDialog.ShowDialog();
-            if(teamDialog.DialogResult == true)
+            if (teamDialog.DialogResult == true)
             {
                 Team Selected = (Team)teamDialog.lstTeamDialog.SelectedItem;
                 cboSV1.SelectedValue = Selected.SV1Id;
@@ -497,14 +497,7 @@ namespace ERSApp.Views
         //First one is commented as rest are same
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (Selected.Holiday)
-            {
-                UpdateStaffHoliday();
-            }
-            else
-            {
-                UpdateStaff();
-            }
+            UpdateStaff();
 
             //Check if LOD has changed
             if (txtLOD.Text != Selected.LOD.ToString())
@@ -521,7 +514,7 @@ namespace ERSApp.Views
                     RolesFilled = false;
                 }
             }
-            if(Selected.State != 2)
+            if (Selected.State != 2)
             {
                 Selected.State = RolesFilled ? 1 : 0;
             }
@@ -592,97 +585,11 @@ namespace ERSApp.Views
             }
         }
 
-        private void UpdateHoliday(int id, string idname, string name, double lod, string lodname,
-            double uns, string unsname, double ot, string otname, int cboid, string cboname,
-            double txtlod, double txtuns, double txtot)
-        {
-            if (id == 0)
-            {
-                //Assign new appoint staff
-                Accessor[Selected, idname] = cboid;
-                Accessor[Selected, name] = cboname;
-                Accessor[Selected, lodname] = txtlod;
-                Accessor[Selected, unsname] = txtuns;
-                try
-                {
-                    Accessor[Selected, otname] = txtot;
-                } catch(Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-
-                if (!name.StartsWith("RN"))
-                {
-                    Selected.StaffCount++;
-                }
-                //Add onto new staff's appointed hours/New record created in sql method
-                StaffViewModel.UpdateHoursHoliday(cboid, txtlod, txtuns, txtot, Week);
-            }
-            //Check if same staff selected
-            else if (id == cboid)
-            {
-                //Check if different times selected
-                if (lod != txtlod)
-                {
-                    //If so, update times and appointed hours to use times selected
-                    double appointed = txtlod - lod;
-                    StaffViewModel.UpdateAppointedHoliday(id, appointed, Week);
-                    Accessor[Selected, lodname] = txtlod;
-                }
-                //Check if different unsocial selected
-                if (uns != txtuns)
-                {
-                    //If so, update times and appointed hours to use times selected
-                    double unsocial = txtuns - uns;
-                    StaffViewModel.UpdateUnsocial(id, unsocial, Week);
-                    Accessor[Selected, unsname] = txtuns;
-                }
-                //Check if different ot selected
-                if (ot != txtot)
-                {
-                    //If so, update times and appointed hours to use times selected
-                    double overtime = txtot - ot;
-                    StaffViewModel.UpdateOvertime(id, overtime, Week);
-                    Accessor[Selected, otname] = txtot;
-                }
-            }
-            //Check if different staff selected
-            else if (id != cboid)
-            {
-                //Update old staff's appointed hours to remove length
-                StaffViewModel.UpdateHoursHoliday(id, -lod, -uns, -ot, Week);
-                //Assign new appoint staff
-                Accessor[Selected, idname] = cboid;
-                Accessor[Selected, name] = cboname;
-                Accessor[Selected, lodname] = txtlod;
-                Accessor[Selected, unsname] = txtuns;
-                //Add onto new staff's appointed hours/New record created in sql method
-                StaffViewModel.UpdateHoursHoliday(cboid, txtlod, txtuns, txtot, Week);
-            }
-        }
-
         private void Reset(int id, string idname, string name, double lod,
             string lodname, double uns, string unsname, double ot, string otname)
         {
             //Remove staff's appointed hours
             StaffViewModel.UpdateHours(id, -lod, -uns, -ot, Week);
-            //Remove any saved staff info
-            Accessor[Selected, idname] = 0;
-            Accessor[Selected, name] = "";
-            Accessor[Selected, lodname] = 0.0;
-            Accessor[Selected, unsname] = 0.0;
-            Accessor[Selected, otname] = 0.0;
-            if (!name.StartsWith("RN"))
-            {
-                Selected.StaffCount--;
-            }
-        }
-
-        private void ResetHoliday(int id, string idname, string name, double lod,
-            string lodname, double uns, string unsname, double ot, string otname)
-        {
-            //Remove staff's appointed hours
-            StaffViewModel.UpdateHoursHoliday(id, -lod, -uns, -ot, Week);
             //Remove any saved staff info
             Accessor[Selected, idname] = 0;
             Accessor[Selected, name] = "";
@@ -961,273 +868,7 @@ namespace ERSApp.Views
             }
         }
 
-        private async void UpdateStaffHoliday()
-        {
-            //First check if there is a selected item
-            if (cboSV1.SelectedItem != null)
-            {
-                if (txtSV1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for SV1.");
-                    return;
-                }
-                if (txtSV1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for SV1.");
-                    return;
-                }
-                else
-                {
-                    UpdateHoliday(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS",
-                        Selected.SV1OT, "SV1OT", (int)cboSV1.SelectedValue, cboSV1.Text, double.Parse(txtSV1LOD.Text),
-                        double.Parse(txtSV1UNS.Text), double.Parse(txtSV1OT.Text));
-                }
-            }
-            //Else remove if reset staff has been pressed
-            else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
-            {
-                ResetHoliday(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS", Selected.SV1OT, "SV1OT");
-            }
-
-            //Do same for other roles
-            if (cboDRI1.SelectedItem != null)
-            {
-                if (txtDRI1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for DRI1.");
-                    return;
-                }
-                if (txtDRI1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for DRI1.");
-                    return;
-                }
-                else
-                {
-                    UpdateHoliday(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS",
-                        Selected.DRI1OT, "DRI1OT", (int)cboDRI1.SelectedValue, cboDRI1.Text, double.Parse(txtDRI1LOD.Text),
-                        double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1OT.Text));
-                }
-            }
-            else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
-            {
-                ResetHoliday(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS", Selected.DRI1OT, "DRI1OT");
-            }
-
-            if (cboDRI2.SelectedItem != null)
-            {
-                if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "DRI2 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtDRI2LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for DRI2.");
-                        return;
-                    }
-                    if (txtDRI2UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for DRI2.");
-                        return;
-                    }
-                    else
-                    {
-                        UpdateHoliday(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS",
-                            Selected.DRI2OT, "DRI2OT", (int)cboDRI2.SelectedValue, cboDRI2.Text, double.Parse(txtDRI2LOD.Text),
-                            double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2OT.Text));
-                    }
-                }
-            }
-            else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
-            {
-                ResetHoliday(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS", Selected.DRI2OT, "DRI2OT");
-            }
-
-            //Get RN selected info
-            if (cboRN1.SelectedItem != null)
-            {
-                if (txtRN1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for RN1.");
-                    return;
-                }
-                if (txtRN1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for RN1.");
-                    return;
-                }
-                else
-                {
-                    UpdateHoliday(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS",
-                        Selected.RN1OT, "RN1OT", (int)cboRN1.SelectedValue, cboRN1.Text, double.Parse(txtRN1LOD.Text),
-                        double.Parse(txtRN1UNS.Text), double.Parse(txtRN1OT.Text));
-                }
-            }
-            else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
-            {
-                ResetHoliday(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS", Selected.RN1OT, "RN1OT");
-            }
-
-            if (cboRN2.SelectedItem != null)
-            {
-                if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "RN2 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtRN2LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for RN2.");
-                        return;
-                    }
-                    if (txtRN2UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for RN2.");
-                        return;
-                    }
-                    else
-                    {
-                        UpdateHoliday(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS",
-                            Selected.RN2OT, "RN2OT", (int)cboRN2.SelectedValue, cboRN2.Text, double.Parse(txtRN2LOD.Text),
-                            double.Parse(txtRN2UNS.Text), double.Parse(txtRN2OT.Text));
-                    }
-                }
-            }
-            else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
-            {
-                ResetHoliday(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS", Selected.RN2OT, "RN2OT");
-            }
-
-            if (cboRN3.SelectedItem != null)
-            {
-                if ((int)cboRN3.SelectedValue == (int)cboRN1.SelectedValue ||
-                    (int)cboRN3.SelectedValue == (int)cboRN2.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "RN3 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtRN3LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for RN3.");
-                        return;
-                    }
-                    if (txtRN3UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for RN3.");
-                        return;
-                    }
-                    else
-                    {
-                        UpdateHoliday(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS",
-                            Selected.RN3OT, "RN3OT", (int)cboRN3.SelectedValue, cboRN3.Text, double.Parse(txtRN3LOD.Text),
-                            double.Parse(txtRN3UNS.Text), double.Parse(txtRN3OT.Text));
-                    }
-                }
-            }
-            else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
-            {
-                ResetHoliday(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS", Selected.RN3OT, "RN3OT");
-            }
-
-            //Get CCA selected info
-            if (cboCCA1.SelectedItem != null)
-            {
-                if (txtCCA1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for CCA1.");
-                    return;
-                }
-                if (txtCCA1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA1.");
-                    return;
-                }
-                else
-                {
-                    UpdateHoliday(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS",
-                        Selected.CCA1OT, "CCA1OT", (int)cboCCA1.SelectedValue, cboCCA1.Text, double.Parse(txtCCA1LOD.Text),
-                        double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1OT.Text));
-                }
-            }
-            else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
-            {
-                ResetHoliday(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS", Selected.CCA1OT, "CCA1OT");
-            }
-
-            if (cboCCA2.SelectedItem != null)
-            {
-                if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "CCA2 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtCCA2LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA2.");
-                        return;
-                    }
-                    if (txtCCA2UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA2.");
-                        return;
-                    }
-                    else
-                    {
-                        UpdateHoliday(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS",
-                            Selected.CCA2OT, "CCA2OT", (int)cboCCA2.SelectedValue, cboCCA2.Text, double.Parse(txtCCA2LOD.Text),
-                            double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2OT.Text));
-                    }
-                }
-            }
-            else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
-            {
-                ResetHoliday(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS", Selected.CCA2OT, "CCA2OT");
-            }
-
-            if (cboCCA3.SelectedItem != null)
-            {
-                if ((int)cboCCA3.SelectedValue == (int)cboCCA1.SelectedValue ||
-                    (int)cboCCA3.SelectedValue == (int)cboCCA2.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "CCA3 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtCCA3LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA3.");
-                        return;
-                    }
-                    if (txtCCA3UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA3.");
-                        return;
-                    }
-                    else
-                    {
-                        UpdateHoliday(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS",
-                            Selected.CCA3OT, "CCA3OT", (int)cboCCA3.SelectedValue, cboCCA3.Text, double.Parse(txtCCA3LOD.Text),
-                            double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3OT.Text));
-                    }
-                }
-            }
-            else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
-            {
-                ResetHoliday(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS", Selected.CCA3OT, "CCA3OT");
-            }
-        }
-
-            private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             //Use this in the xaml file to only allow numbers in input
             Regex regex = new Regex("[^0-9.]+");
