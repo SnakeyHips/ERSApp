@@ -107,13 +107,13 @@ namespace ERSApp.Views
             }
             else
             {
-                double weekStart = StaffViewModel.GetWeek(DateTime.Parse(dateStart.Text));
+                 double weekStart = StaffViewModel.GetWeek(DateTime.Parse(dateStart.Text));
                 double weekEnd = StaffViewModel.GetWeek(DateTime.Parse(dateEnd.Text));
                 double contractCount = 0.0;
                 double appointedCount = 0.0;
                 double absenceCount = 0.0;
-                double holidayCount = 0.0;
-                double unsocialCount = 0.0;
+                double lowrateuCount = 0.0;
+                double highrateuCount = 0.0;
                 double overtimeCount = 0.0;
 
                 List<Staff> SelectedRange = new List<Staff>();
@@ -131,15 +131,15 @@ namespace ERSApp.Views
                     contractCount += s.ContractHours;
                     appointedCount += s.AppointedHours;
                     absenceCount += s.AbsenceHours;
-                    holidayCount += s.HolidayHours;
-                    unsocialCount += s.UnsocialHours;
+                    lowrateuCount += s.LowRateUHours;
+                    highrateuCount += s.HighRateUHours;
                     overtimeCount += s.OvertimeHours;
                 }
                 txtContractCount.Text = contractCount.ToString();
                 txtAppointedCount.Text = appointedCount.ToString();
                 txtAbsenceCount.Text = absenceCount.ToString();
-                txtHolidayCount.Text = holidayCount.ToString();
-                txtUnsocialCount.Text = unsocialCount.ToString();
+                txtLowRateUCount.Text = lowrateuCount.ToString();
+                txtHighRateUCount.Text = highrateuCount.ToString();
                 txtOvertimeCount.Text = overtimeCount.ToString();
             }
         }
