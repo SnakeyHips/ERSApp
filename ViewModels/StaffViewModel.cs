@@ -142,7 +142,7 @@ namespace ERSApp.ViewModels
         {
             string query = "INSERT INTO RosterTable " +
                 "(Week, StaffId, StaffName, Role, ContractHours, AppointedHours, AbsenceHours, LowRateUHours, HighRateUHours, OvertimeHours)" +
-                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Holiday, @Lowrateu, @Highrateu, @Overtime);";
+                " VALUES (@Week, @Id, @Name, @Role, @ContractHours, @Appointed, @Absence, @Lowrateu, @Highrateu, @Overtime);";
             Staff s = Staffs.First(x => x.Id == id);
             using (SqlConnection conn = new SqlConnection(connString))
             {
