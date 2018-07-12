@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterOwner"
-        Title="Staff View" Height="750" Width="850">
+        Title="Staff View" Height="750" Width="820">
     <Grid Name="grdStaff" Margin="15,0,15,15">
         <Label Name ="lblHeader" Content="Day - Date" FontSize="26" HorizontalAlignment="Left" Foreground="{DynamicResource AccentColorBrush}"/>
         <Label Content="Clinic Time:" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -58,20 +58,20 @@
         <TextBox Name="txtRN3LOD" HorizontalAlignment="Left" Height="23" Margin="210,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
         <TextBox Name="txtRN3UNS" HorizontalAlignment="Left" Height="23" Margin="270,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
         <TextBox Name="txtRN3OT" HorizontalAlignment="Left" Height="23" Margin="330,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <Label Content="CCAs: " HorizontalAlignment="Right" Margin="0,320,373,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtCCA1" HorizontalAlignment="Right" Height="23" Margin="0,320,213,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtCCA1LOD" HorizontalAlignment="Right" Height="23" Margin="0,320,153,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA1UNS" HorizontalAlignment="Right" Height="23" Margin="0,320,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA1OT" HorizontalAlignment="Right" Height="23" Margin="0,320,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA2" HorizontalAlignment="Right" Height="23" Margin="0,360,213,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtCCA2LOD" HorizontalAlignment="Right" Height="23" Margin="0,360,153,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA2UNS" HorizontalAlignment="Right" Height="23" Margin="0,360,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA2OT" HorizontalAlignment="Right" Height="23" Margin="0,360,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA3" HorizontalAlignment="Right" Height="23" Margin="0,400,213,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
-        <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,400,153,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA3UNS" HorizontalAlignment="Right" Height="23" Margin="0,400,93,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <TextBox Name="txtCCA3OT" HorizontalAlignment="Right" Height="23" Margin="0,400,33,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
-        <lvc:CartesianChart Margin="0,480,0,40" LegendLocation="Bottom" DataTooltip="{x:Null}" Hoverable="False" Series="{Binding SeriesCollection}">
+        <Label Content="CCAs: " HorizontalAlignment="Right" Margin="0,320,343,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtCCA1" HorizontalAlignment="Right" Height="23" Margin="0,320,183,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtCCA1LOD" HorizontalAlignment="Right" Height="23" Margin="0,320,123,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA1UNS" HorizontalAlignment="Right" Height="23" Margin="0,320,63,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA1OT" HorizontalAlignment="Right" Height="23" Margin="0,320,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA2" HorizontalAlignment="Right" Height="23" Margin="0,360,183,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtCCA2LOD" HorizontalAlignment="Right" Height="23" Margin="0,360,123,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA2UNS" HorizontalAlignment="Right" Height="23" Margin="0,360,63,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA2OT" HorizontalAlignment="Right" Height="23" Margin="0,360,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA3" HorizontalAlignment="Right" Height="23" Margin="0,400,183,0" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox Name="txtCCA3LOD" HorizontalAlignment="Right" Height="23" Margin="0,400,123,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA3UNS" HorizontalAlignment="Right" Height="23" Margin="0,400,63,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <TextBox Name="txtCCA3OT" HorizontalAlignment="Right" Height="23" Margin="0,400,0,0" TextAlignment="Right" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        <lvc:CartesianChart Margin="0,440,0,40" LegendLocation="Bottom" DataTooltip="{x:Null}" Hoverable="False" Series="{Binding SeriesCollection}">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Name="xAxis" MinValue="0" MaxValue="1">
                     <lvc:Axis.Separator>
