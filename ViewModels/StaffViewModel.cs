@@ -308,7 +308,7 @@ namespace ERSApp.ViewModels
             }
         }
 
-        public static void UpdateHoursHighRate(int id, double appointed, double highrateu, double overtime, double week)
+        public static void UpdateHighRateU(int id, double appointed, double highrateu, double overtime, double week)
         {
             if (id != 0)
             {
