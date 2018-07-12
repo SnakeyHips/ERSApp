@@ -73,7 +73,7 @@ namespace ERSApp.Views
             {
                 if (SessionViewModel.SelectedSession.Holiday > 0)
                 {
-                    SessionHolidayViewWindow viewHolidayWindow = new SessionHolidayViewWindow(SessionViewModel.SelectedSession);
+                    SessionViewHolidayWindow viewHolidayWindow = new SessionViewHolidayWindow(SessionViewModel.SelectedSession);
                     viewHolidayWindow.Show();
                 }
                 else
