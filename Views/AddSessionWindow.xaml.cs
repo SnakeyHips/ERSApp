@@ -171,14 +171,17 @@ namespace ERSApp.Views
             return allowed;
         }
         
-                //Method for checking if selected date is weekend/holiday
-        public bool CheckHoliday()
+        //Method for checking if selected date is weekend/holiday
+        public int CheckHoliday()
         {
-            bool holiday = false;
-            if (dateSession.SelectedDate.Value.DayOfWeek.Equals(DayOfWeek.Saturday) 
-                || dateSession.SelectedDate.Value.DayOfWeek.Equals(DayOfWeek.Sunday))
+            int holiday = 0;
+            if (dateSession.SelectedDate.Value.DayOfWeek.Equals(DayOfWeek.Saturday))
             {
-                holiday = true;
+                holiday = 1;
+            }
+            else if (dateSession.SelectedDate.Value.DayOfWeek.Equals(DayOfWeek.Sunday))
+            {
+                holiday = 2;
             }
             else
             {
@@ -187,7 +190,7 @@ namespace ERSApp.Views
                 {
                     if (h.Date.Equals(date))
                     {
-                        holiday = true;
+                        holiday = 2;
                     }
                 }
             }
