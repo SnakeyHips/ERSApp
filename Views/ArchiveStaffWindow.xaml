@@ -24,8 +24,8 @@
                     <GridViewColumn Header="Contract" Width="70" DisplayMemberBinding="{Binding ContractHours}"/>
                     <GridViewColumn Header="Appointed" Width="70" DisplayMemberBinding="{Binding AppointedHours}"/>
                     <GridViewColumn Header="Absence" Width="70" DisplayMemberBinding="{Binding AbsenceHours}"/>
-                    <GridViewColumn Header="Holiday" Width="70" DisplayMemberBinding="{Binding HolidayHours}"/>
-                    <GridViewColumn Header="Unsocial" Width="70" DisplayMemberBinding="{Binding UnsocialHours}"/>
+                    <GridViewColumn Header="Low Rate" Width="70" DisplayMemberBinding="{Binding LowRateUHours}"/>
+                    <GridViewColumn Header="High Rate" Width="70" DisplayMemberBinding="{Binding HighRateUHours}"/>
                     <GridViewColumn Header="Overtime" Width="70" DisplayMemberBinding="{Binding OvertimeHours}"/>
                 </GridView>
             </ListView.View>
