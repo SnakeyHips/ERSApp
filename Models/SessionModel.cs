@@ -17,7 +17,7 @@ namespace ERSApp.Models
         private int chairs;
         private int occ;
         private int estimate;
-        private bool holiday;
+        private int holiday;
         private string note;
         private int sv1Id;
         private string sv1Name;
@@ -211,7 +211,7 @@ namespace ERSApp.Models
             }
         }
 
-        public bool Holiday
+        public int Holiday
         {
             get
             {
