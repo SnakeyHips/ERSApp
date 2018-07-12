@@ -33,10 +33,10 @@
         <TextBox Name="txtAppointedCount" Margin="0,240,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
         <Label Content="Absence:" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtAbsenceCount" Margin="0,280,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Content="Holiday:" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtHolidayCount" Margin="0,320,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
-        <Label Content="Unsocial:" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="txtUnsocialCount" Margin="0,360,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Content="Low Rate U:" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtLowRateUCount" Margin="0,320,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
+        <Label Content="High Rate U:" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="txtHighRateUCount" Margin="0,360,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
         <Label Content="Overtime:" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="txtOvertimeCount" Margin="0,400,0,0" Text="0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
         <Button Content="Calculate" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="25" Width="75" Click="btnCalculate_Click"/>
