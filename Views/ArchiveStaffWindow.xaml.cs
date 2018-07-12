@@ -47,7 +47,8 @@ namespace ERSApp.Views
                 //Reverse for loop so works
                 for(int i = Roster.Count-1; i >= 0; i--)
                 {
-                    if (Roster[i].AppointedHours == 0 && Roster[i].AbsenceHours == 0 && Roster[i].UnsocialHours == 0)
+                    if (Roster[i].AppointedHours == 0 && Roster[i].AbsenceHours == 0 && 
+                        Roster[i].LowRateUHours == 0 && Roster[i].HighRateUHours == 0)
                     {
                         StaffViewModel.DeleteRoster(Roster[i].Id, (double)lstWeeks.SelectedValue);
                         Roster.RemoveAt(i);
@@ -86,8 +87,8 @@ namespace ERSApp.Views
                                 r.ContractHours += s.ContractHours;
                                 r.AppointedHours += s.AppointedHours;
                                 r.AbsenceHours += s.AbsenceHours;
-                                r.HolidayHours += s.HolidayHours;
-                                r.UnsocialHours += s.UnsocialHours;
+                                r.LowRateUHours += s.LowRateUHours;
+                                r.HighRateUHours += s.HighRateUHours;
                                 r.OvertimeHours += s.OvertimeHours;
                                 break;
                             }
@@ -140,7 +141,7 @@ namespace ERSApp.Views
                 Font norm = FontFactory.GetFont(FontFactory.HELVETICA, 8);
 
                 //Column titles with bold text for stock table
-                string[] headers = { "Id", "Name", "Contract", "Appointed", "Absence", "Holiday", "Unsocial",
+                string[] headers = { "Id", "Name", "Contract", "Appointed", "Absence", "LowRateU", "HighRateU",
                     "Overtime", "Neg", "CO"};
 
                 foreach(string h in headers)
@@ -159,8 +160,8 @@ namespace ERSApp.Views
                     rosterTable.AddCell(new Paragraph(s.ContractHours.ToString(), norm));
                     rosterTable.AddCell(new Paragraph(s.AppointedHours.ToString(), norm));
                     rosterTable.AddCell(new Paragraph(s.AbsenceHours.ToString(), norm));
-                    rosterTable.AddCell(new Paragraph(s.HolidayHours.ToString(), norm));
-                    rosterTable.AddCell(new Paragraph(s.UnsocialHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.LowRateUHours.ToString(), norm));
+                    rosterTable.AddCell(new Paragraph(s.HighRateUHours.ToString(), norm));
                     rosterTable.AddCell(new Paragraph(s.OvertimeHours.ToString(), norm));
                     double difference = s.ContractHours - (s.AppointedHours + s.AbsenceHours);
                     if (difference > 0)
