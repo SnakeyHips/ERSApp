@@ -17,8 +17,8 @@ namespace ERSApp.Models
         private double contractHours;
         private double appointedHours;
         private double absenceHours;
-        private double holidayHours;
-        private double unsocialHours;
+        private double lowRateUHours;
+        private double highRateUHours;
         private double overtimeHours;
         private string workPattern;
         private string status;
@@ -167,34 +167,34 @@ namespace ERSApp.Models
             }
         }
 
-        public double HolidayHours
+        public double LowRateUHours
         {
             get
             {
-                return holidayHours;
+                return lowRateUHours;
             }
             set
             {
-                if (holidayHours != value)
+                if (lowRateUHours != value)
                 {
-                    holidayHours = value;
-                    RaisePropertyChanged("HolidayHours");
+                    lowRateUHours = value;
+                    RaisePropertyChanged("LowRateUHours");
                 }
             }
         }
 
-        public double UnsocialHours
+        public double HighRateUHours
         {
             get
             {
-                return unsocialHours;
+                return highRateUHours;
             }
             set
             {
-                if (unsocialHours != value)
+                if (highRateUHours != value)
                 {
-                    unsocialHours = value;
-                    RaisePropertyChanged("UnsocialHours");
+                    highRateUHours = value;
+                    RaisePropertyChanged("HighRateUHours");
                 }
             }
         }
