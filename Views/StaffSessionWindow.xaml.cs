@@ -12,6 +12,7 @@ using MahApps.Metro.Controls.Dialogs;
 using LiveCharts;
 using LiveCharts.Wpf;
 using FastMember;
+using System.Threading.Tasks;
 
 namespace ERSApp.Views
 {
@@ -184,72 +185,99 @@ namespace ERSApp.Views
         private void cboSV1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtSV1LOD.IsEnabled = true;
+            txtSV1LOD.Text = Selected.LOD.ToString();
             txtSV1UNS.IsEnabled = true;
+            txtSV1UNS.Text = "0";
             txtSV1OT.IsEnabled = true;
+            txtSV1OT.Text = "0";
             btnResetSV1.IsEnabled = true;
         }
 
         private void cboDRI1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtDRI1LOD.IsEnabled = true;
+            txtDRI1LOD.Text = Selected.LOD.ToString();
             txtDRI1UNS.IsEnabled = true;
+            txtDRI1UNS.Text = "0";
             txtDRI1OT.IsEnabled = true;
+            txtDRI1OT.Text = "0";
             btnResetDRI1.IsEnabled = true;
         }
 
         private void cboDRI2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtDRI2LOD.IsEnabled = true;
+            txtDRI2LOD.Text = Selected.LOD.ToString();
             txtDRI2UNS.IsEnabled = true;
+            txtDRI2UNS.Text = "0";
             txtDRI2OT.IsEnabled = true;
+            txtDRI2OT.Text = "0";
             btnResetDRI2.IsEnabled = true;
         }
 
         private void cboRN1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtRN1LOD.IsEnabled = true;
+            txtRN1LOD.Text = Selected.LOD.ToString();
             txtRN1UNS.IsEnabled = true;
+            txtRN1UNS.Text = "0";
             txtRN1OT.IsEnabled = true;
+            txtRN1OT.Text = "0";
             btnResetRN1.IsEnabled = true;
         }
 
         private void cboRN2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtRN2LOD.IsEnabled = true;
+            txtRN2LOD.Text = Selected.LOD.ToString();
             txtRN2UNS.IsEnabled = true;
+            txtRN2UNS.Text = "0";
             txtRN2OT.IsEnabled = true;
+            txtRN2OT.Text = "0";
             btnResetRN2.IsEnabled = true;
         }
 
         private void cboRN3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtRN3LOD.IsEnabled = true;
+            txtRN3LOD.Text = Selected.LOD.ToString();
             txtRN3UNS.IsEnabled = true;
+            txtRN3UNS.Text = "0";
             txtRN3OT.IsEnabled = true;
+            txtRN3OT.Text = "0";
             btnResetRN3.IsEnabled = true;
         }
 
         private void cboCCA1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtCCA1LOD.IsEnabled = true;
+            txtCCA1LOD.Text = Selected.LOD.ToString();
             txtCCA1UNS.IsEnabled = true;
+            txtCCA1UNS.Text = "0";
             txtCCA1OT.IsEnabled = true;
+            txtCCA1OT.Text = "0";
             btnResetCCA1.IsEnabled = true;
         }
 
         private void cboCCA2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtCCA2LOD.IsEnabled = true;
+            txtCCA2LOD.Text = Selected.LOD.ToString();
             txtCCA2UNS.IsEnabled = true;
+            txtCCA2UNS.Text = "0";
             txtCCA2OT.IsEnabled = true;
+            txtCCA2OT.Text = "0";
             btnResetCCA2.IsEnabled = true;
         }
 
         private void cboCCA3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txtCCA3LOD.IsEnabled = true;
+            txtCCA3LOD.Text = Selected.LOD.ToString();
             txtCCA3UNS.IsEnabled = true;
+            txtCCA3UNS.Text = "0";
             txtCCA3OT.IsEnabled = true;
+            txtCCA3OT.Text = "0";
             btnResetCCA3.IsEnabled = true;
         }
 
@@ -366,56 +394,38 @@ namespace ERSApp.Views
             if (cboSV1.SelectedItem != null)
             {
                 txtSV1LOD.Text = txtLOD.Text;
-                txtSV1UNS.Text = "0";
-                txtSV1OT.Text = "0";
             }
             if (cboDRI1.SelectedItem != null)
             {
                 txtDRI1LOD.Text = txtLOD.Text;
-                txtDRI1UNS.Text = "0";
-                txtDRI1OT.Text = "0";
             }
             if (cboDRI2.SelectedItem != null)
             {
                 txtDRI2LOD.Text = txtLOD.Text;
-                txtDRI2UNS.Text = "0";
-                txtDRI2OT.Text = "0";
             }
             if (cboRN1.SelectedItem != null)
             {
                 txtRN1LOD.Text = txtLOD.Text;
-                txtRN1UNS.Text = "0";
-                txtRN1OT.Text = "0";
             }
             if (cboRN2.SelectedItem != null)
             {
                 txtRN2LOD.Text = txtLOD.Text;
-                txtRN2UNS.Text = "0";
-                txtRN2OT.Text = "0";
             }
             if (cboRN3.SelectedItem != null)
             {
                 txtRN3LOD.Text = txtLOD.Text;
-                txtRN3UNS.Text = "0";
-                txtRN3OT.Text = "0";
             }
             if (cboCCA1.SelectedItem != null)
             {
                 txtCCA1LOD.Text = txtLOD.Text;
-                txtCCA1UNS.Text = "0";
-                txtCCA1OT.Text = "0";
             }
             if (cboCCA2.SelectedItem != null)
             {
                 txtCCA2LOD.Text = txtLOD.Text;
-                txtCCA2UNS.Text = "0";
-                txtCCA2OT.Text = "0";
             }
             if (cboCCA3.SelectedItem != null)
             {
                 txtCCA3LOD.Text = txtLOD.Text;
-                txtCCA3UNS.Text = "0";
-                txtCCA3OT.Text = "0";
             }
         }
 
@@ -495,9 +505,153 @@ namespace ERSApp.Views
 
         //Update Staff info - lots of if statements as properties can't be passed through methods
         //First one is commented as rest are same
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private async void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            UpdateStaff();
+            //First check if there is a selected item
+            if (cboSV1.SelectedItem != null)
+            {
+                Update(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS",
+                    Selected.SV1OT, "SV1OT", (int)cboSV1.SelectedValue, cboSV1.Text, double.Parse(txtSV1LOD.Text),
+                    double.Parse(txtSV1UNS.Text), double.Parse(txtSV1OT.Text));
+            }
+            //Else remove if reset staff has been pressed
+            else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
+            {
+                Reset(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS", Selected.SV1OT, "SV1OT");
+            }
+
+            //Do same for other roles
+            if (cboDRI1.SelectedItem != null)
+            {
+                Update(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS",
+                    Selected.DRI1OT, "DRI1OT", (int)cboDRI1.SelectedValue, cboDRI1.Text, double.Parse(txtDRI1LOD.Text),
+                    double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1OT.Text));
+            }
+            else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
+            {
+                Reset(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS", Selected.DRI1OT, "DRI1OT");
+            }
+
+            if (cboDRI2.SelectedItem != null)
+            {
+                if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "DRI2 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    Update(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS",
+                        Selected.DRI2OT, "DRI2OT", (int)cboDRI2.SelectedValue, cboDRI2.Text, double.Parse(txtDRI2LOD.Text),
+                        double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2OT.Text));
+                }
+            }
+            else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
+            {
+                Reset(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS", Selected.DRI2OT, "DRI2OT");
+            }
+
+            //Get RN selected info
+            if (cboRN1.SelectedItem != null)
+            {
+                Update(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS",
+                    Selected.RN1OT, "RN1OT", (int)cboRN1.SelectedValue, cboRN1.Text, double.Parse(txtRN1LOD.Text),
+                    double.Parse(txtRN1UNS.Text), double.Parse(txtRN1OT.Text));
+            }
+            else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
+            {
+                Reset(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS", Selected.RN1OT, "RN1OT");
+            }
+
+            if (cboRN2.SelectedItem != null)
+            {
+                if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "RN2 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    Update(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS",
+                        Selected.RN2OT, "RN2OT", (int)cboRN2.SelectedValue, cboRN2.Text, double.Parse(txtRN2LOD.Text),
+                        double.Parse(txtRN2UNS.Text), double.Parse(txtRN2OT.Text));
+                }
+            }
+            else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
+            {
+                Reset(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS", Selected.RN2OT, "RN2OT");
+            }
+
+            if (cboRN3.SelectedItem != null)
+            {
+                if ((int)cboRN3.SelectedValue == (int)cboRN1.SelectedValue ||
+                    (int)cboRN3.SelectedValue == (int)cboRN2.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "RN3 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    Update(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS",
+                        Selected.RN3OT, "RN3OT", (int)cboRN3.SelectedValue, cboRN3.Text, double.Parse(txtRN3LOD.Text),
+                        double.Parse(txtRN3UNS.Text), double.Parse(txtRN3OT.Text));
+                }
+            }
+            else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
+            {
+                Reset(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS", Selected.RN3OT, "RN3OT");
+            }
+
+            //Get CCA selected info
+            if (cboCCA1.SelectedItem != null)
+            {
+                Update(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS",
+                    Selected.CCA1OT, "CCA1OT", (int)cboCCA1.SelectedValue, cboCCA1.Text, double.Parse(txtCCA1LOD.Text),
+                    double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1OT.Text));
+            }
+            else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
+            {
+                Reset(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS", Selected.CCA1OT, "CCA1OT");
+            }
+
+            if (cboCCA2.SelectedItem != null)
+            {
+                if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "CCA2 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    Update(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS",
+                        Selected.CCA2OT, "CCA2OT", (int)cboCCA2.SelectedValue, cboCCA2.Text, double.Parse(txtCCA2LOD.Text),
+                        double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2OT.Text));
+                }
+            }
+            else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
+            {
+                Reset(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS", Selected.CCA2OT, "CCA2OT");
+            }
+
+            if (cboCCA3.SelectedItem != null)
+            {
+                if ((int)cboCCA3.SelectedValue == (int)cboCCA1.SelectedValue ||
+                    (int)cboCCA3.SelectedValue == (int)cboCCA2.SelectedValue)
+                {
+                    await this.ShowMessageAsync("", "CCA3 duplicate selected.");
+                    return;
+                }
+                else
+                {
+                    Update(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS",
+                        Selected.CCA3OT, "CCA3OT", (int)cboCCA3.SelectedValue, cboCCA3.Text, double.Parse(txtCCA3LOD.Text),
+                        double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3OT.Text));
+                }
+            }
+            else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
+            {
+                Reset(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS", Selected.CCA3OT, "CCA3OT");
+            }
 
             //Check if LOD has changed
             if (txtLOD.Text != Selected.LOD.ToString())
@@ -602,277 +756,20 @@ namespace ERSApp.Views
             }
         }
 
-        private async void UpdateStaff()
-        {
-            //First check if there is a selected item
-            if (cboSV1.SelectedItem != null)
-            {
-                if (txtSV1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for SV1.");
-                    return;
-                }
-                if (txtSV1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for SV1.");
-                    return;
-                }
-                else
-                {
-                    Update(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS",
-                        Selected.SV1OT, "SV1OT", (int)cboSV1.SelectedValue, cboSV1.Text, double.Parse(txtSV1LOD.Text),
-                        double.Parse(txtSV1UNS.Text), double.Parse(txtSV1OT.Text));
-                }
-            }
-            //Else remove if reset staff has been pressed
-            else if (cboSV1.SelectedItem == null && Selected.SV1Id != 0)
-            {
-                Reset(Selected.SV1Id, "SV1Id", "SV1Name", Selected.SV1LOD, "SV1LOD", Selected.SV1UNS, "SV1UNS", Selected.SV1OT, "SV1OT");
-            }
-
-            //Do same for other roles
-            if (cboDRI1.SelectedItem != null)
-            {
-                if (txtDRI1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for DRI1.");
-                    return;
-                }
-                if (txtDRI1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for DRI1.");
-                    return;
-                }
-                else
-                {
-                    Update(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS",
-                        Selected.DRI1OT, "DRI1OT", (int)cboDRI1.SelectedValue, cboDRI1.Text, double.Parse(txtDRI1LOD.Text),
-                        double.Parse(txtDRI1UNS.Text), double.Parse(txtDRI1OT.Text));
-                }
-            }
-            else if (cboDRI1.SelectedItem == null && Selected.DRI1Id != 0)
-            {
-                Reset(Selected.DRI1Id, "DRI1Id", "DRI1Name", Selected.DRI1LOD, "DRI1LOD", Selected.DRI1UNS, "DRI1UNS", Selected.DRI1OT, "DRI1OT");
-            }
-
-            if (cboDRI2.SelectedItem != null)
-            {
-                if ((int)cboDRI2.SelectedValue == (int)cboDRI1.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "DRI2 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtDRI2LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for DRI2.");
-                        return;
-                    }
-                    if (txtDRI2UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for DRI2.");
-                        return;
-                    }
-                    else
-                    {
-                        Update(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS",
-                            Selected.DRI2OT, "DRI2OT", (int)cboDRI2.SelectedValue, cboDRI2.Text, double.Parse(txtDRI2LOD.Text),
-                            double.Parse(txtDRI2UNS.Text), double.Parse(txtDRI2OT.Text));
-                    }
-                }
-            }
-            else if (cboDRI2.SelectedItem == null && Selected.DRI2Id != 0)
-            {
-                Reset(Selected.DRI2Id, "DRI2Id", "DRI2Name", Selected.DRI2LOD, "DRI2LOD", Selected.DRI2UNS, "DRI2UNS", Selected.DRI2OT, "DRI2OT");
-            }
-
-            //Get RN selected info
-            if (cboRN1.SelectedItem != null)
-            {
-                if (txtRN1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for RN1.");
-                    return;
-                }
-                if (txtRN1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for RN1.");
-                    return;
-                }
-                else
-                {
-                    Update(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS",
-                        Selected.RN1OT, "RN1OT", (int)cboRN1.SelectedValue, cboRN1.Text, double.Parse(txtRN1LOD.Text),
-                        double.Parse(txtRN1UNS.Text), double.Parse(txtRN1OT.Text));
-                }
-            }
-            else if (cboRN1.SelectedItem == null && Selected.RN1Id != 0)
-            {
-                Reset(Selected.RN1Id, "RN1Id", "RN1Name", Selected.RN1LOD, "RN1LOD", Selected.RN1UNS, "RN1UNS", Selected.RN1OT, "RN1OT");
-            }
-
-            if (cboRN2.SelectedItem != null)
-            {
-                if ((int)cboRN2.SelectedValue == (int)cboRN1.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "RN2 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtRN2LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for RN2.");
-                        return;
-                    }
-                    if (txtRN2UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for RN2.");
-                        return;
-                    }
-                    else
-                    {
-                        Update(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS",
-                            Selected.RN2OT, "RN2OT", (int)cboRN2.SelectedValue, cboRN2.Text, double.Parse(txtRN2LOD.Text),
-                            double.Parse(txtRN2UNS.Text), double.Parse(txtRN2OT.Text));
-                    }
-                }
-            }
-            else if (cboRN2.SelectedItem == null && Selected.RN2Id != 0)
-            {
-                Reset(Selected.RN2Id, "RN2Id", "RN2Name", Selected.RN2LOD, "RN2LOD", Selected.RN2UNS, "RN2UNS", Selected.RN2OT, "RN2OT");
-            }
-
-            if (cboRN3.SelectedItem != null)
-            {
-                if ((int)cboRN3.SelectedValue == (int)cboRN1.SelectedValue ||
-                    (int)cboRN3.SelectedValue == (int)cboRN2.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "RN3 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtRN3LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for RN3.");
-                        return;
-                    }
-                    if (txtRN3UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for RN3.");
-                        return;
-                    }
-                    else
-                    {
-                        Update(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS",
-                            Selected.RN3OT, "RN3OT", (int)cboRN3.SelectedValue, cboRN3.Text, double.Parse(txtRN3LOD.Text),
-                            double.Parse(txtRN3UNS.Text), double.Parse(txtRN3OT.Text));
-                    }
-                }
-            }
-            else if (cboRN3.SelectedItem == null && Selected.RN3Id != 0)
-            {
-                Reset(Selected.RN3Id, "RN3Id", "RN3Name", Selected.RN3LOD, "RN3LOD", Selected.RN3UNS, "RN3UNS", Selected.RN3OT, "RN3OT");
-            }
-
-            //Get CCA selected info
-            if (cboCCA1.SelectedItem != null)
-            {
-                if (txtCCA1LOD.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a LOD value for CCA1.");
-                    return;
-                }
-                if (txtCCA1UNS.Text == "")
-                {
-                    await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA1.");
-                    return;
-                }
-                else
-                {
-                    Update(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS",
-                        Selected.CCA1OT, "CCA1OT", (int)cboCCA1.SelectedValue, cboCCA1.Text, double.Parse(txtCCA1LOD.Text),
-                        double.Parse(txtCCA1UNS.Text), double.Parse(txtCCA1OT.Text));
-                }
-            }
-            else if (cboCCA1.SelectedItem == null && Selected.CCA1Id != 0)
-            {
-                Reset(Selected.CCA1Id, "CCA1Id", "CCA1Name", Selected.CCA1LOD, "CCA1LOD", Selected.CCA1UNS, "CCA1UNS", Selected.CCA1OT, "CCA1OT");
-            }
-
-            if (cboCCA2.SelectedItem != null)
-            {
-                if ((int)cboCCA2.SelectedValue == (int)cboCCA1.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "CCA2 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtCCA2LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA2.");
-                        return;
-                    }
-                    if (txtCCA2UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA2.");
-                        return;
-                    }
-                    else
-                    {
-                        Update(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS",
-                            Selected.CCA2OT, "CCA2OT", (int)cboCCA2.SelectedValue, cboCCA2.Text, double.Parse(txtCCA2LOD.Text),
-                            double.Parse(txtCCA2UNS.Text), double.Parse(txtCCA2OT.Text));
-                    }
-                }
-            }
-            else if (cboCCA2.SelectedItem == null && Selected.CCA2Id != 0)
-            {
-                Reset(Selected.CCA2Id, "CCA2Id", "CCA2Name", Selected.CCA2LOD, "CCA2LOD", Selected.CCA2UNS, "CCA2UNS", Selected.CCA2OT, "CCA2OT");
-            }
-
-            if (cboCCA3.SelectedItem != null)
-            {
-                if ((int)cboCCA3.SelectedValue == (int)cboCCA1.SelectedValue ||
-                    (int)cboCCA3.SelectedValue == (int)cboCCA2.SelectedValue)
-                {
-                    await this.ShowMessageAsync("", "CCA3 duplicate selected.");
-                    return;
-                }
-                else
-                {
-                    if (txtCCA3LOD.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a LOD value for CCA3.");
-                        return;
-                    }
-                    if (txtCCA3UNS.Text == "")
-                    {
-                        await this.ShowMessageAsync("", "Please enter a Unsocial value for CCA3.");
-                        return;
-                    }
-                    else
-                    {
-                        Update(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS",
-                            Selected.CCA3OT, "CCA3OT", (int)cboCCA3.SelectedValue, cboCCA3.Text, double.Parse(txtCCA3LOD.Text),
-                            double.Parse(txtCCA3UNS.Text), double.Parse(txtCCA3OT.Text));
-                    }
-                }
-            }
-            else if (cboCCA3.SelectedItem == null && Selected.CCA3Id != 0)
-            {
-                Reset(Selected.CCA3Id, "CCA3Id", "CCA3Name", Selected.CCA3LOD, "CCA3LOD", Selected.CCA3UNS, "CCA3UNS", Selected.CCA3OT, "CCA3OT");
-            }
-        }
-
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             //Use this in the xaml file to only allow numbers in input
             Regex regex = new Regex("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void txt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            if (txt.Text.Equals(""))
+            {
+                txt.Text = "0";
+            }
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
