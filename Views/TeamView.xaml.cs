@@ -44,13 +44,6 @@ namespace ERSApp.Views
             }
         }
 
-        private void btnArchiveTeam_Click(object sender, RoutedEventArgs e)
-        {
-            //ArchiveTeamWindow ArchiveTeamWindow = new ArchiveTeamWindow();
-            //ArchiveTeamWindow.Owner = mainWindow;
-            //ArchiveTeamWindow.ShowDialog();
-        }
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.Close();
