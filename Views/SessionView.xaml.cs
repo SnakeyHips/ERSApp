@@ -71,8 +71,16 @@ namespace ERSApp.Views
         {
             if (lstSessions.SelectedIndex > -1)
             {
-                ViewWindow viewWindow = new ViewWindow(SessionViewModel.SelectedSession);
-                viewWindow.Show();
+                if (SessionViewModel.SelectedSession.Holiday > 0)
+                {
+                    SessionHolidayViewWindow viewHolidayWindow = new SessionHolidayViewWindow(SessionViewModel.SelectedSession);
+                    viewHolidayWindow.Show();
+                }
+                else
+                {
+                    SessionViewWindow viewWindow = new SessionViewWindow(SessionViewModel.SelectedSession);
+                    viewWindow.Show();
+                }
             }
         }
 
@@ -86,10 +94,20 @@ namespace ERSApp.Views
         {
             if (lstSessions.SelectedIndex > -1)
             {
-                StaffSessionWindow staffSessionWindow = new StaffSessionWindow(SessionViewModel.SelectedSession);
-                staffSessionWindow.Owner = mainWindow;
-                staffSessionWindow.ShowDialog();
+                if(SessionViewModel.SelectedSession.Holiday > 0)
+                {
+                    StaffSessionHolidayWindow staffSessionHolidayWindow = new StaffSessionHolidayWindow(SessionViewModel.SelectedSession);
+                    staffSessionHolidayWindow.Owner = mainWindow;
+                    staffSessionHolidayWindow.ShowDialog();
+                }
+                else
+                {
+                    StaffSessionWindow staffSessionWindow = new StaffSessionWindow(SessionViewModel.SelectedSession);
+                    staffSessionWindow.Owner = mainWindow;
+                    staffSessionWindow.ShowDialog();
+                }
             }
+        }
         }
 
         private async void btnDelSession_Click(object sender, RoutedEventArgs e)
